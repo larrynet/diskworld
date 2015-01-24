@@ -1,0 +1,11 @@
+Card,played,Green,Green Card1, last
+Card,notplayed,Green,Green Card2, last
+Card,played,Brown,Brown Card1,last
+Card,notplayed,Brown,Brown Card2,last
+Card,notplayed,Personality,Personality 1,last
+Card,notplayed,Personality,Personality 2,last
+Card,notplayed,Personality,Personality 3,last
+Card,notplayed,City,City Name1,last
+Area,Area name1,2,1,true,last
+Player,Lawrence
+Board,3,20
