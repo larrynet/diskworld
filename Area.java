@@ -30,7 +30,7 @@ public class Area
 		// to define if two area are adjacent
 		public boolean isAdjacent(int playerNumber,int areaNumber)
 		{
-			//Tester
+			//Tester 2
 		}
 		
 }
