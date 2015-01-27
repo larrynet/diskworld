@@ -10,6 +10,9 @@ public class Pieces {
 	private String Location;
 	
 	
+	/**
+	 * Empty Constructor
+	 */
 	public Pieces(){}
 	
 	/**
@@ -21,10 +24,10 @@ public class Pieces {
 	 */
 	public Pieces(int _Id, String _Type, String _Color)
 	{
-		this.PieceID = _Id;
-		this.Type = _Type;
-		this.Color = _Color;
-		this.Location = "";
+		PieceID = _Id;
+		Type = _Type;
+		Color = _Color;
+		Location = "";
 	}
 	
 	
