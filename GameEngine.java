@@ -39,15 +39,14 @@ public class GameEngine
 	public static final int MAX_CITY_CARD = 1;
 
 	private List<Player> ListPlayer;
-	private Card[] ListGreenCard;
-	private Card[] ListBrownCard;
+	private List<Card> ListCard;
 	private Board GameBoard;
 	
 	//private Card[] List
-	public GameEngine(int PlayerNum) 
+	public GameEngine() 
 	{
-		ListGreenCard = new Card[MAX_GREEN_CARD];
-		ListBrownCard = new Card[MAX_BROWN_CARD];
+		ListPlayer = new ArrayList<Player>();
+		ListCard = new ArrayList<Card>();
 		GameBoard = new Board();
 	}
 	
@@ -66,6 +65,8 @@ public class GameEngine
 		    while ((line = reader.readLine()) != null) {
 		        if(!ParseLine(line))
 		        	System.out.println("Error while parsing: " + line);
+		        else
+		        	System.out.println("parsing success: " + line);
 		    }
 		} catch (IOException x) {
 		    System.err.format("IOException: %s%n", x);
@@ -79,12 +80,139 @@ public class GameEngine
 		}
 	}
 	
+	private Boolean HasPlayerPiece(Player p, Area a) 
+	{
+		List<Pieces> AreaMinions = new ArrayList<Pieces>();
+		//for(int p=0; p<ListPlayer.size(); ++p)
+		{
+			//for each player, traverse minion
+			for(int m=0; m<p.ListMinion.size(); ++m)
+			{
+				if(p.ListMinion.get(m).GetLocation().equalsIgnoreCase(a.GetName()))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	private List<Pieces> GetMinionsArea(String n) 
+	{
+		List<Pieces> AreaMinions = new ArrayList<Pieces>();
+		for(int p=0; p<ListPlayer.size(); ++p)
+		{
+			//for each player, traverse minion
+			for(int m=0; m<ListPlayer.get(p).ListMinion.size(); ++m)
+			{
+				if(ListPlayer.get(p).ListMinion.get(m).GetLocation().equalsIgnoreCase(n))
+					AreaMinions.add(ListPlayer.get(p).ListMinion.get(m));
+			}
+		}
+		return AreaMinions;
+	}
 	
 	/**
 	 * Function will print the current state of the program 
 	 */
 	public void PrintState()
 	{
+		System.out.println("Game State");
+		System.out.println("-----------\n");
+		System.out.println("There are " + ListPlayer.size() + "players:\n");
+		for(int p=0; p<ListPlayer.size(); ++p)
+		{
+			System.out.println("   Player " + p + "(" + ListPlayer.get(p).GetColor() + ")\t is playing as " + ListPlayer.get(p).Demon);
+		}
+		
+		System.out.println("Current state of the game board:\n\tarea \tminions\ttrouble?\tbuilding?\tdemons\ttrolls \n");
+		if(GameBoard.ListArea != null)
+		{
+			//traverse each area in board
+			for(int a=0; a<GameBoard.ListArea.size(); ++a)
+			{
+				Area currentArea = GameBoard.ListArea.get(a);
+				String AreaColorList ="";
+				String HasTrouble ="";
+				String HasBuilding ="";
+				if(currentArea.TroubleMakers.size()>0) 
+					HasTrouble = "YES";
+				else
+					HasTrouble = "no";
+				
+				if(currentArea.IsBuilt) 
+					HasBuilding = "YES";
+				else
+					HasBuilding = "no";
+				
+				//get all the minions of that area
+				for(int p=0; p<ListPlayer.size(); ++p)
+				{
+					if(HasPlayerPiece(ListPlayer.get(p), currentArea))
+						AreaColorList = AreaColorList+","+ListPlayer.get(p).GetColor().charAt(0);
+				}
+				if(AreaColorList == "") 
+					AreaColorList = "none";
+				
+				//discuss Demon, Troll and troublemaker
+				System.out.println(currentArea.GetName()+"\t"+AreaColorList+"\t"+HasTrouble+"\t"+HasBuilding+"\t"+currentArea.Demons.size()+"\t"+currentArea.Trolls.size());
+				
+			}
+		}
+		
+		for(int PlayerCount=0; PlayerCount<ListPlayer.size(); ++PlayerCount)
+		{
+			Player player = ListPlayer.get(PlayerCount);
+			List<Card> PlayerHand = player.GetCards();
+			
+			//traverse the player cards to gather info for output
+			List<String> AreaList = new ArrayList<String>();
+			List<String> BrownList = new ArrayList<String>();
+			List<String> GreenList = new ArrayList<String>();
+			
+			for(int PlayerHandCount =0; PlayerHandCount < player.GetPlayerCardCount(); PlayerHandCount++)
+			{
+				if(PlayerHand.get(PlayerHandCount).Name.contains("City"))
+					AreaList.add(PlayerHand.get(PlayerHandCount).Name);
+				
+				if(PlayerHand.get(PlayerHandCount).Name.contains("Green"))
+					GreenList.add(PlayerHand.get(PlayerHandCount).Name);
+				
+				if(PlayerHand.get(PlayerHandCount).Name.contains("Brown"))
+					BrownList.add(PlayerHand.get(PlayerHandCount).Name);
+			}
+				
+			System.out.println("Player "+PlayerCount+"'s current inventory:\n");
+			System.out.println("   - "+player.ListMinion.size()+" minions, "+player.ListBuilding.size()+" buildings, "+player.GetMoneyCount()+" Ankh-Morpork dollars\n");
+			System.out.println("   - City Area Cards: \n      ");
+			for(int AreaCount=0; AreaCount < AreaList.size(); ++AreaCount)
+			{
+				if(AreaCount != AreaList.size()-1)
+					System.out.println(AreaList.get(AreaCount)+",");
+				else
+					System.out.println(AreaList.get(AreaCount));
+			}
+			
+			System.out.println("\n   - Player cards: \n      ");
+			for(int GreenCardIterator=0; GreenCardIterator<GreenList.size(); GreenCardIterator++)
+			{
+				if(GreenCardIterator != GreenList.size()-1)
+					System.out.println(GreenList.get(GreenCardIterator)+",");
+				else
+					System.out.println(GreenList.get(GreenCardIterator));
+			}
+				
+			
+			for(int BrownCardIterator=0; BrownCardIterator<BrownList.size(); BrownCardIterator++)
+			{
+				if(BrownCardIterator != BrownList.size()-1)
+					System.out.println(BrownList.get(BrownCardIterator)+",");
+				else
+					System.out.println(BrownList.get(BrownCardIterator));	
+			}
+			
+		
+		}
+		
+		System.out.println("The bank has " + GameBoard.Bank + "  Ankh-Morpork dollars.");
 	}
 	
 	/**
@@ -93,7 +221,8 @@ public class GameEngine
 	 * @param path
 	 * @return void
 	 */
-	public void ExportGameState(String path) {
+	public void ExportGameState(String path) 
+	{
 		
 	}
 	
@@ -105,7 +234,7 @@ public class GameEngine
 	 */
 	private boolean ParseLine(String s)
 	{
-		boolean HasError = false;
+		boolean ParseSuccess = true;
 		
 		StringTokenizer st = new StringTokenizer(s, ",");
 		
@@ -113,26 +242,50 @@ public class GameEngine
 		String FirstToken = st.nextToken();
 		
 		if(FirstToken.equalsIgnoreCase("board")) {
-			
+			GameBoard = CreateBoardElement(s);
 		} else if(FirstToken.equalsIgnoreCase("player")) {
 			ListPlayer.add(CreatePlayer(s));
 		}else if(FirstToken.equalsIgnoreCase("area")) {
-			GameBoard = CreateBoard(s);
+			GameBoard.ListArea.add(CreateArea(s));
 		}else if(FirstToken.equalsIgnoreCase("card")) {
-			//create card
+			ListCard.add(CreateCard(s));
 		}
 		//perform SQA     
-		return HasError;
+		return ParseSuccess;
 	}
-	
-	private Board CreateBoard(String s)
+	//TEMPORARY
+	private Card CreateCard(String s)
 	{
 		StringTokenizer st = new StringTokenizer(s, ",");
 		
 		//TBM: Test token size
-	     if(st.countTokens() != 3)
+	     if(st.countTokens() != 4)
 	     {
-	    	 System.out.println("Error parsing borad. token count invalid: " + st.countTokens());
+	    	 System.out.println("Error parsing card. token count invalid: " + st.countTokens());
+	    	 return new Card();
+	     }
+	     else
+	     {
+	    	 st.nextToken();
+	    	 String Name = st.nextToken();
+	    	 String Owner = st.nextToken();
+	    	 return new Card(Name, Owner);
+	     }
+	}
+	
+	//to be determined
+	private Area CreateArea(String s)
+	{
+		return new Area(true);
+	}
+	private Board CreateBoardElement(String s)
+	{
+		StringTokenizer st = new StringTokenizer(s, ",");
+		
+		//TBM: Test token size
+	     if(st.countTokens() != 4)
+	     {
+	    	 System.out.println("Error parsing board element. token count invalid: " + st.countTokens());
 	    	 return new Board();
 	     }
 	     else
@@ -143,12 +296,20 @@ public class GameEngine
 	    	 return new Board(Integer.parseInt(Die), Integer.parseInt(Bank));
 	     }
 	}
+	/**
+	 * Get the current state of the player as a string
+	 * 
+	 * @return Player State format : Player, player number, personality card id, money count, number of cards,_
+	 * cards ids, number of minions, minion ids, number of buildings, buildings ids, last
+	 */
 	private Player CreatePlayer(String s)
 	{ 
 		String Personality ="";
 		String Money ="";
-		List<String> ListMinion = new ArrayList<String>();
-		List<String> ListBuilding= new ArrayList<String>();
+		String Color = "";
+		List<Pieces> ListMinion = new ArrayList<Pieces>();
+		List<Pieces> ListBuilding= new ArrayList<Pieces>();
+		List<Card> PlayerHand = new ArrayList<Card>();
 		String DemonPiece = "";
 		
 		int indexToken = 0;
@@ -157,25 +318,30 @@ public class GameEngine
 		//TBM: Test token size
 	     while (ParseSuccess && st.hasMoreTokens()) {
 	    	 String CurrentToken = st.nextToken();
-	         System.out.println("CurrentToken: " + CurrentToken);
-	         if(indexToken == 1 )
+	         
+	         if(indexToken == 2 )
 	        	 Personality = CurrentToken;
-	         else if(indexToken == 2) 
+	         else if(indexToken == 3) 
 	        	 Money = CurrentToken;
-	         else if(indexToken == 3) {
+	         else if(indexToken == 4) 
+	        	 Color = CurrentToken;
+	         else if(indexToken == 5) {
+	        	//extract the list of minion and their corresponding attribute
+	        	 int TotalCard = Integer.parseInt(CurrentToken);
+	        	 
+	        	 for(int CountCard=0; CountCard < TotalCard; CountCard++ )
+	        		 PlayerHand.add(new Card(st.nextToken(), "Player"+ListPlayer.size()+1));
+	        	 
 	        	//extract the list of minion and their corresponding attribute
 	        	 int TotalMinionCount = Integer.parseInt(CurrentToken);
 	        	 for(int CountMinion=0; CountMinion < TotalMinionCount; CountMinion++ )
-	        		 ListMinion.add(st.nextToken());
+	        		 ListMinion.add(new Pieces(Integer.parseInt(st.nextToken()),"",""));
 	        	 
 	        	 //extract the list of building
 	        	 CurrentToken = st.nextToken();
 	        	 int TotalBuildingCount = Integer.parseInt(CurrentToken);
 	        	 for(int CountBuilding=0; CountBuilding < TotalBuildingCount; CountBuilding++ )
-	        		 ListBuilding.add(st.nextToken());
-	        	 
-	        	 //extract demon name
-	        	 DemonPiece = st.nextToken();
+	        		 ListBuilding.add(new Pieces(Integer.parseInt(st.nextToken()),"",""));
 	        	 
 	        	 //expect "last keyword"
 	        	 CurrentToken = st.nextToken();
@@ -185,15 +351,18 @@ public class GameEngine
 	        	 }
 	        	 else
 	        		 System.out.println("PARSING PLAYER SUCCESSFUL");
-	         } else 
+	         } else if(indexToken != 0)
 	        	 ParseSuccess = false; 
 	         
 	         indexToken ++;
 	     }
+	     //TBD
+	     //return new Player();
+	     //public Player(int _PlayerNumber, Card _Personality, String _Color, List<Card> _PlayerCards){
 	    if(!ParseSuccess) 
 	    	return new Player();
 	    else
-	    	return new Player(Personality, Integer.parseInt(Money), ListMinion, ListBuilding, DemonPiece);
+	    	return new Player(ListPlayer.size()+1, new Card(Personality, "Player"+ListPlayer.size()+1),Integer.parseInt(Money), Color, PlayerHand,ListMinion, ListBuilding);
 		
 	}
 }

@@ -29,6 +29,7 @@ public class Pieces {
 		Color = _Color;
 		Location = "";
 	}
+	public String GetLocation() {return Location;}
 	
 	
 	/**

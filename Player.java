@@ -11,11 +11,22 @@ public class Player {
 	private List<Card> PlayerCards;
 	private int PlayerNumber;
 	private int Money;
+	private String Color;
 	List<Pieces> ListMinion;
 	List<Pieces> ListBuilding;
 	String Demon;
 	
 	public Player () {}
+	//Lawrence
+	public Player(int _PlayerNumber, Card _Personality, int _Money, String _Color, List<Card> _PlayerCards, List<Pieces> _ListMinion, List<Pieces> _ListBuilding){
+		PlayerNumber = _PlayerNumber;
+		Personality = _Personality;
+		Money = _Money;
+		ListMinion = _ListMinion;
+		ListBuilding = _ListBuilding;
+		PlayerCards = _PlayerCards;
+		//Demon = new Pieces();
+	}
 	
 	public Player(int _PlayerNumber, Card _Personality, String _Color, List<Card> _PlayerCards){
 		PlayerNumber = _PlayerNumber;
@@ -81,7 +92,7 @@ public class Player {
 		return this.PlayerCards.size();
 	}
 	
-	
+	public List<Card> GetCards() {return this.PlayerCards;}
 	/**
 	 * Get the count of minions
 	 * @return number of minions currently belonging to user
@@ -108,7 +119,7 @@ public class Player {
 	 * @return Player State format : Player, player number, personality card id, money count, number of cards,_
 	 * cards ids, number of minions, minion ids, number of buildings, buildings ids, last
 	 */
-	public String GetPlayerState()
+	/*public String GetPlayerState()
 	{
 		
 		String playerState = 	"Player,"
@@ -124,7 +135,7 @@ public class Player {
 								+ "last";
 							 
 		return playerState;
-	}
+	}*/
 	
 	
 	/**
@@ -164,6 +175,11 @@ public class Player {
 		return lstPlayerPieces;
 	}
 
+	public String GetColor()
+	{
+		return Color;
+	}
+	
 	/**
 	 * Iterate through the player cards and create a string of card id separated by a comma
 	 * @return PlayerCards Id's in comma delimited format
@@ -173,7 +189,7 @@ public class Player {
 		StringBuilder AllCards = new StringBuilder();
 		
 		//
-		for (int i = 0; i < this.GetPlayerCardCount(); i++)
+		/*for (int i = 0; i < this.GetPlayerCardCount(); i++)
 		{
 			AllCards.append(Integer.toString(this.PlayerCards.get(i).GetCardID()));
 			
@@ -183,7 +199,7 @@ public class Player {
 				AllCards.append(",");
 			}
 		}
-		
+		*/
 		return AllCards.toString();
 	}
 	

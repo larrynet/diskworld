@@ -1,5 +1,7 @@
 //dummy class
 public class Card {
-	String Name;
-	public Card(String n) {Name =n;}
+	public String Name;
+	public String Owner;
+	public Card(String n, String o) {Name =n; Owner = o;}
+	public Card() {Name="";Owner="";}
 }
