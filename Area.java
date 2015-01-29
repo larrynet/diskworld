@@ -189,7 +189,7 @@ public class Area
 		
 		
 		}
-		public String SaveArea()
+		public String SaveAreaState()
 		{
 			//Area,..........,Last
 			// Each Area should be saved
@@ -210,13 +210,22 @@ public class Area
 			 
 		}
 			 
-}	 
+	 
 		
 		
-	/*	public void print() //to print for demo
+		public void ReportAreaState() //to print for demo
 		{
-			
+			System.out.println("Number    Name    Minions    Empty?   Trouble?   Building? Demons   Trolls");
+			for (int i=0;i<12;i++)
+			{
+			 System.out.printf(" %-2d %-16S %-8S %-8s %-10s %-10s %-8s %-10s %n",(i+1), ArrName[i], Minions, IsEmpty ,IsTrouble, IsBuilt,Demons,Trolls);
+              
+			}
 		}
+		
+		
+		}
+
 		
 		// to define if two area are adjacent
 	//	public boolean isAdjacent(int playerNumber,int areaNumber)
@@ -229,9 +238,9 @@ public class Area
 		//{
 	//	}
 		
-}
+//}
 		
-		*/
+		//
 		
 		/*
 		 * public int GetMoneyCount()
