@@ -4,19 +4,36 @@
  * @author pari Alt+shift+j
  *
  */
-
+import java.util.List;
+import java.util.ArrayList;
 
 public class Area 
 {
-	
-	
 		private String[] ArrName ={ "Dolly Sisters","Unreal Estate","Dragon's Landing","Small Gods","The Scours","The Hippo","The Shades","Dimwell","Longwall","Isle of Gods","Seven Sleepers","Nap Hill"};
 		private String Name;
 		private int[] ArrBuildingCost={6,18,12,18,6,12,6,6,12,12,18,12};
 		private int BuildingCost;
 		private int Number;
-		private boolean IsEmpty;
-		private boolean IsBuilt; //in case a building is built in the area
+		public  boolean IsEmpty;
+		public boolean IsBuilt; //in case a building is built in the area
+		public List<Pieces> TroubleMakers;
+		public List<Pieces> Demons;
+		public List<Pieces> Trolls;
+		public String GetName() {return Name;}
+		
+		public Area(boolean b) {}
+		public void AddDemons(Pieces p) 
+		{
+			Demons.add(p);
+		}
+		public void AddTrolls(Pieces p) 
+		{
+			Trolls.add(p);
+		}
+		public void AddTroubleMaker(Pieces p) 
+		{
+			TroubleMakers.add(p);
+		}
 		
 		private int[][] AdjacentAreas=new int[][]
 		{
@@ -81,7 +98,7 @@ public class Area
 		 System.out.println();
 		 System.out.println();
 		 System.out.println("12 Areas are created");
-		}
+	}
 		
 		
 		//restore----set Area--modify Area
