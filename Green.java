@@ -3,21 +3,21 @@ public class Green extends Cards
 
 {
 
-	String[] Name={"Green"};
+	String Name;
 	int Id;
-	String [] GreenName;
+	Boolean Status;
+
+	
+	
 	
 	public Green ()
 	{
-		String [] GreenName={"Green"};
-		for (int i=1;i<=43;i++)
-		{
 	
-		this.Id=401+i;
-	     System.out.print(GreenName[0]);
-	     System.out.print(" ");
-	     System.out.print(i);
-		 System.out.print(",");
-		}
 	}
+	public Green(String Name,int Id,boolean Status)
+{
+		this.Name=Name;
+		this.Id=Id;
+		this.Status=Status;
+}
 }

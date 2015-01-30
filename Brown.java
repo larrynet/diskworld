@@ -1,22 +1,26 @@
-
+/**
+ * @author Niloufar
+ *
+ */
 public class Brown extends Cards
 {
 
-	String[] Name={"Brown"};
+	String Name;
 	int Id;
-	String [] BrownName;
+	boolean Status;
 	
-	public Brown ()
-	{
-		String [] BrownName={"Brown"};
-		for (int i=1;i<=53;i++)
+	
+	
+	
+		public Brown(String Name,int Id,boolean Status)
 		{
-	
-		this.Id=401+i;
-	     System.out.print(BrownName[0]);
-	     System.out.print(" ");
-	     System.out.print(i);
-		 System.out.print(",");
+				this.Name=Name;
+				this.Id=Id;
+				this.Status=Status;
 		}
-	}
+		public Brown()
+		{
+			
+		}
+	
 }

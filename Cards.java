@@ -1,12 +1,16 @@
-
+/**
+ * @author Niloufar
+ *
+ */
 public class Cards extends ManageCards
-{   //extends from game engin
+{   
 	
 	
 
-	public String Name ;
+	public Cards Name ;
    // public List FaceValue;
     public int Id;
+    public boolean Status;
     /*public Cards (String Name,int Id)
 	{
 		
