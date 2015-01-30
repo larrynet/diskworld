@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * @author Niloufar
+ *
+ */
 public class ManageCards 
 {
    //  ManageCards Attributes 
