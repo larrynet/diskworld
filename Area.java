@@ -145,17 +145,18 @@ public class Area
 		//set Variables what info lawrence should send for me to reload
 		//IsEmpty is not enough.we should know which player.which piece.is in the area
 		//IsBuilt is not enough.Which player has built in the area?
-		public Area(int Number, boolean IsTrouble,boolean IsEmpty, boolean IsBuilt) 
+		public Area (int Number, List<Pieces> Minions, List<Pieces> Trolls, List<Pieces> Demons,List<Pieces> TroubleMakers)
 		{
 			this.Number=Number;
-			this.IsEmpty=IsEmpty;
-			this.IsBuilt=IsBuilt;
-			this.IsTrouble=IsTrouble;
+			this.Minions.addAll(Minions);
+		    this.TroubleMakers.addAll(TroubleMakers);
+		    this.Trolls.addAll(Trolls);
+		    this.Demons.addAll(Demons);
+		    
 			this.Name=ArrName[Number-1];
 			this.BuildingCost=ArrBuildingCost[Number-1];
 			
-			System.out.println("Area" + (Number)+"  "+ Name+ "   $"+ BuildingCost  +" is set  "
-	    			 +IsEmpty +"  "+IsBuilt);
+			System.out.println("Area" + (Number)+"  "+ Name+ "   $"+ BuildingCost  +" "+Minions+" "+TroubleMakers+" "+Trolls+" "+Demons);
 			
 		}
 		
