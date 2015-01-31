@@ -243,7 +243,7 @@ public class Area
 		
 		
 			
-		// to define if two area are adjacent
+		// to define if two area are adjacent--it returns false
 		public boolean IsAdjacent(int AreaNumber1,int AreaNumber2)
 		{   
 			boolean Adjacent=true;
