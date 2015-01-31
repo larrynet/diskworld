@@ -1,8 +1,7 @@
 import java.util.List;
-import java.util.Vector;
 
 /**
- * @author gayhazan
+ * @author Gay Hazan
  *
  */
 public class Player {
