@@ -1,4 +1,6 @@
+import java.io.Serializable;
 import java.util.List;
+
 /**
  * @author Niloufar
  *
@@ -10,21 +12,105 @@ import java.util.List;
  * 
  * 
  */
-public class ManageCards
+public class ManageCards implements Serializable
 {
+	
    //  ManageCards Attributes 
 	public Cards [] c =new Cards[5];
-	public Personality[] p=new Personality[7];
-	public Event []e =new Event[12];
-	public CityArea [] ct=new CityArea[12];
-	public Green[] g=new Green[48];
-	public Brown[] b=new Brown[53];
+	public PersonalityCards[] p=new PersonalityCards[7];
+	public EventCards []e =new EventCards[12];
+	public CityAreaCards [] ct=new CityAreaCards[12];
+	public GreenCards[] g=new GreenCards[48];
+	public BrownCards[] b=new BrownCards[53];
+	
+
+	//ManageCards Constructor
+	public ManageCards()
+	{
+		String []PersonalityName={"Lord Vetinari","Lord Selachii ","Lord Rust ","Lord de Word ","Dragon King of Arms ","Chrysoprase ","Commander Vimes"};
+	     String []EventName={"The Dragon","Flood","Fire","Fog","Riots","Explorion","Mysterious Murders","Demons From The Dungeon Dimension","Subsidence","Bloody Stupid Johnson","Trolls","Earthquake"};
+		 String []CityAreaName={"Dolly Sisters","Unreal Estate","Dragon's Landing","Small Gods","The Scours","The Hippo","The Shades","Dimwell","Longwall","Isle of Gods","Seven Sleepers","Nap Hill"};
+		 
+		 int [] PersonalityId={101,102,103,104,105,106,107};
+	     int [] EventId={201,202,203,204,205,206,207,208,209,210,211,212};
+		 int []CityAreaId={301,302,303,304,305,306,307,308,309,310,311,312};
+		
+		 Boolean Status =true;
+		 /*
+			 * Make an array of c with 5 card size to point to each five of 
+			 * cards type
+			 * 
+			 * When i is zero an arraye of seven personality type card will be initiated an so the rest.
+			 * 
+			 */
+		 
+		for (int i =0;i<=4; i++)
+		{	
+	     this.c[i] = new  Cards();
+	     if (i==0)              
+	     {   
+	    	 for (int j=0; j<=this.p.length-1 ;j++)
+	    		 
+	    	 {
+	    	 this.p[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status);
+	    	 System.out.print(PersonalityName[j]);
+	    	 System.out.print(",");
+	    	 }
+	    	
+	     }
+	     else if (i==1)
+	     {
+	    	 for (int j=0;j<=this.e.length-1 ;j++)
+	    	 {
+	    		 this.e[j]=new EventCards(EventName[j],EventId[j],Status);
+	    		 System.out.print(EventName[j]);
+	    		 System.out.print(",");
+	    	 }
+	    	
+	     }
+	     
+	     else if (i==2)
+	     {
+	    	 for (int j=0;j<=this.ct.length-1;j++)
+	    	 {
+	    		 this.ct[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status);
+	    		 System.out.print(CityAreaName[j]);
+	    		 System.out.print(",");
+	    	 }
+	    	 
+	     }
+	     else if (i==3)
+	     {
+	    	 for (int j=0;j<=this.g.length-1;j++)
+	    	 {
+	    		 this.g[j]=new GreenCards(("Green"+" "+(j+1)),401+j,Status);
+	    		 System.out.print(this.g[j].Name);
+	    		 System.out.print(",");
+	    	 }
+	    	 
+	    	 
+	    	  
+	     }
+	     else if(i==4)
+	     {
+	    	 for (int j=0;j<=this.b.length-1;j++)
+	    	 {
+	    		 this.b[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status);
+	    		 System.out.print(this.b[j].Name);
+	    		 System.out.print(",");
+	    	 }
+	    	 
+	      }
+	     System.out.println("");
+	     }
+	
+	}
 	
 	//ManageCards Methods
 
-    public Event GetEventCard()
+    public EventCards GetEventCard()
     { 
-    	Event AvailableE=new Event();
+    	EventCards AvailableE=new EventCards();
        
     	for (int i=0;i<e.length-1  ;i++ )
     		if (this.e[i].Status==true)
@@ -73,7 +159,7 @@ public class ManageCards
     	 for (int j=0; j<=this.p.length-1 ;j++)
     		 
     	 {
-    	 this.p[j]=new Personality(PersonalityName[j],PersonalityId[j],Status);
+    	 this.p[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status);
     	 System.out.print(PersonalityName[j]);
     	 System.out.print(",");
     	 }
@@ -83,7 +169,7 @@ public class ManageCards
      {
     	 for (int j=0;j<=this.e.length-1 ;j++)
     	 {
-    		 this.e[j]=new Event(EventName[j],EventId[j],Status);
+    		 this.e[j]=new EventCards(EventName[j],EventId[j],Status);
     		 System.out.print(EventName[j]);
     		 System.out.print(",");
     	 }
@@ -94,7 +180,7 @@ public class ManageCards
      {
     	 for (int j=0;j<=this.ct.length-1;j++)
     	 {
-    		 this.ct[j]=new CityArea(CityAreaName[j],CityAreaId[j],Status);
+    		 this.ct[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status);
     		 System.out.print(CityAreaName[j]);
     		 System.out.print(",");
     	 }
@@ -104,7 +190,7 @@ public class ManageCards
      {
     	 for (int j=0;j<=this.g.length-1;j++)
     	 {
-    		 this.g[j]=new Green(("Green"+" "+(j+1)),401+j,Status);
+    		 this.g[j]=new GreenCards(("Green"+" "+(j+1)),401+j,Status);
     		 System.out.print(this.g[j].Name);
     		 System.out.print(",");
     	 }
@@ -116,7 +202,7 @@ public class ManageCards
      {
     	 for (int j=0;j<=this.b.length-1;j++)
     	 {
-    		 this.b[j]=new Brown(("Brown"+" "+(j+1)),(501+j),Status);
+    		 this.b[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status);
     		 System.out.print(this.b[j].Name);
     		 System.out.print(",");
     	 }
@@ -131,7 +217,7 @@ public class ManageCards
 	 * 
 	 * 
 	 */
-	public void GetState()
+	public void GetState() //used for testing
 	{ 
 		System.out.print("Cards,");
 		for (int i=0;i<p.length-1  ;i++ )
@@ -170,6 +256,20 @@ public class ManageCards
 		
 	}
 //	 System.out.println(this.e[1].Id);
+	
+	@Override
+	   public String toString() 
+	{
+		 return  (this.toString());
+	   
+
+	  
+	   }
+
+	
+	//Do some IO test
+	
+	
 }
 
 
