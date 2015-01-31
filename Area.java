@@ -251,8 +251,9 @@ public class Area
             
             for (int i=0;i<7;i++)
             	{
-            	if(AdjacentAreas [AreaNumber1][i]==AreaNumber2)
-            		{Adjacent=true;}
+            	if(AdjacentAreas[AreaNumber1][i]==AreaNumber2)
+            		{Adjacent=true;
+            		break;}
             	else
             		{Adjacent= false;}
             		

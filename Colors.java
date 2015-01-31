@@ -4,6 +4,7 @@
  *
  */
 public enum Colors {
+	None,
 	Red,  
 	Green,  
 	Blue,  
