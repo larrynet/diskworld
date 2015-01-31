@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.util.Iterator;
 import java.io.IOException;
-public class Board {
+import java.io.Serializable;
+
+public class Board implements Serializable{
 	public int Die;
 	public int Bank;
 	public  List<Area> ListArea ;
@@ -11,6 +13,10 @@ public class Board {
 	public Board() 
 	{}
 
+	public String toString() 
+	{
+		return this.toString();
+	}
 	public Board(int d, int b) {
 		Die = d;
 		Bank = b;

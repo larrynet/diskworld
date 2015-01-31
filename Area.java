@@ -1,11 +1,11 @@
 import java.util.List;
 import java.util.ArrayList;
-
+import java.io.Serializable;
 /**
  * @author pari
  *
  */
-public class Area 
+public class Area implements Serializable
 {
 	    //Attributes
 		private String[] ArrName ={ "Dolly Sisters","Unreal Estate","Dragon's Landing","Small Gods","The Scours","The Hippo","The Shades","Dimwell","Longwall","Isle of Gods","Seven Sleepers","Nap Hill"};
@@ -46,6 +46,11 @@ public class Area
 		public Area(boolean b) //what is this? what is that boolean?
 		{
 			
+		}
+		
+		public String toString() 
+		{
+			return this.toString();
 		}
 		
 		public void AddDemons(Pieces p) 

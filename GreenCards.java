@@ -1,5 +1,5 @@
 
-public class Green extends Cards
+public class GreenCards extends Cards
 
 {
 
@@ -10,11 +10,11 @@ public class Green extends Cards
 	
 	
 	
-	public Green ()
+	public GreenCards ()
 	{
 	
 	}
-	public Green(String Name,int Id,boolean Status)
+	public GreenCards(String Name,int Id,boolean Status)
 {
 		this.Name=Name;
 		this.Id=Id;

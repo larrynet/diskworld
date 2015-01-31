@@ -1,19 +1,20 @@
 import java.util.List;
+import java.io.Serializable;
 
 /**
  * @author Gay Hazan
  *
  */
-public class Player {
+public class Player implements Serializable{
 	
-	private Card Personality;
-	private List<Card> PlayerCards;
+	private Cards Personality;
+	private List<Cards> PlayerCards;
 	private int PlayerNumber;
 	private int Money;
 	private Colors Color;
 	List<Pieces> ListMinions;
 	List<Pieces> ListBuildings;
-	List<Card> CityAreaCards;
+	List<Cards> CityAreaCards;
 	String Demon;
 	
 	/**
@@ -30,7 +31,7 @@ public class Player {
 	 * @param _ListMinion
 	 * @param _ListBuilding
 	 */
-	public Player(int _PlayerNumber, Card _Personality, int _Money, Colors _Color, List<Card> _PlayerCards, List<Pieces> _ListMinion, List<Pieces> _ListBuilding){
+	public Player(int _PlayerNumber, Cards _Personality, int _Money, Colors _Color, List<Cards> _PlayerCards, List<Pieces> _ListMinion, List<Pieces> _ListBuilding){
 		PlayerNumber = _PlayerNumber;
 		Personality = _Personality;
 		Money = _Money;
@@ -41,14 +42,17 @@ public class Player {
 		//Demon = new Pieces();
 	}
 	
-	
+	public String toString() 
+	{
+		return this.toString();
+	}
 	
 	/**
-	 * Public Getter for Player Personality Card
+	 * Public Getter for Player Personality Cards
 	 * 
-	 * @return Card personality card object
+	 * @return Cards personality card object
 	 */
-	public Card GetPlayerPersonality()
+	public Cards GetPlayerPersonality()
 	{
 		return this.Personality;
 	}
@@ -97,7 +101,7 @@ public class Player {
 		return this.PlayerCards.size();
 	}
 	
-	public List<Card> GetCards() {return this.PlayerCards;}
+	public List<Cards> GetCards() {return this.PlayerCards;}
 	/**
 	 * Get the count of minions
 	 * @return number of minions currently belonging to user

@@ -1,10 +1,7 @@
-/**
- * @author Niloufar
- *
- */
 
 
-public class Personality extends Cards
+
+public class PersonalityCards extends Cards
 
 {
 
@@ -13,18 +10,18 @@ public class Personality extends Cards
     public int Id;
 	public boolean Status;
 
-	public Personality (String Name,int Id,boolean Status)
+	public PersonalityCards (String Name,int Id,boolean Status)
 	{
 		
 		this.Name=Name;
 		this.Id=Id;
 		this.Status=Status;
 	}
-	public Personality ()
+	public PersonalityCards ()
 	{
 	}
 
-public string GetPersonality()
+public String GetPersonality()
 	{
 		return(" Face Value of Personality Card");
 	}
