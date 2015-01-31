@@ -1,8 +1,9 @@
+import java.io.Serializable;
 /**
  * @author gayhazan
  *
  */
-public class Pieces {
+public class Pieces implements Serializable{
 	
 	private PieceType Type;
 	private Colors Color;
@@ -10,7 +11,7 @@ public class Pieces {
 	/**
 	 * Empty Constructor
 	 */
-	public Pieces(){}
+	public Pieces() {}
 	
 	/**
 	 * Default Constructor
@@ -25,6 +26,10 @@ public class Pieces {
 		Color = _Color;
 	}
 	
+	public String toString() 
+	{
+		return this.toString();
+	}
 	
 	/**
 	 * @return
