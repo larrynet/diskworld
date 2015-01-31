@@ -158,7 +158,7 @@ public class Board implements Serializable {
 		System.out.println("Bank current balance: " + this.Bank);
 		System.out.println();
 		System.out.printf("%-16S %-16S  %-10s %-10s %-8s %-10s %n","area","minions","trouble?","building?","demons","trolls");
-		
+		System.out.println();
 		
 		for (Area area : ListArea)
 		{
