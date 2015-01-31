@@ -4,11 +4,8 @@
  */
 public class Pieces {
 	
-	private int PieceID;
-	private String Type;
-	private String Color;
-	private String Location;
-	
+	private PieceType Type;
+	private Colors Color;
 	
 	/**
 	 * Empty Constructor
@@ -22,33 +19,25 @@ public class Pieces {
 	 * @param Type - What type of piece it is
 	 * @param What color is the piece
 	 */
-	public Pieces(int _Id, String _Type, String _Color)
+	public Pieces( PieceType _Type, Colors _Color)
 	{
-		PieceID = _Id;
 		Type = _Type;
 		Color = _Color;
-		Location = "";
-	}
-	public String GetLocation() {return Location;}
-	
-	
-	/**
-	 * @return Current Piece ID
-	 */
-	public int GetPieceID()
-	{
-		return this.PieceID;
 	}
 	
 	
 	/**
-	 * Set location of Piece
-	 * 
-	 * @param Location of piece
+	 * @return
 	 */
-	public void SetPieceLocation(String _location)
-	{
-		this.Location = _location;
+	public Colors GetPieceColor() {
+		return this.Color;
+	}
+	
+	/**
+	 * @return
+	 */
+	public PieceType GetPieceType() {
+		return this.Type;
 	}
 	
 

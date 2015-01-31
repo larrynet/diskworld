@@ -1,8 +1,7 @@
 import java.util.List;
-import java.util.Vector;
 
 /**
- * @author gayhazan
+ * @author Gay Hazan
  *
  */
 public class Player {
@@ -11,32 +10,38 @@ public class Player {
 	private List<Card> PlayerCards;
 	private int PlayerNumber;
 	private int Money;
-	private String Color;
-	List<Pieces> ListMinion;
-	List<Pieces> ListBuilding;
+	private Colors Color;
+	List<Pieces> ListMinions;
+	List<Pieces> ListBuildings;
+	List<Card> CityAreaCards;
 	String Demon;
 	
+	/**
+	 * 
+	 */
 	public Player () {}
-	//Lawrence
-	public Player(int _PlayerNumber, Card _Personality, int _Money, String _Color, List<Card> _PlayerCards, List<Pieces> _ListMinion, List<Pieces> _ListBuilding){
+	
+	/**
+	 * @param _PlayerNumber
+	 * @param _Personality
+	 * @param _Money
+	 * @param _Color
+	 * @param _PlayerCards
+	 * @param _ListMinion
+	 * @param _ListBuilding
+	 */
+	public Player(int _PlayerNumber, Card _Personality, int _Money, Colors _Color, List<Card> _PlayerCards, List<Pieces> _ListMinion, List<Pieces> _ListBuilding){
 		PlayerNumber = _PlayerNumber;
 		Personality = _Personality;
 		Money = _Money;
-		ListMinion = _ListMinion;
-		ListBuilding = _ListBuilding;
+		ListMinions = _ListMinion;
+		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
+		Color = _Color;
 		//Demon = new Pieces();
 	}
 	
-	public Player(int _PlayerNumber, Card _Personality, String _Color, List<Card> _PlayerCards){
-		PlayerNumber = _PlayerNumber;
-		Personality = _Personality;
-		Money = 10;
-		ListMinion = CreateMinions(_Color);
-		ListBuilding = CreateBuildings(_Color);
-		PlayerCards = _PlayerCards;
-		//Demon = new Pieces();
-	}
+	
 	
 	/**
 	 * Public Getter for Player Personality Card
@@ -97,18 +102,18 @@ public class Player {
 	 * Get the count of minions
 	 * @return number of minions currently belonging to user
 	 */
-	private int GetMinionCount()
+	public int GetMinionCount()
 	{
-		return this.ListMinion.size();
+		return this.ListMinions.size();
 	}
 	
 	/**
 	 * Get the count of buildings
 	 * @return number of buildings currently belonging to user
 	 */
-	private int GetBuildingCount()
+	public int GetBuildingCount()
 	{
-		return this.ListBuilding.size();
+		return this.ListBuildings.size();
 	}
 	
 	
@@ -142,49 +147,16 @@ public class Player {
 	 * @param Color
 	 * @return
 	 */
-	private List<Pieces> CreateMinions(String Color)
-	{
-		int pieceIdSequence = this.PlayerNumber * 100;
-		
-		List<Pieces> lstPlayerPieces = new Vector<Pieces>();
-		for (int i = 1; i<= 12; i++ )
-		{
-			Pieces piece = new Pieces(pieceIdSequence + i,"mignion",Color);
-			
-			lstPlayerPieces.add(piece);
-		}
-		
-		return lstPlayerPieces;
-	}
-	
-	/**
-	 * @param Color
-	 * @return
-	 */
-	private List<Pieces> CreateBuildings(String Color)
-	{
-		int pieceIdSequence = (this.PlayerNumber * 100) + 10;
-		List<Pieces> lstPlayerPieces = new Vector<Pieces>();
-		for (int i = 1; i<= 6; i++ )
-		{
-			Pieces piece = new Pieces(pieceIdSequence + i,"building",Color);
-			
-			lstPlayerPieces.add(piece);
-		}
-		
-		return lstPlayerPieces;
-	}
-
-	public String GetColor()
+	public Colors GetColor()
 	{
 		return Color;
 	}
 	
-	/**
-	 * Iterate through the player cards and create a string of card id separated by a comma
-	 * @return PlayerCards Id's in comma delimited format
-	 */
-	private String GetPlayerCardIds()
+		/**
+		 * Iterate through the player cards and create a string of card id separated by a comma
+		 * @return PlayerCards Id's in comma delimited format
+		 */
+		private String GetPlayerCardIds()
 	{
 		StringBuilder AllCards = new StringBuilder();
 		
@@ -204,48 +176,51 @@ public class Player {
 	}
 	
 	
-	/**
-	 * Iterate through the player minions list and create a string of minion id separate by a comma
-	 * @return Minion Id's in comma delimited format
-	 */
-	private String GetMinionIds()
-	{
-		StringBuilder AllMinions = new StringBuilder();
-		
-		for (int i = 0; i < 12; i++)
+		public void RetrieveMinion(Pieces Minion)
 		{
-			AllMinions.append(Integer.toString(this.ListMinion.get(i).GetPieceID()));
-			
-			if (i < 11)
+			if (this.GetMinionCount() < 12)
 			{
-				AllMinions.append(",");
+				if (Minion.GetPieceColor() == this.Color && Minion.GetPieceType() == PieceType.Minion)
+				{
+					this.ListMinions.add(Minion);
+				}
 			}
-			
 		}
-		return AllMinions.toString();
-	}
-
+		
+		public Pieces PlaceMinion()
+		{
+			Pieces MinionToSend =  this.ListMinions.get(this.GetMinionCount()-1);
+				
+			this.ListMinions.remove(this.GetMinionCount()-1);
+			
+			
+			return MinionToSend;
+		
+		}
+		
+		public void RetrieveBuiding(Pieces Building)
+		{
+			if (this.GetMinionCount() < 6)
+			{
+				if (Building.GetPieceColor() == this.Color && Building.GetPieceType() == PieceType.Building)
+				{
+					this.ListBuildings.add(Building);
+				}
+			}
+		}
+		
+		public Pieces PlaceBuilding()
+		{
+			Pieces BuildingToSend =  this.ListBuildings.get(this.GetBuildingCount()-1);
+			
+			this.ListMinions.remove(this.GetBuildingCount()-1);
+			
+			
+			return BuildingToSend;
+		}
 	
-	/**
-	 * Iterate through all the player buildings and create a string of building ids by a comma
-	 * @return	Comma separated list of Building Ids
-	 */
-	private String GetBuildingIds()
-	{
-		StringBuilder AllBuildings  = new StringBuilder();
-		
-		for (int i = 0; i < 6; i++)
-		{
-			AllBuildings.append(Integer.toString(this.ListBuilding.get(i).GetPieceID()));
-			
-			if (i < 5)
-			{
-				AllBuildings.append(",");
-			}
-		}
-		
-		return AllBuildings.toString();
-	}
+
+
 
 
 }
