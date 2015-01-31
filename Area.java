@@ -58,7 +58,7 @@ public class Area
 			Trolls.add(p);
 		}
 		
-		public void AddTroubleMaker(Pieces p) //only onetroublemarker in each area can be--we should check the number
+		public void AddTroubleMaker(Pieces p) //only one troublemarker in each area can be--we should check the number
 		{
 			TroubleMakers.add(p);
 			this.IsTrouble =true;
@@ -145,19 +145,37 @@ public class Area
 		//set Variables what info lawrence should send for me to reload
 		//IsEmpty is not enough.we should know which player.which piece.is in the area
 		//IsBuilt is not enough.Which player has built in the area?
-		public Area(int Number, boolean IsTrouble,boolean IsEmpty, boolean IsBuilt) 
+		public Area (int Number, List<Pieces> Minions, List<Pieces> Trolls, List<Pieces> Demons,List<Pieces> TroubleMakers)
 		{
+			try
+			{
+			checkAreaNumber(Number);
+			}
+			catch (IllegalArgumentException exception)
+				{
+				System.out.println(exception.getMessage());
+				}
+			
 			this.Number=Number;
-			this.IsEmpty=IsEmpty;
-			this.IsBuilt=IsBuilt;
-			this.IsTrouble=IsTrouble;
+			this.Minions.addAll(Minions);
+		    this.TroubleMakers.addAll(TroubleMakers);
+		    this.Trolls.addAll(Trolls);
+		    this.Demons.addAll(Demons);
+		    
 			this.Name=ArrName[Number-1];
 			this.BuildingCost=ArrBuildingCost[Number-1];
 			
-			System.out.println("Area" + (Number)+"  "+ Name+ "   $"+ BuildingCost  +" is set  "
-	    			 +IsEmpty +"  "+IsBuilt);
+			System.out.println("Area" + (Number)+"  "+ Name+ "   $"+ BuildingCost  +" "+Minions+" "+TroubleMakers+" "+Trolls+" "+Demons);
 			
 		}
+
+		//throwing Exception
+		private void checkAreaNumber(int Number) 
+		{
+			if(Number<0)
+				throw new IllegalArgumentException("Area number cannot be Negative.");
+		}
+		
 		
 		//restore from saved point---set Area
 		public void CreateArea(int Number,  boolean IsTrouble,boolean IsEmpty, boolean IsBuilt,List<Pieces> Minions,List<Pieces> Trolls,List<Pieces> Demons,List<Pieces> TroubleMaker)
@@ -224,14 +242,25 @@ public class Area
 		}
 		
 		
+			
+		// to define if two area are adjacent--it returns false
+		public boolean IsAdjacent(int AreaNumber1,int AreaNumber2)
+		{   
+			boolean Adjacent=true;
+			--AreaNumber1;
+            
+            for (int i=0;i<7;i++)
+            	{
+            	if(AdjacentAreas [AreaNumber1][i]==AreaNumber2)
+            		{Adjacent=true;}
+            	else
+            		{Adjacent= false;}
+            		
+            	}
+			return Adjacent;
 		}
-
 		
-		// to define if two area are adjacent
-	//	public boolean isAdjacent(int playerNumber,int areaNumber)
-	//	{
-	//		public int
-	//	}
+}
 		
 		
 		//SaveState(BufferedWriter bw)
