@@ -58,7 +58,7 @@ public class Area
 			Trolls.add(p);
 		}
 		
-		public void AddTroubleMaker(Pieces p) //only onetroublemarker in each area can be--we should check the number
+		public void AddTroubleMaker(Pieces p) //only one troublemarker in each area can be--we should check the number
 		{
 			TroubleMakers.add(p);
 			this.IsTrouble =true;
@@ -147,6 +147,15 @@ public class Area
 		//IsBuilt is not enough.Which player has built in the area?
 		public Area (int Number, List<Pieces> Minions, List<Pieces> Trolls, List<Pieces> Demons,List<Pieces> TroubleMakers)
 		{
+			try
+			{
+			checkAreaNumber(Number);
+			}
+			catch (IllegalArgumentException exception)
+				{
+				System.out.println(exception.getMessage());
+				}
+			
 			this.Number=Number;
 			this.Minions.addAll(Minions);
 		    this.TroubleMakers.addAll(TroubleMakers);
@@ -159,6 +168,14 @@ public class Area
 			System.out.println("Area" + (Number)+"  "+ Name+ "   $"+ BuildingCost  +" "+Minions+" "+TroubleMakers+" "+Trolls+" "+Demons);
 			
 		}
+
+		//throwing Exception
+		private void checkAreaNumber(int Number) 
+		{
+			if(Number<0)
+				throw new IllegalArgumentException("Area number cannot be Negative.");
+		}
+		
 		
 		//restore from saved point---set Area
 		public void CreateArea(int Number,  boolean IsTrouble,boolean IsEmpty, boolean IsBuilt,List<Pieces> Minions,List<Pieces> Trolls,List<Pieces> Demons,List<Pieces> TroubleMaker)
@@ -225,14 +242,25 @@ public class Area
 		}
 		
 		
-		}
-
-		
+			
 		// to define if two area are adjacent
-	//	public boolean isAdjacent(int playerNumber,int areaNumber)
-	//	{
-	//		public int
-	//	}
+		public boolean IsAdjacent(int AreaNumber1,int AreaNumber2)
+		{   
+			boolean Adjacent=true;
+			--AreaNumber1;
+            
+            for (int i=0;i<7;i++)
+            	{
+            	if(AdjacentAreas [AreaNumber1][i]==AreaNumber2)
+            		{Adjacent=true;}
+            	else
+            		{Adjacent= false;}
+            		
+            	}
+			return Adjacent;
+		}
+		
+}
 		
 		
 		//SaveState(BufferedWriter bw)
