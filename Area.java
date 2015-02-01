@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * @author pari
  *
  */
+
 public class Area implements Serializable
 {
 		private String Name;
@@ -29,10 +30,11 @@ public class Area implements Serializable
 		}
 
 		/**
-		 * Contstructor
-		 * @param _Name
-		 * @param _Number
-		 * @param _Cost
+		 * Area Contructor
+		 * 
+		 * @param Area Name
+		 * @param Area Number
+		 * @param _Area Cost
 		 */
 		public Area(String _Name, int _Number, int _Cost) 
 		{
@@ -50,10 +52,27 @@ public class Area implements Serializable
 			
 		}
 		
-		//Methods
-		public String GetName() {return Name;}
 		
+		/**
+		 * @return Name of Area
+		 */
+		public String GetName() 
+		{
+			return this.Name;
+		}
+		
+		
+		/**
+		 * @return Cost of Area
+		 */
+		public int GetAreaCost()
+		{
+			return this.BuildingCost;
+		}
 
+		/**
+		 * @return
+		 */
 		public int GetDemonCount()
 		{
 			if (this.ListDemons.size() > 0)
@@ -64,6 +83,9 @@ public class Area implements Serializable
 			return 0;
 		}
 
+		/**
+		 * @return
+		 */
 		public int GetTrollCount()
 		{
 			if (this.ListTrolls.size() > 0)
@@ -74,27 +96,42 @@ public class Area implements Serializable
 			return 0;
 		}
 		
+		/**
+		 * @param p
+		 */
 		public void AddDemons(Pieces p) 
 		{
 			ListDemons.add(p);
 		}
 		
+		/**
+		 * @param p
+		 */
 		public void AddTrolls(Pieces p) 
 		{
 			ListTrolls.add(p);
 		}
 		
+		/**
+		 * @param p
+		 */
 		public void AddTroubleMaker(Pieces p) //only one troublemarker in each area can be--we should check the number
 		{
 			ListTroubleMakers.add(p);
 			this.IsTrouble =true;
 		}
 		
+		/**
+		 * @param p
+		 */
 		public void AddMinions(Pieces p) 
 		{
 			ListMinions.add(p);
 		}
 		
+		/**
+		 * @param b
+		 */
 		public void AddBuilding(Pieces b) 
 		{
 			ListBuildings.add(b);
@@ -102,16 +139,25 @@ public class Area implements Serializable
 		}
 		
 		
+		/**
+		 * @param p
+		 */
 		public void RemoveDemons(Pieces p) 
 		{
 			ListDemons.remove(p);
 		}
 		
+		/**
+		 * @param p
+		 */
 		public void RemoveTrolls(Pieces p) 
 		{
 			ListTrolls.remove(p);
 		}
 		
+		/**
+		 * @param p
+		 */
 		public void RemoveTroubleMaker(Pieces p) 
 		{
 			ListTroubleMakers.remove(p);
@@ -119,6 +165,10 @@ public class Area implements Serializable
 			
 		}
 		
+		/**
+		 * @param Color
+		 * @return
+		 */
 		public boolean RemoveMinions(Colors Color) 
 		{
 			for (Pieces Minion : ListMinions)
@@ -134,6 +184,10 @@ public class Area implements Serializable
 			return false;
 		}
 		
+		/**
+		 * @param p
+		 * @return
+		 */
 		public boolean RemoveBuilding(Pieces p) 
 		{
 			//We need to make sure the building that we want to remove is actually the one that the area has.
@@ -147,6 +201,10 @@ public class Area implements Serializable
 			return false;
 		}
 		
+		/**
+		 * @param Color
+		 * @return
+		 */
 		public int GetMinionCount(Colors Color)
 		{
 			int MinionCount = 0;
@@ -170,11 +228,17 @@ public class Area implements Serializable
 			
 		}
 	
+		/**
+		 * @return Area has building
+		 */
 		public boolean HasBuilding()
 		{
 			return this.IsBuilt;
 		}
 		
+		/**
+		 * @return A comma separated string of minions present in Area
+		 */
 		public String ReportMinion()
 		{
 			StringBuilder MinionColors = new StringBuilder();
@@ -196,6 +260,9 @@ public class Area implements Serializable
 			return "none";
 		}
 			
+		/**
+		 * Prints State of Current Area: Name, Minions in Area, Trouble Marker present, Building present, Demon count, troll count
+		 */
 		public void PrintState() //to print for demo
 		{
 			 System.out.printf("%-16S %-16S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, IsBuilt,this.GetDemonCount(),this.GetTrollCount());
