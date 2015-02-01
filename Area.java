@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * @author pari
+ * @author parinaz Barakhshan
  *
  */
 
@@ -24,13 +24,14 @@ public class Area implements Serializable
 		private List<Pieces> ListBuildings;
 		
 		
+		
 		public String toString() 
 		{
 			return this.toString();
 		}
 
 		/**
-		 * Area Contructor
+		 * Area Constructor
 		 * 
 		 * @param Area Name
 		 * @param Area Number
@@ -71,7 +72,7 @@ public class Area implements Serializable
 		}
 
 		/**
-		 * @return
+		 * @return existence of Demon in an Area
 		 */
 		public int GetDemonCount()
 		{
@@ -84,7 +85,7 @@ public class Area implements Serializable
 		}
 
 		/**
-		 * @return
+		 * @return existence of Troll in an Area 
 		 */
 		public int GetTrollCount()
 		{
