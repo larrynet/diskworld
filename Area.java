@@ -98,7 +98,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param  a Demon from Pieces class
 		 */
 		public void AddDemons(Pieces p) 
 		{
@@ -106,7 +106,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a Troll from Pieces class
 		 */
 		public void AddTrolls(Pieces p) 
 		{
@@ -114,7 +114,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a TroubleMarker from Pieces class
 		 */
 		public void AddTroubleMaker(Pieces p) //only one troublemarker in each area can be--we should check the number
 		{
@@ -123,7 +123,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a Minion from Pieces class
 		 */
 		public void AddMinions(Pieces p) 
 		{
@@ -131,7 +131,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param b
+		 * @param a Building from Pieces class
 		 */
 		public void AddBuilding(Pieces b) 
 		{
@@ -141,7 +141,7 @@ public class Area implements Serializable
 		
 		
 		/**
-		 * @param p
+		 * @param a Demon from Pieces class
 		 */
 		public void RemoveDemons(Pieces p) 
 		{
@@ -149,7 +149,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a Troll from Pieces class
 		 */
 		public void RemoveTrolls(Pieces p) 
 		{
@@ -157,7 +157,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a TroubleMarker from Pieces class
 		 */
 		public void RemoveTroubleMaker(Pieces p) 
 		{
