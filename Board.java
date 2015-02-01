@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * @author parinaz Barakhshan
+ * @author parinaz Barakhshan <parinaz1983@yahoo.com>
  *
  */
 
@@ -63,7 +63,7 @@ public class Area implements Serializable
 		
 		
 		/**
-		 * @return Cost of Area
+		 * @return Cost of building in the Area
 		 */
 		public int GetAreaCost()
 		{
@@ -97,7 +97,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a Demon from pieces class
 		 */
 		public void AddDemons(Pieces p) 
 		{
@@ -105,7 +105,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a Troll from pieces class
 		 */
 		public void AddTrolls(Pieces p) 
 		{
@@ -113,7 +113,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a Trouble Marker from pieces class
 		 */
 		public void AddTroubleMaker(Pieces p) //only one troublemarker in each area can be--we should check the number
 		{
@@ -122,7 +122,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a Minion from pieces class
 		 */
 		public void AddMinions(Pieces p) 
 		{
@@ -130,7 +130,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param b
+		 * @param a building from pieces class
 		 */
 		public void AddBuilding(Pieces b) 
 		{
@@ -140,7 +140,7 @@ public class Area implements Serializable
 		
 		
 		/**
-		 * @param p
+		 * @param a Demon from pieces class
 		 */
 		public void RemoveDemons(Pieces p) 
 		{
@@ -148,7 +148,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a Troll from pieces class
 		 */
 		public void RemoveTrolls(Pieces p) 
 		{
@@ -156,7 +156,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a TroubleMarker from pieces class
 		 */
 		public void RemoveTroubleMaker(Pieces p) 
 		{
@@ -185,7 +185,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * @param a building from pieces class
 		 * @return
 		 */
 		public boolean RemoveBuilding(Pieces p) 
