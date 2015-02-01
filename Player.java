@@ -15,7 +15,7 @@ public class Player implements Serializable{
 	List<Pieces> ListMinions;
 	List<Pieces> ListBuildings;
 	List<Cards> CityAreaCards;
-	String Demon;
+	
 	
 	/**
 	 * 
@@ -39,7 +39,7 @@ public class Player implements Serializable{
 		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
 		Color = _Color;
-		//Demon = new Pieces();
+		
 	}
 	
 	public String toString() 
@@ -151,30 +151,6 @@ public class Player implements Serializable{
 		return Color;
 	}
 	
-	/**
-	 * Iterate through the player cards and create a string of card id separated by a comma
-	 * @return PlayerCards Id's in comma delimited format
-	 */
-	private String GetPlayerCardIds()
-{
-	StringBuilder AllCards = new StringBuilder();
-	
-	//
-	/*for (int i = 0; i < this.GetPlayerCardCount(); i++)
-	{
-		AllCards.append(Integer.toString(this.PlayerCards.get(i).GetCardID()));
-		
-		//Add Comma logic
-		if (i < this.GetPlayerCardCount())
-		{
-			AllCards.append(",");
-		}
-	}
-	*/
-	return AllCards.toString();
-}
-
-
 	public void RetrieveMinion(Pieces Minion)
 	{
 		if (this.GetMinionCount() < 12)
@@ -212,7 +188,7 @@ public class Player implements Serializable{
 	{
 		Pieces BuildingToSend =  this.ListBuildings.get(this.GetBuildingCount()-1);
 		
-		this.ListMinions.remove(this.GetBuildingCount()-1);
+		this.ListBuildings.remove(this.GetBuildingCount()-1);
 		
 		
 		return BuildingToSend;

@@ -1,6 +1,6 @@
 import java.io.Serializable;
 /**
- * @author gayhazan
+ * @author Gay Hazan
  *
  */
 public class Pieces implements Serializable{

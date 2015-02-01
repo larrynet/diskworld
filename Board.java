@@ -15,7 +15,7 @@ public class Board implements Serializable {
     private int Bank;
     private int Die;
 	private  List<Area> ListArea;
-	private List<Card> ListCityAreaCards;
+	private List<Cards> ListCityAreaCards;
 	private List<Pieces> ListTroubleMakers;
 	private List<Pieces> ListDemons;
 	private List<Pieces> ListTrolls;
@@ -32,7 +32,7 @@ public class Board implements Serializable {
 	{	
 		Bank = 120;
 		
-		ListCityAreaCards = new ArrayList<Card>();
+		ListCityAreaCards = new ArrayList<Cards>();
 		ListTroubleMakers = new ArrayList<Pieces>();
 		ListDemons = new ArrayList<Pieces>();
 		ListTrolls = new ArrayList<Pieces>();
@@ -65,12 +65,7 @@ public class Board implements Serializable {
 	{
 		this.Bank += amount;
 	}
-	
-	public void AddArea(List<Area> a) 
-	{
-		//TODO
-	}
-	
+
 	public boolean PlaceMinion(int AreaNumber,Player player)
 	{
 		if(player.GetMinionCount()!=0)
@@ -112,45 +107,12 @@ public class Board implements Serializable {
 		return true;
 	}
 
-
 	public boolean RemoveMinion(int AreaNumber, Player player)
 	{
 		
 		return true;
 	}
 	
-	public Board(int d, int b, Area[] list) 
-	{
-		Die = d;
-		Bank = b;
-		
-		/*for(int i=0; i<list.length; i++) 
-			ListArea.add(new Area(list[i].Name, list[i].Cost, list[i].Number, list[i].IsEmpty));
-		*/
-	}
-
-	public void SaveState (BufferedWriter bw)
-	{
-		try {
-			bw.append("board,die,"+this.Die+"\n");
-			bw.append("board,bank,"+this.Bank+"\n");
-			
-			Iterator<Area> it=ListArea.iterator();
-
-	        while(it.hasNext())
-	        {
-	        	Area CurrentArea = (Area)it.next();
-	        	String StrIsEmpty = "";
-	        	//if(CurrentArea.IsEmpty) StrIsEmpty = "true";
-	        	//else StrIsEmpty = "false";
-	        	//TBM: Area.SaveState()
-	        	//bw.append("area,"+CurrentArea.Name+","+CurrentArea.Cost+","+CurrentArea.Number+","+StrIsEmpty+"\n");
-	        }
-
-
-		} catch (IOException e) {e.printStackTrace(); } 
-	}
-
 	public void PrintState() 
 	{
 		System.out.println("Current state of the game board\n==============================\n");
