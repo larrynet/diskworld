@@ -9,13 +9,15 @@ public class PersonalityCards extends Cards
    // public List FaceValue;
     public int Id;
 	public boolean Status;
+	public CardType Type;
 
-	public PersonalityCards (String Name,int Id,boolean Status)
+	public PersonalityCards (String Name,int Id,boolean Status,CardType Type)
 	{
 		
 		this.Name=Name;
 		this.Id=Id;
 		this.Status=Status;
+		this.Type=Type;
 	}
 	public PersonalityCards ()
 	{

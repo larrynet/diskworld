@@ -8,12 +8,14 @@ public class CityAreaCards extends Cards implements Serializable
     //public List FaceValue;
 	public int Id;
     public boolean Status;
-	
-	public CityAreaCards(String Name, int Id,boolean Status) 
+    public CardType Type ;
+    
+	public CityAreaCards(String Name,int Id,boolean Status,CardType Type)
 	{
 		this.Name=Name;
 		this.Id=Id;
 		this.Status=Status;
+		this.Type=Type;
 	}
 	public CityAreaCards()
 	{
