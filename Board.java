@@ -1,282 +1,176 @@
-import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.Serializable;
+import java.util.Iterator;
+import java.io.IOException;
 
-/**
- * @author parinaz Barakhshan <parinaz1983@yahoo.com>
- *
- */
 
-public class Area implements Serializable
-{
-		private String Name;
-		private int BuildingCost;
-		private int Number;
-
-		//public  boolean IsEmpty;
-		private boolean IsBuilt; //in case a building is built in the area
-		private boolean IsTrouble; //in case two minions are in the area
-		
-		private List<Pieces> ListTroubleMakers;
-		private List<Pieces> ListDemons;
-		private List<Pieces> ListTrolls;
-		private List<Pieces> ListMinions;
-		private List<Pieces> ListBuildings;
-		
-		
-		public String toString() 
-		{
-			return this.toString();
-		}
-
-		/**
-		 * Area Constructor
-		 * 
-		 * @param Area Name
-		 * @param Area Number
-		 * @param _Area Cost
-		 */
-		public Area(String _Name, int _Number, int _Cost) 
-		{
-			Name = _Name;
-			Number = _Number;
-			BuildingCost = _Cost;
-			IsTrouble = false;
-			IsBuilt = false;
-			
-			ListTroubleMakers = new ArrayList<Pieces>();
-			ListDemons = new ArrayList<Pieces>();
-			ListTrolls = new ArrayList<Pieces>();
-			ListMinions = new ArrayList<Pieces>();
-			ListBuildings = new ArrayList<Pieces>();
-			
-		}
-		
-		
-		/**
-		 * @return Name of Area
-		 */
-		public String GetName() 
-		{
-			return this.Name;
-		}
-		
-		
-		/**
-		 * @return Cost of building in the Area
-		 */
-		public int GetAreaCost()
-		{
-			return this.BuildingCost;
-		}
-
-		/**
-		 * @return existence of Demon
-		 */
-		public int GetDemonCount()
-		{
-			if (this.ListDemons.size() > 0)
-			{
-				return 1;
-			}
-			
-			return 0;
-		}
-
-		/**
-		 * @return existence of Troll
-		 */
-		public int GetTrollCount()
-		{
-			if (this.ListTrolls.size() > 0)
-			{
-				return 1;
-			}
-			
-			return 0;
-		}
-		
-		/**
-		 * @param a Demon from pieces class
-		 */
-		public void AddDemons(Pieces p) 
-		{
-			ListDemons.add(p);
-		}
-		
-		/**
-		 * @param a Troll from pieces class
-		 */
-		public void AddTrolls(Pieces p) 
-		{
-			ListTrolls.add(p);
-		}
-		
-		/**
-		 * @param a Trouble Marker from pieces class
-		 */
-		public void AddTroubleMaker(Pieces p) //only one troublemarker in each area can be--we should check the number
-		{
-			ListTroubleMakers.add(p);
-			this.IsTrouble =true;
-		}
-		
-		/**
-		 * @param a Minion from pieces class
-		 */
-		public void AddMinions(Pieces p) 
-		{
-			ListMinions.add(p);
-		}
-		
-		/**
-		 * @param a building from pieces class
-		 */
-		public void AddBuilding(Pieces b) 
-		{
-			ListBuildings.add(b);
-			this.IsBuilt = true;
-		}
-		
-		
-		/**
-		 * @param a Demon from pieces class
-		 */
-		public void RemoveDemons(Pieces p) 
-		{
-			ListDemons.remove(p);
-		}
-		
-		/**
-		 * @param a Troll from pieces class
-		 */
-		public void RemoveTrolls(Pieces p) 
-		{
-			ListTrolls.remove(p);
-		}
-		
-		/**
-		 * @param a TroubleMarker from pieces class
-		 */
-		public void RemoveTroubleMaker(Pieces p) 
-		{
-			ListTroubleMakers.remove(p);
-			this.IsTrouble=false ;
-			
-		}
-		
-		/**
-		 * @param Color
-		 * @return
-		 */
-		public boolean RemoveMinions(Colors Color) 
-		{
-			for (Pieces Minion : ListMinions)
-			{
-				
-				if (Minion.GetPieceColor() == Color)
-				{
-					ListMinions.remove(Minion);
-					return true;
-				}
-			}
-			
-			return false;
-		}
-		
-		/**
-		 * @param a building from pieces class
-		 * @return
-		 */
-		public boolean RemoveBuilding(Pieces p) 
-		{
-			//We need to make sure the building that we want to remove is actually the one that the area has.
-			if (p == this.ListBuildings.get(0))
-			{
-				ListBuildings.remove(p);
-				this.IsBuilt = false;
-				return true;
-			}
-			
-			return false;
-		}
-		
-		/**
-		 * @param Color
-		 * @return
-		 */
-		public int GetMinionCount(Colors Color)
-		{
-			int MinionCount = 0;
-			
-			if (Color == Colors.None)
-			{
-				return this.ListMinions.size();
-			}
-			else
-			{
-				for (Pieces minion : this.ListMinions){
-					
-					if (minion.GetPieceColor() == Color)
-					{
-						MinionCount ++;
-					}
-				}
-				
-				return MinionCount;
-			}
-			
-		}
+public class Board implements Serializable {
 	
-		/**
-		 * @return Area has building
-		 */
-		public boolean HasBuilding()
+	//Board Attributes
+	private String[] ArrName ={ "Dolly Sisters","Unreal Estate","Dragon's Landing","Small Gods","The Scours","The Hippo","The Shades","Dimwell","Longwall","Isle of Gods","Seven Sleepers","Nap Hill"};
+	private int[] ArrBuildingCost={6,18,12,18,6,12,6,6,12,12,18,12};
+	
+    private int Bank;
+    private int Die;
+	private  List<Area> ListArea;
+	private List<Cards> ListCityAreaCards;
+	private List<Pieces> ListTroubleMakers;
+	private List<Pieces> ListDemons;
+	private List<Pieces> ListTrolls;
+	private List<Pieces> ListDeadMinions;
+	
+	//Board Public Methos
+
+	public String toString() 
+	{
+		return this.toString();
+	}
+	
+	public Board() 
+	{	
+		Bank = 120;
+		
+		ListCityAreaCards = new ArrayList<Cards>();
+		ListTroubleMakers = new ArrayList<Pieces>();
+		ListDemons = new ArrayList<Pieces>();
+		ListTrolls = new ArrayList<Pieces>();
+		ListDeadMinions = new ArrayList<Pieces>();
+		ListArea = new ArrayList<Area>();
+		
+		CreateAreas();
+		
+		CreatePieces();
+	}
+	
+	public int RollDie()
+	{
+		this.Die = (int)(Math.ceil(Math.random() * 12)); 
+		
+		return this.Die;
+	}
+	
+	public int GetBalance()
+	{
+		return this.Bank;
+	}
+
+	public void DeductFromBank(int amount)
+	{
+		this.Bank -= amount;
+	}
+
+	public void AddToBank(int amount)
+	{
+		this.Bank += amount;
+	}
+
+	public boolean PlaceMinion(int AreaNumber,Player player)
+	{
+		if(player.GetMinionCount()!=0)
 		{
-			return this.IsBuilt;
+			ListArea.get(AreaNumber-1).AddMinions(player.PlaceMinion());
+			
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean PlaceBuilding(int AreaNumber,Player player)
+	{
+		if(player.GetBuildingCount()!=0)
+		{
+			ListArea.get(AreaNumber-1).AddBuilding(player.PlaceBuilding());
+			
+			return true;
 		}
 		
-		/**
-		 * @return A comma separated string of minions present in Area
-		 */
-		public String ReportMinion()
+		return false;
+	}
+	
+	public boolean PlaceTroll(int AreaNumber)
+	{
+		ListArea.get(AreaNumber-1).AddTrolls(this.ListTrolls.get(this.ListTrolls.size()-1));
+		return true;
+	}
+	
+	public boolean PlaceDemon(int AreaNumber)
+	{
+		ListArea.get(AreaNumber-1).AddDemons(this.ListDemons.get(this.ListDemons.size()-1));
+		return true;
+	}
+
+	public boolean PlaceTroubleMarker(int AreaNumber)
+	{
+		ListArea.get(AreaNumber-1).AddTroubleMaker(this.ListTroubleMakers.get(this.ListTroubleMakers.size()-1));
+		return true;
+	}
+
+	public boolean RemoveMinion(int AreaNumber, Player player)
+	{
+		
+		return true;
+	}
+	
+	public void PrintState() 
+	{
+		System.out.println("Current state of the game board\n==============================\n");
+		System.out.println("Die current value: " + this.Die);
+		System.out.println("Bank current balance: " + this.Bank);
+		System.out.println();
+		System.out.printf("%-16S %-16S  %-10s %-10s %-8s %-10s %n","area","minions","trouble?","building?","demons","trolls");
+		System.out.println();
+		
+		for (Area area : ListArea)
 		{
-			StringBuilder MinionColors = new StringBuilder();
-			
-			if (this.GetMinionCount(Colors.None) > 0)
-			{
-				for (Pieces Minion : this.ListMinions) 
-				{
-					MinionColors.append(Minion.GetPieceColor());
-					MinionColors.append(",");
-					
-				}
-				
-				MinionColors.deleteCharAt(MinionColors.length()-1);
-				
-				return MinionColors.toString();
+			area.PrintState();
+		}
+	}
+	
+	//Boar Private Methods
+
+	private void CreateAreas()
+	{
+		for (int i=0;i< ArrName.length;i++)
+		{
+			Area NewArea = new Area(ArrName[i],i+1,ArrBuildingCost[i]);
+			this.ListArea.add(i,NewArea);
+		}
+	}
+	
+	private void CreatePieces()
+	{
+		//Create Demons
+
+		for (int i = 0; i < 4; i++){
+
+			Pieces Demon = new Pieces(PieceType.Demon, Colors.Orange);
+
+			this.ListDemons.add(Demon);
+
 			}
-			
-			return "none";
-		}
-			
-		/**
-		 * Prints State of Current Area: Name, Minions in Area, Trouble Marker present, Building present, Demon count, troll count
-		 */
-		public void PrintState() //to print for demo
-		{
-			 System.out.printf("%-16S %-16S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, IsBuilt,this.GetDemonCount(),this.GetTrollCount());
-            
-		}
-		
-		
-			 
+
+		//Create Trolls
+
+		for (int i =0; i < 3; i++){
+
+			Pieces Troll = new Pieces(PieceType.Troll, Colors.Brown);
+
+			this.ListTrolls.add(Troll);
+
+			}
+
+			//Create Trouble Marker
+
+			for (int i = 0; i < 12; i++) {
+
+				Pieces TroubleMarker = new Pieces(PieceType.TroubleMarker, Colors.Black);
+
+				this.ListTroubleMakers.add(TroubleMarker);
+
+			}
+
+	}
 }
-	
-	
-	
-	
-	
-	
-
 
