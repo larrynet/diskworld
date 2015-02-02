@@ -2,10 +2,12 @@ import java.util.List;
 import java.io.Serializable;
 
 /**
+ * Player Class to create and initiate a player.
+ * 
  * @author Gay Hazan
- *
+ * @version 1.0
  */
-public class Player implements Serializable{
+public class Player implements Serializable {
 	
 	private Cards Personality;
 	private List<Cards> PlayerCards;
@@ -18,11 +20,8 @@ public class Player implements Serializable{
 	
 	
 	/**
+	 * Player constructor 
 	 * 
-	 */
-	public Player () {}
-	
-	/**
 	 * @param _PlayerNumber
 	 * @param _Personality
 	 * @param _Money
@@ -69,7 +68,7 @@ public class Player implements Serializable{
 	}
 	
 	/**
-	 * Add to player bank roll
+	 * Add money to player bank roll
 	 * 
 	 * @param amount to add
 	 */
@@ -90,7 +89,6 @@ public class Player implements Serializable{
 	
 	}
 
-	
 	/**
 	 * Get the number of cards currently in players hand
 	 * 
@@ -101,11 +99,19 @@ public class Player implements Serializable{
 		return this.PlayerCards.size();
 	}
 	
-	public List<Cards> GetCards() {return this.PlayerCards;}
+	/**
+	 * Retrieve player cards
+	 * @return List of Player Cards currently in player's hand
+	 */
+	public List<Cards> GetCards() 
+	{
+		return this.PlayerCards;
+	}
 	
 	
 	/**
-	 * Get the count of minions
+	 * Get Current Minion count of player
+	 * 
 	 * @return number of minions currently belonging to user
 	 */
 	public int GetMinionCount()
@@ -114,7 +120,8 @@ public class Player implements Serializable{
 	}
 	
 	/**
-	 * Get the count of buildings
+	 * Get current count of buildings
+	 * 
 	 * @return number of buildings currently belonging to user
 	 */
 	public int GetBuildingCount()
@@ -122,6 +129,10 @@ public class Player implements Serializable{
 		return this.ListBuildings.size();
 	}
 	
+	/**
+	 * Method used to print the player profile with the following info: 
+	 * The player number and the player personality
+	 */
 	public void PrintPlayerProfile()
 	{
 		System.out.println("Player " + this.PlayerNumber + "(" + this.Color + ")" + "is playing as " + this.Personality.Name + ".");
@@ -143,6 +154,8 @@ public class Player implements Serializable{
 	
 	
 	/**
+	 * Get the color of the current player
+	 * 
 	 * @param Color
 	 * @return
 	 */
@@ -151,6 +164,12 @@ public class Player implements Serializable{
 		return Color;
 	}
 	
+	
+	/**
+	 * Add Minions back to the players minions
+	 * 
+	 * @param Minion
+	 */
 	public void RetrieveMinion(Pieces Minion)
 	{
 		if (this.GetMinionCount() < 12)
@@ -162,6 +181,11 @@ public class Player implements Serializable{
 		}
 	}
 	
+	
+	/**
+	 * Remove a minion from player's inventory and add to Area
+	 * 
+	 */
 	public Pieces PlaceMinion()
 	{
 		Pieces MinionToSend =  this.ListMinions.get(this.GetMinionCount()-1);
@@ -173,6 +197,11 @@ public class Player implements Serializable{
 	
 	}
 	
+	/**
+	 * Add building back to the players minions
+	 * 
+	 * @param Pieces of type Building
+	 */
 	public void RetrieveBuiding(Pieces Building)
 	{
 		if (this.GetMinionCount() < 6)
@@ -184,6 +213,10 @@ public class Player implements Serializable{
 		}
 	}
 	
+	/**
+	 * Remove a building from player's inventory and add to Area
+	 * 
+	 */
 	public Pieces PlaceBuilding()
 	{
 		Pieces BuildingToSend =  this.ListBuildings.get(this.GetBuildingCount()-1);

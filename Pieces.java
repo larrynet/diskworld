@@ -1,7 +1,9 @@
 import java.io.Serializable;
 /**
+ * Class to create pieces of different type
+ * 
  * @author Gay Hazan
- *
+ * @version 1.0
  */
 public class Pieces implements Serializable{
 	

@@ -1,10 +1,16 @@
 
 /**
- * @author gayhazan
+ * Enum to assign types to pieces
+ * 
+ * @author Gay Hazan
  *
  */
 public enum PieceType {
 	
-		Minion, Demon, Troll, TroubleMarker, Building;
+		Minion, 
+		Demon, 
+		Troll, 
+		TroubleMarker, 
+		Building;
 	
 }
