@@ -1,17 +1,19 @@
 import java.io.Serializable;
 import java.util.List;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+
+
 
 /**
  * @author Niloufar
- *
- */
-/*
  * 
  * Class ManageCards use to hold the attributes of every single card in the game.
- * 
- * 
- * 
+ * These Cards will be initiated at the beginning of the game.
+ *
  */
+
 public class ManageCards implements Serializable
 {
 	
@@ -22,9 +24,14 @@ public class ManageCards implements Serializable
 	public CityAreaCards [] ct=new CityAreaCards[12];
 	public GreenCards[] g=new GreenCards[48];
 	public BrownCards[] b=new BrownCards[53];
+	public CardType Cardtype;
 	
-
+	
 	//ManageCards Constructor
+	
+	/**
+	 * ManageCards constructor will initiate all cards of the game.
+	 */
 	public ManageCards()
 	{
 		String []PersonalityName={"Lord Vetinari","Lord Selachii ","Lord Rust ","Lord de Word ","Dragon King of Arms ","Chrysoprase ","Commander Vimes"};
@@ -52,8 +59,9 @@ public class ManageCards implements Serializable
 	    	 for (int j=0; j<=this.p.length-1 ;j++)
 	    		 
 	    	 {
-	    	 this.p[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status);
-	    	 
+	    	 this.p[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status,CardType.PersonalityCards );
+	    	 System.out.print(PersonalityName[j]);
+	    	 System.out.print(",");
 	    	 }
 	    	
 	     }
@@ -61,7 +69,9 @@ public class ManageCards implements Serializable
 	     {
 	    	 for (int j=0;j<=this.e.length-1 ;j++)
 	    	 {
-	    		 this.e[j]=new EventCards(EventName[j],EventId[j],Status);
+	    		 this.e[j]=new EventCards(EventName[j],EventId[j],Status,CardType.EventCards);
+	    		 System.out.print(EventName[j]);
+	    		 System.out.print(",");
 	    	 }
 	    	
 	     }
@@ -70,8 +80,9 @@ public class ManageCards implements Serializable
 	     {
 	    	 for (int j=0;j<=this.ct.length-1;j++)
 	    	 {
-	    		 this.ct[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status);
-
+	    		 this.ct[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status,CardType.CityAreaCards);
+	    		 System.out.print(CityAreaName[j]);
+	    		 System.out.print(",");
 	    	 }
 	    	 
 	     }
@@ -79,7 +90,9 @@ public class ManageCards implements Serializable
 	     {
 	    	 for (int j=0;j<=this.g.length-1;j++)
 	    	 {
-	    		 this.g[j]=new GreenCards(("Green"+" "+(j+1)),401+j,Status);
+	    		 this.g[j]=new GreenCards(("Green"+" "+(j+1)),401+j,Status,CardType.GreenCards);
+	    		 System.out.print(this.g[j].Name);
+	    		 System.out.print(",");
 	    	 }
 	    	 
 	    	 
@@ -89,10 +102,13 @@ public class ManageCards implements Serializable
 	     {
 	    	 for (int j=0;j<=this.b.length-1;j++)
 	    	 {
-	    		 this.b[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status);
+	    		 this.b[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status,CardType.BrownCards);
+	    		 System.out.print(this.b[j].Name);
+	    		 System.out.print(",");
 	    	 }
 	    	 
 	      }
+	     System.out.println("");
 	     }
 	
 	}
@@ -150,7 +166,9 @@ public class ManageCards implements Serializable
     	 for (int j=0; j<=this.p.length-1 ;j++)
     		 
     	 {
-    	 this.p[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status);
+    	 this.p[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status,CardType.PersonalityCards);
+    	 System.out.print(PersonalityName[j]);
+    	 System.out.print(",");
     	 }
     	
      }
@@ -158,7 +176,9 @@ public class ManageCards implements Serializable
      {
     	 for (int j=0;j<=this.e.length-1 ;j++)
     	 {
-    		 this.e[j]=new EventCards(EventName[j],EventId[j],Status);
+    		 this.e[j]=new EventCards(EventName[j],EventId[j],Status,CardType.EventCards);
+    		 System.out.print(EventName[j]);
+    		 System.out.print(",");
     	 }
     	
      }
@@ -167,7 +187,9 @@ public class ManageCards implements Serializable
      {
     	 for (int j=0;j<=this.ct.length-1;j++)
     	 {
-    		 this.ct[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status);
+    		 this.ct[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status,CardType.CityAreaCards);
+    		 System.out.print(CityAreaName[j]);
+    		 System.out.print(",");
     	 }
     	 
      }
@@ -175,7 +197,9 @@ public class ManageCards implements Serializable
      {
     	 for (int j=0;j<=this.g.length-1;j++)
     	 {
-    		 this.g[j]=new GreenCards(("Green"+" "+(j+1)),401+j,Status);
+    		 this.g[j]=new GreenCards(("Green"+" "+(j+1)),401+j,Status,CardType.GreenCards);
+    		 System.out.print(this.g[j].Name);
+    		 System.out.print(",");
     	 }
     	 
     	 
@@ -185,17 +209,20 @@ public class ManageCards implements Serializable
      {
     	 for (int j=0;j<=this.b.length-1;j++)
     	 {
-    		 this.b[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status);
+    		 this.b[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status,CardType.BrownCards);
+    		 System.out.print(this.b[j].Name);
+    		 System.out.print(",");
     	 }
     	 
       }
+     System.out.println("");
      }
 	
 	}
-	/*
-	 * This Method is showing the current state of each cards 
-	 * 
-	 * 
+	
+	/**
+	 * GetState is used to show the current state of Cards
+	 * Used to test the value of cards in built 1 of project.
 	 */
 	public void GetState() //used for testing
 	{ 
@@ -237,20 +264,129 @@ public class ManageCards implements Serializable
 	}
 //	 System.out.println(this.e[1].Id);
 	
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	   public String toString() 
 	{
 		 return  (this.toString());
 	   
+ }
+	
+	
+/**
+ * 
+ * Method GetCard will be call from GameEngin to Draw cards to player during the game.
+ * 
+ * @param Type  Type of cards which would be personality,event...
+ * @return return type is an object of type cards
+ */
+public Cards GetCard( CardType Type)
+	{
+		
+	Cards available =new Cards();
+	
+		if(CardType.PersonalityCards==Type  )    
+		{  this.ShuffleCards(this.p);
+			for (int i=0;i<=this.p.length-1;i++)
+			{
+		
+			 if (this.p[i].Status==true  )
+			 { 
+			    p[i].Status=false;
+			    available= this.p[i];
+				 break;
+			 } 
+			}
+		}
+		else if(CardType.EventCards==Type  )    
+		{   this.ShuffleCards(this.e);
+			for (int i=0;i<=this.e.length-1;i++)
+			{		 
+			 if (this.e[i].Status==true  )
+			  {
+				 e[i].Status=false;
+				 available= this.e[i];
+				 break;
+	          }
+			}
+		}
+			
+		else if(CardType.CityAreaCards  ==Type  )    
+		{   this.ShuffleCards(ct);
+			for (int i=0;i<=this.ct.length-1;i++)
+				{
+				 if (this.ct[i].Status==true  )
+				  {
+					 ct[i].Status=false;
+					 available=this.ct[i];
+					 break;
+				 
+				  }
+				}
+		}
+					
+		else if(CardType.GreenCards  ==Type  )    
+		{   this.ShuffleCards(g);
+			for (int i=0;i<=this.g.length-1;i++)
+				{
+				 if (this.g[i].Status==true  )
+				 { 
+					 g[i].Status=false;
+					 available=this.g[i];
+					 break;
+				 }	
+				}
+		}
+		else if(CardType.BrownCards  ==Type  )    
+		{this.ShuffleCards(b);
+			for (int i=0;i<=this.b.length-1;i++)
+				{
+					
+				if (this.b[i].Status==true  )
+				{
+				 b[i].Status=false;
+				 available= this.b[i];
+				 break;
+				 }
+			}
+		}
+		else available=null;
+return available;
+		
+	}
 
-	  
-	   }
+/**
+ * Shuffle method was written shuffle the cards before giving them to players.
+ * 
+ * @param c This parameter is array of cards
+ * @return  An array of cards will be return
+ */
+public  Cards[] ShuffleCards(Cards[] c)
+ {
+	Random rgen = new Random();  // Random number generator			
 
-	
-	//Do some IO test
-	
-	
+	for (int i=0; i<c.length; i++)
+	{
+	    int randomPosition = rgen.nextInt(c.length);
+	    Cards temp = c[i];
+	    c[i] = c[randomPosition];
+	    c[randomPosition] = temp;
+	}
+
+	return c;
 }
+
+
+
+}
+
+		
+		
+	
 
 
 
