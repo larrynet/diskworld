@@ -21,7 +21,7 @@ public class Area implements Serializable
 		private List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
 		private List<Pieces> ListMinions;
-		private List<Pieces> ListBuildings;
+		private Pieces Building;
 		
 		
 		
@@ -49,7 +49,7 @@ public class Area implements Serializable
 			ListDemons = new ArrayList<Pieces>();
 			ListTrolls = new ArrayList<Pieces>();
 			ListMinions = new ArrayList<Pieces>();
-			ListBuildings = new ArrayList<Pieces>();
+			Building = null;
 			
 		}
 		
@@ -135,7 +135,7 @@ public class Area implements Serializable
 		 */
 		public void AddBuilding(Pieces b) 
 		{
-			ListBuildings.add(b);
+			this.Building = b;
 			this.IsBuilt = true;
 		}
 		
@@ -192,10 +192,11 @@ public class Area implements Serializable
 		public boolean RemoveBuilding(Pieces p) 
 		{
 			//We need to make sure the building that we want to remove is actually the one that the area has.
-			if (p == this.ListBuildings.get(0))
+			if (p == this.Building)
 			{
-				ListBuildings.remove(p);
+				this.Building = null;
 				this.IsBuilt = false;
+				
 				return true;
 			}
 			

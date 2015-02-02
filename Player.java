@@ -9,14 +9,16 @@ import java.io.Serializable;
  */
 public class Player implements Serializable {
 	
+	public static final int INITIAL_BANK = 10;
+	
 	private Cards Personality;
 	private List<Cards> PlayerCards;
 	private int PlayerNumber;
 	private int Money;
 	private Colors Color;
-	List<Pieces> ListMinions;
-	List<Pieces> ListBuildings;
-	List<Cards> CityAreaCards;
+	private List<Pieces> ListMinions;
+	private List<Pieces> ListBuildings;
+	private List<Cards> CityAreaCards;
 	
 	
 	/**
@@ -30,10 +32,10 @@ public class Player implements Serializable {
 	 * @param _ListMinion
 	 * @param _ListBuilding
 	 */
-	public Player(int _PlayerNumber, Cards _Personality, int _Money, Colors _Color, List<Cards> _PlayerCards, List<Pieces> _ListMinion, List<Pieces> _ListBuilding){
+	public Player(int _PlayerNumber, Cards _Personality, Colors _Color, List<Cards> _PlayerCards, List<Pieces> _ListMinion, List<Pieces> _ListBuilding){
 		PlayerNumber = _PlayerNumber;
 		Personality = _Personality;
-		Money = _Money;
+		Money = INITIAL_BANK;
 		ListMinions = _ListMinion;
 		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
@@ -56,6 +58,49 @@ public class Player implements Serializable {
 		return this.Personality;
 	}
 	
+	
+	
+	/**
+	 * Method to play a player card and remove it from the players hand
+	 * 
+	 * @return Played Card
+	 */
+	public Cards PlayCard()
+	{
+		Cards PlayedCard = this.PlayerCards.get(this.PlayerCards.size()-1);
+		
+		this.PlayerCards.remove(this.PlayerCards.size()-1);
+		
+		return PlayedCard;
+	}
+	
+	
+	/**
+	 * Add a player card to current players hand
+	 * 
+	 * @param PlayerCard
+	 */
+	public void AddPlayerCard(Cards PlayerCard)
+	{
+		this.PlayerCards.add(PlayerCard);
+	}
+	
+	/**
+	 * @param CityAreaCard
+	 */
+	public void AddCityAreayCard(Cards CityAreaCard)
+	{
+		this.CityAreaCards.add(CityAreaCard);
+	}
+	
+	public Cards RemoveCityAreaCard()
+	{
+		Cards UsedCityAreaCard = this.CityAreaCards.get(this.CityAreaCards.size()-1);
+		
+		this.CityAreaCards.remove(this.CityAreaCards.size()-1);
+		
+		return UsedCityAreaCard;
+	}
 	
 	/**
 	 * Public Getter for player money sum
@@ -227,4 +272,8 @@ public class Player implements Serializable {
 		return BuildingToSend;
 	}
 
+	public List<Cards> GetCityAreayCards()
+	{
+		return this.CityAreaCards;
+	}
 }
