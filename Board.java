@@ -5,16 +5,16 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.io.IOException;
 
-
 public class Board implements Serializable {
 	
 	//Board Attributes
 	private String[] ArrName ={ "Dolly Sisters","Unreal Estate","Dragon's Landing","Small Gods","The Scours","The Hippo","The Shades","Dimwell","Longwall","Isle of Gods","Seven Sleepers","Nap Hill"};
 	private int[] ArrBuildingCost={6,18,12,18,6,12,6,6,12,12,18,12};
-	
+	public static final int TOTAL_AREA = 12;
+	public static final int INITIAL_BANK = 120;
     private int Bank;
     private int Die;
-	private  List<Area> ListArea;
+	public  List<Area> ListArea;
 	private List<Cards> ListCityAreaCards;
 	private List<Pieces> ListTroubleMakers;
 	private List<Pieces> ListDemons;
@@ -25,12 +25,13 @@ public class Board implements Serializable {
 
 	public String toString() 
 	{
+		Area a;
 		return this.toString();
 	}
 	
 	public Board() 
 	{	
-		Bank = 120;
+		Bank = INITIAL_BANK;
 		
 		ListCityAreaCards = new ArrayList<Cards>();
 		ListTroubleMakers = new ArrayList<Pieces>();
@@ -51,6 +52,10 @@ public class Board implements Serializable {
 		return this.Die;
 	}
 	
+	public void SetBalance(int b)
+	{
+		this.Bank = b;
+	}
 	public int GetBalance()
 	{
 		return this.Bank;
@@ -104,12 +109,6 @@ public class Board implements Serializable {
 	public boolean PlaceTroubleMarker(int AreaNumber)
 	{
 		ListArea.get(AreaNumber-1).AddTroubleMaker(this.ListTroubleMakers.get(this.ListTroubleMakers.size()-1));
-		return true;
-	}
-
-	public boolean RemoveMinion(int AreaNumber, Player player)
-	{
-		
 		return true;
 	}
 	

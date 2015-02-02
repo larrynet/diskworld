@@ -53,8 +53,7 @@ public class ManageCards implements Serializable
 	    		 
 	    	 {
 	    	 this.p[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status);
-	    	 System.out.print(PersonalityName[j]);
-	    	 System.out.print(",");
+	    	 
 	    	 }
 	    	
 	     }
@@ -63,8 +62,6 @@ public class ManageCards implements Serializable
 	    	 for (int j=0;j<=this.e.length-1 ;j++)
 	    	 {
 	    		 this.e[j]=new EventCards(EventName[j],EventId[j],Status);
-	    		 System.out.print(EventName[j]);
-	    		 System.out.print(",");
 	    	 }
 	    	
 	     }
@@ -74,8 +71,7 @@ public class ManageCards implements Serializable
 	    	 for (int j=0;j<=this.ct.length-1;j++)
 	    	 {
 	    		 this.ct[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status);
-	    		 System.out.print(CityAreaName[j]);
-	    		 System.out.print(",");
+
 	    	 }
 	    	 
 	     }
@@ -84,8 +80,6 @@ public class ManageCards implements Serializable
 	    	 for (int j=0;j<=this.g.length-1;j++)
 	    	 {
 	    		 this.g[j]=new GreenCards(("Green"+" "+(j+1)),401+j,Status);
-	    		 System.out.print(this.g[j].Name);
-	    		 System.out.print(",");
 	    	 }
 	    	 
 	    	 
@@ -96,12 +90,9 @@ public class ManageCards implements Serializable
 	    	 for (int j=0;j<=this.b.length-1;j++)
 	    	 {
 	    		 this.b[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status);
-	    		 System.out.print(this.b[j].Name);
-	    		 System.out.print(",");
 	    	 }
 	    	 
 	      }
-	     System.out.println("");
 	     }
 	
 	}
@@ -160,8 +151,6 @@ public class ManageCards implements Serializable
     		 
     	 {
     	 this.p[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status);
-    	 System.out.print(PersonalityName[j]);
-    	 System.out.print(",");
     	 }
     	
      }
@@ -170,8 +159,6 @@ public class ManageCards implements Serializable
     	 for (int j=0;j<=this.e.length-1 ;j++)
     	 {
     		 this.e[j]=new EventCards(EventName[j],EventId[j],Status);
-    		 System.out.print(EventName[j]);
-    		 System.out.print(",");
     	 }
     	
      }
@@ -181,8 +168,6 @@ public class ManageCards implements Serializable
     	 for (int j=0;j<=this.ct.length-1;j++)
     	 {
     		 this.ct[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status);
-    		 System.out.print(CityAreaName[j]);
-    		 System.out.print(",");
     	 }
     	 
      }
@@ -191,8 +176,6 @@ public class ManageCards implements Serializable
     	 for (int j=0;j<=this.g.length-1;j++)
     	 {
     		 this.g[j]=new GreenCards(("Green"+" "+(j+1)),401+j,Status);
-    		 System.out.print(this.g[j].Name);
-    		 System.out.print(",");
     	 }
     	 
     	 
@@ -203,12 +186,9 @@ public class ManageCards implements Serializable
     	 for (int j=0;j<=this.b.length-1;j++)
     	 {
     		 this.b[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status);
-    		 System.out.print(this.b[j].Name);
-    		 System.out.print(",");
     	 }
     	 
       }
-     System.out.println("");
      }
 	
 	}

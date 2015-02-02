@@ -18,11 +18,13 @@ public class JUnitTestSuite {
 		StateManager sm = new StateManager();
 		
 		GameEngine ge = new GameEngine();
-		ge.CardManager.c[0].Name = RandomString;
+		ManageCards CardManager = ge.GetCardManager();
+		CardManager.c[0].Name = RandomString;
 		ExportSuccess = sm.ExportGameState(ge,PathState);
 		
 		GameEngine LoadFromState = sm.ImportGameState(PathState);
-		ImportSuccess = RandomString.equals(LoadFromState.CardManager.c[0].Name);
+		ManageCards LoadFromStateCards = LoadFromState.GetCardManager();
+		ImportSuccess = RandomString.equals(LoadFromStateCards.c[0].Name);
 
 		//evaluate test result
 		assertTrue("Failed while import state", ImportSuccess);
