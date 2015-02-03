@@ -17,7 +17,7 @@ public class Area implements Serializable
 		private boolean IsBuilt; //in case a building is built in the area
 		private boolean IsTrouble; //in case two minions are in the area
 		
-		private List<Pieces> ListTroubleMakers;
+		private Pieces TroubleMakers;
 		private List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
 		private List<Pieces> ListMinions;
@@ -45,7 +45,7 @@ public class Area implements Serializable
 			IsTrouble = false;
 			IsBuilt = false;
 			
-			ListTroubleMakers = new ArrayList<Pieces>();
+			TroubleMakers = null;
 			ListDemons = new ArrayList<Pieces>();
 			ListTrolls = new ArrayList<Pieces>();
 			ListMinions = new ArrayList<Pieces>();
@@ -72,29 +72,19 @@ public class Area implements Serializable
 		}
 
 		/**
-		 * @return existence of Demon in an Area
+		 * @return number of Demons in an Area
 		 */
 		public int GetDemonCount()
 		{
-			if (this.ListDemons.size() > 0)
-			{
-				return 1;
-			}
-			
-			return 0;
+			return this.ListDemons.size() ;			
 		}
 
 		/**
-		 * @return existence of Troll in an Area 
+		 * @return number of Trolls in an Area 
 		 */
 		public int GetTrollCount()
 		{
-			if (this.ListTrolls.size() > 0)
-			{
-				return 1;
-			}
-			
-			return 0;
+			return this.ListTrolls.size();
 		}
 		
 		/**
@@ -116,9 +106,9 @@ public class Area implements Serializable
 		/**
 		 * @param a TroubleMarker from Pieces class
 		 */
-		public void AddTroubleMaker(Pieces p) //only one troublemarker in each area can be--we should check the number
+		public void AddTroubleMaker(Pieces p) 
 		{
-			ListTroubleMakers.add(p);
+			this.TroubleMakers= p;
 			this.IsTrouble =true;
 		}
 		
@@ -161,14 +151,14 @@ public class Area implements Serializable
 		 */
 		public void RemoveTroubleMaker(Pieces p) 
 		{
-			ListTroubleMakers.remove(p);
+			TroubleMakers=null;
 			this.IsTrouble=false ;
 			
 		}
 		
 		/**
 		 * @param Color
-		 * @return
+		 * @return boolean to show if it has been done or not
 		 */
 		public boolean RemoveMinions(Colors Color) 
 		{
@@ -187,11 +177,11 @@ public class Area implements Serializable
 		
 		/**
 		 * @param p
-		 * @return
+		 * @return boolean to show if it has been removed or not
 		 */
 		public boolean RemoveBuilding() 
 		{
-			//We need to make area has building
+			//We need to make sure the area has building
 			if (this.IsBuilt)
 			{
 				
@@ -206,7 +196,7 @@ public class Area implements Serializable
 		
 		/**
 		 * @param Color
-		 * @return
+		 * @return the number of minions of the requested color
 		 */
 		public int GetMinionCount(Colors Color)
 		{
@@ -232,7 +222,7 @@ public class Area implements Serializable
 		}
 	
 		/**
-		 * @return Area has building
+		 * @return boolean to show if the Area has building or not
 		 */
 		public boolean HasBuilding()
 		{
