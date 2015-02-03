@@ -14,7 +14,7 @@ public class Board implements Serializable {
 	public static final int INITIAL_BANK = 120;
     private int Bank;
     private int Die;
-	public  List<Area> ListArea;
+	private  List<Area> ListArea;
 	private List<Cards> ListCityAreaCards;
 	private List<Pieces> ListTroubleMakers;
 	private List<Pieces> ListDemons;

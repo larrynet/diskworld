@@ -80,8 +80,8 @@ public class main {
 			}
 			if(Choice.charAt(0) == '3')
 			{
-				System.out.println("Please enter the player index of whom the minion belong (1-" + NumPlayer + "):");
-				int PlayerIndex = ValidateEntry(scan, 1, NumPlayer);
+				System.out.println("Please enter the player index of whom the minion belong (0-" + (NumPlayer-1) + "):");
+				int PlayerIndex = ValidateEntry(scan, 0, NumPlayer-1);
 				System.out.println("Please enter the area index to put the minion (1-12):");
 				int AreaIndex = ValidateEntry(scan, 1, 12);
 						
@@ -89,8 +89,8 @@ public class main {
 			}
 			else if(Choice.charAt(0) == '4')
 			{
-				System.out.println("Please enter the player index of whom the building belong (1-" + NumPlayer + "):");
-				int PlayerIndex = ValidateEntry(scan, 1, NumPlayer);
+				System.out.println("Please enter the player index of whom the building belong (0-" + (NumPlayer-1) + "):");
+				int PlayerIndex = ValidateEntry(scan, 0, NumPlayer-1);
 				System.out.println("Please enter the area index to put the building (1-12):");
 				int AreaIndex = ValidateEntry(scan, 1, 12);
 				ge.PlaceBuilding(AreaIndex, PlayerIndex-1);
@@ -117,7 +117,11 @@ public class main {
 			{
 				System.out.println("Please enter the player index of whom to transfer money (1-" + NumPlayer + "):");
 				int PlayerIndex = ValidateEntry(scan, 1, NumPlayer);
-				//missing money transfer command
+				
+				if(ge.PayPlayer(PlayerIndex, 2))
+						System.out.println("Amount have balance withdrawn from the bank and transfered to the player.");
+				else
+					System.out.println("Amount transfered failed.");
 			}
 			else if(Choice.charAt(0) == '9') 
 			{

@@ -43,7 +43,23 @@ public class GameEngine implements Serializable
 		}
 		
 	}
-
+	/**
+	 * @param PlayerIndex
+	 * @param amount
+	 * @return if succeeded or not
+	 */
+	public boolean PayPlayer(int PlayerIndex, int amount)
+	{
+		int NewAmount = GameBoard.GetBalance()-amount;
+		if(NewAmount >= 0)
+		{
+			GameBoard.SetBalance(NewAmount);
+			ListPlayer.get(PlayerIndex).AddToMoney(amount);
+			return true;
+		}
+		else
+			return false;
+	}
 	/**
 	 * Function will put a player minion in the area
 	 * 
