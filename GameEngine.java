@@ -31,8 +31,17 @@ public class GameEngine implements Serializable
 	 */
 	public GameEngine(int p) 
 	{
-		TotalPlayer = p;
-		InitializeData();
+		if (p <2 && p>4)
+		{
+			System.out.println("Diskworld only supports 2 to 4 players. Please re-enter number of players: ");
+			return;
+		}
+		else
+		{
+			TotalPlayer = p;
+			InitializeData();
+		}
+		
 	}
 
 	/**
@@ -124,29 +133,13 @@ public class GameEngine implements Serializable
 	        boolean PlayerStillCard = true;
 	        
 	        //fetch a random city area card
-	        while(PlayerStillCard)
+	        for(int PlayerHandCount= 0; PlayerHandCount < PlayerHandSize; PlayerHandCount++)
 	        {
-	        	randomInt = _RandomGenerator.nextInt(CardManager.g.length);
-	        	if(CardManager.g[randomInt].Status)
-	        	{
-	        		CardManager.g[randomInt].Status = false;
-	        		ListPlayerCards.add(CardManager.g[randomInt]);
-	        		PlayerStillCard = (ListPlayerCards.size() < PlayerHandSize);
-	        	}        	
+	        	ListPlayerCards.add(CardManager.GetCard(CardType.GreenCards));      	
 	        }
 	        
 	        // fetch a random personality card
-	        boolean PlayerStillPersonality = true;
-	        while(PlayerStillPersonality)
-	        {
-	        	randomInt = _RandomGenerator.nextInt(CardManager.p.length);
-	        	if(CardManager.p[randomInt].Status)
-	        	{
-	        		CardManager.p[randomInt].Status = false;
-	        		PlayerPersonality = CardManager.p[randomInt];
-	        		PlayerStillPersonality = false;
-	        	}        	
-	        }
+	        ListPlayerCards.add(CardManager.GetCard(CardType.PersonalityCards));   
 	        
 	        //create a list minions and buildings for each player
 	        List<Pieces> ListMinions = new ArrayList<Pieces>();
