@@ -21,7 +21,7 @@ public class Board implements Serializable {
 	private List<Pieces> ListTrolls;
 	private List<Pieces> ListDeadMinions;
 	
-	//Board Public Methos
+	//Board Public Methods
 
 	public String toString() 
 	{
@@ -56,6 +56,7 @@ public class Board implements Serializable {
 	{
 		this.Bank = b;
 	}
+
 	public int GetBalance()
 	{
 		return this.Bank;
@@ -92,6 +93,13 @@ public class Board implements Serializable {
 		}
 		
 		return false;
+	}
+	
+	public void RemoveBuilding(int AreaNumber, Player player)
+	{
+		Area currentArea = this.ListArea.get(AreaNumber);
+		
+		currentArea.RemoveBuilding();
 	}
 	
 	public boolean PlaceTroll(int AreaNumber)

@@ -189,11 +189,12 @@ public class Area implements Serializable
 		 * @param p
 		 * @return
 		 */
-		public boolean RemoveBuilding(Pieces p) 
+		public boolean RemoveBuilding() 
 		{
-			//We need to make sure the building that we want to remove is actually the one that the area has.
-			if (p == this.Building)
+			//We need to make area has building
+			if (this.IsBuilt)
 			{
+				
 				this.Building = null;
 				this.IsBuilt = false;
 				

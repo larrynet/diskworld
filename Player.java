@@ -18,7 +18,7 @@ public class Player implements Serializable {
 	private Colors Color;
 	private List<Pieces> ListMinions;
 	private List<Pieces> ListBuildings;
-	private List<Cards> CityAreaCards;
+	private List<Cards> ListCityAreaCards;
 	
 	
 	/**
@@ -90,14 +90,14 @@ public class Player implements Serializable {
 	 */
 	public void AddCityAreayCard(Cards CityAreaCard)
 	{
-		this.CityAreaCards.add(CityAreaCard);
+		this.ListCityAreaCards.add(CityAreaCard);
 	}
 	
 	public Cards RemoveCityAreaCard()
 	{
-		Cards UsedCityAreaCard = this.CityAreaCards.get(this.CityAreaCards.size()-1);
+		Cards UsedCityAreaCard = this.ListCityAreaCards.get(this.ListCityAreaCards.size()-1);
 		
-		this.CityAreaCards.remove(this.CityAreaCards.size()-1);
+		this.ListCityAreaCards.remove(this.ListCityAreaCards.size()-1);
 		
 		return UsedCityAreaCard;
 	}
@@ -195,6 +195,14 @@ public class Player implements Serializable {
 	{
 		System.out.println("Player " + this.PlayerNumber + "'s current invetory");
 		System.out.println(this.GetMinionCount() + " minions, " + this.GetBuildingCount() + " buildings " + this.GetMoneyCount() + " Ankh-Morpork dollars");
+		System.out.println();
+		System.out.println("City Area Cards:");
+		System.out.println(this.PrintCityAreaCards());
+		System.out.println();
+		System.out.println("PlayerCards");
+		System.out.println(this.PrintPlayerCards()[0]);
+		System.out.println(this.PrintPlayerCards()[1]);
+
 	}
 	
 	
@@ -274,6 +282,53 @@ public class Player implements Serializable {
 
 	public List<Cards> GetCityAreayCards()
 	{
-		return this.CityAreaCards;
+		return this.ListCityAreaCards;
 	}
+	
+	private String PrintCityAreaCards()
+	{
+		StringBuilder strCityAreaCards = new StringBuilder();
+		 for (Cards CityAreaCard : this.ListCityAreaCards)
+		 {
+			 strCityAreaCards.append(CityAreaCard.Name);
+			 strCityAreaCards.append(",");
+			 
+		 }
+		 
+		 strCityAreaCards.deleteCharAt(strCityAreaCards.length()-1);
+		 
+		 return strCityAreaCards.toString();
+	}
+
+	private String[] PrintPlayerCards()
+	{
+		StringBuilder strGreenPlayerCards = new StringBuilder();
+		StringBuilder strBrownPlayerCards = new StringBuilder();
+		
+		
+		
+		strGreenPlayerCards.append("Green ");
+		strBrownPlayerCards.append("Brown ");
+		
+		for (Cards PlayerCard : this.PlayerCards)
+		{
+			if (PlayerCard.Type == CardType.BrownCards)
+			{
+				strBrownPlayerCards.append(PlayerCard.Id);
+				strBrownPlayerCards.append(",");
+			}
+			else if (PlayerCard.Type == CardType.GreenCards)
+			{
+				strGreenPlayerCards.append(PlayerCard.Id);
+				strGreenPlayerCards.append(",");
+			}
+		}
+		
+		String[] FinalString  = {strGreenPlayerCards.toString(),strBrownPlayerCards.toString()};
+		
+		return FinalString;
+
+		
+	}
+
 }
