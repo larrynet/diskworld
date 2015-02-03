@@ -1,32 +1,26 @@
 import java.io.Serializable;
-
 /**
  * @author Niloufar
  *
+ *
  */
-public class EventCards  implements Cards, Serializable
-
+public class EventCards implements Cards, Serializable 
 {
-
-	public String Name ;
-	public int Id;
-	public boolean Status;
-	 public CardType Type ;
-	 
-public EventCards(String Name,int Id,boolean Status,CardType Type)
-		{
-			
-			this.Name=Name;
-			this.Id=Id;
-			this.Status=Status;
-			this.Type=Type;
-		}
-	public EventCards ()
+	private String Name;
+	private int Id;
+	boolean Status;
+	private CardType Type;
+	
+	
+	public EventCards (String _Name, int _Id, boolean _Status, CardType _Type)
 	{
-		
+		Name = _Name;
+		Id = _Id;
+		Status = _Status;
+		Type = _Type;
+
 	}
-	
-	
+
 	public String GetName ()
 	{
 		return this.Name;
@@ -41,4 +35,12 @@ public EventCards(String Name,int Id,boolean Status,CardType Type)
 	 {
 		 return this.Type;
 	 }
+	
+	public String toString() 
+	   {
+		 return  (this.toString());
+	   
+	  
+	   }
 }
+

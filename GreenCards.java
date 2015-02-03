@@ -1,48 +1,44 @@
 import java.io.Serializable;
-
-
-public class GreenCards implements Cards, Serializable
-
-{
-
-	String Name;
-	int Id;
-	Boolean Status;
-	 public CardType Type ;
-	    public GreenCards (String Name,int Id,boolean Status,CardType Type)
-		{
-			
-			this.Name=Name;
-			this.Id=Id;
-			this.Status=Status;
-			this.Type=Type;
-		}
+/**
+ * @author Niloufar
+ *
+ *
+ */
+public class GreenCards implements Cards, Serializable {
+	private String Name;
+	private int Id;
+	boolean Status;
+	private CardType Type;
 	
-	public GreenCards ()
+	
+	public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type) {
+		Name = _Name;
+		Id = _Id;
+		Status = _Status;
+		Type = _Type;
+
+	}
+
+	public String GetName ()
 	{
-	
+		return this.Name;
 	}
 	
-	 public String toString() 
+	public int GetID()
+	{
+		return this.Id;
+	}
+	
+	public CardType GetCardType()
+	 {
+		 return this.Type;
+	 }
+	
+	public String toString() 
 	   {
 		 return  (this.toString());
 	   
 	  
 	   }
-	 
-	 public String GetName ()
-		{
-			return this.Name;
-		}
-	 
-	 public int GetID()
-		{
-			return this.Id;
-		}
-	 
-	 public CardType GetCardType()
-	 {
-		 return this.Type;
-	 }
-
 }
+
