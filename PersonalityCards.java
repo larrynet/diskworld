@@ -1,30 +1,40 @@
+import java.io.Serializable;
 
-
-
-public class PersonalityCards extends Cards
-
-{
-
-	public String Name ;
-   // public List FaceValue;
-    public int Id;
+public class PersonalityCards implements Cards, Serializable {
+	public String Name;
+	public int Id;
 	public boolean Status;
 	public CardType Type;
 
-	public PersonalityCards (String Name,int Id,boolean Status,CardType Type)
-	{
-		
-		this.Name=Name;
-		this.Id=Id;
-		this.Status=Status;
-		this.Type=Type;
-	}
-	public PersonalityCards ()
-	{
+	public PersonalityCards(String _Name, int _Id, boolean _Status,
+			CardType _Type) {
+		Name = _Name;
+		Id = _Id;
+		Status = _Status;
+		Type = _Type;
+
 	}
 
-public String GetPersonality()
+	public String GetName ()
 	{
-		return(" Face Value of Personality Card");
+		return this.Name;
 	}
+	
+	public int GetID()
+	{
+		return this.Id;
+	}
+	
+	public CardType GetCardType()
+	 {
+		 return this.Type;
+	 }
+	
+	public String toString() 
+	   {
+		 return  (this.toString());
+	   
+	  
+	   }
 }
+

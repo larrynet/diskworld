@@ -180,7 +180,7 @@ public class Player implements Serializable {
 	 */
 	public void PrintPlayerProfile()
 	{
-		System.out.println("Player " + this.PlayerNumber + "(" + this.Color + ")" + "is playing as " + this.Personality.Name + ".");
+		System.out.println("Player " + this.PlayerNumber + " (" + this.Color + ") " + "is playing as " + this.Personality.GetName() + ".");
 
 	}
 	
@@ -196,9 +196,15 @@ public class Player implements Serializable {
 		System.out.println("Player " + this.PlayerNumber + "'s current invetory");
 		System.out.println(this.GetMinionCount() + " minions, " + this.GetBuildingCount() + " buildings " + this.GetMoneyCount() + " Ankh-Morpork dollars");
 		System.out.println();
-		System.out.println("City Area Cards:");
-		System.out.println(this.PrintCityAreaCards());
-		System.out.println();
+		
+		//If player has City Area Cards then print them
+		if (this.ListCityAreaCards != null && this.ListCityAreaCards.size() > 0)
+		{
+			System.out.println("City Area Cards:");
+			System.out.println(this.PrintCityAreaCards());
+			System.out.println();
+		}
+		
 		System.out.println("PlayerCards");
 		System.out.println(this.PrintPlayerCards()[0]);
 		System.out.println(this.PrintPlayerCards()[1]);
@@ -312,14 +318,14 @@ public class Player implements Serializable {
 		
 		for (Cards PlayerCard : this.PlayerCards)
 		{
-			if (PlayerCard.Type == CardType.BrownCards)
+			if (PlayerCard.GetCardType() == CardType.BrownCards)
 			{
-				strBrownPlayerCards.append(PlayerCard.Id);
+				strBrownPlayerCards.append(PlayerCard.GetID());
 				strBrownPlayerCards.append(",");
 			}
-			else if (PlayerCard.Type == CardType.GreenCards)
+			else if (PlayerCard.GetCardType() == CardType.GreenCards)
 			{
-				strGreenPlayerCards.append(PlayerCard.Id);
+				strGreenPlayerCards.append(PlayerCard.GetID());
 				strGreenPlayerCards.append(",");
 			}
 		}

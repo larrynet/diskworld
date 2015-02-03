@@ -4,7 +4,7 @@ import java.io.Serializable;
  * @author Niloufar
  *
  */
-public class EventCards  extends Cards implements Serializable
+public class EventCards  implements Cards, Serializable
 
 {
 
@@ -25,8 +25,20 @@ public EventCards(String Name,int Id,boolean Status,CardType Type)
 	{
 		
 	}
-	public String GetEvent()
+	
+	
+	public String GetName ()
 	{
-		return(" Face Value of Event Card");
+		return this.Name;
 	}
+	
+	public int GetID()
+	{
+		return this.Id;
+	}
+	
+	public CardType GetCardType()
+	 {
+		 return this.Type;
+	 }
 }

@@ -1,7 +1,7 @@
 import java.io.Serializable;
 
 
-public class CityAreaCards extends Cards implements Serializable
+public class CityAreaCards implements Cards, Serializable
 {
 
 	public String Name ;
@@ -21,14 +21,26 @@ public class CityAreaCards extends Cards implements Serializable
 	{
 		
 	}
-	public String GetCityArea()
-	{ 
-		return(" Face Value of City Card");
-	}
+	
 	 public String toString() 
 		   {
 			 return  (this.toString());
 		   
 		  
 		   }
+	 
+	 public String GetName ()
+		{
+			return this.Name;
+		}
+	 
+	 public int GetID()
+		{
+			return this.Id;
+		}
+	 
+	 public CardType GetCardType()
+	 {
+		 return this.Type;
+	 }
 }

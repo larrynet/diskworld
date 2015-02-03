@@ -108,7 +108,29 @@ public class GameEngine implements Serializable
 	 */
 	public void PrintState()
 	{
+		//Print Player Profile
+		System.out.println("Game State");
+		System.out.println("-----------");
+		System.out.println();
+		System.out.println("There are " + this.TotalPlayer + " players in the game");
+		System.out.println();
+		
+		//Call player method to print player profile for each player
+		for (Player player : this.ListPlayer)
+		{
+			player.PrintPlayerProfile();
+		}
+		
+		System.out.println();
 		GameBoard.PrintState();
+		
+		//Call player method to print player state
+		for (Player player : this.ListPlayer)
+		{
+			player.GetPlayerState();
+		}
+
+		
 	}
 	
 	/**
@@ -127,7 +149,7 @@ public class GameEngine implements Serializable
 		{
 			//Assign set of RandomCard to player
 	        List<Cards> ListPlayerCards = new ArrayList<Cards>();
-	        Cards PlayerPersonality = null;
+	        Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
 	        Random _RandomGenerator = new Random();
 	        int randomInt = 0;
 	        boolean PlayerStillCard = true;
@@ -139,8 +161,7 @@ public class GameEngine implements Serializable
 	        }
 	        
 	        // fetch a random personality card
-	        ListPlayerCards.add(CardManager.GetCard(CardType.PersonalityCards));   
-	        
+	       
 	        //create a list minions and buildings for each player
 	        List<Pieces> ListMinions = new ArrayList<Pieces>();
 	        List<Pieces> ListBuildings = new ArrayList<Pieces>();

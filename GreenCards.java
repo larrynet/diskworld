@@ -1,5 +1,7 @@
+import java.io.Serializable;
 
-public class GreenCards extends Cards
+
+public class GreenCards implements Cards, Serializable
 
 {
 
@@ -20,5 +22,27 @@ public class GreenCards extends Cards
 	{
 	
 	}
+	
+	 public String toString() 
+	   {
+		 return  (this.toString());
+	   
+	  
+	   }
+	 
+	 public String GetName ()
+		{
+			return this.Name;
+		}
+	 
+	 public int GetID()
+		{
+			return this.Id;
+		}
+	 
+	 public CardType GetCardType()
+	 {
+		 return this.Type;
+	 }
 
 }

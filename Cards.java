@@ -5,35 +5,15 @@ import java.util.Random;
  * @author Niloufar
  *
  */
-public class Cards implements Serializable
-{   
-	
+public interface Cards  {
 
-	public String Name ;
-   // public List FaceValue;
-    public int Id;
-    public boolean Status;
-    public CardType Type ;
-    public Cards (String Name,int Id,boolean Status,CardType Type)
-	{
-		
-		this.Name=Name;
-		this.Id=Id;
-		this.Status=Status;
-		this.Type=Type;
-	}
-    public Cards()
-    {
-    	
-    }
-    
-    public String toString()
-    {
-    	return this.toString();
-    }
-  
-    
-  
-}
-		
+	public String Name = "";
+	public int Id = 0;
+	public boolean Status = false;
+	public CardType Type = null;
 	
+	public String GetName();
+	public int GetID();
+	public CardType GetCardType();
+
+}
