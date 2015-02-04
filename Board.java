@@ -60,6 +60,11 @@ public class Board implements Serializable {
 		return this.Die;
 	}
 	
+	public  int GetDie()
+	{
+		return this.Die;
+	}
+	
 	public void SetBalance(int b)
 	{
 		this.Bank = b;

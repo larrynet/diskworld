@@ -244,19 +244,6 @@ public class ManageCards implements Serializable
 		
 		
 	}
-//	 System.out.println(this.e[1].Id);
-	
-	
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	/*@Override
-	   public String toString() 
-	{
-		 return  (this.toString());
-	  
- }
 	
 	
 /**
