@@ -22,103 +22,162 @@ public class GameEngine implements Serializable
 	 */
 	public GameEngine() 
 	{
-		TotalPlayer = 2; //initialize to the minimal player
+		TotalPlayer = 2; //initialize to the minimal player in default constructor
 		InitializeData();
 	}
 	
 	/**
+	 * @param p - Init all internal structure with player p
 	 * Default constructor who will init all internal structure with player p
 	 * 
-	 * @param p
 	 */
 	public GameEngine(int p) 
 	{
-		if (p <2 && p>4)
-		{
-			System.out.println("Diskworld only supports 2 to 4 players. Please re-enter number of players: ");
-			return;
-		}
-		else
+		if (ValidPlayerIndex(p))
 		{
 			TotalPlayer = p;
 			InitializeData();
 		}
-		
+		else
+		{
+			System.out.println("Diskworld only supports 2 to 4 players. ");
+			return; //return control to user without init the internal structure
+		}
 	}
+	
 	/**
+	 * Return the current bank amount of player 
+	 * 
+	 * @param PlayerIndex whom to get Balance
+	 * @return balance of player
+	 */
+	public int GetPlayerBank(int PlayerIndex)
+	{
+		if (ValidPlayerIndex(PlayerIndex))
+			return ListPlayer.get(PlayerIndex).GetMoneyCount();
+		else 
+			return 0;
+	}
+	
+	/**
+	 * Called Internally to test if PlayerIndex is valid.
+	 * 
 	 * @param PlayerIndex
+	 * @return
+	 */
+	private boolean ValidPlayerIndex(int PlayerIndex)
+	{
+		return ((PlayerIndex <= 4) && (PlayerIndex >= 1));
+	}
+	
+	/**
+	 * Called Internally to test if AreaIndex is valid.
+	 * 
+	 * @param PlayerIndex
+	 * @return
+	 */
+	private boolean ValidAreaIndex(int AreaIndex)
+	{
+		return ((AreaIndex <= 12) && (AreaIndex >= 1));
+	}
+	
+	/**
+	 * @param PlayerIndex whom to pay
+	 * @param amount to pay
 	 * @param amount 
 	 * @return if succeeded or not
 	 */
 	
 	public boolean PayPlayer(int PlayerIndex, int amount)
 	{
-		int NewAmount = GameBoard.GetBalance()-amount;
-		if(NewAmount >= 0)
-		{
-			GameBoard.SetBalance(NewAmount);
-			ListPlayer.get(PlayerIndex).AddToMoney(amount);
-			return true;
-		}
-		else
+		if (ValidPlayerIndex(PlayerIndex) == false)
 			return false;
+		else
+		{
+			int NewAmount = GameBoard.GetBalance()-amount;
+			if(NewAmount >= 0)
+			{
+				GameBoard.SetBalance(NewAmount);
+				ListPlayer.get(PlayerIndex).AddToMoney(amount);
+				return true;
+			}
+			else
+				return false;
+		}
+		
 	}
+	
 	/**
 	 * Function will put a player minion in the area
 	 * 
-	 * @param AreaNumber
-	 * @param player
+	 * @param AreaNumber to place minion
+	 * @param player index which minion belongs
 	 * @return if Suceeded or not
 	 */
 	public boolean PlaceMinion(int AreaNumber,int player)
 	{
-		return GameBoard.PlaceMinion(AreaNumber, ListPlayer.get(player));
+		if(ValidPlayerIndex(player) && ValidAreaIndex(AreaNumber))
+			return GameBoard.PlaceMinion(AreaNumber, ListPlayer.get(player));
+		else 
+			return false;
 	}
 	
 	/**
 	 * Function will put a player building in the area
 	 * 
-	 * @param AreaNumber
-	 * @param player
+	 * @param AreaNumber to place building
+	 * @param player index which building belongs
 	 * @return if Suceeded or not
 	 */
 	public boolean PlaceBuilding(int AreaNumber,int player)
 	{
-		return GameBoard.PlaceBuilding(AreaNumber, ListPlayer.get(player));
+		if(ValidPlayerIndex(player) && ValidAreaIndex(AreaNumber))
+			return GameBoard.PlaceBuilding(AreaNumber, ListPlayer.get(player));
+		else 
+			return false;
 	}
 	
 	
 	/**
 	 * Function will put a troll in the area
 	 * 
-	 * @param AreaNumber
+	 * @param AreaNumber indicating the area where action will be performed
 	 * @return if Suceeded or not
 	 */
 	public boolean PlaceTroll(int AreaNumber)
 	{
-		return GameBoard.PlaceTroll(AreaNumber);
+		if(ValidAreaIndex(AreaNumber))
+			return GameBoard.PlaceTroll(AreaNumber);
+		else 
+			return false;
 	}
 	
 	/**
 	 * Function will put a demon the area
 	 * 
-	 * @param AreaNumber
+	 * @param AreaNumber indicating the area where action will be performed
 	 * @return if Suceeded or not
 	 */
 	public boolean PlaceDemon(int AreaNumber)
 	{
-		return GameBoard.PlaceDemon(AreaNumber);
+		if(ValidAreaIndex(AreaNumber))
+			return GameBoard.PlaceDemon(AreaNumber);
+		else 
+			return false;
 	}
 
 	/**
 	 * Function will put a troublemaker the area
 	 * 
-	 * @param AreaNumber
+	 * @param AreaNumber indicating the area where action will be performed
 	 * @return if Suceeded or not
 	 */
 	public boolean PlaceTroubleMarker(int AreaNumber)
 	{
-		return GameBoard.PlaceTroubleMarker(AreaNumber);
+		if(ValidAreaIndex(AreaNumber))
+			return GameBoard.PlaceTroubleMarker(AreaNumber);
+		else 
+			return false;
 	}
 	
 	
@@ -168,10 +227,9 @@ public class GameEngine implements Serializable
 		{
 			//Assign set of RandomCard to player
 	        List<Cards> ListPlayerCards = new ArrayList<Cards>();
+	        
+	        // fetch a random personality card
 	        Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
-	        Random _RandomGenerator = new Random();
-	        int randomInt = 0;
-	        boolean PlayerStillCard = true;
 	        
 	        //fetch a random city area card
 	        for(int PlayerHandCount= 0; PlayerHandCount < PlayerHandSize; PlayerHandCount++)
@@ -179,8 +237,6 @@ public class GameEngine implements Serializable
 	        	ListPlayerCards.add(CardManager.GetCard(CardType.GreenCards));      	
 	        }
 	        
-	        // fetch a random personality card
-	       
 	        //create a list minions and buildings for each player
 	        List<Pieces> ListMinions = new ArrayList<Pieces>();
 	        List<Pieces> ListBuildings = new ArrayList<Pieces>();
@@ -202,11 +258,27 @@ public class GameEngine implements Serializable
 	}
 	
 	/**
+	 * @return bank balance
+	 */
+	public int GetBankBalance()
+	{
+		return GameBoard.GetBalance();
+	}
+	
+	/**
 	 * @return a copy of the card manager which contains all the card
 	 */
 	public ManageCards GetCardManager()
 	{
 		return CardManager;
+	}
+	
+	/**
+	 * @return if game is initialized
+	 */
+	public boolean IsGameInitialize()
+	{
+		return (TotalPlayer>0);
 	}
 	
 	/* (non-Javadoc)
