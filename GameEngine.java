@@ -98,7 +98,7 @@ public class GameEngine implements Serializable
 			if(NewAmount >= 0)
 			{
 				GameBoard.SetBalance(NewAmount);
-				ListPlayer.get(PlayerIndex).AddToMoney(amount);
+				ListPlayer.get(PlayerIndex-1).AddToMoney(amount);
 				return true;
 			}
 			else
@@ -117,7 +117,7 @@ public class GameEngine implements Serializable
 	public boolean PlaceMinion(int AreaNumber,int player)
 	{
 		if(ValidPlayerIndex(player) && ValidAreaIndex(AreaNumber))
-			return GameBoard.PlaceMinion(AreaNumber, ListPlayer.get(player));
+			return GameBoard.PlaceMinion(AreaNumber, ListPlayer.get(player-1));
 		else 
 			return false;
 	}
@@ -132,7 +132,7 @@ public class GameEngine implements Serializable
 	public boolean PlaceBuilding(int AreaNumber,int player)
 	{
 		if(ValidPlayerIndex(player) && ValidAreaIndex(AreaNumber))
-			return GameBoard.PlaceBuilding(AreaNumber, ListPlayer.get(player));
+			return GameBoard.PlaceBuilding(AreaNumber, ListPlayer.get(player-1));
 		else 
 			return false;
 	}

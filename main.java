@@ -87,20 +87,20 @@ public class main {
 				}
 				if(Choice.charAt(0) == '3')
 				{
-					System.out.println("Please enter the player index of whom the minion belong (0-" + (NumPlayer-1) + "):");
+					System.out.println("Please enter the player index of whom the minion belong (1-" + (NumPlayer) + "):");
 					int PlayerIndex = ValidateEntry(scan, 0, NumPlayer-1);
 					System.out.println("Please enter the area index to put the minion (1-12):");
 					int AreaIndex = ValidateEntry(scan, 1, 12);
 							
-					ge.PlaceMinion(AreaIndex, PlayerIndex-1);
+					ge.PlaceMinion(AreaIndex, PlayerIndex);
 				}
 				else if(Choice.charAt(0) == '4')
 				{
-					System.out.println("Please enter the player index of whom the building belong (0-" + (NumPlayer-1) + "):");
+					System.out.println("Please enter the player index of whom the building belong (1-" + (NumPlayer) + "):");
 					int PlayerIndex = ValidateEntry(scan, 0, NumPlayer-1);
 					System.out.println("Please enter the area index to put the building (1-12):");
 					int AreaIndex = ValidateEntry(scan, 1, 12);
-					ge.PlaceBuilding(AreaIndex, PlayerIndex-1);
+					ge.PlaceBuilding(AreaIndex, PlayerIndex);
 				}
 				else if(Choice.charAt(0) == '5')
 				{
