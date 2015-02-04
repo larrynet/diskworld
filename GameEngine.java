@@ -27,7 +27,9 @@ public class GameEngine implements Serializable
 	}
 	
 	/**
-	 * @param Default constructor who will init all internal structure with player p
+	 * Default constructor who will init all internal structure with player p
+	 * 
+	 * @param p
 	 */
 	public GameEngine(int p) 
 	{
@@ -45,9 +47,10 @@ public class GameEngine implements Serializable
 	}
 	/**
 	 * @param PlayerIndex
-	 * @param amount
+	 * @param amount 
 	 * @return if succeeded or not
 	 */
+	
 	public boolean PayPlayer(int PlayerIndex, int amount)
 	{
 		int NewAmount = GameBoard.GetBalance()-amount;

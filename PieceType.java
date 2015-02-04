@@ -1,6 +1,6 @@
 
 /**
- * Enum to assign types to pieces
+ * Enum type used to assign types to pieces
  * 
  * @author Gay Hazan
  *

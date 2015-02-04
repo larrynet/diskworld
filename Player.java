@@ -26,7 +26,6 @@ public class Player implements Serializable {
 	 * 
 	 * @param _PlayerNumber
 	 * @param _Personality
-	 * @param _Money
 	 * @param _Color
 	 * @param _PlayerCards
 	 * @param _ListMinion
@@ -43,10 +42,7 @@ public class Player implements Serializable {
 		
 	}
 	
-	public String toString() 
-	{
-		return this.toString();
-	}
+
 	
 	/**
 	 * Public Getter for Player Personality Cards
@@ -186,10 +182,8 @@ public class Player implements Serializable {
 	
 	
 	/**
-	 * Get the current state of the player as a string
+	 * Print the current state of the player as a string
 	 * 
-	 * @return Player State format : Player, player number, personality card id, money count, number of cards,_
-	 * cards ids, number of minions, minion ids, number of buildings, buildings ids, last
 	 */
 	public void GetPlayerState()
 	{
@@ -215,8 +209,7 @@ public class Player implements Serializable {
 	/**
 	 * Get the color of the current player
 	 * 
-	 * @param Color
-	 * @return
+	 * @return Enum of type color
 	 */
 	public Colors GetColor()
 	{
@@ -227,7 +220,7 @@ public class Player implements Serializable {
 	/**
 	 * Add Minions back to the players minions
 	 * 
-	 * @param Minion
+	 * @param Minion Piece of type of minion
 	 */
 	public void RetrieveMinion(Pieces Minion)
 	{
@@ -259,7 +252,7 @@ public class Player implements Serializable {
 	/**
 	 * Add building back to the players minions
 	 * 
-	 * @param Pieces of type Building
+	 * @param Building Pieces of type Building
 	 */
 	public void RetrieveBuiding(Pieces Building)
 	{
@@ -286,11 +279,29 @@ public class Player implements Serializable {
 		return BuildingToSend;
 	}
 
+	/**
+	 * Method to return list of cards.
+	 * 
+	 * @return
+	 */
 	public List<Cards> GetCityAreayCards()
 	{
 		return this.ListCityAreaCards;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() 
+	{
+		return this.toString();
+	}
 	
+	/**
+	 * Method used to print a comma delimited string of all city area cards
+	 * 
+	 * @return Comma delimited string of city area card
+	 */
 	private String PrintCityAreaCards()
 	{
 		StringBuilder strCityAreaCards = new StringBuilder();
@@ -306,6 +317,11 @@ public class Player implements Serializable {
 		 return strCityAreaCards.toString();
 	}
 
+	/**
+	 * Method used to print a comma delimited string of all player cards
+	 * 
+	 * @return Comma delimited string of player cards
+	 */
 	private String[] PrintPlayerCards()
 	{
 		StringBuilder strGreenPlayerCards = new StringBuilder();

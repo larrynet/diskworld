@@ -29,6 +29,9 @@ public class Board implements Serializable {
 		return this.toString();
 	}
 	
+	/**
+	 * Board Constructor
+	 */
 	public Board() 
 	{	
 		Bank = INITIAL_BANK;
@@ -45,6 +48,11 @@ public class Board implements Serializable {
 		CreatePieces();
 	}
 	
+	/**
+	 * Method that rolls die and sets the value of the Die attribute
+	 * 
+	 * @return New Die value
+	 */
 	public int RollDie()
 	{
 		this.Die = (int)(Math.ceil(Math.random() * 12)); 

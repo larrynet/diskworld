@@ -32,13 +32,6 @@ public class ManageCards implements Serializable
 	/**
 	 * Default constructor
 	 * 
-	 * @param p - An array of 7 Personality cards
-	 * @param e - An array of 12 Event cards.
-	 * @param ct -An array of 12 CityArea cards
-	 * @param g - An array of 48 Green board cards.
-	 * @param b-An array of 53 Brown board cards.
-	 * @param Cardtype-indicating the type of cards.
-	 * 
 	 */
 	public ManageCards()
 	{
@@ -352,7 +345,7 @@ return available;
 /**
  * Shuffle method was written shuffle the cards before giving them to players.
  * 
- * @param c This parameter is array of cards
+ * @param _Cards This parameter is array of cards
  * @return  An array of cards will be return
  */
 public  Cards[] ShuffleCards(Cards[] _Cards)
