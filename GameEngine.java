@@ -250,7 +250,7 @@ public class GameEngine implements Serializable
 	        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
 	        } 
 	        
-	        ListPlayer.add(new Player(ListPlayer.size(), PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
+	        ListPlayer.add(new Player(ListPlayer.size()+1, PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
 		}
 		
 		//Initialize a random value to dice
