@@ -16,21 +16,25 @@ public class main {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Please enter the number of players: ");
 		
-		int NumPlayer = scan.nextInt();
-		while(NumPlayer <2 && NumPlayer >4)
+		int NumPlayer = ValidateIntEntry(scan);
+		while(NumPlayer <2 || NumPlayer >4)
 		{
 			System.out.println("Sorry this game only supports 2 to 4 players. Please try to enter the value of player again:");
 			NumPlayer = scan.nextInt();
 		}
-		GameEngine ge = new GameEngine(NumPlayer);;
+		GameEngine ge = new GameEngine(NumPlayer);
+		
+		
 		
 		if(!ge.IsGameInitialize())
 		{
 			System.out.println("GameEngine failed to initiate.");
-			return;
+			
 		}
 		else
 		{
+			ge.DetermineFirstPlayer();
+			
 			boolean Continue = true;
 			
 			do
@@ -88,7 +92,7 @@ public class main {
 				if(Choice.charAt(0) == '3')
 				{
 					System.out.println("Please enter the player index of whom the minion belong (1-" + (NumPlayer) + "):");
-					int PlayerIndex = ValidateEntry(scan, 0, NumPlayer-1);
+					int PlayerIndex = ValidateEntry(scan, 1, NumPlayer);
 					System.out.println("Please enter the area index to put the minion (1-12):");
 					int AreaIndex = ValidateEntry(scan, 1, 12);
 							
@@ -97,7 +101,7 @@ public class main {
 				else if(Choice.charAt(0) == '4')
 				{
 					System.out.println("Please enter the player index of whom the building belong (1-" + (NumPlayer) + "):");
-					int PlayerIndex = ValidateEntry(scan, 0, NumPlayer-1);
+					int PlayerIndex = ValidateEntry(scan, 1, NumPlayer-1);
 					System.out.println("Please enter the area index to put the building (1-12):");
 					int AreaIndex = ValidateEntry(scan, 1, 12);
 					ge.PlaceBuilding(AreaIndex, PlayerIndex);
@@ -158,23 +162,54 @@ public class main {
 	{
 		int ValidEntry = 0;
 		boolean InputInvalid = true;
+		
+		
 		while (InputInvalid)
-		{
+		{	
 			try
-			{
-				ValidEntry = scan.nextInt();
-				if(ValidEntry < min && ValidEntry>max)
+			{	
+				ValidEntry = Integer.parseInt(scan.next()); 
+				if(ValidEntry < min || ValidEntry>max)
 				{
-					System.out.println("Value is out of bound. Please re-enter value index ("+min +"1-" + max + "):");
+					System.out.println("Value is out of bound. Please re-enter value index (1-" + max + "):");
 				}
 				else
+				{
 					InputInvalid = false;
+				}
 			} catch (Exception e) 
 			{
-				System.out.println("Input invalid. Please re-enter value index ("+min +"1-" + max + "):");
+				System.out.println("Input invalid. Please re-enter value index (1-" + max + "):");
 			}
 		}
 		return ValidEntry;
 	}
 
+	
+	/**
+	 * Function will verify that input is int. 
+	 * @param scan scanner object
+	 * @return the integer entered if correct
+	 */
+	public static int ValidateIntEntry(Scanner scan)
+	{
+		int ValidEntry = 0;
+		boolean InputInvalid = true;
+		
+		while (InputInvalid)
+		{	
+			try
+			{	
+				ValidEntry = Integer.parseInt(scan.next()); 
+				InputInvalid = false;
+				
+			} catch (Exception e) 
+			{
+				System.out.println("Input invalid. Please re-enter value index (1-4)");
+			}
+		}
+		return ValidEntry;
+	}
+	
+		
 }

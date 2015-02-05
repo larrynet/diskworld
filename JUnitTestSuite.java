@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
 import java.util.Random;
 
 public class JUnitTestSuite {
@@ -122,6 +123,17 @@ public class JUnitTestSuite {
 		
 		
 		assertTrue("Minion Add not working", area.GetMinionCount(Colors.None) == 1);
+	}
+	
+	@Test public void TestFirstPlayerSelection()
+	{
+		//initialize game with 4 players
+		GameEngine ge = new GameEngine(4);
+		
+		ge.DetermineFirstPlayer();
+		System.out.println(ge.GetCurrentPlayer());
+		assertTrue(ge.GetCurrentPlayer() >= 0 && ge.GetCurrentPlayer() < 4);
+	
 	}
 		
 	
