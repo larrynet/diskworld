@@ -101,7 +101,7 @@ public class main {
 				else if(Choice.charAt(0) == '4')
 				{
 					System.out.println("Please enter the player index of whom the building belong (1-" + (NumPlayer) + "):");
-					int PlayerIndex = ValidateEntry(scan, 1, NumPlayer-1);
+					int PlayerIndex = ValidateEntry(scan, 1, NumPlayer);
 					System.out.println("Please enter the area index to put the building (1-12):");
 					int AreaIndex = ValidateEntry(scan, 1, 12);
 					ge.PlaceBuilding(AreaIndex, PlayerIndex);
