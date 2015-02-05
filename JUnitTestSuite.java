@@ -43,21 +43,21 @@ public class JUnitTestSuite {
 		
 		//Pick a random player
 		int RandomAmountOfMoney = 5;
-		int RandomPlayerIndex = ValidPlayerNumber[_random.nextInt(3)]-1;
+		int RandomPlayerIndex = ValidPlayerNumber[_random.nextInt(3)];
 		
 		//initialize game with 4 players
 		GameEngine ge = new GameEngine(4);
 		
 		//Test Success Scenario
 		int InitialBankAmount = ge.GetBankBalance(); 
-		int InitialPlayerAmount = ge.GetPlayerBank(RandomPlayerIndex);
+		int InitialPlayerAmount = ge.GetPlayerBank(RandomPlayerIndex-1);
 		
 		//Pay Random player  a random amount
 		boolean PaySuccess = ge.PayPlayer(RandomPlayerIndex, RandomAmountOfMoney); 
 		
 		if(PaySuccess)
 		{
-			int NewBalance = ge.GetPlayerBank(RandomPlayerIndex);
+			int NewBalance = ge.GetPlayerBank(RandomPlayerIndex-1);
 			TransferSuccessScenario = (NewBalance == (InitialPlayerAmount+ RandomAmountOfMoney));
 			TransferSuccessScenario = TransferSuccessScenario && (ge.GetBankBalance() == (InitialBankAmount-RandomAmountOfMoney));
 		}
