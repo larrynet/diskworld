@@ -1,0 +1,13 @@
+Card,Green1,none,last
+Card,Green2,none,last
+Card,Green3,none,last
+Card,Green4,none,last
+Card,Green5,none,last
+Card,Brown1,none,last
+Card,Brown2,none,last
+Card,Brown3,none,last
+Player,1,Lord Vetinari0,5,black,4,card1,card2,card3,card4,2,1,2,1,101,last
+Player,2,Lord Vetinari1,10,blue,2,card10,card20,card3,card4,1,11,12,1,201,last
+Player,3,Lord Vetinari2,3,orange,1,card21,card2,card3,card4,1,31,32,1,301,last
+Player,4,Lord Vetinari3,1,white,3,card31,card32,card33,1,41,1,401,last
+Board,3,20,last
