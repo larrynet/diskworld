@@ -250,6 +250,7 @@ public class GameEngine implements Serializable
 		for (Player player : this.ListPlayer)
 		{
 			player.GetPlayerState();
+			System.out.println();
 		}
 
 		
