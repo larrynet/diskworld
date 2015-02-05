@@ -8,7 +8,7 @@ import java.util.Random;
 public interface Cards 
 {
 
-	String Name = "";
+	 String Name = "";
 	 int Id = 0;
      boolean Status = false;
 	 CardType Type = null;

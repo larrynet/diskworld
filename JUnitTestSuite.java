@@ -1,8 +1,7 @@
 import static org.junit.Assert.*;
 
-import java.util.Scanner;
-
 import org.junit.Test;
+
 import java.util.Random;
 
 public class JUnitTestSuite {
@@ -91,5 +90,52 @@ public class JUnitTestSuite {
 		assertTrue("Failed while export state", InitFailedcenario);
 		
 	}
+	
+	@Test public void TestBankCount() {
+		
+		int BoardBankBalance = 120;
+		
+		Board TestBoard = new Board();
+		assertTrue("Bank Balance is wrong",TestBoard.GetBalance() == BoardBankBalance);
+		
+		TestBoard.DeductFromBank(20);
+		assertFalse("Bank Balance is wrong",TestBoard.GetBalance() == BoardBankBalance);
+		
+	}
+		
+	@Test public void TestRollDie() {
+			
+		Board TestBoard = new Board();
+		
+		for (int i = 0; i < 100 ; i++)
+		{
+			TestBoard.RollDie();
+			assertTrue("Die not in range",TestBoard.GetDie() > 0 && TestBoard.GetDie() < 13);
+		}
+	}
+	
+	@Test public void TestAddMinionToArea()
+	{
+		Area area = new Area("Test", 1,5);
+		Pieces Minion = new Pieces(PieceType.Minion, Colors.Red);
+		
+		area.AddMinions(Minion);
+		
+		
+		assertTrue("Minion Add not working", area.GetMinionCount(Colors.None) == 1);
+	}
+	
+	@Test public void TestFirstPlayerSelection()
+	{
+		//initialize game with 4 players
+		GameEngine ge = new GameEngine(4);
+		
+		ge.DetermineFirstPlayer();
+		System.out.println(ge.GetCurrentPlayer());
+		assertTrue(ge.GetCurrentPlayer() >= 0 && ge.GetCurrentPlayer() < 4);
+	
+	}
+		
+	
 
 }

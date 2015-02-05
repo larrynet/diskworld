@@ -18,9 +18,8 @@ public class Pieces implements Serializable{
 	/**
 	 * Default Constructor
 	 * 
-	 * @param Id - unique Identifier for this piece
-	 * @param Type - What type of piece it is
-	 * @param What color is the piece
+	 * @param _Type - What type of piece it is
+	 * @param _Color What color is the piece
 	 */
 	public Pieces( PieceType _Type, Colors _Color)
 	{
@@ -28,10 +27,6 @@ public class Pieces implements Serializable{
 		Color = _Color;
 	}
 	
-	public String toString() 
-	{
-		return this.toString();
-	}
 	
 	/**
 	 * @return
@@ -47,9 +42,13 @@ public class Pieces implements Serializable{
 		return this.Type;
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() 
+	{
+		return this.toString();
+	}
 
 }
-
-
-//Test for how many pieces are present per color when game start
-//Test that all ID's are unique

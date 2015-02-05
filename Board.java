@@ -5,6 +5,10 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.io.IOException;
 
+/**
+ * @author parinaz Barakhshan
+ *
+ */
 public class Board implements Serializable {
 	
 	//Board Attributes
@@ -29,6 +33,10 @@ public class Board implements Serializable {
 		return this.toString();
 	}
 	
+	/**
+	 * Board Constructor,
+	 * initializing the areas and pieces related to Board
+	 */
 	public Board() 
 	{	
 		Bank = INITIAL_BANK;
@@ -45,6 +53,11 @@ public class Board implements Serializable {
 		CreatePieces();
 	}
 	
+	/**
+	 * Method that rolls die and sets the value of the Die attribute
+	 * 
+	 * @return New Die value between 1 to 12
+	 */
 	public int RollDie()
 	{
 		this.Die = (int)(Math.ceil(Math.random() * 12)); 
@@ -52,26 +65,51 @@ public class Board implements Serializable {
 		return this.Die;
 	}
 	
+	/**
+	 * @return the amount of Die
+	 */
+	public  int GetDie()
+	{
+		return this.Die;
+	}
+	
+	/**
+	 * @param b
+	 */
 	public void SetBalance(int b)
 	{
 		this.Bank = b;
 	}
 
+	/**
+	 * @return the current balance of the bank ofthe board
+	 */
 	public int GetBalance()
 	{
 		return this.Bank;
 	}
 
+	/**
+	 * @param amount
+	 */
 	public void DeductFromBank(int amount)
 	{
 		this.Bank -= amount;
 	}
 
+	/**
+	 * @param amount
+	 */
 	public void AddToBank(int amount)
 	{
 		this.Bank += amount;
 	}
 
+	/**
+	 * @param AreaNumber
+	 * @param player
+	 * @return boolaen to show if it is done or not
+	 */
 	public boolean PlaceMinion(int AreaNumber,Player player)
 	{
 		if(player.GetMinionCount()!=0)
@@ -83,6 +121,11 @@ public class Board implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * @param AreaNumber
+	 * @param player
+	 * @return
+	 */
 	public boolean PlaceBuilding(int AreaNumber,Player player)
 	{
 		if(player.GetBuildingCount()!=0)
@@ -95,6 +138,10 @@ public class Board implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * @param AreaNumber
+	 * @param player
+	 */
 	public void RemoveBuilding(int AreaNumber, Player player)
 	{
 		Area currentArea = this.ListArea.get(AreaNumber);
@@ -102,24 +149,39 @@ public class Board implements Serializable {
 		currentArea.RemoveBuilding();
 	}
 	
+	/**
+	 * @param AreaNumber
+	 * @return
+	 */
 	public boolean PlaceTroll(int AreaNumber)
 	{
 		ListArea.get(AreaNumber-1).AddTrolls(this.ListTrolls.get(this.ListTrolls.size()-1));
 		return true;
 	}
 	
+	/**
+	 * @param AreaNumber
+	 * @return
+	 */
 	public boolean PlaceDemon(int AreaNumber)
 	{
 		ListArea.get(AreaNumber-1).AddDemons(this.ListDemons.get(this.ListDemons.size()-1));
 		return true;
 	}
 
+	/**
+	 * @param AreaNumber
+	 * @return
+	 */
 	public boolean PlaceTroubleMarker(int AreaNumber)
 	{
 		ListArea.get(AreaNumber-1).AddTroubleMaker(this.ListTroubleMakers.get(this.ListTroubleMakers.size()-1));
 		return true;
 	}
 	
+	/**
+	 * prints the current state of the board
+	 */
 	public void PrintState() 
 	{
 		System.out.println("Current state of the game board\n==============================\n");
@@ -137,6 +199,9 @@ public class Board implements Serializable {
 	
 	//Boar Private Methods
 
+	/**
+	 * creates the areas
+	 */
 	private void CreateAreas()
 	{
 		for (int i=0;i< ArrName.length;i++)
@@ -146,6 +211,9 @@ public class Board implements Serializable {
 		}
 	}
 	
+	/**
+	 * creates the demons,Trolls,TroubleMarkers
+	 */
 	private void CreatePieces()
 	{
 		//Create Demons

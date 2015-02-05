@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * @author parinaz Barakhshan
+ * @author Parinaz Barakhshan
  *
  */
 
@@ -33,9 +33,9 @@ public class Area implements Serializable
 		/**
 		 * Area Constructor
 		 * 
-		 * @param Area Name
-		 * @param Area Number
-		 * @param _Area Cost
+		 * @param _Name Area Name
+		 * @param _Number Area Number
+		 * @param _Cost Area Cost
 		 */
 		public Area(String _Name, int _Number, int _Cost) 
 		{
@@ -87,8 +87,9 @@ public class Area implements Serializable
 			return this.ListTrolls.size();
 		}
 		
+		
 		/**
-		 * @param  a Demon from Pieces class
+		 * @param p Piece of type Demon
 		 */
 		public void AddDemons(Pieces p) 
 		{
@@ -96,7 +97,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param a Troll from Pieces class
+		 * @param p Piece of type Troll
 		 */
 		public void AddTrolls(Pieces p) 
 		{
@@ -104,7 +105,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param a TroubleMarker from Pieces class
+		 * @param p Piece of Type Trouble Marker
 		 */
 		public void AddTroubleMaker(Pieces p) 
 		{
@@ -113,7 +114,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param a Minion from Pieces class
+		 * @param p Piece of type minion
 		 */
 		public void AddMinions(Pieces p) 
 		{
@@ -121,7 +122,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param a Building from Pieces class
+		 * @param b piece of type building
 		 */
 		public void AddBuilding(Pieces b) 
 		{
@@ -131,7 +132,7 @@ public class Area implements Serializable
 		
 		
 		/**
-		 * @param a Demon from Pieces class
+		 * @param p Piece of type Demon
 		 */
 		public void RemoveDemons(Pieces p) 
 		{
@@ -139,7 +140,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param a Troll from Pieces class
+		 * @param p Troll from Pieces class
 		 */
 		public void RemoveTrolls(Pieces p) 
 		{
@@ -147,7 +148,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param a TroubleMarker from Pieces class
+		 * @param p TroubleMarker from Pieces class
 		 */
 		public void RemoveTroubleMaker(Pieces p) 
 		{
@@ -157,7 +158,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param Color
+		 * @param Color enum of type Color
 		 * @return boolean to show if it has been done or not
 		 */
 		public boolean RemoveMinions(Colors Color) 
@@ -176,7 +177,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param p
+		 * 
 		 * @return boolean to show if it has been removed or not
 		 */
 		public boolean RemoveBuilding() 
@@ -195,7 +196,7 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @param Color
+		 * @param Color Enum of type Color
 		 * @return the number of minions of the requested color
 		 */
 		public int GetMinionCount(Colors Color)

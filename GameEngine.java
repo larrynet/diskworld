@@ -16,6 +16,7 @@ public class GameEngine implements Serializable
 	private ManageCards CardManager;
 	private Board GameBoard;
 	private int TotalPlayer;
+	private int CurrentPlayer;
 	
 	/**
 	 * Default constructor who will init all internal structure with minimum supported player 
@@ -28,6 +29,8 @@ public class GameEngine implements Serializable
 	
 	/**
 	 * @param p - Init all internal structure with player p
+	 * Default constructor who will init all internal structure with player p
+	 * 
 	 */
 	public GameEngine(int p) 
 	{
@@ -82,8 +85,10 @@ public class GameEngine implements Serializable
 	/**
 	 * @param PlayerIndex whom to pay
 	 * @param amount to pay
+	 * @param amount 
 	 * @return if succeeded or not
 	 */
+	
 	public boolean PayPlayer(int PlayerIndex, int amount)
 	{
 		if (ValidPlayerIndex(PlayerIndex) == false)
@@ -94,7 +99,7 @@ public class GameEngine implements Serializable
 			if(NewAmount >= 0)
 			{
 				GameBoard.SetBalance(NewAmount);
-				ListPlayer.get(PlayerIndex).AddToMoney(amount);
+				ListPlayer.get(PlayerIndex-1).AddToMoney(amount);
 				return true;
 			}
 			else
@@ -113,7 +118,7 @@ public class GameEngine implements Serializable
 	public boolean PlaceMinion(int AreaNumber,int player)
 	{
 		if(ValidPlayerIndex(player) && ValidAreaIndex(AreaNumber))
-			return GameBoard.PlaceMinion(AreaNumber, ListPlayer.get(player));
+			return GameBoard.PlaceMinion(AreaNumber, ListPlayer.get(player-1));
 		else 
 			return false;
 	}
@@ -128,7 +133,7 @@ public class GameEngine implements Serializable
 	public boolean PlaceBuilding(int AreaNumber,int player)
 	{
 		if(ValidPlayerIndex(player) && ValidAreaIndex(AreaNumber))
-			return GameBoard.PlaceBuilding(AreaNumber, ListPlayer.get(player));
+			return GameBoard.PlaceBuilding(AreaNumber, ListPlayer.get(player-1));
 		else 
 			return false;
 	}
@@ -176,6 +181,35 @@ public class GameEngine implements Serializable
 			return false;
 	}
 	
+	/**
+	 * 
+	 */
+	public void DetermineFirstPlayer()
+	{
+		int LastDieValue = 0;
+		int NewDieValue = 0;
+		for (int i = 0; i < this.ListPlayer.size(); i++)
+		{
+			do
+			{
+				NewDieValue = GameBoard.RollDie();
+				
+			}while(NewDieValue == LastDieValue);
+			
+			if (NewDieValue > LastDieValue)
+			{
+				this.CurrentPlayer = i;
+				LastDieValue = NewDieValue;
+			}
+			
+		}
+	}
+	
+	public int GetCurrentPlayer()
+	{
+		return this.CurrentPlayer;
+	}
+	
 	
 	/**
 	 * Print State of the game
@@ -189,6 +223,10 @@ public class GameEngine implements Serializable
 		System.out.println("There are " + this.TotalPlayer + " players in the game");
 		System.out.println();
 		
+		//CurrentPLayer
+		System.out.println("Current Player : Player " + (this.GetCurrentPlayer() + 1) );
+		System.out.println();
+		
 		//Call player method to print player profile for each player
 		for (Player player : this.ListPlayer)
 		{
@@ -197,6 +235,7 @@ public class GameEngine implements Serializable
 		
 		System.out.println();
 		GameBoard.PrintState();
+		System.out.println();
 		
 		//Call player method to print player state
 		for (Player player : this.ListPlayer)
@@ -246,7 +285,8 @@ public class GameEngine implements Serializable
 	        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
 	        } 
 	        
-	        ListPlayer.add(new Player(ListPlayer.size(), PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
+	        ListPlayer.add(new Player(ListPlayer.size()+1, PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
+	        GameBoard.DeductFromBank(10);
 		}
 		
 		//Initialize a random value to dice
@@ -285,3 +325,4 @@ public class GameEngine implements Serializable
 		return this.toString();
 	}
 }
+
