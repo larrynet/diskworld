@@ -105,7 +105,7 @@ public class GameEngine implements Serializable
 			if(NewAmount >= 0)
 			{
 				GameBoard.SetBalance(NewAmount);
-				ListPlayer.get(PlayerIndex).AddToMoney(amount);
+				ListPlayer.get(PlayerIndex-1).AddToMoney(amount);
 				return true;
 			}
 			else
