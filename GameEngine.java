@@ -82,9 +82,12 @@ public class GameEngine implements Serializable
 		return ((AreaIndex <= 12) && (AreaIndex >= 1));
 	}
 	
-	public void GetCardStateOfPlayer(int PlayerNumber)
+	/**
+	 * Function will print the state of all the cards 
+	 */
+	public void GetCardStateOfPlayer()
 	{
-		CardManager.GetState(PlayerNumber);
+		CardManager.GetState();
 	}
 	/**
 	 * @param PlayerIndex whom to pay
@@ -185,7 +188,7 @@ public class GameEngine implements Serializable
 	}
 	
 	/**
-	 * 
+	 * Function will randomly pick a player to be the first one
 	 */
 	public void DetermineFirstPlayer()
 	{
@@ -208,6 +211,9 @@ public class GameEngine implements Serializable
 		}
 	}
 	
+	/**
+	 * @return current Player's turn
+	 */
 	public int GetCurrentPlayer()
 	{
 		return this.CurrentPlayer;

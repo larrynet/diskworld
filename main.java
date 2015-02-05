@@ -141,7 +141,7 @@ public class main {
 				}
 				else if(Choice.charAt(0) == '0') 
 				{
-					ge.GetCardStateOfPlayer(NumPlayer);
+					ge.GetCardStateOfPlayer();
 				}
 				else if(Choice.charAt(0) == 'q') 
 				{

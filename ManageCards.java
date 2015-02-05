@@ -128,94 +128,11 @@ public class ManageCards implements Serializable
 
 	}
 	
-	
-	public  void CardInitiate()
-	{
-   
-	 String []PersonalityName={"PersonalityRole 1","PersonalityRole 2","PersonalityRole 3","PersonalityRole 4","PersonalityRole 5","PersonalityRole 6","PersonalityRole 7"};
-     String []EventName={"Event 1","Event 2","Event 3","Event 4","Event 5","Event 6","Event 7","Event 8","Event 9","Event 10","Event 11","Event 12"};
-	 String []CityAreaName={"CityArea 1","CityArea 2","CityArea 3","CityArea 4","CityArea 5","CityArea 6","CityArea","CityArea 8","CityArea 9","CityArea 10","CityArea 11","CityArea 12"};
-	 
-	 int [] PersonalityId={101,102,103,104,105,106,107};
-     int [] EventId={201,202,203,204,205,206,207,208,209,210,211,212};
-	 int []CityAreaId={301,302,303,304,305,306,307,308,309,310,311,312};
-	
-	 Boolean Status =true;
-	 /*
-		 * Make an array of c with 5 card size to point to each five of 
-		 * cards type
-		 * 
-		 * When i is zero an arraye of seven personality type card will be initiated an so the rest.
-		 * 
-		 */
-	 
-	for (int i =0;i<=4; i++)
-	{	
-     
-     if (i==0)              
-     {   
-    	 for (int j=0; j<=this.Personality_Card.length-1 ;j++)
-    		 
-    	 {
-    	 this.Personality_Card[j]=new PersonalityCards(PersonalityName[j],PersonalityId[j],Status,CardType.PersonalityCards);
-    	 System.out.print(PersonalityName[j]);
-    	 System.out.print(",");
-    	 }
-    	
-     }
-     else if (i==1)
-     {
-    	 for (int j=0;j<=this.Event_Card.length-1 ;j++)
-    	 {
-    		 this.Event_Card[j]=new EventCards(EventName[j],EventId[j],Status,CardType.EventCards);
-    		 System.out.print(EventName[j]);
-    		 System.out.print(",");
-    	 }
-    	
-     }
-     
-     else if (i==2)
-     {
-    	 for (int j=0;j<=this.CityArea_Cards.length-1;j++)
-    	 {
-    		 this.CityArea_Cards[j]=new CityAreaCards(CityAreaName[j],CityAreaId[j],Status,CardType.CityAreaCards);
-    		 System.out.print(CityAreaName[j]);
-    		 System.out.print(",");
-    	 }
-    	 
-     }
-     else if (i==3)
-     {
-    	 for (int j=0;j<=this.Green_Cards.length-1;j++)
-    	 {
-    		 this.Green_Cards[j]=new GreenCards(("green"+(j+1)),401+j,Status,CardType.GreenCards);
-    		 System.out.print(this.Green_Cards[j].GetName());
-    		 System.out.print(",");
-    	 }
-    	 
-    	 
-    	  
-     }
-     else if(i==4)
-     {
-    	 for (int j=0;j<=this.Brown_Cards.length-1;j++)
-    	 {
-    		 this.Brown_Cards[j]=new BrownCards(("Brown"+" "+(j+1)),(501+j),Status,CardType.BrownCards);
-    		 System.out.print(this.Brown_Cards[j].GetName());
-    		 System.out.print(",");
-    	 }
-    	 
-      }
-     System.out.println("");
-     }
-	
-	}
-	
 	/**
 	 * GetState is used to show the current state of Cards
 	 * Used to test the value of cards in built 1 of project.
 	 */
-	public void GetState( int PlayerNumber) //used for testing
+	public void GetState() //used for testing
 	{ 
 		System.out.println("State of Current Cards ");
 		System.out.println("===========================================================================");
