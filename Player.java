@@ -336,15 +336,19 @@ public class Player implements Serializable {
 		{
 			if (PlayerCard.GetCardType() == CardType.BrownCards)
 			{
-				strBrownPlayerCards.append(PlayerCard.GetID());
+				strBrownPlayerCards.append(PlayerCard.GetName());
 				strBrownPlayerCards.append(",");
 			}
 			else if (PlayerCard.GetCardType() == CardType.GreenCards)
 			{
-				strGreenPlayerCards.append(PlayerCard.GetID());
+				strGreenPlayerCards.append(PlayerCard.GetName());
 				strGreenPlayerCards.append(",");
 			}
 		}
+		
+		//Remove Trailing comma from string builder
+		strGreenPlayerCards.deleteCharAt(strGreenPlayerCards.length()-1);
+		strGreenPlayerCards.deleteCharAt(strGreenPlayerCards.length()-1);
 		
 		String[] FinalString  = {strGreenPlayerCards.toString(),strBrownPlayerCards.toString()};
 		
