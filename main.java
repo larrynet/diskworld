@@ -49,6 +49,7 @@ public class main {
 				System.out.println("7 - [Change State of Game] Place Trolls in an Area");
 				System.out.println("8 - [Change State of Game] Transfer 2 Ankh-Morpork dollars to Player");
 				System.out.println("9 - Print the current state");
+				System.out.println("0 - Print the card details");
 				System.out.println("q- Quit");
 				String Choice = scan.next();
 				
@@ -129,7 +130,7 @@ public class main {
 					System.out.println("Please enter the player index of whom to transfer money (1-" + NumPlayer + "):");
 					int PlayerIndex = ValidateEntry(scan, 1, NumPlayer);
 					
-					if(ge.PayPlayer(PlayerIndex, 2))
+					if(ge.PayPlayer(PlayerIndex-1, 2))
 							System.out.println("Amount have balance withdrawn from the bank and transfered to the player.");
 					else
 						System.out.println("Amount transfered failed.");
@@ -137,6 +138,10 @@ public class main {
 				else if(Choice.charAt(0) == '9') 
 				{
 					ge.PrintState();
+				}
+				else if(Choice.charAt(0) == '0') 
+				{
+					ge.GetCardStateOfPlayer(NumPlayer);
 				}
 				else if(Choice.charAt(0) == 'q') 
 				{

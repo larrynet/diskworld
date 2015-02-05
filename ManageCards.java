@@ -18,7 +18,8 @@ public class ManageCards implements Serializable
 {
 	
    //  ManageCards Attributes 
-	
+	private int TotalBrownCard = 53;
+	private int TotalPersonalityCard = 7;
 	private PersonalityCards[] Personality_Card=new PersonalityCards[7];
 	private EventCards []Event_Card =new EventCards[12];
 	private CityAreaCards []CityArea_Cards =new CityAreaCards[12];
@@ -33,14 +34,14 @@ public class ManageCards implements Serializable
 	 * Default constructor
 	 * 
 	 */
-	public ManageCards()
+	public ManageCards(int TotalPlayer)
 	{
-		String []PersonalityName={"Lord Vetinari","Lord Selachii","Lord Rust","Lord de Word","Dragon King of Arms","Chrysoprase","Commander Vimes"};
+		String []PersonalityName={"Lord Vetinari","Lord Selachii","Lord Rust","Lord de Word","Dragon King of Arms","Commander Vimes","Chrysoprase"};
 	     String []EventName={"The Dragon","Flood","Fire","Fog","Riots","Explorion","Mysterious Murders","Demons From The Dungeon Dimension","Subsidence","Bloody Stupid Johnson","Trolls","Earthquake"};
 		 String []CityAreaName={"Dolly Sisters","Unreal Estate","Dragon's Landing","Small Gods","The Scours","The Hippo","The Shades","Dimwell","Longwall","Isle of Gods","Seven Sleepers","Nap Hill"};
 		 String [] BrownName=
 			 {
-			"Sergeant Cheery Littlebottom"     , "Otto Shriek"               , "The Claks"                         ,    "Sergeant Colon"             ,  "Cosmos Lavish" ,   
+			"Sergeant Cheery Littlebottom"     , "Otto Shriek"               , "The Claks"                         ,    "Sergeant Colon"             ,     
 			  "The Dean"                       , "HELLO"                     ,"Burleigh & Stronginth"              ,    "The Bursar"                 , "Cable Street Particulars", 
 			  "Canting Crew"                   ,"Cancer"                     ,  "The Chair of Indefinite Studies"  ,"Sir Charles Lavatory"           ,"Dorfi"                    ,
 			  "Sergeant Detritus"              ,"Deep Dwarves"               ,"Adora Bell Dearheart"               ,"The Alchemists'Guild"           ,"The Auditors"             ,
@@ -48,9 +49,9 @@ public class ManageCards implements Serializable
 			  "Willian de Worde"               ,"Willikins"                  ,"Archchancellor Ridcully"            ,"Ruby"                           ,"The Senior Wrangler",
 			  "Mr Shine"                       ,"Mr Slant"                   ,"The Smoking Gnu"                     , "Stanley"                      ,"Moist Wong Lipwig",
 			  "Doctor Mossy Lawn"              , "Patrician's Palace"        ,"Pondor Stibbons"                     ,"The Post Office","Reacher Gilt","Professor of Recent Runes",
-			  "Doctor Hix"                     ,"Hobsons's Livery Stable"     ,"Hubert"                            ,"Igor"                           ,"The Luggage"                 
-			  ,"The Mob"                       ,"Lord Downey"                ,"The Mob"                            ,"Lord Downey"                    ,"Dwarves"                     ,
-			  "Edward d'Earth"                ,"Buggy Swires"                ,"Errol"                              , "Gargoyles"
+			  "Doctor Hix"                     ,"Hobsons's Livery Stable"    ,"Igor"                               ,"The Luggage"                 
+			  ,"The Mob"                       ,"Lord Downey"                ,"Dwarves" ,
+			  "Edward d'Earth"                ,"Buggy Swires"                ,"Errol"                              , "Gargoyles"                     ,"Hubert","Cosmos Lavish" 
 			  };
 		 
 		 String []GreenName=
@@ -80,8 +81,13 @@ public class ManageCards implements Serializable
 		{
 			if (i == 0)
 			{
-				for (int j = 0; j <= this.Personality_Card.length - 1; j++)
-
+				TotalPersonalityCard = this.Personality_Card.length;
+				//remove the card: Chrysoprase card
+				if(TotalPlayer == 2)
+				{
+					TotalPersonalityCard --;
+				}
+				for (int j = 0; j < TotalPersonalityCard; j++)
 					this.Personality_Card[j] = new PersonalityCards(PersonalityName[j], PersonalityId[j], Status,CardType.PersonalityCards);
 				
 			} else if (i == 1)
@@ -106,8 +112,14 @@ public class ManageCards implements Serializable
 
 			} else if (i == 4) 
 			{
-				for (int j = 0; j <= this.Brown_Cards.length - 1; j++)
-
+				TotalBrownCard = this.Brown_Cards.length;
+				
+				//remove the last two cards: Hubert and Cosmos Lavish if only two player
+				if(TotalPlayer == 2)
+				{
+					TotalBrownCard-=2;
+				}
+				for (int j = 0; j < TotalBrownCard; j++)
 					this.Brown_Cards[j] = new BrownCards((BrownName[j]), (501 + j), Status,CardType.BrownCards);
 
 			}
@@ -208,37 +220,15 @@ public class ManageCards implements Serializable
 		System.out.println("State of Current Cards ");
 		System.out.println("===========================================================================");
 		System.out.print("Personality Cards : ");
-		
-		if (PlayerNumber>2)
+
+		for (int i = 0; i < TotalPersonalityCard; i++) 
 		{
-		
-		for (int i=0;i<this.Personality_Card.length-1  ;i++ )
-		{
-			  System.out.print(this.Personality_Card[i].GetName());
-		 if (this.Personality_Card[i].Status)
-		   {
-			System.out.print("  Available  ,");
-		 
-		   }
-		else
-			System.out.print("  Unavailable  ,");
+			System.out.print(this.Personality_Card[i].GetName());
+			if (this.Personality_Card[i].Status) 
+				System.out.print("  Available  ,");
+			else
+				System.out.print("  Unavailable  ,");
 		}
-		}
-		else //If number of player was equal to two
-			for (int i=0;i<this.Personality_Card.length-1  ;i++ )
-				if(this.Personality_Card[i].GetName()!="Chrysoprase" )
-				{
-					 System.out.print( this.Personality_Card[i].GetName());
-					 if (this.Personality_Card[i].Status)
-					   {
-						System.out.print("  Available  ,");
-					 
-					   }
-					else
-						System.out.print("  Unavailable  ,");
-				}
-		
-					
 		
 		System.out.println("");
 		
@@ -288,11 +278,8 @@ public class ManageCards implements Serializable
 		System.out.println(" ");
 		
 		System.out.print("Boards Card Brown : ");
-		
-		if (PlayerNumber>2)
-		{
-		
-		for (int i=0;i<this.Brown_Cards.length-1  ;i++ )
+				
+		for (int i=0;i<TotalBrownCard  ;i++ )
 		{
 			  System.out.print(this.Brown_Cards[i].GetName());
 		 if (this.Brown_Cards[i].Status)
@@ -303,21 +290,8 @@ public class ManageCards implements Serializable
 		else
 			System.out.print("  Unavailable  ,");
 		}
-		}
-		else //If number of player was equal to two
-			for (int i=0;i<this.Brown_Cards.length-1  ;i++ )
-				if(this.Brown_Cards[i].GetName()!="Hubert" && this.Brown_Cards[i].GetName()!="Cosmos Lavish")
-				{
-					 System.out.print( this.Brown_Cards[i].GetName());
-					 if (this.Brown_Cards[i].Status)
-					   {
-						System.out.print("  Available  ,");
-					 
-					   }
-					else
-						System.out.print("  Unavailable  ,");
-				}
 		
+		System.out.println();
 					
 		}
 		
@@ -339,8 +313,9 @@ public Cards GetCard( CardType Type)
 	
 		if(CardType.PersonalityCards==Type  ) 
 			
-		{  this.ShuffleCards((Cards [])  this.Personality_Card);
-			for (int i=0;i<=this.Personality_Card.length-1;i++)
+		{  
+			this.ShuffleCards((Cards [])  this.Personality_Card);
+			for (int i=0;i<TotalPersonalityCard;i++)
 			{
 		
 			 if (this.Personality_Card[i].Status==true  )
@@ -392,7 +367,7 @@ public Cards GetCard( CardType Type)
 		}
 		else if(CardType.BrownCards  ==Type  )    
 		{this.ShuffleCards((Cards [])this.Brown_Cards);
-			for (int i=0;i<=this.Brown_Cards.length-1;i++)
+			for (int i=0;i<TotalBrownCard;i++)
 				{
 					
 				if (this.Brown_Cards[i].Status==true  )
@@ -416,11 +391,16 @@ return available;
  */
 public  Cards[] ShuffleCards(Cards[] _Cards)
  {
-	Random rgen = new Random();  // Random number generator			
-
-	for (int i=0; i<_Cards.length; i++)
+	Random rgen = new Random();  // Random number generator
+	int TotalCard = _Cards.length;
+	if(_Cards[0].GetCardType() == CardType.BrownCards)
+		TotalCard = TotalBrownCard;
+	else if(_Cards[0].GetCardType() == CardType.PersonalityCards)
+		TotalCard = TotalPersonalityCard;
+	
+	for (int i=0; i<TotalCard; i++)
 	{
-	    int randomPosition = rgen.nextInt(_Cards.length);
+	    int randomPosition = rgen.nextInt(TotalCard);
 	    Cards temp = _Cards[i];
 	    _Cards[i] = _Cards[randomPosition];
 	    _Cards[randomPosition] = temp;

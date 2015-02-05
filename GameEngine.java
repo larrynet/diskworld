@@ -82,13 +82,16 @@ public class GameEngine implements Serializable
 		return ((AreaIndex <= 12) && (AreaIndex >= 1));
 	}
 	
+	public void GetCardStateOfPlayer(int PlayerNumber)
+	{
+		CardManager.GetState(PlayerNumber);
+	}
 	/**
 	 * @param PlayerIndex whom to pay
 	 * @param amount to pay
 	 * @param amount 
 	 * @return if succeeded or not
 	 */
-	
 	public boolean PayPlayer(int PlayerIndex, int amount)
 	{
 		if (ValidPlayerIndex(PlayerIndex) == false)
@@ -99,7 +102,7 @@ public class GameEngine implements Serializable
 			if(NewAmount >= 0)
 			{
 				GameBoard.SetBalance(NewAmount);
-				ListPlayer.get(PlayerIndex-1).AddToMoney(amount);
+				ListPlayer.get(PlayerIndex).AddToMoney(amount);
 				return true;
 			}
 			else
@@ -255,13 +258,14 @@ public class GameEngine implements Serializable
 		int TotalBuildingPerPlayer = 6;
 		int TotalMinionPerPlayer = 12;
 		ListPlayer = new ArrayList<Player>();
-		CardManager = new ManageCards();
+		CardManager = new ManageCards(TotalPlayer);
 		GameBoard = new Board();
 		
 		for(int PlayerCount = 0; PlayerCount <TotalPlayer; PlayerCount++)
 		{
 			//Assign set of RandomCard to player
 	        List<Cards> ListPlayerCards = new ArrayList<Cards>();
+	        int PlayerIndex = ListPlayer.size()+1;
 	        
 	        // fetch a random personality card
 	        Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
@@ -285,8 +289,17 @@ public class GameEngine implements Serializable
 	        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
 	        } 
 	        
-	        ListPlayer.add(new Player(ListPlayer.size()+1, PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
+	        ListPlayer.add(new Player(PlayerIndex, PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
 	        GameBoard.DeductFromBank(10);
+	        
+	        //each player should place one of their minions in the Shades, The Scours, and Dolly Sisters
+	        Player p = ListPlayer.get(PlayerCount);
+	        GameBoard.PlaceMinion(1, ListPlayer.get(PlayerCount)); //dolly sister index
+	        GameBoard.PlaceMinion(5, ListPlayer.get(PlayerCount)); //The Scouts index
+	        GameBoard.PlaceMinion(7, ListPlayer.get(PlayerCount)); //The Shades index
+	        GameBoard.PlaceTroubleMarker(1);
+	        GameBoard.PlaceTroubleMarker(5);
+	        GameBoard.PlaceTroubleMarker(7);
 		}
 		
 		//Initialize a random value to dice
