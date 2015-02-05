@@ -130,7 +130,7 @@ public class main {
 					System.out.println("Please enter the player index of whom to transfer money (1-" + NumPlayer + "):");
 					int PlayerIndex = ValidateEntry(scan, 1, NumPlayer);
 					
-					if(ge.PayPlayer(PlayerIndex-1, 2))
+					if(ge.PayPlayer(PlayerIndex, 2))
 							System.out.println("Amount have balance withdrawn from the bank and transfered to the player.");
 					else
 						System.out.println("Amount transfered failed.");
