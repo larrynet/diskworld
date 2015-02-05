@@ -29,10 +29,9 @@ public class ManageCards implements Serializable
 	
 	
 	//ManageCards Constructor
-	
+
 	/**
-	 * Default constructor
-	 * 
+	 * @param TotalPlayer indicates the number of player playing the game. 
 	 */
 	public ManageCards(int TotalPlayer)
 	{
