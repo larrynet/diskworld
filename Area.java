@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * @author parinaz Barakhshan
+ * @author Parinaz Barakhshan
  *
  */
 
