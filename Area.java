@@ -259,7 +259,7 @@ public class Area implements Serializable
 		 */
 		public void PrintState() //to print for demo
 		{
-			 System.out.printf("%-16S %-16S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, IsBuilt,this.GetDemonCount(),this.GetTrollCount());
+			 System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, IsBuilt,this.GetDemonCount(),this.GetTrollCount());
             
 		}
 		
