@@ -35,12 +35,12 @@ public class ManageCards implements Serializable
 	 */
 	public ManageCards()
 	{
-		String []PersonalityName={"Lord Vetinari","Lord Selachii ","Lord Rust ","Lord de Word ","Dragon King of Arms ","Chrysoprase ","Commander Vimes"};
+		String []PersonalityName={"Lord Vetinari","Lord Selachii","Lord Rust","Lord de Word","Dragon King of Arms","Chrysoprase","Commander Vimes"};
 	     String []EventName={"The Dragon","Flood","Fire","Fog","Riots","Explorion","Mysterious Murders","Demons From The Dungeon Dimension","Subsidence","Bloody Stupid Johnson","Trolls","Earthquake"};
 		 String []CityAreaName={"Dolly Sisters","Unreal Estate","Dragon's Landing","Small Gods","The Scours","The Hippo","The Shades","Dimwell","Longwall","Isle of Gods","Seven Sleepers","Nap Hill"};
 		 String [] BrownName=
 			 {
-			"Sergeant Cheery Littlebottom"     , "Otto Shriek"               , "The Claks"                         ,    "Sergeant Colon"             ,  "Cosmo Lavish" ,   
+			"Sergeant Cheery Littlebottom"     , "Otto Shriek"               , "The Claks"                         ,    "Sergeant Colon"             ,  "Cosmos Lavish" ,   
 			  "The Dean"                       , "HELLO"                     ,"Burleigh & Stronginth"              ,    "The Bursar"                 , "Cable Street Particulars", 
 			  "Canting Crew"                   ,"Cancer"                     ,  "The Chair of Indefinite Studies"  ,"Sir Charles Lavatory"           ,"Dorfi"                    ,
 			  "Sergeant Detritus"              ,"Deep Dwarves"               ,"Adora Bell Dearheart"               ,"The Alchemists'Guild"           ,"The Auditors"             ,
@@ -203,47 +203,126 @@ public class ManageCards implements Serializable
 	 * GetState is used to show the current state of Cards
 	 * Used to test the value of cards in built 1 of project.
 	 */
-	public void GetState() //used for testing
+	public void GetState( int PlayerNumber) //used for testing
 	{ 
 		System.out.println("State of Current Cards ");
 		System.out.println("===========================================================================");
 		System.out.print("Personality Cards : ");
+		
+		if (PlayerNumber>2)
+		{
+		
 		for (int i=0;i<this.Personality_Card.length-1  ;i++ )
-			System.out.print(this.Personality_Card[i].GetName()+ "," + this.Personality_Card[i].GetID()+",");
-		System.out.print(",Last");
-		System.out.println("");
+		{
+			  System.out.print(this.Personality_Card[i].GetName());
+		 if (this.Personality_Card[i].Status)
+		   {
+			System.out.print("  Available  ,");
+		 
+		   }
+		else
+			System.out.print("  Unavailable  ,");
+		}
+		}
+		else //If number of player was equal to two
+			for (int i=0;i<this.Personality_Card.length-1  ;i++ )
+				if(this.Personality_Card[i].GetName()!="Chrysoprase" )
+				{
+					 System.out.print( this.Personality_Card[i].GetName());
+					 if (this.Personality_Card[i].Status)
+					   {
+						System.out.print("  Available  ,");
+					 
+					   }
+					else
+						System.out.print("  Unavailable  ,");
+				}
+		
+					
+		
 		System.out.println("");
 		
 		
-		System.out.print("Event Cards :");
+		System.out.print("Event Cards : ");
 		for (int i=0;i< this.Event_Card.length-1  ;i++ )
-			System.out.print( this.Event_Card[i].GetName() + "," + this.Event_Card[i].GetID()+",");
-		System.out.print(",Last"); 
-		System.out.println("");
-		System.out.println("");
+		{
+			System.out.print( this.Event_Card[i].GetName());
 		
+		 if (this.Event_Card[i].Status)
+		   {
+			System.out.print("  Available  ,");
+		   
+		   }
+		else
+			System.out.print("  Unavailable , ");
+		
+		}
+		System.out.println("");
 		System.out.print("City Area Cards :");
 		for (int i=0;i<this.CityArea_Cards.length-1  ;i++ )
-			System.out.print(this.CityArea_Cards[i].GetName() +","+ this.CityArea_Cards[i].GetID()+",");
-		System.out.print(",Last");  
+		{
+			System.out.print(this.CityArea_Cards[i].GetName());
+		 if (this.CityArea_Cards[i].Status)
+		   {
+			System.out.print("  Available  ,");
+		   
+		   }
+		else
+			System.out.print("  Unavailable , ");
+		
+		}
 		System.out.println("");
-		System.out.println("");
-
 		System.out.print("Board Cards Green : ");
 		for (int i=0;i<this.Green_Cards  .length-1  ;i++ )
-			System.out.print(this.Green_Cards[i].GetName() +","+ this.Green_Cards[i].GetID()+",");
-		System.out.print(",Last");  
-		System.out.println("");
-		System.out.println("");
+		{
+			System.out.print(this.Green_Cards[i].GetName() );
+		 if (this.Green_Cards[i].Status)
+		   {
+			System.out.print("  Available , ");
+		    
+		   }
+		else
+			System.out.print("  Unavailable , ");
+		
+		}
+		System.out.println(" ");
 		
 		System.out.print("Boards Card Brown : ");
+		
+		if (PlayerNumber>2)
+		{
+		
 		for (int i=0;i<this.Brown_Cards.length-1  ;i++ )
-			System.out.print( this.Brown_Cards[i].GetName() + "," + this.Brown_Cards[i].GetID() +",");
-		System.out.print(",Last"); 
-		System.out.println("");
+		{
+			  System.out.print(this.Brown_Cards[i].GetName());
+		 if (this.Brown_Cards[i].Status)
+		   {
+			System.out.print("  Available  ,");
+		 
+		   }
+		else
+			System.out.print("  Unavailable  ,");
+		}
+		}
+		else //If number of player was equal to two
+			for (int i=0;i<this.Brown_Cards.length-1  ;i++ )
+				if(this.Brown_Cards[i].GetName()!="Hubert" && this.Brown_Cards[i].GetName()!="Cosmos Lavish")
+				{
+					 System.out.print( this.Brown_Cards[i].GetName());
+					 if (this.Brown_Cards[i].Status)
+					   {
+						System.out.print("  Available  ,");
+					 
+					   }
+					else
+						System.out.print("  Unavailable  ,");
+				}
+		
+					
+		}
 		
 		
-	}
+	
 	
 	
 /**
