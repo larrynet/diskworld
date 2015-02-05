@@ -125,14 +125,38 @@ public class JUnitTestSuite {
 		assertTrue("Minion Add not working", area.GetMinionCount(Colors.None) == 1);
 	}
 	
+/**
+	 * Test First Player selection to make sure all players can be selected
+	 * 
+	 */
 	@Test public void TestFirstPlayerSelection()
 	{
 		//initialize game with 4 players
 		GameEngine ge = new GameEngine(4);
+		boolean player1 = false;
+		boolean player2 = false;
+		boolean player3 = false;
+		boolean player4 = false;
 		
-		ge.DetermineFirstPlayer();
-		System.out.println(ge.GetCurrentPlayer());
-		assertTrue(ge.GetCurrentPlayer() >= 0 && ge.GetCurrentPlayer() < 4);
+		for (int i = 0; i < 100 ; i++)
+		{
+			ge.DetermineFirstPlayer();
+			
+			switch (ge.GetCurrentPlayer()+1)
+			{
+			case 1: player1 = true;
+				break;
+			case 2: player2 = true;
+				break;
+			case 3: player3 = true;
+				break;
+			case 4: player4 = true;
+				break;
+			}
+		}
+		
+		
+		assertTrue(player1 && player2 && player3 && player4);
 	
 	}
 		
