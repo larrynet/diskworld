@@ -1,453 +1,456 @@
+
+//name, verb, object, condition, actionnumber, symbol/prices
+//Symbol: A:Assassination, RT:Remove Trouble, T(3):Take 3$,S:Scroll,RE:Random Event,
+ //C: another Card, I:Interupt, M:Minion, B:Building
+
 //Green cards
-//VERT, OBJECT, CONDITION, ACTIONNUMBER, SYMBOL/PRICES
-//Symbol: A:Assassination,RT:Remove Trouble, T(3):Take 3$,S:Scroll,RE:Random Event, C:another //Crad, I:Interupt, M:Minion, B:Building
-//Mr Boggis
-verb=pay object=2$ each player symbol=S,M
-//Mr Bent
-verb=loan object=10$ bank condition=pay back 12$ or lose 15 points end game symbol=S,C
+name=Mr Boggis
+verb=pay; object=2$ each player; symbol=S,M;
 
-//The beggars
-verb=GiveCard object=2 cards of their choice symbol=S,M
+name=Mr Bent
+verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points end game; symbol=S,C;
 
-//The bank of Ankh-Morpork**
-verb=loan object=10$ bank condition=pay back 12$ or lose 15 points endgame symbol=S,C
+name=The beggars
+verb=givecard; object=2 cards of their choice; symbol=S,M;
 
-//The dysk
-verb=Get object=1$ condition=each minion in The Isle of Gods symbol=B,S
+name=The bank of Ankh-Morpork**
+verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points endgame; symbol=S,C;
 
-//The Duckman
-verb=Move object=Minion from area condition=adjacent area symbol=S
+name=The dysk
+verb=get; object=1$; condition=each minion in The Isle of Gods; symbol=B,S;
 
-//Drumknott
-verb=PlayCard object=2 other cards symbol=S
+name=The Duckman
+verb=move; object=minion from area; condition=adjacent area; symbol=S;
 
-//CMOT Dibbler**
-verb=Get object=4$ bank condition=dice>7 order=1
-verb=Pay object=2$ bank condition=dice=1 OR verb=Remove object=1 minion
+name=Drumknott
+verb=playcard; object=2 other cards; symbol=S;
 
-//Groat
-symbol=M
+name=CMOT Dibbler**
+verb=get; object=4$ bank; condition=dice>7 order=1;
+verb=pay; object=2$ bank; condition=dice=1 OR verb=remove; object=1 minion;
 
-//Gimlet's Dwarf Delicatessen
-symbol=S,T(3)
+name=Groat
+symbol=M;
 
-//Gaspode
-verb=stop object=move or remove minion symbol=I
+name=Gimlet's Dwarf Delicatessen
+symbol=S,T(3);
 
-//Fresh Start Club
-verb=PutMinion object=different area condition=remove minion Symbol=I
+name=Gaspode
+verb=stop; object=move or remove minion; symbol=I;
 
-//The Ankh Morpork Sunshine Dragon Sanctuary
-verb=Give object=1$ or card Symbol=S,C
+name=Fresh Start Club
+verb=put minion; object=different area; condition=remove minion; symbol=I;
 
-//Segeant Angua
-symbol=RT,C
+name=The Ankh Morpork Sunshine Dragon Sanctuary
+verb=give; object=1$ OR card; symbol=S,C;
 
-//The Agony Aunts
-symbol=A,T(2),M
+name=Segeant Angua
+symbol=RT,C;
 
-//Dr Cruces
-symbol=A,T(3)
+name=The Agony Aunts
+symbol=A,T(2),M;
 
-//captain carrot
-symbol=M,RT,T(1)
+name=Dr Cruces
+symbol=A,T(3);
 
-//mrs cake
-verb=look object=all but one personality symbol=S,T(2),M
+name=captain carrot
+symbol=M,RT,T(1);
 
-//Foul Ole Ron
-verb=Move object=minion to adjacent area symbol=S,C
+name=mrs cake
+verb=look; object=all but one personality; symbol=S,T(2),M;
 
-//The Fire Brigade
-verb=Get object=5$ from a player OR verb=remove object=building symbol=S,C
+name=Foul Ole Ron
+verb=move; object=minion to adjacent area; symbol=S,C;
 
-//Zorgo the Retro-phrenologist
-verb=exchange object=personality with one random unused symbol=S,B
+name=The Fire Brigade
+verb=get; object=5$ from a player OR verb=remove; object=building; symbol=S,C;
 
-//Dr Whiteface
-verb=take object=5$ or VERB=give object=card to player hand symbol=S,M
+name=Zorgo the Retro-phrenologist
+verb=exchange; object=personality with one random unused; symbol=S,B;
 
-//Mr Pin & Mr  Tulip
-symbol=A,T(1)
+name=Dr Whiteface
+verb=take; object=5$ OR verb=give; object=card to player hand; symbol=S,M;
 
-//The thieves guild
-verb=take object=2$ from all player symbol=S,M
-// Inigo Skimmer
-Symbol=A,T(2)  
+name=Mr Pin & Mr  Tulip
+symbol=A,T(1);
 
-//History Monkes
-Verb=shuffle object=discard cards actionnumber=1
-verb=draw Object=4cards from discard cards   Symbol=S,M 
-//Hex
-Verb=draw Object=3 cards   Symbol=S,B   ; 
-//HERE ‘N’ NOW
-Verb=roll Object=die  symbol=S,C actionnumber=1
-verb=get  object=3$ from a player of choice Condition=number die>=7 actionnumber=2
- verb=remove from board object=1minion  Condition=number die==1 actionnumber=2
+name=The thieves guild
+verb=take; object=2$ from all player; symbol=S,M;
+
+name= Inigo Skimmer
+symbol=A,T(2);  
+
+name=History Monkes
+verb=shuffle; object=discard cards; actionnumber=1;
+verb=draw; object=4cards from discard cards; symbol=S,M; 
+
+name=Hex
+verb=draw; object=3 cards; symbol=S,B; 
+
+name=HERE ‘N’ NOW
+verb=roll; object=die;  symbol=S,C; actionnumber=1;
+verb=get; object=3$ from a player of choice; condition=number die>=7; actionnumber=2;
+verb=remove from board; object=1minion;  condition=number die==1; actionnumber=2;
  
-//Harry King 
-Verb=discard Object= unlimited cards   Symbol=M,S  actionnumber=1
-Verb=get Object= 2*n(Cards)$  actionnumber=2
+name=Harry King 
+verb=discard; object= unlimited cards; symbol=M,S;  actionnumber=1;
+verb=get; object= 2*n(cards)$;  actionnumber=2;
 
-//Horga’s House of Ribs
- Symbol=T(3),M
+name=Horga’s House of Ribs
+ symbol=T(3),M;
 
-//Mr Gryle
-Symbol=A,T(1) 
+name=Mr Gryle
+symbol=A,T(1); 
 
- //The Peeled Nuts
+ name=The Peeled Nuts
 
-//THE Opera House
-Verb=get Object=1$  Condition=for each minion in the Isle of Gods symbol=B,S actionnumber=2 
+name=THE Opera House
+verb=get; object=1$;  Condition=for each minion in the Isle of Gods; symbol=B,S; actionnumber=2; 
 
-//Nobby Nobbs
-Verb=get Object=3$ from a player of choice  Symbol=S,C  actionnumber=1 
+name=Nobby Nobbs
+verb=get; object=3$ from a player of choice;  symbol=S,C;  actionnumber=1; 
 
-//Modo
-Verb=discard Object=1 card   ActionNumber=1 Symbol=S,M  
+name=Modo
+verb=discard; object=1 card ;  actionnumber=1; symbol=S,M;  
 
-//The Mended Drum
-Symbol=B,T(2)
+name=The Mended Drum
+symbol=B,T(2);
 
-//Librarian
-Verb=get Object=4 cards  Symbol=S  ActionNumber= 1 
+name=Librarian
+verb=get; object=4 cards;  symbol=S;  actionnumber= 1;
 
-//Leonard of Quirm
-Verb=get Object=4 cards   Symbol= S ActionNumber= 1 
+name=Leonard of Quirm
+verb=get; object=4 cards;   symbol= S; actionnumber= 1; 
 
-//Shonky Shop
-Verb=discard Object=n cards action number=1 Symbol= S,B actionnumber=1
- Verb=get Object= n*(discard cards)$   actionnumber=2
+name=Shonky Shop
+verb=discard; object=n cards; actionnumber=1; symbol= S,B; actionnumber=1;
+verb=get; object= n*(discard cards)$ ;  actionnumber=2;
 
-//Sacharissa Cripslock
-Verb=get Object=1$ for each trouble marker on board Symbol=S,M  ActionNumber =1
+name=Sacharissa Cripslock
+verb=get; object=1$ for each trouble marker on board; symbol=S,M ; actionnumber =1
 
-//Rosie Palm
-Verb=choose object=1 player  Symbol=M,S  actionnumber=1 
-Verb=give Object=1card to a player actionnumber=2
-Verb=get Object=2$ from the player  actionnumber=3
+name=Rosie Palm
+verb=choose; object=1 player; symbol=M,S; actionnumber=1 
+verb=give; object=1card to a player;  actionnumber=2
+verb=get; object=2$ from the player;  actionnumber=3;
 
-//Rinsewind
-Verb=remove  Object=1minion from an area Condition=area has troublemarker Symbol=RE,S,C ActionNumber=1 
-Verb=place  Object=1minion  Condition=adjacent area   Symbol=C ActionNumber= 2
+name=Rinsewind
+verb=remove; object=1minion from an area; condition=area has troublemarker; symbol=RE,S,C; actionnumber=1; 
+verb=place; object=1minion;  condition=adjacent area;   symbol=C; actionnumber= 2;
 
-//The Roya Mint
-Symbol=B,T(5)
+name=The Roya Mint
+symbol=B,T(5);
 
-//Queen Molly
-Verb=select object=1 player Symbol=M,S actionnumber=1
-Verb=get Object=2cards from a player condition =selected number=player number actionnumber=2
+name=Queen Molly
+verb=select; object=1 player; symbol=M,S; actionnumber=1;
+verb=get; object=2cards from a player; condition =selected number=player number; actionnumber=2;
 
-//The Pink PussyCat
-Symbol=T(3),C
- 
+name=The Pink PussyCat
+symbol=T(3),C;
 
+ //Personality Cards
+name=Lord Vetinari
+verb=win; object=minions in 11 area; condition=2players; actionnumber=1; 
+verb=win; object=3palyer in 10 area; condition=3players; actionnumber=1;
+verb=win; object=minions in 9 area; condition=4players; actionnumber=1; 
 
-//Personality Cards
+name=Lord Selachii
+verb=win; object=control area in 7 area; condition=2players; actionnumber=1; 
+verb=win; object=control area in 5 area; condition=3players; actionnumber=1;
+verb=win; object=control area in 4 area; condition=4players; actionnumber=1; 
 
-//Lord Vetinari
-Verb=win object=minions in 11 area condition=2players actionnumber=1 
-verb=win object=3palyer in 10 area conditon=3players actionnumber=1
-Verb=win object=minions in 9 area condition=4players actionnumber=1 
+name=Lord Rust
+verb=win; object=control area in 7 area; condition=2players; actionnumber=1; 
+verb=win; object=control area in 5 area; condition=3players; actionnumber=1;
+verb=win; object=control area in 4 area; condition=4players; actionnumber=1; 
 
-//Lord Selachii
-Verb=win object=control area in 7 area condition=2players actionnumber=1 
-verb=win object=control area in 5 area conditon=3players actionnumber=1
-Verb=win object=control area in 4 area condition=4players actionnumber=1 
+name=Lord de Word
+verb=win; object=control area in 7 area; condition=2players; actionnumber=1; 
+verb=win; object=control area in 5 area; condition=3players; actionnumber=1;
+verb=win; object=control area in 4 area; condition=4players; actionnumber=1; 
 
-//Lord Rust
-Verb=win object=control area in 7 area condition=2players actionnumber=1 
-verb=win object=control area in 5 area conditon=3players actionnumber=1
-Verb=win object=control area in 4 area condition=4players actionnumber=1 
+name=Dragon King of Arms
+verb=win; object=count trouble marker; condition=count(troublemarker)>=8; actionnumber=1; 
 
-//Lord de Word
-Verb=win object=control area in 7 area condition=2players actionnumber=1 
-verb=win object=control area in 5 area conditon=3players actionnumber=1
-Verb=win object=control area in 4 area condition=4players actionnumber=1 
+name=Chrysoprase
+verb=win; object=Money in hand; condition=Count(money in hand)-count(loan)*12$ >=50$; actionnumber=1; 
 
-//Dragon King of Arms
-Verb=win object=count trouble marker condition=count(troublemarker)>=8 actionnumber=1 
-
-//Chrysoprase
-Verb=win object=Money in hand condition=Count(money in hand)-count(loan)*12$ >=50$ actionnumber=1 
-
-//Commander Vimes
-Verb=win object=count(cards) condition=count(cards)==0 
+name=Commander Vimes
+verb=win; object=count(cards); condition=count(cards)==0; 
 
 //Event Cards
-//The Dragon
-Verb=roll object=die  actionnumber=1 
-verb=remove object=all pieces conditon=number of die actionnumber=1
+name=The Dragon
+verb=roll;  object=die;  actionnumber=1; 
+verb=remove; object=all pieces;  condition=number of die; actionnumber=1;
 
-//Flood
-Verb=roll object=2die  actionnumber=1 
-verb=move  object=minions to adjacent area  conditon=(number)die==(number)area and is adjacent to the river  actionnumber=2
-//Fire
-Verb=roll object=die  actionnumber=1 
-verb=roll object=die  actionnumber=2
-Verb=roll object=die area in 4 area condition=currenrt die>last die actionnumber=3
-//Fog
-Verb=draw object=5cards actionnumber=1 
-verb=widraw object=5cards actionnumber=2
-//Riots
-Verb=end  object=game condition=count(trouble marker)>=8 actionnumber=1  
-//Explorion
-Verb=roll object=die  actionnumber=1 
-verb=remove object=buildings conditon=number area==number die actionnumber=2
-//Mysterious Murders
-Verb=roll each player object=die actionnumber=1 
-verb=remove object=1 minions conditon=number area=number die actionnumber=2
-//Demons From The Dungeon Dimension
-Verb=roll object=4die  actionnumber=1 
-verb=place object=minion conditon=number roll =number area actionnumber=2
-//Subsidence
-Verb=pay object=$2 for each building condition=own a building actionnumber=1 
-verb=remove object=building conditon=do not pay actionnumber=2
-//Trolls
-Verb=roll object=3 die  actionnumber=1 
-verb=place object=troll minion piece conditon=number area==number minio actionnumber=2
-//Bloody Stupid Johnson  
-Verb=roll object=die actionnumber=1 
-verb=place to one side object=city area card conditon=number city area==number roll cardsactionnumber=2
-Verb=remove object=1 minions condition=number area card==number roll actionnumber=2
-//"Earthquake
-Verb=roll object=2 die actionnumber=1 
-verb=remove object=all buildings conditon=number die ==number city area  actionnumber=2
+name=Flood
+verb=roll; object=2die;  actionnumber=1; 
+verb=move;  object=minions to adjacent area;  condition=(number)die==(number)area and is adjacent to the river;  actionnumber=2;
+
+name=Fire
+verb=roll; object=die;  actionnumber=1; 
+verb=roll; object=die;  actionnumber=2;
+verb=roll; object=die area in 4 area; condition=currenrt die>last die; actionnumber=3;
+
+name=Fog
+verb=draw; object=5cards; actionnumber=1;
+verb=widraw; object=5cards; actionnumber=2;
+
+name=Riots
+verb=end;  object=game; condition=count(trouble marker)>=8; actionnumber=1;  
+
+name=Explorion
+verb=roll; object=die;  actionnumber=1; 
+verb=remove; object=buildings; conditon=number area==number die; actionnumber=2;
+
+name=Mysterious Murders
+verb=roll each player; object=die; actionnumber=1; 
+verb=remove; object=1 minions; conditon=number area=number die; actionnumber=2;
+
+name=Demons From The Dungeon Dimension
+verb=roll; object=4die ; actionnumber=1; 
+verb=place; object=minion; conditon=number roll =number area; actionnumber=2;
+
+name=Subsidence
+verb=pay; object=$2 for each building; condition=own a building; actionnumber=1; 
+verb=remove; object=building; condition=do not pay; actionnumber=2;
+
+name=Trolls
+verb=roll; object=3 die ; actionnumber=1; 
+verb=place; object=troll minion piece; condition=number area==number minion; actionnumber=2;
+
+name=Bloody Stupid Johnson  
+verb=roll; object=die;  actionnumber=1;
+verb=place to one side; object=city area card; condition=number city area==number roll cards; actionnumber=2;
+verb=remove; object=1 minions; condition=number area card==number roll; actionnumber=2;
+
+name=Earthquake
+verb=roll; object=2 die; actionnumber=1; 
+verb=remove; object=all buildings; condition=number die ==number city area ; actionnumber=2;
 
 //City Area
 
-//The Hyppo
-Verb=take  object=2$ from bank  condition=once per turn  price =12$ actionnumber=1 
+name=The Hyppo
+verb=take; object=2$ from bank; condition=once per turn;  price =12$; actionnumber=1; 
 
-//The Sours
-Verb=discard object=1 card condition=once per turn price=6$ actionnumber=1
-Verb=take object=2$  condition=once per  actionnumber=1
+name=The Sours
+verb=discard; object=1 card; condition=once per turn price=6$; actionnumber=1;
+verb=take; object=2$;  condition=once per; actionnumber=1;
 
-//Small Gods 
-verb=pay object=3$ cards price=18$ actionnumber=1
-Verb=ignore object=random event card  actionnumber=1 
+name=Small Gods 
+verb=pay; object=3$ cards; price=18$; actionnumber=1;
+verb=ignore; object=random event card;  actionnumber=1; 
 
-//Dragon’s Landing
-Verb=take object=2 $ from bank condition=once per turn price=12$ actionnumber=1 
+Dragon’s Landing
+verb=take; object=2 $ from bank; condition=once per turn; price=12$; actionnumber=1; 
 
-//Unreal Estate
-Verb=take  object= 1 card from deck  price=18$ actionnumber=1 
-verb=discard object=card  from deck  cards actionnumber=2
+name=Unreal Estate
+verb=take; object= 1 card from deck ; price=18$; actionnumber=1; 
+verb=discard; object=card  from deck  cards; actionnumber=2;
 
-//Dolly Sisters
-Verb=pay  object=3$ condition =once per turn actionnumber=1 
-verb=place  side object=1 minion in Dolly siter or adjacent area csactionnumber=2
+name=Dolly Sisters
+verb=pay;  object=3$; condition =once per turn; actionnumber=1; 
+verb=place side; object=1 minion in dolly sister or adjacent area cs; actionnumber=2;
 
 
-//Nap Hill
+name=Nap Hill
+verb=take; object=1 $ from bank; condition=once per turn;  price=12$; actionnumber=1; 
 
-Verb=take object=1 $ from bank condition=once per turn  price=12$ actionnumber=1 
+name=Seven Sleepers
+verb=take; object=3 $ from bank; condition =one per turn ; price=18$; actionnumber=1; 
 
-//Seven Sleepers
-Verb=take object=3 $ from bank condition =one per turn  price=18$ actionnumber=1 
+name=Isle of Gods 
+verb=pay;  object=2$ ; price=12$; actionnumber=1; 
+verb=remove ; object=1 trouble maker; actionnumber=2;
 
-//Isle of Gods 
-Verb=pay  object=2$  price=12$ ationnumber=1 
-verb=remove  object=1 trouble maker  actionnumber=2
+name=Longwall
+verb=take; object=1 $ from bank; price=12$; actionnumber=1; 
 
-//Longwall
-Verb=take object=1 $ from bank  price=12$ actionnumber=1 
+name=Dimwell 
+verb=pay; object=3$;  price=12$; actionnumber=1; 
+verb=place; object=1 minion in dimwell or adjacent area; actionnumber=2;
 
-//Dimwell 
-Verb=pay  object=3$  price=12$ ationnumber=1 
-verb=place  object=1 minion in Dimwell or adjacent area actionnumber=2
-
-//The Shades
-Verb=place object=trouble maker in Shades or Adjacent  price =6$ actionnumber=1 
+name=The Shades
+verb=place; object=trouble maker in Shades or Adjacent; price =6$; actionnumber=1; 
 
 //Brown Cards
-//Sergeant Cheery Littlebottom
-Verb=getobject=2 cards from deck symbol=S,RT actionnumber=1
+name=Sergeant Cheery Littlebottom
+verb=get; object=2 cards from deck; symbol=S,RT; actionnumber=1;
 
-//Otto Shriek
-Verb=get object=1$ *count(trouble marker in board) symbol=S,B
+name=Otto Shriek
+verb=get; object=1$ *count(trouble marker in board); symbol=S,B;
 
-//The Clacks
-Veerb=get object=2 cards from deck symbol =S,T(2), play a card actionnumber=1
+name=The Clacks
+verb=get; object=2 cards from deck; symbol =S,T(2), C; actionnumber=1;
 
-//Sergeant Colon
-Symbol= RT,M
+name=Sergeant Colon
+symbol= RT,M;
 
-//Cosmos Lavish
-Verb=pay object= 2$ to another player Symbol=S,C actionnumber=1
-Verb=remove object=1 minion condition=count(trouble marker0>1 and minion is not owed by player actionnumber=2
+name=Cosmos Lavish
+verb=pay; object= 2$ to another player; symbol=S,C; actionnumber=1;
+verb=remove; object=1 minion; condition=count(trouble marker0>1 and minion is not owed by player;  actionnumber=2;
 
-//The Dean
-Verb= remove object =1 minion from Unreal Estate Symbol= RE,S,C actionnumber =1
+name=The Dean
+verb= remove;  object =1 minion from Unreal Estate;  symbol= RE,S,C;  actionnumber =1;
 
-//HELLO
-Symbol=A,A,B
+name=HELLO
+symbol=A,A,B;
 
-//Burleigh & Stronginth
-Verb=pay object =2 $ player of choice  Symbol=S,B actionnumber=1
-Verb=assassinate object= 1 minion actionnumber=2
+name=Burleigh & Stronginth
+verb=pay; object =2 $ player of choice;  symbol=S,B; actionnumber=1;
+verb=assassinate; object= 1 minion; actionnumber=2;
 
-//The Bursar
-Verb=exchage object =2 minion position Symbol=RE,S,C actionnumber=1
+name=The Bursar
+verb=exchange; object =2 minion position; symbol=RE,S,C; actionnumber=1;
 
-//Cable Street Particular
-Verb=choose object =1 player Symbol=S,M actionnumber=1
-Verb=see object=all choose player cards actionnumber=2
-Verb=discard object=1 player card actionnumber=3
+name=Cable Street Particular
+verb=choose; object =1 player; symbol=S,M; actionnumber=1;
+verb=see; object=all choose player cards; actionnumber=2;
+verb=discard; object=1 player card; actionnumber=3;
 
-//Canting Crew
-Verb=move object=1 minion of another player to adjacent area  Symbol=S,M actionnumber=1
+name=Canting Crew
+verb=move; object=1 minion of another player to adjacent area ; symbol=S,M; actionnumber=1;
 
-//Cancer
-Verb=roll object=2 die Symbol=S,C actionnumber=1
-Verb=remove object=1 minion of choice in that area condition=trouble marker has no effect actionnumber=2
+name=Cancer
+verb=roll; object=2 die; symbol=S,C; actionnumber=1;
+verb=remove; object=1 minion of choice in that area; condition=trouble marker has no effect; actionnumber=2;
 
-//The Chair of Indefinite Studies
-Verb=exchange object=all cards   with another player Symbol=RE,S,C actionnumber=1
+name=The Chair of Indefinite Studies
+verb=exchange; object=all cards with another player; symbol=RE,S,C; actionnumber=1;
 
-//Sir Charles Lavatory
-Verb=get object=1$ *count(building) condition=any color Symbol=S,B
+name=Sir Charles Lavatory
+verb=get; object=1$ *count(building); condition=any color; symbol=S,B;
 
-//Dorfi
-Verb=move  object=1 minion Symbol=S,C actionnumber=1
-Verb=place object=1 minion in any area actionnumber=2
-
-
-//Sergeant Detritus
-Symbol=RT,RT
-
-//Deep Dwarves
-Verb=place object=1 minion condition= no trouble marker Symbol= S,C
-
-//Adora Bell Dearheart
-Verb=move  object=1 minion Symbol=S,M,B actionnumber=1
-Verb=place object=1 minion in any area actionnumber=2
-
-//The Alchemists'Guild
-Verb=discard object=1/2/3 card symbol=S,B actionnumber=1
-Verb=get object=card condition=count(card in hand)==5 actionnumber=2
-
-//The Auditors
-Verb=remove  object=1 minion condition=everyother player in order Symbol=S actionnumber=1
-
-//Buggy Swires
-Symbol= RT
-
-//Susan
-Verb=stop object=minion condition=minion is removing from board symbol=I actionnumber=1
+name=Dorfi
+verb=move ; object=1 minion; symbol=S,C; actionnumber=1;
+verb=place; object=1 minion in any area; actionnumber=2;
 
 
-//Sybil Vimes
-Verb=replace object=building of you own  and another player symbol=T(3),S actionnumber=1
+name=Sergeant Detritus
+symbol=RT,RT;
 
-//Mr Teatime
-Symbol=T(3),A,C 
+name=Deep Dwarves
+verb=place; object=1 minion; condition= no trouble marker; symbol= S,C;
 
-//The Watch
-SYMBOL=B,RT
+name=Adora Bell Dearheart
+verb=move ; object=1 minion; symbol=S,M,B; actionnumber=1;
+verb=place; object=1 minion in any area; actionnumber=2;
 
-//Wee Mad Arthur
-Verb=made object=building condition=half price symbol=S actionnumber=1
+name=The Alchemists'Guild
+verb=discard; object=1/2/3 card; symbol=S,B; actionnumber=1;
+verb=get; object=card; condition=count(card in hand)==5; actionnumber=2;
 
-//Willian de Worde
-Verb=get object=1 $* count (trouble marker on the board) symbol=M,S actionnumber=1
+name=The Auditors
+verb=remove ; object=1 minion; condition=every other player in order; symbol=S;  actionnumber=1;
 
-//Willikins
-Verb=place object=minion in area  condition=area has a building  symbol=S actionnumber=1
+name=Buggy Swires
+symbol= RT;
 
-
-//Archchancellor Ridcully
-Verb=place  object=1 or 2 minion in adjacent or Unreal Estate symbol=RE,S actionnumber=1
-
-//Ruby
-Symbol =M,B
-
-//The Senior Wrangler
-Verb=place  object=minion in adjacent or Unreal Estate symbol=RE,S,C actionnumber=1
-
-//Mr Shine
-Verb=place object=minion symbol=S actionnumber=1
-
-//Mr Slant
-Verb=choose object=area  condition=area has trouble marker symbol=S,B actionnumber=1
-Verb=get object=2$ * count(minion) actionnumber=2
-
-//The Smoking Gnu
-Verb=place object=1 minion condition =count(trouble marker in area)>1 symbol =S,C actionnumber=1
-
-//Stanley
-Verb=get  object=2 cards of other player   symbol=S,M actionnumber=1
-Verb=return object=1cards to player  actionnumber=2
-
-//Moist Wong Lipwig
-Verb=take object=2 cards form deck symbol=M,T(3),S,C  actionnumber=1
-
-//Doctor Mossy Lawn
-Verb=interrupt object =player turn symbol=I actionnumber=1
-Verb=get  object=played card before this card  actionnumber=2
-
-//Patrician's Palace
-Symbol=B,T(4),M
-
-//Pondor Stibbons
-Verb=play object =2 other cards symbol=RE,S actionnumber=1
-
-//The Post Office
-Verb=get object 1$ * count(building on board) symbol=S,M actionnumber=1
+name=Susan
+verb=stop; object=minion; condition=minion is removing from board; symbol=I; actionnumber=1;
 
 
-//Reacher Gilt
-Verb=place object= onother player building with owned  condition=trouble marker in area >1   symbol=S actionnumber=1
-Verb=pay object=cost of the building to the owner 
+name=Sybil Vimes
+verb=replace; object=building of you own  and another player; symbol=T(3),S; actionnumber=1;
 
-//Professor of Recent Runes
-Verb=get object =2 cards from deck symbol =RE,S,C actionnumber=1
+name=Mr Teatime
+symbol=T(3),A,C; 
 
-//Doctor Hix
-Verb=place object=trouble marker in any area symbol=RE,S,C actionnumber=1
+name=The Watch
+symbol=B,RT;
 
-//Hobsons's Livery Stable
-Verb=choose object=player symbol= S,B actionnumber=1
-Verb=pay object=2$ to player of choice actionnumber=2
-Veerb=move object= 1 minion to any area actionnumber=3
+name=Wee Mad Arthur
+verb=made; object=building; condition=half price; symbol=S; actionnumber=1;
 
-//Hubert
-Verb=choose object=player symbol=S,M actionnumber=1
-Verb=give(choosed player) object=money to the player of choice  actionnumber=2
+name=Willian de Worde
+verb=get; object=1 $* count (trouble marker on the board); symbol=M,S; actionnumber=1;
 
-//Igor
-Verb=place object=removed minions condition=place in different area symbol=I ctionnumber=1
+name=Willikins
+verb=place; object=minion in area ; condition=area has a building ; symbol=S; actionnumber=1;
 
-//The Luggage
-Verb=discard object =1card  symbol=A,S actionnumber =1
 
-//The Mob
-Verb=place object =1trouble marker in adjacent area condition =trouble marker >1 in area adjacent  symbol=S,M,C actionnumber=1
+name=Archchancellor Ridcully
+verb=place ; object=1 or 2 minion in adjacent or Unreal Estate; symbol=RE,S; actionnumber=1;
 
-//Lord Downey
-Symbol=A,T(3),B
+name=Ruby
+Symbol =M,B;
 
-//Dwarves  
-Symbol=M,M
+name=The Senior Wrangler
+verb=place ; object=minion in adjacent or Unreal Estate; symbol=RE,S,C; actionnumber=1;
+
+name=Mr Shine
+verb=place; object=minion; symbol=S; actionnumber=1;
+
+name=Mr Slant
+verb=choose; object=area ; condition=area has trouble marker; symbol=S,B; actionnumber=1
+verb=get; object=2$ * count(minion); actionnumber=2;
+
+name=The Smoking Gnu
+verb=place; object=1 minion; condition =count(trouble marker in area)>1; symbol =S,C; actionnumber=1;
+
+name=Stanley
+verb=get ; object=2 cards of other player  ; symbol=S,M; actionnumber=1
+verb=return; object=1cards to player ; actionnumber=2;
+
+name=Moist Wong Lipwig
+verb=take; object=2 cards form deck; symbol=M,T(3),S,C ; actionnumber=1
+
+name=Doctor Mossy Lawn
+verb=interrupt; object =player turn; symbol=I; actionnumber=1;
+verb=get ; object=played card before this card ; actionnumber=2;
+
+name=Patrician's Palace
+symbol=B,T(4),M;
+
+name=Pondor Stibbons
+verb=play; object =2 other cards; symbol=RE,S; actionnumber=1;
+
+name=The Post Office
+verb=get; object 1$ * count(building on board); symbol=S,M; actionnumber=1;
+
+
+name=Reacher Gilt
+verb=place; object= another player building with owned  condition=trouble marker in area >1  ; symbol=S; actionnumber=1;
+verb=pay; object=cost of the building to the owner; 
+
+name=Professor of Recent Runes
+verb=get; object =2 cards from deck; symbol =RE,S,C; actionnumber=1;
+
+name=Doctor Hix
+verb=place; object=trouble marker in any area; symbol=RE,S,C; actionnumber=1;
+
+name=Hobsons's Livery Stable
+verb=choose; object=player; symbol= S,B; actionnumber=1;
+verb=pay; object=2$ to player of choice; actionnumber=2;
+verb=move; object= 1 minion to any area; actionnumber=3;
+
+name=Hubert
+verb=choose; object=player; symbol=S,M; actionnumber=1;
+verb=give(chose player); object=money to the player of choice ; actionnumber=2;
+
+name=Igor
+verb=place; object=removed minions; condition=place in different area; symbol=I; actionnumber=1;
+
+name=The Luggage
+verb=discard; object =1card ; symbol=A,S; actionnumber =1;
+
+name=The Mob
+verb=place; object =1trouble marker in adjacent area; condition =trouble marker >1 in area adjacent ; symbol=S,M,C; actionnumber=1;
+
+name=Lord Downey
+symbol=A,T(3),B;
+
+name=Dwarves  
+symbol=M,M;
          
-//Edward d'Earth
-Symbol =A,T(3),B
+name=Edward d'Earth
+Symbol =A,T(3),B;
 
+name=Errol
+verb=roll card; object =die; actionnumber=1; symbol=S,C; actionnumber=1
+verb=remove; object =1 minion of choice from area has trouble maker; condition=die number>=7; actionnumber =2;
+verb=remove; object=1 minion owned; condition=die number ==1; actionnumber =2; 
 
-//Errol
-Verb =roll card object =die actionnumber=1 symbol=S,C actionnumber=1
-Verb=remove object =1 minion of choice from area hase trouble maker condition=die number>=7 actionnumber =2
-Verb=remove object 1 minion owned condition=die number ==1 actionnumber =2 
-
-
-//Gargoyl
-Verb =Draw card object =1 card condition=1 card from each building  symbol=S,B actionnumber=1 
-
-??
-
-??
-
-??
-
-??
+name=Gargoyl
+verb=Draw card; object =1 card condition=1 card from each building ; symbol=S,B; actionnumber=1; 
 
