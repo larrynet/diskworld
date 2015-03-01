@@ -2,7 +2,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.util.List;
 import java.util.Random;
+import java.util.Vector;
 
 public class JUnitTestSuite {
 	 
@@ -91,6 +94,36 @@ public class JUnitTestSuite {
 		
 	}
 	
+	@Test public void TestGreenCard() {
+		// TODO Auto-generated method stub
+		boolean GeneratedError = false;
+	String  thisLine = null;
+	List<Action> lstAction = new Vector<Action>();
+	
+	
+	  try{
+	     // open input stream test.txt for reading purpose.
+	     BufferedReader br = new BufferedReader(new FileReader("/Users/gayhazan/Documents/workspace/CardAction/src/action.txt"));
+	     while ((thisLine = br.readLine()) != null) {
+	    	
+	    	//If not comment then read
+	    	 if (!thisLine.startsWith("/") && !thisLine.isEmpty())
+	    	 {
+	    		 Action newAction = Action.ParseString(thisLine);
+	    		 lstAction.add(newAction);
+	    	 }
+	     }       
+	  }catch(Exception e){
+	     e.printStackTrace();
+	     GeneratedError = true;
+	  }		  
+	  
+	  System.out.println(lstAction.size());
+	  lstAction.get(1).PrintActionVerbs();
+	  lstAction.get(1).PrintActionObject();
+	  
+	  assertFalse("Generated an exeption testing action", GeneratedError);
+	}
 	@Test public void TestBankCount() {
 		
 		int BoardBankBalance = 120;
