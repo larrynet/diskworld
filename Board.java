@@ -247,5 +247,34 @@ public class Board implements Serializable {
 			}
 
 	}
+	
+	//check the adjacency of one other to another one-is a adjacent to b and return a bolean
+	
+		public boolean AreaAdjacency(int Area1, int Area2)
+		{
+			//since the array starts from array index 0
+			Area1--;
+			for (int i=0;i<7;i++)
+			{
+				if (AdjacentAreas[Area1][i]==Area2)
+					{
+					IsAdjacent= true;
+					break;
+					}
+					
+				else 
+					{
+					IsAdjacent= false;
+					}
+			}
+			return IsAdjacent;
+			
+		}
+		
+		public void Assassinate(int AreaNumber,Pieces p)
+		{
+			ListArea.get(AreaNumber-1).Assassinate(p);
+		}
+		
 }
 
