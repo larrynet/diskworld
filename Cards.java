@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public interface Cards 
 {
-
+	Action CardAction= null;
 	 String Name = "";
 	 int Id = 0;
      boolean Status = false;
