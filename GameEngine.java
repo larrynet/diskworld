@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import java.io.Serializable;
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class GameEngine implements Serializable
 		}
 	}
 	
+	
 	/**
 	 * Return the current bank amount of player 
 	 * 
@@ -60,6 +62,87 @@ public class GameEngine implements Serializable
 			return 0;
 	}
 	
+	public boolean PlayCard(int CurrentPlayerIndex, int playChoice)
+	{
+		boolean isCardPlayed = false;
+		
+		//fetch card of playchoice
+		Cards CardPlayed = ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
+		
+		boolean ActionStatus = true;
+		
+		//Execute the symbol of the
+		for(int sIterator = 0; ActionStatus && (sIterator < CardPlayed.CardAction.Symbol.size()); sIterator++)
+		{
+			String currentSymbol = CardPlayed.CardAction.Symbol.get(sIterator);
+			
+			if(currentSymbol.compareToIgnoreCase("B") == 0)
+				ActionStatus = PutBuilding(CurrentPlayerIndex);
+			else if(currentSymbol.compareToIgnoreCase("M") == 0)
+				ActionStatus = PutBuilding(CurrentPlayerIndex);
+			else if(currentSymbol.compareToIgnoreCase("A") == 0)
+				ActionStatus = Assassinate(CurrentPlayerIndex);
+			else if(currentSymbol.compareToIgnoreCase("RT") == 0)
+				ActionStatus = RemoveTrouble(CurrentPlayerIndex);
+			else if(currentSymbol.contains("T("))
+				ActionStatus = WithdrawMoney(CurrentPlayerIndex, (int)currentSymbol.charAt(2));
+			else if(currentSymbol.compareToIgnoreCase("RE") == 0)
+				ActionStatus = PlayEvent(CurrentPlayerIndex);
+			else if(currentSymbol.compareToIgnoreCase("C") == 0)
+			{
+				Scanner scan = new Scanner(System.in);
+				System.out.println("Again? Which card you now want to play (1-5)?");
+				int newCard = scan.nextInt();
+				ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
+			}
+			else if(currentSymbol.compareToIgnoreCase("I") == 0)
+				System.out.println("You shouldn't have played this card because it doesn't do anything. Oh well too late now :)");
+		}
+		
+		return ActionStatus;
+	}
+	
+	//TODO
+	private boolean WithdrawMoney(int player, int amount)
+	{
+			boolean ActionSuccess = false;
+		
+		return ActionSuccess;
+	}
+	//TODO
+	private boolean PlayEvent(int player)
+	{
+		boolean ActionSuccess = false;
+		
+		return ActionSuccess;
+	}
+	private boolean RemoveTrouble(int player)
+	{
+		boolean ActionSuccess = false;
+		
+		return ActionSuccess;
+	}
+	
+	private boolean Assassinate(int player)
+	{
+		boolean ActionSuccess = false;
+		
+		return ActionSuccess;
+	}
+	
+	private boolean PutMinion(int player)
+	{
+		boolean ActionSuccess = false;
+		
+		return ActionSuccess;
+	}
+	
+	private boolean PutBuilding(int player)
+	{
+		boolean ActionSuccess = false;
+		
+		return ActionSuccess;
+	}
 	/**
 	 * Called Internally to test if PlayerIndex is valid.
 	 * 
