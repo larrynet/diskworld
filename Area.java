@@ -22,8 +22,7 @@ public class Area implements Serializable
 		private List<Pieces> ListTrolls;
 		private List<Pieces> ListMinions;
 		private Pieces Building;
-		
-		
+				
 		
 		public String toString() 
 		{
@@ -44,16 +43,41 @@ public class Area implements Serializable
 			BuildingCost = _Cost;
 			IsTrouble = false;
 			IsBuilt = false;
-			
 			TroubleMakers = null;
 			ListDemons = new ArrayList<Pieces>();
 			ListTrolls = new ArrayList<Pieces>();
 			ListMinions = new ArrayList<Pieces>();
 			Building = null;
-			
 		}
 		
-		
+		/**
+		 * @return
+		 */
+		public boolean GetIsBuilt() {
+			return IsBuilt;
+		}
+
+		/**
+		 * @param isBuilt
+		 */
+		public void SetIsBuilt(boolean isBuilt) {
+			IsBuilt = isBuilt;
+		}
+
+		/**
+		 * @return
+		 */
+		public boolean GetIsTrouble() {
+			return IsTrouble;
+		}
+
+		/**
+		 * @param isTrouble
+		 */
+		public void SetIsTrouble(boolean isTrouble) {
+			IsTrouble = isTrouble;
+		}
+				
 		/**
 		 * @return Name of Area
 		 */
@@ -61,7 +85,6 @@ public class Area implements Serializable
 		{
 			return this.Name;
 		}
-		
 		
 		/**
 		 * @return Cost of Area
@@ -87,6 +110,35 @@ public class Area implements Serializable
 			return this.ListTrolls.size();
 		}
 		
+		/**
+		 * pass color as None so that you get the number of all minions in area
+		 * @param Color Enum of type Color
+		 * @return the number of minions of the requested color
+		 */
+		public int GetMinionCount(Colors Color)
+		{
+			int MinionCount = 0;
+			
+			if (Color == Colors.None)
+			{
+				return this.ListMinions.size();
+			}
+			else
+			{
+				for (Pieces minion : this.ListMinions){
+					
+					if (minion.GetPieceColor() == Color)
+					{
+						MinionCount ++;
+					}
+				}
+				
+				return MinionCount;
+			}
+			
+		}
+		
+				
 		
 		/**
 		 * @param p Piece of type Demon
@@ -118,6 +170,11 @@ public class Area implements Serializable
 		 */
 		public void AddMinions(Pieces p) 
 		{
+			if ((GetMinionCount(Colors.None)+(GetDemonCount())+(GetTrollCount()))>1 )
+			{
+			  AddTroubleMaker(p);	
+			}
+				
 			ListMinions.add(p);
 		}
 		
@@ -126,31 +183,44 @@ public class Area implements Serializable
 		 */
 		public void AddBuilding(Pieces b) 
 		{
+			if(!(this.IsBuilt))
+			{
 			this.Building = b;
 			this.IsBuilt = true;
+			}
+			else
+			{
+				System.out.println("Each Area can only hold one building.This area already has one");
+			}
 		}
 		
 		
 		/**
 		 * @param p Piece of type Demon
 		 */
-		public void RemoveDemons(Pieces p) 
-		{
-			ListDemons.remove(p);
+		public void RemoveDemons() 
+		{  //should I remove TroubleMarker?check if troublemarker is set then I unset it?
+			if(ListDemons.size()>1)
+		    {
+			ListDemons.remove(ListDemons.size()-1);
+		    }
 		}
 		
 		/**
 		 * @param p Troll from Pieces class
 		 */
-		public void RemoveTrolls(Pieces p) 
-		{
-			ListTrolls.remove(p);
+		public void RemoveTrolls() 
+		{  //should I remove TroubleMarker?check if troublemarker is set then I unset it?
+			if(ListTrolls.size()>1)
+			{
+			ListTrolls.remove(ListTrolls.size()-1);
+			}
 		}
 		
 		/**
 		 * @param p TroubleMarker from Pieces class
 		 */
-		public void RemoveTroubleMaker(Pieces p) 
+		public void RemoveTroubleMaker() 
 		{
 			TroubleMakers=null;
 			this.IsTrouble=false ;
@@ -169,6 +239,10 @@ public class Area implements Serializable
 				if (Minion.GetPieceColor() == Color)
 				{
 					ListMinions.remove(Minion);
+					if ((GetMinionCount(Colors.None)>1) && (this.IsTrouble))
+					{
+					  RemoveTroubleMaker();	
+					}
 					return true;
 				}
 			}
@@ -195,32 +269,7 @@ public class Area implements Serializable
 			return false;
 		}
 		
-		/**
-		 * @param Color Enum of type Color
-		 * @return the number of minions of the requested color
-		 */
-		public int GetMinionCount(Colors Color)
-		{
-			int MinionCount = 0;
-			
-			if (Color == Colors.None)
-			{
-				return this.ListMinions.size();
-			}
-			else
-			{
-				for (Pieces minion : this.ListMinions){
-					
-					if (minion.GetPieceColor() == Color)
-					{
-						MinionCount ++;
-					}
-				}
-				
-				return MinionCount;
-			}
-			
-		}
+	
 	
 		/**
 		 * @return boolean to show if the Area has building or not
@@ -253,6 +302,9 @@ public class Area implements Serializable
 			
 			return "none";
 		}
+		
+		
+		
 			
 		/**
 		 * Prints State of Current Area: Name, Minions in Area, Trouble Marker present, Building present, Demon count, troll count
@@ -264,6 +316,28 @@ public class Area implements Serializable
 		}
 		
 		
+		public void Assassinate(Pieces p)
+		{if (IsTrouble)
+		{
+		IsTrouble=false;
+		RemoveTroubleMaker();
+		
+		switch(p.GetPieceType())
+		{
+			case Minion:
+				RemoveMinions(p.GetPieceColor());
+				break;
+			case Demon:
+				RemoveDemons();
+				break;
+			case Troll:
+				RemoveTrolls();
+				break;
+		}
+					
+		}
+			
+		}
 			 
 }
 	
