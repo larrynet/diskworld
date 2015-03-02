@@ -9,8 +9,9 @@ import java.util.List;
  * This class acts as a Facade to hide the internal structure to player. 
  * 
  * @author Lawrence
- * @version 1.0
+ * @version 2.0
  */
+ 
 public class GameEngine implements Serializable
 {
 	private List<Player> ListPlayer;
@@ -68,9 +69,10 @@ public class GameEngine implements Serializable
 		
 		//fetch card of playchoice
 		Cards CardPlayed = ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
-		
 		boolean ActionStatus = true;
 		
+        System.out.println("Player " + CurrentPlayerIndex + "decides to play " + CardPlayed.Name);
+        
 		//Execute the symbol of the
 		for(int sIterator = 0; ActionStatus && (sIterator < CardPlayed.CardAction.Symbol.size()); sIterator++)
 		{
@@ -79,13 +81,13 @@ public class GameEngine implements Serializable
 			if(currentSymbol.compareToIgnoreCase("B") == 0)
 				ActionStatus = PutBuilding(CurrentPlayerIndex);
 			else if(currentSymbol.compareToIgnoreCase("M") == 0)
-				ActionStatus = PutBuilding(CurrentPlayerIndex);
+				ActionStatus = PutMinion(CurrentPlayerIndex);
 			else if(currentSymbol.compareToIgnoreCase("A") == 0)
 				ActionStatus = Assassinate(CurrentPlayerIndex);
 			else if(currentSymbol.compareToIgnoreCase("RT") == 0)
 				ActionStatus = RemoveTrouble(CurrentPlayerIndex);
 			else if(currentSymbol.contains("T("))
-				ActionStatus = WithdrawMoney(CurrentPlayerIndex, (int)currentSymbol.charAt(2));
+				ActionStatus = PayPlayer(CurrentPlayerIndex, (int)currentSymbol.charAt(2));
 			else if(currentSymbol.compareToIgnoreCase("RE") == 0)
 				ActionStatus = PlayEvent(CurrentPlayerIndex);
 			else if(currentSymbol.compareToIgnoreCase("C") == 0)
@@ -97,35 +99,181 @@ public class GameEngine implements Serializable
 			}
 			else if(currentSymbol.compareToIgnoreCase("I") == 0)
 				System.out.println("You shouldn't have played this card because it doesn't do anything. Oh well too late now :)");
+            else if(currentSymbol.compareToIgnoreCase("S") == 0)
+                ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
+            else
+                System.out.println("Symbol " + currentSymbol + " is invalid. ");
 		}
 		
 		return ActionStatus;
 	}
-	
-	//TODO
-	private boolean WithdrawMoney(int player, int amount)
-	{
-			boolean ActionSuccess = false;
-		
-		return ActionSuccess;
-	}
-	//TODO
+
+    private boolean PlayEffect(Cards CardPlayed, int player)
+    {
+    	boolean ActionStatus = false;
+        Action currentEffect = CardPlayed.CardAction;
+        
+        //traverse the verb
+        for(int verbCount=0; verbCount<currentEffect.Verb.size(); verbCount++)
+        {
+            //order of execution has to be reinforce when it is an AND
+            if(currentEffect.Relation.compareToIgnoreCase("and") == 0)
+            {
+                //Lawrence
+                if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("pay") ==0)
+                {
+                    //exception Reacher Gilt
+                    if(CardPlayed.Name.compareToIgnoreCase("Reacher Gilt") != 0)
+                    {
+                        int amount = (int)currentEffect.Object.get(verbCount).charAt(1);
+                        //if(
+                    }
+                    else //exception here
+                    {}
+                    
+                    
+                }
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("give") ==0)
+                {
+                
+                }
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("take") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("get") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("interrupt") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("discard") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
+                {}
+                //Parinaz
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("draw") ==0)
+                {}else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("withdraw") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("exchange") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("assassinate") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("roll") ==0)
+                {}
+                //TODO personality cards
+                //else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("win") ==0)
+                //{}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("move") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
+                {}
+                //Niloufar
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("place") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("play") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("return") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("replace") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("stop") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
+                {}
+                //Gay
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("see") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("exchange") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("ignore") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("end") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("select") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("putminion") ==0)
+                {}
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
+                {}
+                else
+                    System.out.println("!!!!!!! Unknown verb found !!!!!!!! : " + currentEffect.Verb.get(verbCount));
+            }
+            //order of execution not important. Can only execute one of them
+            else 
+            {
+                //only the following cards should come here. We will treat them exceptionally
+                
+                //name=CMOT Dibbler**
+                //verb=get; object=4$ bank; condition=dice>7 order=1;
+                // verb=pay; object=2$ bank; condition=dice=1 OR verb=remove; object=1 minion;
+                
+                //name=The Fire Brigade
+                //verb=get; object=5$ from a player OR verb=remove; object=building; symbol=S,C;
+                
+                //name=Dr Whiteface
+                //verb=take; object=5$ OR verb=give; object=card to player hand; symbol=S,M;
+                
+            }
+            
+        }
+        
+        return ActionStatus;
+    }
 	private boolean PlayEvent(int player)
 	{
 		boolean ActionSuccess = false;
-		
+		System.out.println("Activating the event effect now");
+        
+        //TODO - add code to analyze the event action
+        
 		return ActionSuccess;
 	}
 	private boolean RemoveTrouble(int player)
 	{
 		boolean ActionSuccess = false;
-		
+		System.out.println("Please enter the Area index you want to remove the troublemaker.");
+        Scanner scan = new Scanner(System.in);
+        int AreaNumber = scan.nextInt();
+        ActionSuccess = RemoveTrouble(AreaNumber);
 		return ActionSuccess;
 	}
 	
 	private boolean Assassinate(int player)
 	{
 		boolean ActionSuccess = false;
+        boolean Continue = true;
+        Scanner scan = new Scanner(System.in);
+        do
+        {
+            System.out.println("You are about to remove one minion or troll or demon. Please enter the Area index you want to do that. ");
+            
+            int AreaNumber = scan.nextInt();
+            System.out.println("Do you want to remove a troll, demon or minion?");
+            String choice  = scan.next();
+            if(choice.compareToIgnoreCase("demon") == 0)
+            {
+            	//To activate later
+                //ActionSuccess = RemoveDemon( AreaNumber);
+	
+            }
+            else if(choice.compareToIgnoreCase("troll") == 0)
+            {
+            	//to activate later
+                //ActionSuccess = RemoveTroll( AreaNumber);
+            }
+            else if(choice.compareToIgnoreCase("minion") == 0)
+            {
+                System.out.println("Please enter the player you want to remove the index from: ");
+                String PlayerIndex  = scan.next();
+                //To activate later
+                //ActionSuccess = RemoveMinion( AreaNumber, PlayerIndex);
+            }
+            else
+            {
+                System.out.println("Invalid choice:  " + choice+". Please try again. ");
+            }
+        } while(Continue);
 		
 		return ActionSuccess;
 	}
@@ -133,14 +281,21 @@ public class GameEngine implements Serializable
 	private boolean PutMinion(int player)
 	{
 		boolean ActionSuccess = false;
-		
+        System.out.println("Please enter the Area index you want to put your minion. Keep in mind that you must place minion in either an area that you already have a minion in or an adjacent area. ");
+        Scanner scan = new Scanner(System.in);
+        int AreaNumber = scan.nextInt();
+		ActionSuccess =GameBoard.PlaceMinion(AreaNumber,ListPlayer.get(player));
 		return ActionSuccess;
 	}
 	
 	private boolean PutBuilding(int player)
 	{
 		boolean ActionSuccess = false;
-		
+        System.out.println("Please enter the Area index you want to put your building. Keep in mind that you cannot build in an area that already contains either a building or troublemaker. ");
+        
+        Scanner scan = new Scanner(System.in);
+        int AreaNumber = scan.nextInt();
+		ActionSuccess =GameBoard.PlaceBuilding(AreaNumber,ListPlayer.get(player));
 		return ActionSuccess;
 	}
 	/**

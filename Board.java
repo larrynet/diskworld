@@ -250,7 +250,7 @@ public class Board implements Serializable {
 	
 	//check the adjacency of one other to another one-is a adjacent to b and return a bolean
 	
-		public boolean AreaAdjacency(int Area1, int Area2)
+		/*public boolean AreaAdjacency(int Area1, int Area2)
 		{
 			//since the array starts from array index 0
 			Area1--;
@@ -269,7 +269,7 @@ public class Board implements Serializable {
 			}
 			return IsAdjacent;
 			
-		}
+		}*/
 		
 		public void Assassinate(int AreaNumber,Pieces p)
 		{

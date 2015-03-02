@@ -38,9 +38,10 @@ public class main {
 			ge.DetermineFirstPlayer();
 			int CurrentPlayerIndex = ge.GetCurrentPlayer();
 			boolean Continue = true;
-			
+			int count =10000000;
 			do
 			{
+				count --;
 				System.out.println("\nCurrent player turn is " + CurrentPlayerIndex +"+++++++++++++++++++++++++++++++++++++++");
 				
 				//Show all the cards and let the person choose what he wants
@@ -55,7 +56,7 @@ public class main {
 				}
 				else
 				{
-					System.out.println("Which card you want to see (1-5)?");
+					System.out.println("Which card you want to play (1-5)?");
 					int playChoice = scan.nextInt();
 					boolean CardPlayed = ge.PlayCard(CurrentPlayerIndex, playChoice);
 					
@@ -63,6 +64,16 @@ public class main {
 						System.out.println("Card played successfully");
 					else
 						System.out.println("Card failed to play");
+					if(ge.IsWinner())
+					{
+						System.out.println("!!!! Congratulation. Player " + CurrentPlayerIndex + "won the game !!!! ");
+						Continue = false;
+					}
+					if(count == 0)
+					{
+						System.out.println("PROBLEM. INFINITE LOOP DETECTED ");
+						Continue = false;
+					}
 				}
 				CurrentPlayerIndex = (CurrentPlayerIndex++)%NumPlayer; 
 			} while (Continue);	

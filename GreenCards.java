@@ -18,7 +18,7 @@ public class GreenCards implements Cards, Serializable {
 		Type = _Type;
 
 	}
-    public void SetAction(Action a) {CardAction = a;}
+    
 	public String GetName ()
 	{
 		return this.Name;

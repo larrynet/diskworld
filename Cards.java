@@ -13,7 +13,6 @@ public interface Cards
      boolean Status = false;
 	 CardType Type = null;
 	
-	
 	public String GetName();
 	public int GetID();
 	public CardType GetCardType();
