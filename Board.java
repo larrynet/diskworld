@@ -276,5 +276,10 @@ public class Board implements Serializable {
 			ListArea.get(AreaNumber-1).Assassinate(p);
 		}
 		
+		public int CountTroubleMarker()
+		{
+			return this.ListTroubleMakers.size();
+		}
+		
 }
 
