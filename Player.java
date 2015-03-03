@@ -1,6 +1,6 @@
 import java.util.List;
 import java.io.Serializable;
-
+import java.util.ArrayList;
 /**
  * Player Class to create and initiate a player.
  * 
@@ -11,14 +11,17 @@ public class Player implements Serializable {
 	
 	public static final int INITIAL_BANK = 10;
 	
+    //TEMPORARY
+    public List<Cards> CityAreaCards;
 	private Cards Personality;
-	private List<Cards> PlayerCards;
+	public List<Cards> PlayerCards;
+    
 	private int PlayerNumber;
 	private int Money;
 	private Colors Color;
 	private List<Pieces> ListMinions;
 	private List<Pieces> ListBuildings;
-	private List<Cards> ListCityAreaCards;
+	public List<Cards> ListCityAreaCards;
 	
 	
 	/**
@@ -38,6 +41,8 @@ public class Player implements Serializable {
 		ListMinions = _ListMinion;
 		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
+        CityAreaCards = new ArrayList<Cards>();
+        
 		Color = _Color;
 		
 	}

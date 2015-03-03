@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class CityAreaCards implements Cards, Serializable 
 {
 	private String Name;
+	public String AreaName;
 	private int Id;
 	boolean Status;
 	private CardType Type;

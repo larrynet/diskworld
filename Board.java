@@ -18,7 +18,7 @@ public class Board implements Serializable {
 	public static final int INITIAL_BANK = 120;
     private int Bank;
     private int Die;
-	private  List<Area> ListArea;
+	public List<Area> ListArea;
 	private List<Cards> ListCityAreaCards;
 	private List<Pieces> ListTroubleMakers;
 	private List<Pieces> ListDemons;
@@ -179,6 +179,7 @@ public class Board implements Serializable {
 		return true;
 	}
 	
+    
 	/**
 	 * prints the current state of the board
 	 */
@@ -316,5 +317,18 @@ public class Board implements Serializable {
 		{
 			return this.ListArea.get(areaNumber-1).RemoveMinions(color);
 		}
+        
+        public int CountTroubleMaker()
+        {
+            int TotalTrouble = 0;
+            for(int i=0; i<12; i++)
+                if(ListArea.get(i).HasTroubleMaker())
+                    TotalTrouble++;
+            return TotalTrouble;
+        }
+        public Area GetArea(int i)
+        {
+            return ListArea.get(i);
+        }
 }
 

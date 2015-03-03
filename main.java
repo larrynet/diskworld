@@ -56,6 +56,9 @@ public class main {
 				}
 				else
 				{
+                    //activating the area effect
+                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+                    
 					System.out.println("Which card you want to play (1-5)?");
 					int playChoice = scan.nextInt();
 					boolean CardPlayed = ge.PlayCard(CurrentPlayerIndex, playChoice);

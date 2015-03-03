@@ -9,16 +9,16 @@ import java.util.ArrayList;
 
 public class Area implements Serializable
 {
-		private String Name;
+		public String Name;
 		private int BuildingCost;
 		private int Number;
 
 		//public  boolean IsEmpty;
 		private boolean IsBuilt; //in case a building is built in the area
 		private boolean IsTrouble; //in case two minions are in the area
-		
+		public String CityAreaCardName;
 		private Pieces TroubleMakers;
-		private List<Pieces> ListDemons;
+		public  List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
 		private List<Pieces> ListMinions;
 		private Pieces Building;
@@ -227,6 +227,11 @@ public class Area implements Serializable
 			return false;
 		}
 		
+        public boolean HasTroubleMaker()
+        {
+           return (TroubleMakers != null); 
+        }
+        
 		/**
 		 * @param p TroubleMarker from Pieces class
 		 */

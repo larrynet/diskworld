@@ -22,7 +22,7 @@ public class ManageCards implements Serializable
 	private int TotalPersonalityCard = 7;
 	private PersonalityCards[] Personality_Card=new PersonalityCards[7];
 	private EventCards []Event_Card =new EventCards[12];
-	private CityAreaCards []CityArea_Cards =new CityAreaCards[12];
+	public CityAreaCards []CityArea_Cards =new CityAreaCards[12];
 	private GreenCards[] Green_Cards=new GreenCards[48];
 	private BrownCards[] Brown_Cards=new BrownCards[53];
 	
