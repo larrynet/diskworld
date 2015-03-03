@@ -75,7 +75,7 @@ name=Mr Pin & Mr  Tulip
 symbol=A,T(1);
 
 name=The thieves guild
-verb=take; object=2$ from all player; symbol=S,M;
+verb=pay; object=2$ from all player; symbol=S,M;
 
 name= Inigo Skimmer
 symbol=A,T(2);  
@@ -243,7 +243,7 @@ Dragon’s Landing
 verb=take; object=2 $ from bank; condition=once per turn; price=12$; actionnumber=1; 
 
 name=Unreal Estate
-verb=take; object= 1 card from deck ; price=18$; actionnumber=1; 
+verb=take; object=1 card from deck ; price=18$; actionnumber=1; 
 verb=discard; object=card  from deck  cards; actionnumber=2;
 
 name=Dolly Sisters
@@ -392,8 +392,7 @@ name=Moist Wong Lipwig
 verb=take; object=2 cards form deck; symbol=M,T(3),S,C ; actionnumber=1
 
 name=Doctor Mossy Lawn
-verb=interrupt; object =player turn; symbol=I; actionnumber=1;
-verb=get ; object=played card before this card ; actionnumber=2;
+verb=interrupt; object =own turn but do not discard card played; symbol=I; actionnumber=1;
 
 name=Patrician's Palace
 symbol=B,T(4),M;

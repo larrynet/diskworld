@@ -171,8 +171,24 @@ public class GameEngine implements Serializable
                 	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     
+                    if(object.contains("cards"))
+                    {
+                    	
+                    	//Moist Wong Lipwig
+                    	Cards c1 = CardManager.GetCard(CardType.GreenCards);
+                    	if(c1 == null)
+                    		c1 = CardManager.GetCard(CardType.BrownCards);
+                    	
+                    	Cards c2 = CardManager.GetCard(CardType.GreenCards);
+                    	if(c2 == null)
+                    		c2 = CardManager.GetCard(CardType.BrownCards);
+                    	
+                    	ListPlayer.get(player).AddPlayerCard(c1);
+                    	ListPlayer.get(player).AddPlayerCard(c2);
+                    	
+                    }
                     //Rosie Palm
-                    if(object.contains("card"))
+                    else if(object.contains("card"))
                     {
                     	Scanner scan = new Scanner(System.in);
                     	System.out.println("Enter card index to give.");
@@ -200,14 +216,71 @@ public class GameEngine implements Serializable
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("take") ==0)
                 {
-                	
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                    if(object.contains("cards"))
+                    {
+                    	//the beggars
+                    	Scanner scan = new Scanner(System.in);
+
+                    	System.out.println("Enter player index to take cards from.");
+                        int playerIndex= scan.nextInt();
+                        
+                    	System.out.println("Enter card index0 to take.");
+                        int cardIndex0= scan.nextInt();
+                        
+                        System.out.println("Enter card index1 to take.");
+                        int cardIndex1= scan.nextInt();
+                        Cards c1 = ListPlayer.get(playerIndex).GetCards().get(cardIndex0);
+                        Cards c2 = ListPlayer.get(playerIndex).GetCards().get(cardIndex1);
+                        ListPlayer.get(player).AddPlayerCard(c1);
+                        ListPlayer.get(player).AddPlayerCard(c2);
+                        ListPlayer.get(playerIndex).RemovePlayerCard(cardIndex0);
+                        ListPlayer.get(playerIndex).RemovePlayerCard(cardIndex1);
+                    }
+                    else if(object.contains("1$ or card"))
+                    {
+                    	Scanner scan = new Scanner(System.in);
+                    	//The Ankh Morpork Sunshine Dragon Sanctuary
+                    	System.out.println("Enter player index to take card or 1$ from.");
+                        int playerIndex= scan.nextInt();
+                        
+                        System.out.println("Give $ or card?");
+                        String choice= scan.next();
+                        if(choice.contains("$"))
+                        {
+                        	ListPlayer.get(player).AddToMoney(1);
+            				ListPlayer.get(playerIndex).DeductFromMoney(1);
+                        }
+                        else
+                        {
+                        	System.out.println("Enter card index to take.");
+                            int cardIndex0= scan.nextInt();
+                            Cards c1 = ListPlayer.get(playerIndex).GetCards().get(cardIndex0);
+                          
+                            ListPlayer.get(player).AddPlayerCard(c1);
+                            ListPlayer.get(playerIndex).RemovePlayerCard(cardIndex0);
+                         
+                        }
+                        
+                    }
+                    else if(object.contains("$ from all"))
+                    {
+                    	//thief guild
+                    }
+                    
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("get") ==0)
-                {}
+                {
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("interrupt") ==0)
-                {}
+                {
+                	//have to findout how to play Doctor Mossy Lawn
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("discard") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
