@@ -281,5 +281,40 @@ public class Board implements Serializable {
 			return this.ListTroubleMakers.size();
 		}
 		
+		/**
+		 * 
+		 * @param AreNumber
+		 */
+		public boolean RemoveTroll(int areaNumber)
+		{
+			return this.ListArea.get(areaNumber-1).RemoveTrolls();
+		}
+		
+		/**
+		 * 
+		 * @param AreaNumber
+		 */
+		public boolean Removetrouble(int areaNumber)
+		{
+			return this.ListArea.get(areaNumber-1).RemoveTroubleMaker();
+		}
+		
+		/**
+		 * 
+		 * @param AreaNumber
+		 */
+		public boolean RemoveDemon(int areaNumber)
+		{
+			return this.ListArea.get(areaNumber-1).RemoveDemons();
+		}
+		
+		/**
+		 * 
+		 * @param AreaNumber
+		 */
+		public boolean RemoveMinion(int areaNumber, Colors color)
+		{
+			return this.ListArea.get(areaNumber-1).RemoveMinions(color);
+		}
 }
 

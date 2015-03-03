@@ -198,32 +198,50 @@ public class Area implements Serializable
 		/**
 		 * @param p Piece of type Demon
 		 */
-		public void RemoveDemons() 
-		{  //should I remove TroubleMarker?check if troublemarker is set then I unset it?
+		public boolean RemoveDemons() 
+		{  
+			//should I remove TroubleMarker?check if troublemarker is set then I unset it?
 			if(ListDemons.size()>1)
 		    {
-			ListDemons.remove(ListDemons.size()-1);
+				ListDemons.remove(ListDemons.size()-1);
+				
+				return true;
 		    }
+			
+			return false;
 		}
 		
 		/**
 		 * @param p Troll from Pieces class
 		 */
-		public void RemoveTrolls() 
-		{  //should I remove TroubleMarker?check if troublemarker is set then I unset it?
+		public boolean RemoveTrolls() 
+		{  
+			//should I remove TroubleMarker?check if troublemarker is set then I unset it?
 			if(ListTrolls.size()>1)
 			{
-			ListTrolls.remove(ListTrolls.size()-1);
+				ListTrolls.remove(ListTrolls.size()-1);
+				
+				return true;
 			}
+			
+			return false;
 		}
 		
 		/**
 		 * @param p TroubleMarker from Pieces class
 		 */
-		public void RemoveTroubleMaker() 
+		public boolean RemoveTroubleMaker() 
 		{
-			TroubleMakers=null;
-			this.IsTrouble=false ;
+			if (TroubleMakers != null)
+			{
+				TroubleMakers = null;
+				this.IsTrouble=false ;
+				
+				return true;
+			}
+			
+			return false;
+			
 			
 		}
 		
