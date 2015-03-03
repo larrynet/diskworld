@@ -119,7 +119,7 @@ public class GameEngine implements Serializable
             //order of execution has to be reinforce when it is an AND
             if(currentEffect.Relation.compareToIgnoreCase("and") == 0)
             {
-                //Lawrence
+            	//TODO check condition
                 if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("pay") ==0)
                 {
                 	String object = currentEffect.Object.get(verbCount);
@@ -168,10 +168,40 @@ public class GameEngine implements Serializable
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("give") ==0)
                 {
-                
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                    //Rosie Palm
+                    if(object.contains("card"))
+                    {
+                    	Scanner scan = new Scanner(System.in);
+                    	System.out.println("Enter card index to give.");
+                        int cardIndex= scan.nextInt();
+                        
+                        System.out.println("Enter another player index who you will exchange card for 2$");
+                        int playerIndex= scan.nextInt();
+                        
+                        ListPlayer.get(playerIndex).AddPlayerCard(CardPlayed);
+                        ListPlayer.get(player).RemovePlayerCard(cardIndex);
+                    }
+                    else //Hubert
+                    {
+                    	Scanner scan = new Scanner(System.in);
+                    	System.out.println("Enter player who needs to give 3$.");
+                        int Src= scan.nextInt();
+                        
+                        System.out.println("Enter another player who will receive 3$");
+                        int Dst= scan.nextInt();
+                        
+                        ListPlayer.get(Dst).AddToMoney(3);
+        				ListPlayer.get(Src).DeductFromMoney(3);
+                        
+                    }
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("take") ==0)
-                {}
+                {
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("get") ==0)

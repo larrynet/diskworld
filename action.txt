@@ -11,7 +11,7 @@ name=Mr Bent
 verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points end game; symbol=S,C;
 
 name=The beggars
-verb=givecard; object=2 cards of their choice; symbol=S,M;
+verb=take; object=2 cards of another players; symbol=S,M;
 
 name=The bank of Ankh-Morpork**
 verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points endgame; symbol=S,C;
@@ -42,7 +42,7 @@ name=Fresh Start Club
 verb=put minion; object=different area; condition=remove minion; symbol=I;
 
 name=The Ankh Morpork Sunshine Dragon Sanctuary
-verb=give; object=1$ OR card; symbol=S,C;
+verb=take; object=1$ or card; symbol=S,C;
 
 name=Segeant Angua
 symbol=RT,C;
@@ -130,9 +130,7 @@ name=Sacharissa Cripslock
 verb=get; object=1$ for each trouble marker on board; symbol=S,M ; actionnumber =1
 
 name=Rosie Palm
-verb=choose; object=1 player; symbol=M,S; actionnumber=1 
-verb=give; object=1card to a player;  actionnumber=2
-verb=get; object=2$ from the player;  actionnumber=3;
+verb=give; object=1 card condition=take 2$; symbol, M;S
 
 name=Rinsewind
 verb=remove; object=1minion from an area; condition=area has troublemarker; symbol=RE,S,C; actionnumber=1; 
@@ -419,8 +417,7 @@ name=Hobsons's Livery Stable
 verb=pay; object=2$ another player; AND verb=move; object= 1 minion to any area; actionnumber=3;
 
 name=Hubert
-verb=choose; object=player; symbol=S,M; actionnumber=1;
-verb=give(chose player); object=money to the player of choice ; actionnumber=2;
+verb=give; object=3$ to another player of choice; symbol=S,M;
 
 name=Igor
 verb=place; object=removed minions; condition=place in different area; symbol=I; actionnumber=1;

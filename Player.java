@@ -129,6 +129,11 @@ public class Player implements Serializable {
 		this.Money -= amount;
 	
 	}
+	
+	public boolean RemovePlayerCard(int index )
+	{
+		return (PlayerCards.remove(index)) != null;
+	}
 
 	/**
 	 * Get the number of cards currently in players hand
