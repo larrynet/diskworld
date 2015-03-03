@@ -122,16 +122,49 @@ public class GameEngine implements Serializable
                 //Lawrence
                 if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("pay") ==0)
                 {
-                    //exception Reacher Gilt
-                    if(CardPlayed.Name.compareToIgnoreCase("Reacher Gilt") != 0)
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    if(object.contains("player"))
                     {
-                        int amount = (int)currentEffect.Object.get(verbCount).charAt(1);
-                        //if(
+                    	//pay to each player?
+                    	if(object.contains("each"))
+                    	{
+                    		int OtherPlayer = ListPlayer.size()-1;
+                    		for(int i=0; i<ListPlayer.size(); i++)
+                    		{
+                    			if(i != player) {
+                    				ListPlayer.get(i).AddToMoney(amount);
+                    				ListPlayer.get(player).DeductFromMoney(amount);
+                    			}
+                    		}
+                    		
+                    	}
+                    	else //if(object.contains("another"))//pay to a specific player
+                    	{
+                    		
+                    		System.out.println("Please enter the Area index you want to remove the troublemaker.");
+                            Scanner scan = new Scanner(System.in);
+                            int otherPlayer = scan.nextInt();
+                            ListPlayer.get(otherPlayer).AddToMoney(amount);
+            				ListPlayer.get(player).DeductFromMoney(amount);
+                    	}
                     }
-                    else //exception here
-                    {}
-                    
-                    
+                    else if(object.contains("bank"))
+                    {
+                    	ListPlayer.get(player).DeductFromMoney(amount);
+                    	GameBoard.AddToBank(amount);
+                    }
+                    else if(object.contains("building"))
+                    {
+                    	//TODO - Reacher Gilt - calculate cost of building
+                    	//ListPlayer.get(player).DeductFromMoney(amount);
+                    	//GameBoard.AddToBank(amount);
+                    }
+                    else
+                    {
+                    	System.out.println("unknown object " + object);
+                    }
+    
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("give") ==0)
                 {
