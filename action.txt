@@ -25,8 +25,8 @@ verb=move; object=minion from area; condition=adjacent area; symbol=S;
 name=Drumknott
 verb=playcard; object=2 other cards; symbol=S;
 
-name=CMOT Dibbler**
-verb=get; object=4$ bank; condition=dice>7 order=1;
+name=CMOT Dibbler
+verb=get; object=4$ bank; condition=dice>7 
 verb=pay; object=2$ bank; condition=dice=1 OR verb=remove; object=1 minion;
 
 name=Groat
@@ -287,8 +287,7 @@ name=Sergeant Colon
 symbol= RT,M;
 
 name=Cosmos Lavish
-verb=pay; object= 2$ to another player; symbol=S,C; actionnumber=1;
-verb=remove; object=1 minion; condition=count(trouble marker0>1 and minion is not owed by player;  actionnumber=2;
+verb=pay; object= 2$ to another player; AND verb=remove; object=other minion with troublemaker; symbol=S,C;  
 
 name=The Dean
 verb= remove;  object =1 minion from Unreal Estate;  symbol= RE,S,C;  actionnumber =1;
@@ -297,8 +296,7 @@ name=HELLO
 symbol=A,A,B;
 
 name=Burleigh & Stronginth
-verb=pay; object =2 $ player of choice;  symbol=S,B; actionnumber=1;
-verb=assassinate; object= 1 minion; actionnumber=2;
+verb=pay; object=2$ another player; AND verb=assassinate; object= 1 minion; actionnumber=2; symbol=S,B;
 
 name=The Bursar
 verb=exchange; object =2 minion position; symbol=RE,S,C; actionnumber=1;
@@ -408,10 +406,8 @@ verb=play; object =2 other cards; symbol=RE,S; actionnumber=1;
 name=The Post Office
 verb=get; object 1$ * count(building on board); symbol=S,M; actionnumber=1;
 
-
 name=Reacher Gilt
-verb=place; object= another player building with owned  condition=trouble marker in area >1  ; symbol=S; actionnumber=1;
-verb=pay; object=cost of the building to the owner; 
+verb=replace; object=building condition=troublemaker AND verb=pay; object=cost of the building; symbol=S;  
 
 name=Professor of Recent Runes
 verb=get; object =2 cards from deck; symbol =RE,S,C; actionnumber=1;
@@ -420,9 +416,7 @@ name=Doctor Hix
 verb=place; object=trouble marker in any area; symbol=RE,S,C; actionnumber=1;
 
 name=Hobsons's Livery Stable
-verb=choose; object=player; symbol= S,B; actionnumber=1;
-verb=pay; object=2$ to player of choice; actionnumber=2;
-verb=move; object= 1 minion to any area; actionnumber=3;
+verb=pay; object=2$ another player; AND verb=move; object= 1 minion to any area; actionnumber=3;
 
 name=Hubert
 verb=choose; object=player; symbol=S,M; actionnumber=1;
