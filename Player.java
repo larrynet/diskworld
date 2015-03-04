@@ -363,8 +363,45 @@ public class Player implements Serializable {
 		String[] FinalString  = {strGreenPlayerCards.toString(),strBrownPlayerCards.toString()};
 		
 		return FinalString;
-
+	}
+	
+	
+	/**
+	 * Player takes a loan from the bank, increment the loam amount
+	 * @param amount
+	 */
+	public void GetLoan(int amount)
+	{
+		this.Loan = this.Loan + amount;
+	}
+	
+	/**
+	 * Player pays back all or part of the loan, decrease loan amount
+	 * @param amount
+	 */
+	public void PayLoan(int amount)
+	{
+		this.Loan = this.Loan  - amount;
+	}
+	
+	/**
+	 * Retrieve total loans by player
+	 * @return Loan amount
+	 */
+	public int TotalLoan()
+	{
+		return this.Loan;
+	}
+	
+	/**
+	 * 
+	 * @return Total amount of money player has loan + bank
+	 */
+	public int TotalMoney()
+	{
+		int total = this.TotalLoan() + this.GetMoneyCount();
 		
+		return total; 
 	}
 
 }
