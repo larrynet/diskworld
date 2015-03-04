@@ -18,6 +18,7 @@ public class Player implements Serializable {
     
 	private int PlayerNumber;
 	private int Money;
+	private int Loan;
 	private Colors Color;
 	private List<Pieces> ListMinions;
 	private List<Pieces> ListBuildings;
