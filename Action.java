@@ -6,15 +6,19 @@ public class Action {
 	public int NumberOfAction=0;
 	public List<String> Verb;
 	public List<String> Object;
+	public List<String> Condition;
+	public List<String> ActionNumber;
 	public List<String> Symbol;
 	public String Relation;
 	public boolean KeepTillEnd;
 	
-	public Action(int n, List<String> v, List<String> o, List<String> s , String relation, boolean keep ) 
+	public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,List<String> s ,String relation, boolean keep) 
 	{
 		NumberOfAction = n;
 		Verb = v;
 		Object=o;
+		Condition = c;
+		ActionNumber = a;
 		Symbol = s;
 		Relation = relation;
 		KeepTillEnd = keep;
@@ -27,6 +31,7 @@ public class Action {
 		List<String> objects = new ArrayList<String>();
 		List<String> conditions = new ArrayList<String>();
 		List<String> symbols = new ArrayList<String>();
+		List<String> actionNumber = new ArrayList<String>();
 		boolean KeepTillEnd = false;
 		String [] description;
 		String connector = "";
@@ -59,54 +64,85 @@ public class Action {
 		for (String item : description)
 		{
 			iterDescription++;
-			System.out.println(item);
+			
 			//Separate split item by separator
 			String [] separated = item.split(";");
 			
 			verbs.add(ReturnDesc(separated[0]));
 			objects.add(ReturnDesc(separated[1]));
 			conditions.add(ReturnDesc(separated[2]));
+			actionNumber.add(ReturnDesc(separated[3]));
 			
-			if (description.length == 1 || iterDescription > 1)
+			if (item.contains("symbol"))
 			{
-				objects.add(ReturnDesc(separated[3]));
+				symbols.add(ReturnDesc(separated[4]));
 			}
 			
 		}
 	
-		return new Action(nAction, verbs,objects,symbols, connector, KeepTillEnd);
+		return new Action(nAction, verbs,objects,conditions, actionNumber,symbols, connector, KeepTillEnd);
 	}
 	
-	public void PrintActionVerbs()
+	public String GetVerbs(int index)
 	{
-		StringBuilder strBuilder = new StringBuilder();
-		
-		
-		for(String thisVerb : this.Verb)
+		if (!this.Verb.isEmpty() && this.Verb.size() >= index)
 		{
-			strBuilder.append(thisVerb);
-			strBuilder.append(", ");
+			return this.Verb.get(index);
 		}
 		
-		
-		
-		System.out.println(strBuilder.toString());
+		return "";
 	}
 	
-	public void PrintActionObject()
+	public String GetObject(int index)
 	{
-		StringBuilder strBuilder = new StringBuilder();
-		
-		
-		for(String thisObject : this.Object)
+		if (!this.Object.isEmpty() && this.Object.size() >= index)
 		{
-			strBuilder.append(thisObject);
-			strBuilder.append(", ");
+			return this.Object.get(index);
 		}
 		
+		return "";
+	}
+	
+	public String GetCondition(int index){
 		
+		if (!this.Condition.isEmpty() && this.Condition.size() >= index)
+		{
+			return this.Condition.get(index);
+		}
 		
-		System.out.println(strBuilder.toString());
+		return "";
+	}
+	
+	public String GetActionNumber(int index){
+		
+		if (!this.ActionNumber.isEmpty() && this.ActionNumber.size() >= index)
+		{
+			return this.ActionNumber.get(index);
+		}
+		
+		return "";
+		
+	}
+	
+	public String GetSymbol(int index){
+		
+		if (!this.Symbol.isEmpty() && this.Symbol.size() >= index)
+		{
+			return this.Symbol.get(index);
+		}
+		
+		return "";
+		
+	}
+	
+	public void PrintAll() {
+		
+		int max = this.Verb.size();
+		
+		for (int i = 0; i < max; i++)
+		{
+			System.out.println("Verb=" + this.GetVerbs(i) + ";object=" + this.GetObject(i) + ";condition=" + this.GetCondition(i) + ";actionnumber=" + this.GetActionNumber(i) + ";symbol=" + this.GetSymbol(i));
+		}
 	}
 	
 	private static String ReturnDesc(String desc)
