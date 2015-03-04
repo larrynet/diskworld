@@ -276,7 +276,11 @@ public class GameEngine implements Serializable
                 {
                 	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
-                    if(object.contains("player"))
+                    if(object.contains("another player and have them remove 1 minion with troublemaker"))
+                    {
+                    	//cosmos lavish
+                    }
+                    else if(object.contains("player"))
                     {
                     	//pay to each player?
                     	if(object.contains("each"))
@@ -419,7 +423,15 @@ public class GameEngine implements Serializable
                     }
                     else if(object.contains("$ from all"))
                     {
+                    	
                     	//thief guild
+                    	for(int i=0; i<ListPlayer.size(); i++)
+                		{
+                			if(i != player) {
+                				ListPlayer.get(i).AddToMoney(amount);
+                				ListPlayer.get(player).DeductFromMoney(amount);
+                			}
+                		}
                     }
                     
                 }
@@ -433,12 +445,112 @@ public class GameEngine implements Serializable
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("get") ==0)
                 {
-                	
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                    if(object.contains("minion in the Isle of Gods"))
+                    {
+                    	//The dysk & the opera house
+                    	
+            
+                    }
+                    else if(object.contains("times number of discarded card"))
+                    {
+                    	//Harry King
+                    	//Shonky shop
+                        
+                    }
+                    else if(object.contains("$ for each troublemaker in board"))
+                    {
+                    	//Willian de worde
+                    	
+                    }
+                    else if(object.contains("$ for each building on board"))
+                    {
+                    	//Willian de worde
+                    	
+                    }
+                    else if(object.contains("$ from a player of choice"))
+                    {
+                    	
+                    	//Nobby Nobbs
+                    	
+                    }
+                    else if(object.contains(" for each minion in area with troublemaker"))
+                    {
+                    	//mr slant
+                    	//Otto Shriek
+                    }
+                    else if(object.contains("for each building on board"))
+                    {
+                    	//The Post office
+                    	
+                    }
+                    else if(object.contains("cards of other player and give back 1"))
+                    {
+                    	//stanley
+                    }
+                    else if(object.contains("cards"))
+                    {
+                    	
+                    	//Leonard of Quirm
+                    	//the clacks
+                    	//professor of recent runes
+                    	//Sergeant Cheery Littlebottom
+                    	
+                    }
+                    else if(object.contains("for each trouble maker"))
+                    {
+                    	
+                    	//Sacharissa Cripslock
+                    	
+                    }
+                    else if(object.contains("cards from a player"))
+                    {
+                    	
+                    	//Queen molly (selected player)
+                    }
+                    
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("discard") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                    
+                    if(object.contains("up to 3 cards and fill hands"))
+                    {
+                    	//alchemist guild
+                    }
+                    else if(object.contains("card player card from a other hand"))
+                    {
+                    	//Cable Street Particular
+                    }
+                    else if(object.contains(" card"))
+                    {
+                    	///modo
+                    	//The Mob
+                    } 
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                    
+                    if(object.contains("minion in player order"))
+                    {
+                    	//The Auditors
+                    }
+                    else if(object.contains("minion of choice in that area and roll dice twice"))
+                    {
+                    	//Carcer
+                    }
+                    else if(object.contains("minion of choice in that area and roll dice twice"))
+                    {
+                    	//Carcer
+                    }
+                }
                 //Parinaz
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("draw") ==0)
                 {}else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("withdraw") ==0)
@@ -504,6 +616,8 @@ public class GameEngine implements Serializable
                 //name=Dr Whiteface
                 //verb=take; object=5$ OR verb=give; object=card to player hand; symbol=S,M;
                 
+            	//Errol
+            	//here n now
             }
             
         }
