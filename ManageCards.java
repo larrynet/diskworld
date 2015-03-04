@@ -22,7 +22,7 @@ public class ManageCards implements Serializable
 	private int TotalPersonalityCard = 7;
 	private PersonalityCards[] Personality_Card=new PersonalityCards[7];
 	private EventCards []Event_Card =new EventCards[12];
-	private CityAreaCards []CityArea_Cards =new CityAreaCards[12];
+	public CityAreaCards []CityArea_Cards =new CityAreaCards[12];
 	private GreenCards[] Green_Cards=new GreenCards[48];
 	private BrownCards[] Brown_Cards=new BrownCards[53];
 	
@@ -326,25 +326,28 @@ public  Cards[] ShuffleCards(Cards[] _Cards)
 }
 
 
+//to add
 public void DiscardCard(Cards card )
-{switch(card.Type)
+{
+	//TODO
+	/*switch(card.Type)
 	{
-case GreenCards:
-	ListDiscardGreen.add(card);
-	break;
-case BrownCards:
-	ListDiscardBrown.add(card);
-	break;
-case CityAreaCards:
-	ListDiscardCityArea.add(card);
-	break;
-case EventCards:
-	ListDiscardEvent.add(card);
-	break;
-case PersonalityCards:
-	ListDiscardPersonality.add(card);
-	break;
-	}
+	case GreenCards:
+		ListDiscardGreen.add(card);
+		break;
+	case BrownCards:
+		ListDiscardBrown.add(card);
+		break;
+	case CityAreaCards:
+		ListDiscardCityArea.add(card);
+		break;
+	case EventCards:
+		ListDiscardEvent.add(card);
+		break;
+	case PersonalityCards:
+		ListDiscardPersonality.add(card);
+		break;
+	}*/
 }
 
 @Override

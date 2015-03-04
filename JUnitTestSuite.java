@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
@@ -119,8 +120,8 @@ public class JUnitTestSuite {
 	  }		  
 	  
 	  System.out.println(lstAction.size());
-	  lstAction.get(1).PrintActionVerbs();
-	  lstAction.get(1).PrintActionObject();
+	  lstAction.get(1).PrintAll();
+
 	  
 	  assertFalse("Generated an exeption testing action", GeneratedError);
 	}

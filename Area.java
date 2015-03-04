@@ -9,16 +9,16 @@ import java.util.ArrayList;
 
 public class Area implements Serializable
 {
-		private String Name;
+		public String Name;
 		private int BuildingCost;
 		private int Number;
 
 		//public  boolean IsEmpty;
 		private boolean IsBuilt; //in case a building is built in the area
 		private boolean IsTrouble; //in case two minions are in the area
-		
+		public String CityAreaCardName;
 		private Pieces TroubleMakers;
-		private List<Pieces> ListDemons;
+		public  List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
 		private List<Pieces> ListMinions;
 		private Pieces Building;
@@ -198,32 +198,55 @@ public class Area implements Serializable
 		/**
 		 * @param p Piece of type Demon
 		 */
-		public void RemoveDemons() 
-		{  //should I remove TroubleMarker?check if troublemarker is set then I unset it?
+		public boolean RemoveDemons() 
+		{  
+			//should I remove TroubleMarker?check if troublemarker is set then I unset it?
 			if(ListDemons.size()>1)
 		    {
-			ListDemons.remove(ListDemons.size()-1);
+				ListDemons.remove(ListDemons.size()-1);
+				
+				return true;
 		    }
+			
+			return false;
 		}
 		
 		/**
 		 * @param p Troll from Pieces class
 		 */
-		public void RemoveTrolls() 
-		{  //should I remove TroubleMarker?check if troublemarker is set then I unset it?
+		public boolean RemoveTrolls() 
+		{  
+			//should I remove TroubleMarker?check if troublemarker is set then I unset it?
 			if(ListTrolls.size()>1)
 			{
-			ListTrolls.remove(ListTrolls.size()-1);
+				ListTrolls.remove(ListTrolls.size()-1);
+				
+				return true;
 			}
+			
+			return false;
 		}
 		
+        public boolean HasTroubleMaker()
+        {
+           return (TroubleMakers != null); 
+        }
+        
 		/**
 		 * @param p TroubleMarker from Pieces class
 		 */
-		public void RemoveTroubleMaker() 
+		public boolean RemoveTroubleMaker() 
 		{
-			TroubleMakers=null;
-			this.IsTrouble=false ;
+			if (TroubleMakers != null)
+			{
+				TroubleMakers = null;
+				this.IsTrouble=false ;
+				
+				return true;
+			}
+			
+			return false;
+			
 			
 		}
 		

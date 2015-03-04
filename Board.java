@@ -18,7 +18,7 @@ public class Board implements Serializable {
 	public static final int INITIAL_BANK = 120;
     private int Bank;
     private int Die;
-	private  List<Area> ListArea;
+	public List<Area> ListArea;
 	private List<Cards> ListCityAreaCards;
 	private List<Pieces> ListTroubleMakers;
 	private List<Pieces> ListDemons;
@@ -179,6 +179,7 @@ public class Board implements Serializable {
 		return true;
 	}
 	
+    
 	/**
 	 * prints the current state of the board
 	 */
@@ -250,7 +251,7 @@ public class Board implements Serializable {
 	
 	//check the adjacency of one other to another one-is a adjacent to b and return a bolean
 	
-		public boolean AreaAdjacency(int Area1, int Area2)
+		/*public boolean AreaAdjacency(int Area1, int Area2)
 		{
 			//since the array starts from array index 0
 			Area1--;
@@ -269,12 +270,65 @@ public class Board implements Serializable {
 			}
 			return IsAdjacent;
 			
-		}
+		}*/
 		
 		public void Assassinate(int AreaNumber,Pieces p)
 		{
 			ListArea.get(AreaNumber-1).Assassinate(p);
 		}
 		
+		public int CountTroubleMarker()
+		{
+			return this.ListTroubleMakers.size();
+		}
+		
+		/**
+		 * 
+		 * @param AreNumber
+		 */
+		public boolean RemoveTroll(int areaNumber)
+		{
+			return this.ListArea.get(areaNumber-1).RemoveTrolls();
+		}
+		
+		/**
+		 * 
+		 * @param AreaNumber
+		 */
+		public boolean Removetrouble(int areaNumber)
+		{
+			return this.ListArea.get(areaNumber-1).RemoveTroubleMaker();
+		}
+		
+		/**
+		 * 
+		 * @param AreaNumber
+		 */
+		public boolean RemoveDemon(int areaNumber)
+		{
+			return this.ListArea.get(areaNumber-1).RemoveDemons();
+		}
+		
+		/**
+		 * 
+		 * @param AreaNumber
+		 */
+		public boolean RemoveMinion(int areaNumber, Colors color)
+		{
+			return this.ListArea.get(areaNumber-1).RemoveMinions(color);
+		}
+        
+        public int CountTroubleMaker()
+        {
+            int TotalTrouble = 0;
+            for(int i=0; i<12; i++)
+                if(ListArea.get(i).HasTroubleMaker())
+                    TotalTrouble++;
+            return TotalTrouble;
+        }
+        public Area GetArea(int i)
+        {
+            return ListArea.get(i);
+        }
 }
 

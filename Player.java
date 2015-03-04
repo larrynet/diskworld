@@ -1,6 +1,6 @@
 import java.util.List;
 import java.io.Serializable;
-
+import java.util.ArrayList;
 /**
  * Player Class to create and initiate a player.
  * 
@@ -11,14 +11,18 @@ public class Player implements Serializable {
 	
 	public static final int INITIAL_BANK = 10;
 	
+    //TEMPORARY
+    public List<Cards> CityAreaCards;
 	private Cards Personality;
-	private List<Cards> PlayerCards;
+	public List<Cards> PlayerCards;
+    
 	private int PlayerNumber;
 	private int Money;
+	private int Loan;
 	private Colors Color;
 	private List<Pieces> ListMinions;
 	private List<Pieces> ListBuildings;
-	private List<Cards> ListCityAreaCards;
+	public List<Cards> ListCityAreaCards;
 	
 	
 	/**
@@ -38,6 +42,8 @@ public class Player implements Serializable {
 		ListMinions = _ListMinion;
 		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
+        CityAreaCards = new ArrayList<Cards>();
+        
 		Color = _Color;
 		
 	}
@@ -128,6 +134,11 @@ public class Player implements Serializable {
 	{
 		this.Money -= amount;
 	
+	}
+	
+	public boolean RemovePlayerCard(int index )
+	{
+		return (PlayerCards.remove(index)) != null;
 	}
 
 	/**
@@ -353,8 +364,45 @@ public class Player implements Serializable {
 		String[] FinalString  = {strGreenPlayerCards.toString(),strBrownPlayerCards.toString()};
 		
 		return FinalString;
-
+	}
+	
+	
+	/**
+	 * Player takes a loan from the bank, increment the loam amount
+	 * @param amount
+	 */
+	public void GetLoan(int amount)
+	{
+		this.Loan = this.Loan + amount;
+	}
+	
+	/**
+	 * Player pays back all or part of the loan, decrease loan amount
+	 * @param amount
+	 */
+	public void PayLoan(int amount)
+	{
+		this.Loan = this.Loan  - amount;
+	}
+	
+	/**
+	 * Retrieve total loans by player
+	 * @return Loan amount
+	 */
+	public int TotalLoan()
+	{
+		return this.Loan;
+	}
+	
+	/**
+	 * 
+	 * @return Total amount of money player has loan + bank
+	 */
+	public int TotalMoney()
+	{
+		int total = this.TotalLoan() + this.GetMoneyCount();
 		
+		return total; 
 	}
 
 }
