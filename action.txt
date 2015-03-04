@@ -17,7 +17,7 @@ name=The bank of Ankh-Morpork**
 verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points endgame; symbol=S,C;
 
 name=The dysk
-verb=get; object=1$; condition=each minion in The Isle of Gods; symbol=B,S;
+verb=get; object=1$ for each minion in the Isle of Gods; symbol=B,S;
 
 name=The Duckman
 verb=move; object=minion from area; condition=adjacent area; symbol=S;
@@ -91,10 +91,9 @@ name=HERE ‘N’ NOW
 verb=roll; object=die;  symbol=S,C; actionnumber=1;
 verb=get; object=3$ from a player of choice; condition=number die>=7; actionnumber=2;
 verb=remove from board; object=1minion;  condition=number die==1; actionnumber=2;
- 
+
 name=Harry King 
-verb=discard; object= unlimited cards; symbol=M,S;  actionnumber=1;
-verb=get; object= 2*n(cards)$;  actionnumber=2;
+verb=get; object=2$ times number of discarded card;  symbol=M,S;
 
 name=Horga’s House of Ribs
  symbol=T(3),M;
@@ -104,14 +103,14 @@ symbol=A,T(1);
 
  name=The Peeled Nuts
 
-name=THE Opera House
-verb=get; object=1$;  Condition=for each minion in the Isle of Gods; symbol=B,S; actionnumber=2; 
+name=The Opera House
+verb=get; object=1$ for each minion in the Isle of Gods; symbol=B,S; 
 
 name=Nobby Nobbs
 verb=get; object=3$ from a player of choice;  symbol=S,C;  actionnumber=1; 
 
 name=Modo
-verb=discard; object=1 card ;  actionnumber=1; symbol=S,M;  
+verb=discard; object=1 card ; symbol=S,M;  
 
 name=The Mended Drum
 symbol=B,T(2);
@@ -123,11 +122,10 @@ name=Leonard of Quirm
 verb=get; object=4 cards;   symbol= S; actionnumber= 1; 
 
 name=Shonky Shop
-verb=discard; object=n cards; actionnumber=1; symbol= S,B; actionnumber=1;
-verb=get; object= n*(discard cards)$ ;  actionnumber=2;
+verb=get; object=1$ times number of discarded card;  symbol=M,S;
 
 name=Sacharissa Cripslock
-verb=get; object=1$ for each trouble marker on board; symbol=S,M ; actionnumber =1
+verb=get; object=1$ for each trouble maker on board; symbol=S,M ; actionnumber =1
 
 name=Rosie Palm
 verb=give; object=1 card condition=take 2$; symbol, M;S
@@ -140,8 +138,7 @@ name=The Roya Mint
 symbol=B,T(5);
 
 name=Queen Molly
-verb=select; object=1 player; symbol=M,S; actionnumber=1;
-verb=get; object=2cards from a player; condition =selected number=player number; actionnumber=2;
+verb=get; object=2cards from a player; symbol=M,S;
 
 name=The Pink PussyCat
 symbol=T(3),C;
@@ -273,13 +270,13 @@ verb=place; object=trouble maker in Shades or Adjacent; price =6$; actionnumber=
 
 //Brown Cards
 name=Sergeant Cheery Littlebottom
-verb=get; object=2 cards from deck; symbol=S,RT; actionnumber=1;
+verb=get; object=2 cards; symbol=S,RT; actionnumber=1;
 
 name=Otto Shriek
-verb=get; object=1$ *count(trouble marker in board); symbol=S,B;
+verb=get; object=1$ for each troublemaker; symbol=S,B;
 
 name=The Clacks
-verb=get; object=2 cards from deck; symbol =S,T(2), C; actionnumber=1;
+verb=get; object=2 cards; symbol =S,T(2), C; actionnumber=1;
 
 name=Sergeant Colon
 symbol= RT,M;
@@ -300,9 +297,7 @@ name=The Bursar
 verb=exchange; object =2 minion position; symbol=RE,S,C; actionnumber=1;
 
 name=Cable Street Particular
-verb=choose; object =1 player; symbol=S,M; actionnumber=1;
-verb=see; object=all choose player cards; actionnumber=2;
-verb=discard; object=1 player card; actionnumber=3;
+verb=discard; object=1 card player card from a other hand; symbol=S,M; 
 
 name=Canting Crew
 verb=move; object=1 minion of another player to adjacent area ; symbol=S,M; actionnumber=1;
@@ -315,7 +310,7 @@ name=The Chair of Indefinite Studies
 verb=exchange; object=all cards with another player; symbol=RE,S,C; actionnumber=1;
 
 name=Sir Charles Lavatory
-verb=get; object=1$ *count(building); condition=any color; symbol=S,B;
+verb=get; object=1$ for each building on board; symbol=S,B;
 
 name=Dorfi
 verb=move ; object=1 minion; symbol=S,C; actionnumber=1;
@@ -333,8 +328,7 @@ verb=move ; object=1 minion; symbol=S,M,B; actionnumber=1;
 verb=place; object=1 minion in any area; actionnumber=2;
 
 name=The Alchemists'Guild
-verb=discard; object=1/2/3 card; symbol=S,B; actionnumber=1;
-verb=get; object=card; condition=count(card in hand)==5; actionnumber=2;
+verb=discard; object=up to 3 cards and fill hands; symbol=S,B; actionnumber;
 
 name=The Auditors
 verb=remove ; object=1 minion; condition=every other player in order; symbol=S;  actionnumber=1;
@@ -359,7 +353,7 @@ name=Wee Mad Arthur
 verb=made; object=building; condition=half price; symbol=S; actionnumber=1;
 
 name=Willian de Worde
-verb=get; object=1 $* count (trouble marker on the board); symbol=M,S; actionnumber=1;
+verb=get; object=$ for each troublemaker in board; symbol=M,S; actionnumber=1;
 
 name=Willikins
 verb=place; object=minion in area ; condition=area has a building ; symbol=S; actionnumber=1;
@@ -378,15 +372,13 @@ name=Mr Shine
 verb=place; object=minion; symbol=S; actionnumber=1;
 
 name=Mr Slant
-verb=choose; object=area ; condition=area has trouble marker; symbol=S,B; actionnumber=1
-verb=get; object=2$ * count(minion); actionnumber=2;
+verb=get; object=2$ for each minion in area with troublemaker; symbol=S,B;
 
 name=The Smoking Gnu
 verb=place; object=1 minion; condition =count(trouble marker in area)>1; symbol =S,C; actionnumber=1;
 
 name=Stanley
-verb=get ; object=2 cards of other player  ; symbol=S,M; actionnumber=1
-verb=return; object=1cards to player ; actionnumber=2;
+verb=get ; object=2 cards of other player and give back 1; symbol=S,M; 
 
 name=Moist Wong Lipwig
 verb=take; object=2 cards form deck; symbol=M,T(3),S,C ; actionnumber=1
@@ -401,13 +393,13 @@ name=Pondor Stibbons
 verb=play; object =2 other cards; symbol=RE,S; actionnumber=1;
 
 name=The Post Office
-verb=get; object 1$ * count(building on board); symbol=S,M; actionnumber=1;
+verb=get; object 1$ for each building on board; symbol=S,M; actionnumber=1;
 
 name=Reacher Gilt
 verb=replace; object=building condition=troublemaker AND verb=pay; object=cost of the building; symbol=S;  
 
 name=Professor of Recent Runes
-verb=get; object =2 cards from deck; symbol =RE,S,C; actionnumber=1;
+verb=get; object =2 cards; symbol =RE,S,C; actionnumber=1;
 
 name=Doctor Hix
 verb=place; object=trouble marker in any area; symbol=RE,S,C; actionnumber=1;
@@ -422,7 +414,7 @@ name=Igor
 verb=place; object=removed minions; condition=place in different area; symbol=I; actionnumber=1;
 
 name=The Luggage
-verb=discard; object =1card ; symbol=A,S; actionnumber =1;
+verb=discard; object =1 card ; symbol=A,S; actionnumber =1;
 
 name=The Mob
 verb=place; object =1trouble marker in adjacent area; condition =trouble marker >1 in area adjacent ; symbol=S,M,C; actionnumber=1;
