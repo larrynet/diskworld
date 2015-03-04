@@ -120,8 +120,8 @@ public class JUnitTestSuite {
 	  }		  
 	  
 	  System.out.println(lstAction.size());
-	  lstAction.get(1).PrintActionVerbs();
-	  lstAction.get(1).PrintActionObject();
+	  lstAction.get(1).PrintAll();
+
 	  
 	  assertFalse("Generated an exeption testing action", GeneratedError);
 	}
