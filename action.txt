@@ -131,8 +131,7 @@ name=Rosie Palm
 verb=give; object=1 card condition=take 2$; symbol, M;S
 
 name=Rinsewind
-verb=remove; object=1minion from an area; condition=area has troublemarker; symbol=RE,S,C; actionnumber=1; 
-verb=place; object=1minion;  condition=adjacent area;   symbol=C; actionnumber= 2;
+verb=move; object=1 minion from area with troublemaker to an adjacent area; symbol=RE,S,C;
 
 name=The Roya Mint
 symbol=B,T(5);
@@ -175,98 +174,79 @@ verb=win; object=count(cards); condition=count(cards)==0;
 
 //Event Cards
 name=The Dragon
-verb=roll;  object=die;  actionnumber=1; 
-verb=remove; object=all pieces;  condition=number of die; actionnumber=1;
+verb=; object=;  symbol=; 
 
 name=Flood
-verb=roll; object=2die;  actionnumber=1; 
-verb=move;  object=minions to adjacent area;  condition=(number)die==(number)area and is adjacent to the river;  actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Fire
-verb=roll; object=die;  actionnumber=1; 
-verb=roll; object=die;  actionnumber=2;
-verb=roll; object=die area in 4 area; condition=currenrt die>last die; actionnumber=3;
+verb=; object=;  symbol=; 
 
 name=Fog
-verb=draw; object=5cards; actionnumber=1;
-verb=widraw; object=5cards; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Riots
-verb=end;  object=game; condition=count(trouble marker)>=8; actionnumber=1;  
+verb=; object=;  symbol=;  
 
-name=Explorion
-verb=roll; object=die;  actionnumber=1; 
-verb=remove; object=buildings; conditon=number area==number die; actionnumber=2;
+name=Explosion
+verb=; object=;  symbol=; 
 
 name=Mysterious Murders
-verb=roll each player; object=die; actionnumber=1; 
-verb=remove; object=1 minions; conditon=number area=number die; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Demons From The Dungeon Dimension
-verb=roll; object=4die ; actionnumber=1; 
-verb=place; object=minion; conditon=number roll =number area; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Subsidence
-verb=pay; object=$2 for each building; condition=own a building; actionnumber=1; 
-verb=remove; object=building; condition=do not pay; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Trolls
-verb=roll; object=3 die ; actionnumber=1; 
-verb=place; object=troll minion piece; condition=number area==number minion; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Bloody Stupid Johnson  
-verb=roll; object=die;  actionnumber=1;
-verb=place to one side; object=city area card; condition=number city area==number roll cards; actionnumber=2;
-verb=remove; object=1 minions; condition=number area card==number roll; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Earthquake
-verb=roll; object=2 die; actionnumber=1; 
-verb=remove; object=all buildings; condition=number die ==number city area ; actionnumber=2;
+verb=; object=;  symbol=; 
 
 //City Area
 
 name=The Hyppo
-verb=take; object=2$ from bank; condition=once per turn;  price =12$; actionnumber=1; 
+verb=; object=;  symbol=; 
 
 name=The Sours
-verb=discard; object=1 card; condition=once per turn price=6$; actionnumber=1;
-verb=take; object=2$;  condition=once per; actionnumber=1;
+verb=; object=;  symbol=; 
 
 name=Small Gods 
-verb=pay; object=3$ cards; price=18$; actionnumber=1;
-verb=ignore; object=random event card;  actionnumber=1; 
+verb=; object=;  symbol=;  
 
-Dragon’s Landing
-verb=take; object=2 $ from bank; condition=once per turn; price=12$; actionnumber=1; 
+name=Dragon’s Landing
+verb=; object=;  symbol=; 
 
 name=Unreal Estate
-verb=take; object=1 card from deck ; price=18$; actionnumber=1; 
-verb=discard; object=card  from deck  cards; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Dolly Sisters
-verb=pay;  object=3$; condition =once per turn; actionnumber=1; 
-verb=place side; object=1 minion in dolly sister or adjacent area cs; actionnumber=2;
+verb=; object=;  symbol=; 
 
 
 name=Nap Hill
-verb=take; object=1 $ from bank; condition=once per turn;  price=12$; actionnumber=1; 
+verb=; object=;  symbol=; 
 
 name=Seven Sleepers
-verb=take; object=3 $ from bank; condition =one per turn ; price=18$; actionnumber=1; 
+verb=; object=;  symbol=; 
 
 name=Isle of Gods 
-verb=pay;  object=2$ ; price=12$; actionnumber=1; 
-verb=remove ; object=1 trouble maker; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=Longwall
-verb=take; object=1 $ from bank; price=12$; actionnumber=1; 
+verb=; object=;  symbol=; 
 
 name=Dimwell 
-verb=pay; object=3$;  price=12$; actionnumber=1; 
-verb=place; object=1 minion in dimwell or adjacent area; actionnumber=2;
+verb=; object=;  symbol=; 
 
 name=The Shades
-verb=place; object=trouble maker in Shades or Adjacent; price =6$; actionnumber=1; 
+verb=; object=;  symbol=; 
 
 //Brown Cards
 name=Sergeant Cheery Littlebottom
@@ -282,7 +262,7 @@ name=Sergeant Colon
 symbol= RT,M;
 
 name=Cosmos Lavish
-verb=pay; object= 2$ to another player; AND verb=remove; object=other minion with troublemaker; symbol=S,C;  
+verb=pay; object= 2$ to another player and have them remove 1 minion with troublemaker; symbol=S,C;  
 
 name=The Dean
 verb= remove;  object =1 minion from Unreal Estate;  symbol= RE,S,C;  actionnumber =1;
@@ -302,9 +282,8 @@ verb=discard; object=1 card player card from a other hand; symbol=S,M;
 name=Canting Crew
 verb=move; object=1 minion of another player to adjacent area ; symbol=S,M; actionnumber=1;
 
-name=Cancer
-verb=roll; object=2 die; symbol=S,C; actionnumber=1;
-verb=remove; object=1 minion of choice in that area; condition=trouble marker has no effect; actionnumber=2;
+name=Carcer
+verb=remove; object=1 minion of choice in that area and roll dice twice; symbol=S,C;
 
 name=The Chair of Indefinite Studies
 verb=exchange; object=all cards with another player; symbol=RE,S,C; actionnumber=1;
@@ -331,7 +310,7 @@ name=The Alchemists'Guild
 verb=discard; object=up to 3 cards and fill hands; symbol=S,B; actionnumber;
 
 name=The Auditors
-verb=remove ; object=1 minion; condition=every other player in order; symbol=S;  actionnumber=1;
+verb=remove ; object=1 minion in player order; symbol=S;
 
 name=Buggy Swires
 symbol= RT;
