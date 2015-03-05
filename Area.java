@@ -20,7 +20,8 @@ public class Area implements Serializable
 		private Pieces TroubleMakers;
 		public  List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
-		private List<Pieces> ListMinions;
+		public List<Pieces> ListMinions;
+		public List<Pieces> ListBuilding;
 		private Pieces Building;
 				
 		

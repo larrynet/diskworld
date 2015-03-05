@@ -15,7 +15,7 @@ public class Player implements Serializable {
     public List<Cards> CityAreaCards;
 	private Cards Personality;
 	public List<Cards> PlayerCards;
-    
+    public int HandSize;
 	private int PlayerNumber;
 	private int Money;
 	private int Loan;
@@ -41,6 +41,7 @@ public class Player implements Serializable {
 		PlayerNumber = _PlayerNumber;
 		Personality = _Personality;
 		Money = INITIAL_BANK;
+		HandSize = 5;
 		ListMinions = _ListMinion;
 		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
