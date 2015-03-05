@@ -719,11 +719,94 @@ public class GameEngine implements Serializable
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("ignore") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("end") ==0)
-                {}
+                {
+                	//RIOT CARD : Games end of there are more then eight trouble markers
+                	int countTroubleMarkers = 0;
+                	
+                	for (Area area : this.GameBoard.ListArea)
+                	{
+                		if (area.GetIsTrouble())
+                		{
+                			countTroubleMarkers++;
+                		}
+                		
+                		if (countTroubleMarkers >= 8)
+                		{
+                			//END GAMES PROCEDURE
+                		}
+                	}
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("select") ==0)
-                {}
+                {
+                	//Queen Molly
+                	Scanner scan = new Scanner(System.in);
+                	
+                	System.out.println("Select one player:");
+                    int playerIndex= scan.nextInt();
+                    
+                    System.out.println("Player " + playerIndex + " give player " + player + " two cards of your choice by specifying the card number");
+                    ListPlayer.get(playerIndex).PrintCardsIndex();
+                    
+                    System.out.println("First Card:");
+                    int FirstCard= scan.nextInt();
+                    
+                    System.out.println("Second Card:");
+                    int SecondCard = scan.nextInt();
+                
+                    
+                    Cards c1 = ListPlayer.get(playerIndex).GetCards().get(FirstCard);
+                    Cards c2 = ListPlayer.get(playerIndex).GetCards().get(SecondCard);
+                  
+                    ListPlayer.get(player).AddPlayerCard(c1);
+                    ListPlayer.get(player).AddPlayerCard(c2);
+                    
+                    ListPlayer.get(playerIndex).RemovePlayerCard(FirstCard);
+                    ListPlayer.get(playerIndex).RemovePlayerCard(SecondCard);
+                   
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("putminion") ==0)
-                {}
+                {
+                	Player currentPlayer = ListPlayer.get(player);
+                	
+                	//Does player have a minion removed
+                	Colors PlayerColor = currentPlayer.GetColor();
+                	
+                	//Iterate through dead minions to see if player has a removed minions
+                	Pieces minionPiece = null;
+                	
+                	for(Pieces piece : this.GameBoard.GetDeadMinions())
+                	{
+                		if (piece.GetPieceColor() == PlayerColor)
+                		{
+                			minionPiece = piece;
+                			break;
+                		}
+                	}
+                	
+                	if (minionPiece != null)
+                	{
+	                	//Add minion piece to player minion bank
+	                	currentPlayer.RetrieveMinion(minionPiece);
+	                	
+	                	Scanner scan = new Scanner(System.in);
+	                	
+	                	boolean minionPlaced = false;
+	                	
+	                	while (!minionPlaced)
+	                	{
+		                	System.out.println("Enter area to place minion in: ");
+		                    int areaIndex = scan.nextInt() - 1;
+		                    
+		                    minionPlaced = this.GameBoard.PlaceMinion(areaIndex, currentPlayer);
+	                	}
+                	}
+                	else
+                	{
+                		System.out.println("You do not have a minion that was removed");
+                	}
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
                 {
                 	//Player takes a 10$ loan
@@ -821,7 +904,7 @@ public class GameEngine implements Serializable
                         GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
                     }
                 }
-                else if(CardPlayed.Name.contains("HERE "))// HERE ‘N’ NOW
+                else if(CardPlayed.Name.contains("HERE "))// HERE ï¿½Nï¿½ NOW
                 {
                     //Remove minion of choice with area with Troublemaker
                     int DieValue = GameBoard.RollDie();

@@ -426,4 +426,16 @@ public class Player implements Serializable {
 		this.LostPoints += points;
 	}
 
+	public void PrintCardsIndex()
+	{
+		StringBuilder strCards = new StringBuilder();
+		
+		for (int i = 0; i < this.PlayerCards.size(); i++)
+		{
+			strCards.append(i + ":" + this.PlayerCards.get(i).GetName() + "; ");
+		}
+		
+		System.out.println(strCards.toString());
+	}
+	
 }
