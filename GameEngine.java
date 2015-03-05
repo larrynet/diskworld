@@ -696,21 +696,110 @@ public class GameEngine implements Serializable
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
                 {}
+                
                 //Niloufar
+              
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("place") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                	// In "dorfi", "Adora Bell Dearheart" Place is the second verb????
+                    //move one minion your own minion from an area to another area
+                    
+                  //Deep Dwarves ,Mr Shine
+                	if (object.contains("1 minion in any area" ))
+                			{
+                		//place a minion in any area withount puting trouble marker
+                		System.out.println("Please select a area to put a Minion In.");
+                		boolean IsMinionIn=PutMinion(CurrentPlayer);
+                		if( !IsMinionIn)
+                			throw exceptions;
+                			
+                			}
+                	//Willikins
+                	else if (object.contains("1 minion in area with building in"  ))
+                	{
+                		System.out.println("Please select a area to put a Minion In.");
+                	}
+                	//Archchancellor Ridcully
+                	else if (object.contains("1 or 2 minion in or adjacent to Unreal Estate"  ))
+                	{
+                		
+                	}
+                	//The Senior Wrangler
+                	else if (object.contains("1 minion in or adjacent to Unreal Estate"  ))
+                	{
+                		
+                	}
+                	//The Smoking Gnu
+                	else if (object.contains("1 minion containing in area trouble marker" ))
+                	{
+                		
+                	}
+                	//Doctor Hix
+                	else if (object.contains("trouble marker in any area" ))
+                	{
+                		
+                	}
+                		
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("play") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    //Pondor Stibbons ,Drumknott
+                    if (object.contains("2 other cards"))
+                    {
+                    	
+                    }
+                    	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
-                {}
+                {
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("return") ==0)
-                {}
+                {
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("replace") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                    //Sybil Vimes
+                    if (object.contains("1 building of your own with another player"))
+                    {
+                    
+                    }
+                    else  if (object.contains("1 building of your own with another player"))
+                    {
+                    	//pay the cost +must has a trouble marker
+                    }
+                    	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("stop") ==0)
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    //Gaspode
+                    
+                    if (object.contains("move or remove minion"))
+                    {
+                    	//pay the cost +must has a trouble marker
+                    }
+                    	//Susan
+                    else if (object.contains("1 minion from removing"))
+                    {
+                    	//pay the cost +must has a trouble marker
+                    }
+                    	
+                }
+                //there is two of verb choose
+                /*else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
                 {}
-                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
-                {}
+                {}*/
                 //Gay
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("see") ==0)
                 {}

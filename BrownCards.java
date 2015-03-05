@@ -12,6 +12,7 @@ public class BrownCards implements Cards, Serializable
 	private int Id;
 	boolean Status;
 	private CardType Type;
+	private Action CardAction;
 
 	public BrownCards(String _Name, int _Id, boolean _Status, CardType _Type)
 	{
@@ -21,7 +22,12 @@ public class BrownCards implements Cards, Serializable
 		Type = _Type;
 
 	}
-
+	//Setter
+		public void SetAction(Action _action)
+		{
+			CardAction = _action;
+		}
+		
 	public String GetName() 
 	{
 		return this.Name;
@@ -37,6 +43,11 @@ public class BrownCards implements Cards, Serializable
 		return this.Type;
 	}
 
+	public Action GetAction()
+	{
+		return this.CardAction;
+		
+	}
 	public String toString() 
 	{
 		return (this.toString());

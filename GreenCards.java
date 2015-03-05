@@ -4,22 +4,38 @@ import java.io.Serializable;
  *
  *
  */
-public class GreenCards implements Cards, Serializable {
+public class GreenCards extends Action implements Cards, Serializable
+
+{
 	private String Name;
 	private int Id;
 	boolean Status;
 	private CardType Type;
 	private Action CardAction;
 	
-	public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type) {
+	//Constructor
+	public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+ {
 		Name = _Name;
 		Id = _Id;
 		Status = _Status;
 		Type = _Type;
+		
 
 	}
-	public void SetAction(Action a) {CardAction = a;}
-	public String GetName ()
+	public GreenCards ()
+	{
+		
+	}
+	//Setter
+	public void SetAction(Action _action)
+	{
+		CardAction = _action;
+	}
+	
+
+//Getter
+public String GetName ()
 	{
 		return this.Name;
 	}
@@ -34,6 +50,11 @@ public class GreenCards implements Cards, Serializable {
 		 return this.Type;
 	 }
 	
+	public Action GetAction()
+	{
+		return this.CardAction;
+		
+	}
 	public String toString() 
 	   {
 		 return  (this.toString());
