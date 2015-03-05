@@ -26,6 +26,9 @@ public class EventCards implements Cards, Serializable
 		return this.Name;
 	}
 	
+	public Action GetAction()
+	{return null;}
+	
 	public int GetID()
 	{
 		return this.Id;

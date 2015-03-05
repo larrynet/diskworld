@@ -17,6 +17,6 @@ public interface Cards
 	public String GetName();
 	public int GetID();
 	public CardType GetCardType();
-	public CardAction GetAction();
+	public abstract Action GetAction();
 
 }

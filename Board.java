@@ -337,5 +337,5 @@ public class Board implements Serializable {
         	return this.ListDeadMinions;
         }
 }
-}
+
 

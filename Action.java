@@ -24,6 +24,10 @@ public class Action {
 		KeepTillEnd = keep;
 	}
 	
+	public Action() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public static Action ParseString(String action)
 	{
 		int nAction = 1;

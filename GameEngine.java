@@ -714,7 +714,8 @@ public class GameEngine implements Serializable
                 		System.out.println("Please select a area to put a Minion In.");
                 		boolean IsMinionIn=PutMinion(CurrentPlayer);
                 		if( !IsMinionIn)
-                			throw exceptions;
+                			//throw exceptions;
+                			System.out.println("!!!!!IsMinionIn is TRUE...WHAT THE HELL!!!!!!!");
                 			
                 			}
                 	//Willikins

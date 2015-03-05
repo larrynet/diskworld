@@ -20,9 +20,11 @@ public class GreenCards extends Action implements Cards, Serializable
 		Id = _Id;
 		Status = _Status;
 		Type = _Type;
-		
+		CardAction = new Action();
 
 	}
+	
+	
 	public GreenCards ()
 	{
 		

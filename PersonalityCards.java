@@ -42,5 +42,11 @@ public PersonalityCards()
 	   
 	  
 	   }
+	
+	@Override
+	public Action GetAction() {
+		// TODO Auto-generated method stub
+		return CardAction;
+	}
 }
 
