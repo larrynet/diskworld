@@ -19,6 +19,8 @@ public class Player implements Serializable {
 	private int PlayerNumber;
 	private int Money;
 	private int Loan;
+	private int PayBack;
+	private int LostPoints;
 	private Colors Color;
 	private List<Pieces> ListMinions;
 	private List<Pieces> ListBuildings;
@@ -403,6 +405,24 @@ public class Player implements Serializable {
 		int total = this.TotalLoan() + this.GetMoneyCount();
 		
 		return total; 
+	}
+	
+	/**
+	 * Add payback amount to player for loan cards
+	 * @param amount
+	 */
+	public void AddtoPayBack(int amount)
+	{
+		this.PayBack += amount;
+	}
+	
+	/**
+	 * Increment points to lose if payback not paid
+	 * @param points
+	 */
+	public void IncreaseLostPoints(int points)
+	{
+		this.LostPoints += points;
 	}
 
 }

@@ -597,7 +597,16 @@ public class GameEngine implements Serializable
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("putminion") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
-                {}
+                {
+                	//Player takes a 10$ loan
+                	ListPlayer.get(player).GetLoan(10);
+                	
+                	//Player owed 12$ at end of games
+                	ListPlayer.get(player).AddtoPayBack(12);
+                	
+                	//Player needs to pay back 12 at end of game or player will lose 15 points
+                	ListPlayer.get(player).IncreaseLostPoints(15);
+                }
                 else
                     System.out.println("!!!!!!! Unknown verb found !!!!!!!! : " + currentEffect.Verb.get(verbCount));
             }
