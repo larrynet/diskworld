@@ -20,7 +20,7 @@ name=The dysk
 verb=get; object=1$ for each minion in the Isle of Gods; symbol=B,S;
 
 name=The Duckman
-verb=move; object=minion from area; condition=adjacent area; symbol=S;
+verb=move; object=1 minion belonging to another player from  1 area; condition=adjacent area; symbol=S;
 
 name=Drumknott
 verb=play; object=2 other cards; symbol=S;
@@ -131,7 +131,7 @@ verb=get; object=1$ for each trouble maker on board; symbol=S,M ; actionnumber =
 name=Rosie Palm
 verb=give; object=1 card condition=take 2$; symbol, M;S
 
-name=Rinsewind
+name=Rincewind
 verb=move; object=1 minion from area with troublemaker to an adjacent area; symbol=RE,S,C;
 
 name=The Roya Mint
