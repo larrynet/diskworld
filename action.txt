@@ -26,8 +26,8 @@ name=Drumknott
 verb=play; object=2 other cards; symbol=S;
 
 name=CMOT Dibbler
-verb=get; object=4$ bank; condition=dice>7 
-verb=pay; object=2$ bank; condition=dice=1 OR verb=remove; object=1 minion;
+verb=Roll; object=die; condition=dice>7 verb=get object=4$ from Bank
+verb=pay; object=2$ to bank; condition=dice=1 OR verb=remove; object=1 minion;
 
 name=Groat
 symbol=M;
