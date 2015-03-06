@@ -728,9 +728,57 @@ public class GameEngine implements Serializable
                     }
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("withdraw") ==0)
-                {}
+                {//no verb found}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("exchange") ==0)
-                {}
+                {  
+                	String object = currentEffect.Object.get(verbCount);
+                    //int amount = (int)object.charAt(0);
+                    
+                	
+                	//Zorgo the Retro-phrenologist
+                    if(object.contains("personality"))
+                    {
+                    	
+                    	//I get a personlaity card and set player personality card
+                    	   ListPlayer.get(player).SetPlayerPersonality(CardManager.GetCard(CardType.PersonalityCards));
+                    
+                    	
+                    }//The Bursar
+                    else if(object.contains("minion"))
+                    {
+                    Scanner scan = new Scanner(System.in);
+                	
+                    System.out.println("Enter the player index you want to move his minion.");
+                    int PlayerIndex = scan.nextInt();
+                    System.out.println("Enter area index from which u want to move his minion from:");
+                    int area = scan.nextInt();
+                    
+                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex));
+                    
+                    System.out.println("Enter the player index you want to move his minion.");
+                    int PlayerIndex2 = scan.nextInt();
+                    System.out.println("Enter area index to which you want to move his minion:");
+                    int area2 = scan.nextInt();
+                    
+                    GameBoard.RemoveMinion(area2, ListPlayer.get(PlayerIndex2));
+                    GameBoard.PlaceMinion(area2, ListPlayer.get(PlayerIndex));
+                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex2));
+                    }
+                    //The Chair of Indefinite Studies
+                    else if(object.contains("cards"))
+                    {   Scanner scan = new Scanner(System.in);
+                    	List<Cards> hand=new ArrayList<Cards>();
+               
+                    	System.out.println("Enter the player index you want to change your hand with");
+                        int PlayerIndex = scan.nextInt();
+                        
+                        hand=ListPlayer.get(CurrentPlayer).PlayerCards;
+                        ListPlayer.get(CurrentPlayer).PlayerCards=ListPlayer.get(PlayerIndex).PlayerCards;
+                        ListPlayer.get(PlayerIndex).PlayerCards=hand;
+                    }
+                  
+                }
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("assassinate") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("roll") ==0)
