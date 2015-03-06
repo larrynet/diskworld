@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.List;
 /**
  * @author Niloufar
  *
@@ -42,11 +43,5 @@ public PersonalityCards()
 	   
 	  
 	   }
-	
-	@Override
-	public Action GetAction() {
-		// TODO Auto-generated method stub
-		return CardAction;
-	}
 }
 

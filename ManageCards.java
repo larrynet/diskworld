@@ -4,6 +4,11 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Vector;
+
+
 /**
  * 
  * 
@@ -35,96 +40,12 @@ public class ManageCards implements Serializable
 	 */
 	public ManageCards(int TotalPlayer)
 	{
-		String []PersonalityName={"Lord Vetinari","Lord Selachii","Lord Rust","Lord de Word","Dragon King of Arms","Commander Vimes","Chrysoprase"};
-	     String []EventName={"The Dragon","Flood","Fire","Fog","Riots","Explorion","Mysterious Murders","Demons From The Dungeon Dimension","Subsidence","Bloody Stupid Johnson","Trolls","Earthquake"};
-		 String []CityAreaName={"Dolly Sisters","Unreal Estate","Dragon's Landing","Small Gods","The Scours","The Hippo","The Shades","Dimwell","Longwall","Isle of Gods","Seven Sleepers","Nap Hill"};
-		 String [] BrownName=
-			 {
-			"Sergeant Cheery Littlebottom"     , "Otto Shriek"               , "The Claks"                         ,    "Sergeant Colon"             ,     
-			  "The Dean"                       , "HELLO"                     ,"Burleigh & Stronginth"              ,    "The Bursar"                 , "Cable Street Particulars", 
-			  "Canting Crew"                   ,"Cancer"                     ,  "The Chair of Indefinite Studies"  ,"Sir Charles Lavatory"           ,"Dorfi"                    ,
-			  "Sergeant Detritus"              ,"Deep Dwarves"               ,"Adora Bell Dearheart"               ,"The Alchemists'Guild"           ,"The Auditors"             ,
-			  "Susan"                          ,"Sybil Vimes"                ,"Mr Teatime"                         ,"The Watch"                      ,"Wee Mad Arthur",
-			  "Willian de Worde"               ,"Willikins"                  ,"Archchancellor Ridcully"            ,"Ruby"                           ,"The Senior Wrangler",
-			  "Mr Shine"                       ,"Mr Slant"                   ,"The Smoking Gnu"                     , "Stanley"                      ,"Moist Wong Lipwig",
-			  "Doctor Mossy Lawn"              , "Patrician's Palace"        ,"Pondor Stibbons"                     ,"The Post Office","Reacher Gilt","Professor of Recent Runes",
-			  "Doctor Hix"                     ,"Hobsons's Livery Stable"    ,"Igor"                               ,"The Luggage"                 
-			  ,"The Mob"                       ,"Lord Downey"                ,"Dwarves" ,
-			  "Edward d'Earth"                ,"Buggy Swires"                ,"Errol"                              , "Gargoyles"                     ,"Hubert","Cosmos Lavish" 
-			  };
-		 
-		 String []GreenName=
-			   {
-				 "Mr Boggis"                      ,"Mr Bent"             ,"Mr Beggas'Guild"    ,"The Bank of Akh-Morpork"   ,"The Ankh Mor Pork Sunshine Dragon Sanctuary",
-				 "Sergeant Angua"                 ,"The Agony Aunts"     ,"The Dysk"           ,"The Duckman"               ,"Drumknott",
-				 "CMOT Dibbler"                   ,"Dr Cruces"           ,"Captain Carrot"     ,"Mrs Cake"                   ,"Groat",
-				 "Gimlet's Dwarf Delicatessen"    ,"Gaspode"             ,"Fresh Start Club"   ,"Foul Ole Ron"               ,"The Fools'Guild",
-				 "The Fire Brigade"                ,"Inigo Skimmer"       ,"History Monks"     ,"Hex"                       ,"Here'nNow",
-				 "Harry King"                     ,"Harga's House of Ribs","Mr Gryle"          ,"The Peeled Nuts"           ,"The Opera House",
-				 "Nobby Nobbs"                    ,"Modo"                 ,"The Mended Drum"   ,"Librarian"                 ,"Leonard of Quirm",
-				 "Shonky Shop"                    ,"Sacharissa Cripslock" ,"Rosie Palm"         ,"Rincewind"                 ,"The Royal Mint",
-				 "Queen Mollu"                    ,"Pink PussyCat Club"    ,"Dr Whiteface"      ,"Wallace Sonky"             ,"THe Seamstresses Guild",
-				 "Mr Pin & Mr Tulip"              ,"The Thieves'Guild"     ,"Zorgo the Retro-phrenologist"
-				 };
-				 
-		 
-		 
-		 int [] PersonalityId={101,102,103,104,105,106,107};
-	     int [] EventId={201,202,203,204,205,206,207,208,209,210,211,212};
-		 int []CityAreaId={301,302,303,304,305,306,307,308,309,310,311,312};
-		 
-		 Boolean Status =true;
-		 
-		 
-		for (int i = 0; i <= 4; i++) 
-		{
-			if (i == 0)
-			{
-				TotalPersonalityCard = this.Personality_Card.length;
-				//remove the card: Chrysoprase card
-				if(TotalPlayer == 2)
-				{
-					TotalPersonalityCard --;
-				}
-				for (int j = 0; j < TotalPersonalityCard; j++)
-					this.Personality_Card[j] = new PersonalityCards(PersonalityName[j], PersonalityId[j], Status,CardType.PersonalityCards);
-				
-			} else if (i == 1)
-			{
-				for (int j = 0; j <= this.Event_Card.length - 1; j++)
-
-					this.Event_Card[j] = new EventCards(EventName[j],EventId[j], Status, CardType.EventCards);
-			}
-
-			else if (i == 2) 
-			{
-				for (int j = 0; j <= this.CityArea_Cards.length - 1; j++)
-
-					this.CityArea_Cards[j] = new CityAreaCards(CityAreaName[j],CityAreaId[j], Status, CardType.CityAreaCards);
-
-			} else if (i == 3) 
-			{
-				for (int j = 0; j <= this.Green_Cards.length - 1; j++)
-
-					this.Green_Cards[j] = new GreenCards(
-							(GreenName[j] ), 401 + j, Status,CardType.GreenCards);
-
-			} else if (i == 4) 
-			{
-				TotalBrownCard = this.Brown_Cards.length;
-				
-				//remove the last two cards: Hubert and Cosmos Lavish if only two player
-				if(TotalPlayer == 2)
-				{
-					TotalBrownCard-=2;
-				}
-				for (int j = 0; j < TotalBrownCard; j++)
-					this.Brown_Cards[j] = new BrownCards((BrownName[j]), (501 + j), Status,CardType.BrownCards);
-
-			}
-
-		}
-
+		
+		  CreateGreenCards();
+		  //CreateBrownCards();
+		  //CreatePersoCards();
+		
+		
 	}
 	
 	/**
@@ -357,7 +278,125 @@ public String toString()
 
 }
 
+private void CreateGreenCards()
+{
+	String  thisLine = null;
+	
+	  try{
+	     // open input stream test.txt for reading purpose.
+	     BufferedReader br = new BufferedReader(new FileReader("/Users/gayhazan/Documents/workspace/LocDiskworld/src/GreenCards.txt"));
+	     while ((thisLine = br.readLine()) != null) {
+	    	
+	    	 int iterator =  47;
+	    	 int j = 1;
+	    	//If not comment then read
+	    	 if (!thisLine.contains("name"))
+	    	 {
+	    		 String cardName = thisLine.split("=")[1];
+	    		 
+	    		 this.Green_Cards[iterator] = new GreenCards( cardName, 401 + j, true,CardType.GreenCards);
+	    		 
+	    		 j++;
+	    		 iterator--;
+	    		
+	    	 }
+	    	 else if (!thisLine.contains("verb"))
+	    	 {
+	    		 Action newAction = Action.ParseString(thisLine);
+	    		 this.Green_Cards[iterator+1].AddAction(newAction);
+	    	 }
+	    	 else if (!thisLine.contains("symbol"))
+	    	 {
+	    		 String [] symbols = thisLine.split("=")[1].split(",");
+	    		 
+	    		 for (String s : symbols)
+	    		 {
+	    			 this.Green_Cards[iterator+1].AddSymbols(s);
+	    		 }
+	    	 }
+	    	 
 
+	     }       
+	  }catch(Exception e){
+	     e.printStackTrace();
+	  }		  
+}
+
+private void CreateBrownCards()
+{
+	String  thisLine = null;
+	
+	  try{
+	     // open input stream test.txt for reading purpose.
+	     BufferedReader br = new BufferedReader(new FileReader("/Users/gayhazan/Documents/workspace/LocDiskworld/src/GreenCards.txt"));
+	     while ((thisLine = br.readLine()) != null) {
+	    	
+	    	 int iterator =  53;
+	    	 int j = 1;
+	    	//If not comment then read
+	    	 if (!thisLine.contains("name"))
+	    	 {
+	    		 String cardName = thisLine.split("=")[1];
+	    		 
+	    		 this.Brown_Cards[iterator] = new BrownCards( cardName, 401 + j, true,CardType.BrownCards);
+	    		 
+	    		 j++;
+	    		 iterator--;
+	    		
+	    	 }
+	    	 else if (!thisLine.contains("verb"))
+	    	 {
+	    		 Action newAction = Action.ParseString(thisLine);
+	    		 this.Brown_Cards[iterator+1].AddAction(newAction);
+	    	 }
+	    	 else if (!thisLine.contains("symbol"))
+	    	 {
+	    		 String [] symbols = thisLine.split("=")[1].split(",");
+	    		 
+	    		 for (String s : symbols)
+	    		 {
+	    			 this.Brown_Cards[iterator+1].AddSymbols(s);
+	    		 }
+	    	 }
+	    	 
+
+	     }       
+	  }catch(Exception e){
+	     e.printStackTrace();
+	  }		  
+}
+
+
+private void CreatePersoCards()
+{
+	String  thisLine = null;
+	
+	  try{
+	     // open input stream test.txt for reading purpose.
+	     BufferedReader br = new BufferedReader(new FileReader("/Users/gayhazan/Documents/workspace/LocDiskworld/src/GreenCards.txt"));
+	     while ((thisLine = br.readLine()) != null) {
+	    	
+	    	 int iterator =  6;
+	    	 int j = 1;
+	    	//If not comment then read
+	    	 if (!thisLine.contains("name"))
+	    	 {
+	    		 String cardName = thisLine.split("=")[1];
+	    		 
+	    		 this.Personality_Card[iterator] = new PersonalityCards( cardName, 401 + j, true,CardType.PersonalityCards);
+	    		 
+	    		 j++;
+	    		 iterator--;
+	    		
+	    	 
+	    	 }
+	    	 
+
+	     }       
+	  }catch(Exception e){
+	     e.printStackTrace();
+	  }		  
+}
 }
 
 		

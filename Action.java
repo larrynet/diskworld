@@ -8,18 +8,16 @@ public class Action {
 	public List<String> Object;
 	public List<String> Condition;
 	public List<String> ActionNumber;
-	public List<String> Symbol;
 	public String Relation;
 	public boolean KeepTillEnd;
 	
-	public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,List<String> s ,String relation, boolean keep) 
+	public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
 	{
 		NumberOfAction = n;
 		Verb = v;
 		Object=o;
 		Condition = c;
 		ActionNumber = a;
-		Symbol = s;
 		Relation = relation;
 		KeepTillEnd = keep;
 	}
@@ -34,7 +32,6 @@ public class Action {
 		List<String> verbs = new ArrayList<String>();
 		List<String> objects = new ArrayList<String>();
 		List<String> conditions = new ArrayList<String>();
-		List<String> symbols = new ArrayList<String>();
 		List<String> actionNumber = new ArrayList<String>();
 		boolean KeepTillEnd = false;
 		String [] description;
@@ -77,14 +74,9 @@ public class Action {
 			conditions.add(ReturnDesc(separated[2]));
 			actionNumber.add(ReturnDesc(separated[3]));
 			
-			if (item.contains("symbol"))
-			{
-				symbols.add(ReturnDesc(separated[4]));
-			}
-			
 		}
 	
-		return new Action(nAction, verbs,objects,conditions, actionNumber,symbols, connector, KeepTillEnd);
+		return new Action(nAction, verbs,objects,conditions, actionNumber, connector, KeepTillEnd);
 	}
 	
 	public String GetVerbs(int index)
@@ -128,16 +120,7 @@ public class Action {
 		
 	}
 	
-	public String GetSymbol(int index){
-		
-		if (!this.Symbol.isEmpty() && this.Symbol.size() >= index)
-		{
-			return this.Symbol.get(index);
-		}
-		
-		return "";
-		
-	}
+	
 	
 	public void PrintAll() {
 		
@@ -145,7 +128,7 @@ public class Action {
 		
 		for (int i = 0; i < max; i++)
 		{
-			System.out.println("Verb=" + this.GetVerbs(i) + ";object=" + this.GetObject(i) + ";condition=" + this.GetCondition(i) + ";actionnumber=" + this.GetActionNumber(i) + ";symbol=" + this.GetSymbol(i));
+			System.out.println("Verb=" + this.GetVerbs(i) + ";object=" + this.GetObject(i) + ";condition=" + this.GetCondition(i) + ";actionnumber=" + this.GetActionNumber(i) );
 		}
 	}
 	
