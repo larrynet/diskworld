@@ -89,7 +89,7 @@ name=Hex
 verb=draw; object=3 cards; symbol=S,B; 
 
 name=HERE ‘N’ NOW
-verb=roll; object=die;  symbol=S,C; actionnumber=1;
+verb=roll; object=1 die;  symbol=S,C; actionnumber=1;
 verb=get; object=3$ from a player of choice; condition=number die>=7; actionnumber=2;
 verb=remove from board; object=1minion;  condition=number die==1; actionnumber=2;
 
@@ -275,7 +275,7 @@ name=Burleigh & Stronginth
 verb=pay; object=2$ another player; AND verb=assassinate; object= 1 minion; actionnumber=2; symbol=S,B;
 
 name=The Bursar
-verb=exchange; object =2 minion position; symbol=RE,S,C; actionnumber=1;
+verb=exchange; object =2 minion position on Board; symbol=RE,S,C; actionnumber=1;
 
 name=Cable Street Particular
 verb=discard; object=1 card player card from a other hand; symbol=S,M; 
@@ -284,7 +284,7 @@ name=Canting Crew
 verb=move; object=1 minion of another player to adjacent area ; symbol=S,M; actionnumber=1;
 
 name=Carcer
-verb=remove; object=1 minion of choice in that area and roll dice twice; symbol=S,C;
+verb=remove; object=1 minion of choice in that area and verb=roll object=2 die ; symbol=S,C;
 
 name=The Chair of Indefinite Studies
 verb=exchange; object=all cards with another player; symbol=RE,S,C; actionnumber=1;
@@ -408,7 +408,7 @@ name=Edward d'Earth
 Symbol =A,T(3),B;
 
 name=Errol
-verb=roll card; object =die; actionnumber=1; symbol=S,C; actionnumber=1
+verb=roll; object =1 die; actionnumber=1; symbol=S,C; actionnumber=1
 verb=remove; object =1 minion of choice from area has trouble maker; condition=die number>=7; actionnumber =2;
 verb=remove; object=1 minion owned; condition=die number ==1; actionnumber =2; 
 

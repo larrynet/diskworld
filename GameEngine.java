@@ -752,17 +752,17 @@ public class GameEngine implements Serializable
                     int PlayerIndex = scan.nextInt();
                     System.out.println("Enter area index from which u want to move his minion from:");
                     int area = scan.nextInt();
-                    
-                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex));
+                                        
+                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
                     
                     System.out.println("Enter the player index you want to move his minion.");
                     int PlayerIndex2 = scan.nextInt();
                     System.out.println("Enter area index to which you want to move his minion:");
                     int area2 = scan.nextInt();
                     
-                    GameBoard.RemoveMinion(area2, ListPlayer.get(PlayerIndex2));
+                    GameBoard.RemoveMinion(area2, ListPlayer.get(PlayerIndex2).GetColor());
                     GameBoard.PlaceMinion(area2, ListPlayer.get(PlayerIndex));
-                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex2));
+                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex2).GetColor());
                     }
                     //The Chair of Indefinite Studies
                     else if(object.contains("cards"))
@@ -780,9 +780,65 @@ public class GameEngine implements Serializable
                 }
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("assassinate") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                	
+                	//Burleigh & Stronginth
+                    if(object.contains("minion"))
+                    {
+                    	
+                    	Scanner scan = new Scanner(System.in);
+                    	
+                        System.out.println("Enter the player index you want to assassinate his minion.");
+                        int PlayerIndex = scan.nextInt();
+                        System.out.println("Enter area index ");
+                        int area = scan.nextInt();
+                                                               
+                        GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
+                    	
+                    }
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("roll") ==0)
-                {}
+                {String object = currentEffect.Object.get(verbCount);
+               // int amount = (int)object.charAt(0);
+                
+                 //HERE ‘N’ NOW - //Carcer  -//Eroll     
+                if(object.contains("die"))
+                { 
+                	int amount = (int)object.charAt(0);
+             
+                for(int i=0;i<amount;i++)
+            	{
+                	int roll=GameBoard.RollDie();
+            		System.out.println("Die shows "+ roll);
+            	
+                    if(CardPlayed.GetName()=="Errol" && roll>=7)
+                    {
+                    	Scanner scan = new Scanner(System.in);
+                    	
+                        System.out.println("Enter the player index you want to remove his minion from an area containing a troubleMarker.");
+                        int PlayerIndex = scan.nextInt();
+                        System.out.println("Enter area index ");
+                        int area = scan.nextInt();
+                        
+                        if(GameBoard.ListArea.get(area).HasTroubleMaker())
+                        {                                   
+                        GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
+                        }
+                    }
+                    else if(CardPlayed.GetName()=="Errol" && roll==1)
+                    {   
+                    	Scanner scan = new Scanner(System.in);
+                    	System.out.println("Enter area index where your minion should be removed ");
+                        int area = scan.nextInt();
+                    	GameBoard.RemoveMinion(area, ListPlayer.get(CurrentPlayer).GetColor());
+                    }
+            	}
+                }
+                }
                 //TODO personality cards
                 //else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("win") ==0)
                 //{}
