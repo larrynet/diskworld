@@ -284,7 +284,7 @@ name=Canting Crew
 verb=move; object=1 minion of another player to adjacent area ; symbol=S,M; actionnumber=1;
 
 name=Carcer
-verb=remove; object=1 minion of choice in that area and verb=roll object=2 die ; symbol=S,C;
+verb=roll; object=2 die; and verb=remove; object=1 minion of choice in that area; symbol=S,C;
 
 name=The Chair of Indefinite Studies
 verb=exchange; object=all cards with another player; symbol=RE,S,C; actionnumber=1;

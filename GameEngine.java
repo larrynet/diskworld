@@ -809,13 +809,14 @@ public class GameEngine implements Serializable
                 if(object.contains("die"))
                 { 
                 	int amount = (int)object.charAt(0);
+                	int[] roll=new int[amount];
              
                 for(int i=0;i<amount;i++)
             	{
-                	int roll=GameBoard.RollDie();
-            		System.out.println("Die shows "+ roll);
+                	roll[i]=GameBoard.RollDie();
+            		System.out.println("Die shows "+ roll[i]);
             	
-                    if(CardPlayed.GetName()=="Errol" && roll>=7)
+                    if(CardPlayed.GetName()=="Errol" && roll[i]>=7)
                     {
                     	Scanner scan = new Scanner(System.in);
                     	
@@ -829,19 +830,19 @@ public class GameEngine implements Serializable
                         GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
                         }
                     }
-                    else if(CardPlayed.GetName()=="Errol" && roll==1)
+                    else if(CardPlayed.GetName()=="Errol" && roll[i]==1)
                     {   
                     	Scanner scan = new Scanner(System.in);
                     	System.out.println("Enter area index where your minion should be removed ");
                         int area = scan.nextInt();
                     	GameBoard.RemoveMinion(area, ListPlayer.get(CurrentPlayer).GetColor());
                     }//CMOT Dibbler
-                    else if(CardPlayed.GetName()=="CMOT Dibbler" && roll>=7)
+                    else if(CardPlayed.GetName()=="CMOT Dibbler" && roll[i]>=7)
                     {   
                     	ListPlayer.get(CurrentPlayer).AddToMoney(4);
                     	GameBoard.DeductFromBank(4);
                     	
-                    }else if(CardPlayed.GetName()=="CMOT Dibbler" && roll==1)
+                    }else if(CardPlayed.GetName()=="CMOT Dibbler" && roll[i]==1)
                     {   
                     	Scanner scan = new Scanner(System.in);
                     	System.out.println("Enter 1 to pay 2$ to bank or 2 to remove your minion");
@@ -859,6 +860,18 @@ public class GameEngine implements Serializable
                     	}
                     }
             	}
+                //Carcer
+                if(CardPlayed.GetName()=="Carcer" )
+                {	Scanner scan = new Scanner(System.in);
+            	
+                    //int RollDieValue1 = GameBoard.RollDie();
+                    
+                    System.out.println("Enter Player index to remove minion from area "+roll[0] +" : ");
+                    int PlayerIndex0 = scan.nextInt();
+                    System.out.println("Enter Player index to remove minion from area "+roll[1] +" : ");
+                    int PlayerIndex1 = scan.nextInt();
+                	GameBoard.RemoveMinion(roll[0]+ ListPlayer.get(PlayerIndex0).GetColor());
+                    GameBoard.RemoveMinion(roll[1], ListPlayer.get(PlayerIndex1).GetColor());
                 }
                 }
                 //TODO personality cards
@@ -866,8 +879,8 @@ public class GameEngine implements Serializable
                 //{}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("move") ==0)
                 {
-                	String object = currentEffect.Object.get(verbCount);
-                     int amount = (int)object.charAt(0);
+                	String object1 = currentEffect.Object.get(verbCount);
+                     int amount = (int)object1.charAt(0);
                      
                      //The Duckman -//Foul Ole Ron--//Canting Crew
                      if(object.contains("minion"))
@@ -888,31 +901,31 @@ public class GameEngine implements Serializable
                             		 GameBoard.RemoveMinion(Source,ListPlayer.get(PlayerIndex).GetColor()) ;
                             		 GameBoard.PlaceMinion(Destination, ListPlayer.get(PlayerIndex));
                             	 }//Rincewind
-                             }elseif(CardPlayed.GetName()=="Rincewind")
+                             }else if(CardPlayed.GetName()=="Rincewind")
                              {
-                             Scanner scan = new Scanner(System.in);
+                            // Scanner scan = new Scanner(System.in);
                          	
                              System.out.println("Enter area index from where you want to move minion-it should have troubleMarker");
-                             int Source = scan.nextInt();
+                             int source = scan.nextInt();
                              System.out.println("Enter area index to where you want to move minion-it should be adjacent");
-                             int Destination = scan.nextInt();
+                             int destination = scan.nextInt();
                             
-                             if(GameBoard.GetArea(Source).HasTroubleMaker() && GameBoard.ListArea.AreaAdjacency(Source,Destination))
+                             if(GameBoard.GetArea(source).HasTroubleMaker() && GameBoard.ListArea.AreaAdjacency(source,destination))
                              {
-                            	 GameBoard.RemoveMinion(Source,ListPlayer.get(CurrentPlayer).GetColor()) ;
-                        		 GameBoard.PlaceMinion(Destination, ListPlayer.get(CurrentPlayer)); 
+                            	 GameBoard.RemoveMinion(source,ListPlayer.get(CurrentPlayer).GetColor()) ;
+                        		 GameBoard.PlaceMinion(destination, ListPlayer.get(CurrentPlayer)); 
                              }//Dorfl--//Hobsons's Livery Stable
-                             }elseif(CardPlayed.GetName()=="Dorfl" || CardPlayed.GetName()=="Hobsons's Livery Stable")
+                             }else if(CardPlayed.GetName()=="Dorfl" || CardPlayed.GetName()=="Hobsons's Livery Stable")
                              {
-                             Scanner scan = new Scanner(System.in);
+                            // Scanner scan = new Scanner(System.in);
                          	
                              System.out.println("Enter area index from where you want to move minion");
-                             int Source = scan.nextInt();
+                             int _Source = scan.nextInt();
                              System.out.println("Enter area index to where you want to move minion");
-                             int Destination = scan.nextInt();
+                             int _Destination = scan.nextInt();
                              
-                             GameBoard.RemoveMinion(Source,ListPlayer.get(CurrentPlayer).GetColor()) ;
-                        	 GameBoard.PlaceMinion(Destination, ListPlayer.get(CurrentPlayer)); 
+                             GameBoard.RemoveMinion(_Source,ListPlayer.get(CurrentPlayer).GetColor()) ;
+                        	 GameBoard.PlaceMinion(_Destination, ListPlayer.get(CurrentPlayer)); 
                              }
                              }
                              
@@ -922,29 +935,49 @@ public class GameEngine implements Serializable
                 	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     
-                  /*//CMOT Dibbler
-                    if(object.contains("minion"))
-                    { */
-                    	    /*Scanner scan = new Scanner(System.in);
+                    
+                  //CMOT Dibbler-//The Fire Brigade
+                    if(object.contains("building")  )
+                    { 
+                    	    Scanner scan = new Scanner(System.in);
                         	
-                            System.out.println("Enter the player index you want to move his minion ");
+                            System.out.println("Enter the player index you want to move his building ");
                             int PlayerIndex = scan.nextInt();
-                            System.out.println("Enter area index from where you want to move minion");
-                            int Source = scan.nextInt();
-                            System.out.println("Enter area index to where you want to move minion-it should be adjacent");
-                            int Destination = scan.nextInt();
+                            System.out.println("Enter area index from where you want to move building");
+                            int area = scan.nextInt();
+                            GameBoard.RemoveBuilding(area, ListPlayer.get(PlayerIndex));
                             
-                            if(CardPlayed.GetName()=="The Duckman" || CardPlayed.GetName()=="Foul Ole Ron" ||CardPlayed.GetName()=="Canting Crew")
-                            {
-                           	 if (GameBoard.ListArea.AreaAdjacency(Source,Destination))
-                           	 {
-                           		 GameBoard.RemoveMinion(Source,ListPlayer.get(PlayerIndex).GetColor()) ;
-                           		 GameBoard.PlaceMinion(Destination, ListPlayer.get(PlayerIndex));
-                           	 }//Rincewind
-                            }elseif(CardPlayed.GetName()=="Rincewind")
-                	*/
+                    }//HERE ‘N’ NOW
+                    else if (object.contains("minion") && CardPlayed.GetName()=="HERE ‘N’ NOW"  )
+                    {
+                    Scanner scan = new Scanner(System.in);
+                	
+                    System.out.println("Enter area index from where you want to move building");
+                    int area = scan.nextInt();
+                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
+                    }//The Dean
+                     else if (object.contains("minion") && CardPlayed.GetName()=="The Dean"  )
+                	{
+                    	 Scanner scan = new Scanner(System.in);
+                     	//unreal state is area number 2
+                         System.out.println("Enter the player index you want to move his building ");
+                         int PlayerIndex = scan.nextInt();
+                		 GameBoard.RemoveMinion(1, ListPlayer.get(PlayerIndex).GetColor());
+                	}//The Auditors
+                     else if (object.contains("player order") && CardPlayed.GetName()=="The Auditors"  )
+                     {int _CurrentPlayer=ListPlayer.get(CurrentPlayer)
+                     for (Player player : this.ListPlayer)
+             			{if (PlayerNumber!=_CurrentPlayer)
+             			{
+             				System.out.println("Enter area number from where you want to remove Minion");
+             				int area = scan.nextInt();
+             				GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex));
+             			}
+                    	 
+             			}
+                    }
+                    }
                 }
-                
                 //Niloufar
               
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("place") ==0)
