@@ -304,8 +304,7 @@ name=Deep Dwarves
 verb=place; object=1 minion in any area ; condition= no trouble marker; symbol= S,C;
 
 name=Adora Bell Dearheart
-verb=move ; object=1 minion; symbol=S,M,B; actionnumber=1;
-verb=place; object=1 minion in any area; actionnumber=2;
+verb=place; object=1 minion only if move symbol=S,M,B;
 
 name=The Alchemists'Guild
 verb=discard; object=up to 3 cards and fill hands; symbol=S,B; actionnumber;
@@ -414,5 +413,5 @@ verb=remove; object =1 minion of choice from area has trouble maker; condition=d
 verb=remove; object=1 minion owned; condition=die number ==1; actionnumber =2; 
 
 name=Gargoyl
-verb=Draw card; object =1 card condition=1 card from each building ; symbol=S,B; actionnumber=1; 
+verb=Draw card; object =1 card for each building of yours; symbol=S,B; actionnumber=1; 
 

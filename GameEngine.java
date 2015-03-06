@@ -14,7 +14,7 @@ import java.util.List;
  
 public class GameEngine implements Serializable
 {
-	private List<Player> ListPlayer;
+	public List<Player> ListPlayer;
 	private ManageCards CardManager;
 	private Board GameBoard;
 	private int TotalPlayer;
@@ -26,7 +26,7 @@ public class GameEngine implements Serializable
 	public GameEngine() 
 	{
 		TotalPlayer = 2; //initialize to the minimal player in default constructor
-		InitializeData();
+		//InitializeData();
 	}
 	
 	/**
@@ -239,7 +239,7 @@ public class GameEngine implements Serializable
 		}
 		
 		
-        System.out.println("Player " + CurrentPlayerIndex + "decides to play " + CardPlayed.Name);
+        System.out.println("Player " + CurrentPlayerIndex + "decides to play " + CardPlayed.GetName());
         
 		//Execute the symbol of the
 		for(int sIterator = 0; ActionStatus && (sIterator < s.size()); sIterator++)
@@ -534,7 +534,7 @@ public class GameEngine implements Serializable
                         //TO DISCUSS
                         for(int a=0; a<GameBoard.ListArea.size(); a++)
                         {
-                            TotalBuilding += GameBoard.ListArea.get(a).ListBuilding.size();
+                            //TotalBuilding += GameBoard.ListArea.get(a).ListBuilding.size();
                         }
                         GameBoard.DeductFromBank(amount*TotalBuilding);
                 		ListPlayer.get(player).AddToMoney(amount*TotalBuilding);
@@ -1501,7 +1501,7 @@ public class GameEngine implements Serializable
 		int TotalBuildingPerPlayer = 6;
 		int TotalMinionPerPlayer = 12;
 		ListPlayer = new ArrayList<Player>();
-		CardManager = new ManageCards(TotalPlayer);
+		//CardManager = new ManageCards(TotalPlayer);
 		GameBoard = new Board();
 		
 		for(int PlayerCount = 0; PlayerCount <TotalPlayer; PlayerCount++)
@@ -1510,13 +1510,14 @@ public class GameEngine implements Serializable
 	        List<Cards> ListPlayerCards = new ArrayList<Cards>();
 	        int PlayerIndex = ListPlayer.size()+1;
 	        
+	        //DO LATER
 	        // fetch a random personality card
-	        Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
+	        //Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
 	        
 	        //fetch a random city area card
 	        for(int PlayerHandCount= 0; PlayerHandCount < PlayerHandSize; PlayerHandCount++)
 	        {
-	        	ListPlayerCards.add(CardManager.GetCard(CardType.GreenCards));      	
+	        	//ListPlayerCards.add(CardManager.GetCard(CardType.GreenCards));      	
 	        }
 	        
 	        //create a list minions and buildings for each player
@@ -1532,7 +1533,7 @@ public class GameEngine implements Serializable
 	        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
 	        } 
 	        
-	        ListPlayer.add(new Player(PlayerIndex, PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
+	        ListPlayer.add(new Player(PlayerIndex, null, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
 	        GameBoard.DeductFromBank(10);
 	        
 	        //each player should place one of their minions in the Shades, The Scours, and Dolly Sisters

@@ -21,9 +21,11 @@ public class Area implements Serializable
 		public  List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
 		public List<Pieces> ListMinions;
-		public List<Pieces> ListBuilding;
+		//public List<Pieces> ListBuilding;
+		//public Pieces Building;
 		private Pieces Building;
 				
+		public Pieces GetBuilding() {return Building; }
 		
 		public String toString() 
 		{

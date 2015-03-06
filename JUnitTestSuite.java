@@ -7,13 +7,13 @@ import java.io.FileReader;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
-
+import java.util.List;
 public class JUnitTestSuite {
 	 
 	/**
 	 * Test if functions for import/export GameEngine is working fine
 	 */
-	@Test public void TestStateManager() {
+	/*@Test public void TestStateManager() {
 		boolean ExportSuccess = false,
 				ImportSuccess = false;
         int RandomAmountOfMoney = 15;
@@ -32,12 +32,47 @@ public class JUnitTestSuite {
 		//evaluate test result
 		assertTrue("Failed while import state", ImportSuccess);
 		assertTrue("Failed while export state", ExportSuccess);
+	}*/
+	
+	@Test public void TestHubert()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine(4);
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		//SPECIFIC
+		GreenCards Hubert = new GreenCards("Hubert", 1, true, CardType.GreenCards);
+		List<String> ListVerb = new Vector<String>(); 
+		ListVerb.add("give");
+		List<String> ListSymbol = new Vector<String>(); 
+		ListSymbol.add("s");
+		ListSymbol.add("m");
+		List<String> ListObject = new Vector<String>(); 
+		ListObject.add("3$ to another player of choice");
+//		/public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+		
+		Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+		Hubert.AddAction(a);
+		Hubert.AddSymbols("s");
+		Hubert.AddSymbols("m");
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		
+		ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(Hubert);
+		//check if money transfered
+		
+		boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+		//assertTrue("Failed executing Hubert", Success);
+		//public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,List<String> s ,String relation, boolean keep) 
+		
+				//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+		 
 	}
 	
 	/**
 	 * Test a success and fail scenario while transferring money to player 
 	 */
-	@Test public void TestTransferMoneyToPlay()
+	/*@Test public void TestTransferMoneyToPlay()
 	{
 		boolean TransferSuccessScenario = false;
 		boolean TransferBadScenario = false;
@@ -73,7 +108,7 @@ public class JUnitTestSuite {
 		
 		assertTrue("Failed while transferring money from bank to player", TransferSuccessScenario);
 		assertFalse("Failed because Bank should not have sufficient money to transfer", TransferBadScenario);
-	}
+	}*/
 
 	/**
 	 * Test will test how game reacts if trying to init with an invalid number of player 
@@ -94,7 +129,7 @@ public class JUnitTestSuite {
 		assertTrue("Failed while export state", InitFailedcenario);
 		
 	}
-	
+	/*
 	@Test public void TestGreenCard() {
 		// TODO Auto-generated method stub
 		boolean GeneratedError = false;
@@ -163,7 +198,7 @@ public class JUnitTestSuite {
 	 * Test First Player selection to make sure all players can be selected
 	 * 
 	 */
-	@Test public void TestFirstPlayerSelection()
+	/*@Test public void TestFirstPlayerSelection()
 	{
 		//initialize game with 4 players
 		GameEngine ge = new GameEngine(4);
@@ -193,7 +228,7 @@ public class JUnitTestSuite {
 		assertTrue(player1 && player2 && player3 && player4);
 	
 	}
-		
+	*/	
 	
 
 }

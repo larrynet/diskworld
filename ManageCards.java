@@ -247,30 +247,6 @@ public  Cards[] ShuffleCards(Cards[] _Cards)
 }
 
 
-//to add
-public void DiscardCard(Cards card )
-{
-	//TODO
-	/*switch(card.Type)
-	{
-	case GreenCards:
-		ListDiscardGreen.add(card);
-		break;
-	case BrownCards:
-		ListDiscardBrown.add(card);
-		break;
-	case CityAreaCards:
-		ListDiscardCityArea.add(card);
-		break;
-	case EventCards:
-		ListDiscardEvent.add(card);
-		break;
-	case PersonalityCards:
-		ListDiscardPersonality.add(card);
-		break;
-	}*/
-}
-
 @Override
 public String toString() 
 {
