@@ -222,13 +222,29 @@ public class GameEngine implements Serializable
 		//fetch card of playchoice
 		Cards CardPlayed = ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
 		boolean ActionStatus = true;
+		GreenCards g = null;
+		BrownCards b = null;
+		List<String> s = null;
+		if (CardPlayed.GetCardType() == CardType.GreenCards)
+		{
+			g = (GreenCards)CardPlayed;
+			s = g.GetSymbol();
+		}
+		else if (CardPlayed.GetCardType() == CardType.BrownCards)
+		{
+			b = (BrownCards)CardPlayed;
+			s=g.GetSymbol();
+		
+
+		}
+		
 		
         System.out.println("Player " + CurrentPlayerIndex + "decides to play " + CardPlayed.Name);
         
 		//Execute the symbol of the
-		for(int sIterator = 0; ActionStatus && (sIterator < CardPlayed.CardAction.Symbol.size()); sIterator++)
+		for(int sIterator = 0; ActionStatus && (sIterator < s.size()); sIterator++)
 		{
-			String currentSymbol = CardPlayed.CardAction.Symbol.get(sIterator);
+			String currentSymbol = s.get(sIterator);
 			
 			if(currentSymbol.compareToIgnoreCase("B") == 0)
 				ActionStatus = PutBuilding(CurrentPlayerIndex);
@@ -274,7 +290,21 @@ public class GameEngine implements Serializable
     private boolean PlayEffect(Cards CardPlayed, int player)
     {
     	boolean ActionStatus = false;
-        Action currentEffect = CardPlayed.CardAction;
+    	GreenCards g = null;
+    	BrownCards b = null;
+    	Action currentEffect = null;
+    	
+    	if (CardPlayed.GetCardType() == CardType.GreenCards)
+		{
+			g = (GreenCards)CardPlayed;
+			currentEffect = g.GetAction(0);			
+		}
+		else if (CardPlayed.GetCardType() == CardType.BrownCards)
+		{
+			b = (BrownCards)CardPlayed;
+			currentEffect = b.GetAction(0);
+		}
+        
         
         //traverse the verb
         for(int verbCount=0; verbCount<currentEffect.Verb.size(); verbCount++)
