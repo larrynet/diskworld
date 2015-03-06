@@ -26,7 +26,7 @@ public class GameEngine implements Serializable
 	public GameEngine() 
 	{
 		TotalPlayer = 2; //initialize to the minimal player in default constructor
-		//InitializeData();
+		InitializeData();
 	}
 	
 	/**
@@ -220,31 +220,15 @@ public class GameEngine implements Serializable
 		boolean isCardPlayed = false;
 		
 		//fetch card of playchoice
-		Cards CardPlayed = ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
+		Cards CardPlayed = (GreenCards)ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
 		boolean ActionStatus = true;
-		GreenCards g = null;
-		BrownCards b = null;
-		List<String> s = null;
-		if (CardPlayed.GetCardType() == CardType.GreenCards)
-		{
-			g = (GreenCards)CardPlayed;
-			s = g.GetSymbol();
-		}
-		else if (CardPlayed.GetCardType() == CardType.BrownCards)
-		{
-			b = (BrownCards)CardPlayed;
-			s=g.GetSymbol();
 		
-
-		}
-		
-		
-        System.out.println("Player " + CurrentPlayerIndex + "decides to play " + CardPlayed.GetName());
+        System.out.println("Player " + CurrentPlayerIndex + " decides to play " + CardPlayed.GetName());
         
 		//Execute the symbol of the
-		for(int sIterator = 0; ActionStatus && (sIterator < s.size()); sIterator++)
+		for(int sIterator = 0; ActionStatus && (sIterator < CardPlayed.CardAction.Symbol.size()); sIterator++)
 		{
-			String currentSymbol = s.get(sIterator);
+			String currentSymbol = CardPlayed.CardAction.Symbol.get(sIterator);
 			
 			if(currentSymbol.compareToIgnoreCase("B") == 0)
 				ActionStatus = PutBuilding(CurrentPlayerIndex);
@@ -290,27 +274,14 @@ public class GameEngine implements Serializable
     private boolean PlayEffect(Cards CardPlayed, int player)
     {
     	boolean ActionStatus = false;
-    	GreenCards g = null;
-    	BrownCards b = null;
-    	Action currentEffect = null;
-    	
-    	if (CardPlayed.GetCardType() == CardType.GreenCards)
-		{
-			g = (GreenCards)CardPlayed;
-			currentEffect = g.GetAction(0);			
-		}
-		else if (CardPlayed.GetCardType() == CardType.BrownCards)
-		{
-			b = (BrownCards)CardPlayed;
-			currentEffect = b.GetAction(0);
-		}
-        
+        Action currentEffect = CardPlayed.CardAction;
         
         //traverse the verb
         for(int verbCount=0; verbCount<currentEffect.Verb.size(); verbCount++)
         {
             //order of execution has to be reinforce when it is an AND
-            if(currentEffect.Relation.compareToIgnoreCase("and") == 0)
+        	if(!BelongToException(CardPlayed))
+            //if(currentEffect.Relation.compareToIgnoreCase("and") == 0)
             {
             	//TODO check condition
                 if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("pay") ==0)
@@ -529,13 +500,16 @@ public class GameEngine implements Serializable
                     {
                         //The Post office
                     	//Willian de worde
-                        int TotalBuilding = 0;
-                    	
-                        //TO DISCUSS
-                        for(int a=0; a<GameBoard.ListArea.size(); a++)
-                        {
-                            //TotalBuilding += GameBoard.ListArea.get(a).ListBuilding.size();
-                        }
+                        int TotalBuilding =0;
+                    	for(int a=0; a<GameBoard.ListArea.size(); a++)
+                    	{
+                    		if(ListPlayer.get(player).GetColor() == GameBoard.ListArea.get(a).GetBuilding().GetPieceColor())
+                    		{
+                    			TotalBuilding++;
+                    		}
+                    		
+                    	}
+
                         GameBoard.DeductFromBank(amount*TotalBuilding);
                 		ListPlayer.get(player).AddToMoney(amount*TotalBuilding);
                     	
@@ -711,7 +685,49 @@ public class GameEngine implements Serializable
                 }
                 //Parinaz
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("draw") ==0)
-                {}else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("withdraw") ==0)
+                {
+                	//verb=shuffle; object=discard cards; actionnumber=1;
+                	//verb=draw; object=4cards from discard cards; symbol=S,M; 
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                    if(object.contains("discard"))
+                    {
+                    	Cards [] c = new Cards[4];
+                    	for(int i=0; i<4; i++)
+                    	   ListPlayer.get(player).PlayerCards.add(this.DiscardCards.get(i));
+                    	
+                    }
+                    else if(object.contains("building"))
+                    {
+                    	int NumBuilding =0;
+                    	for(int a=0; a<GameBoard.ListArea.size(); a++)
+                    	{
+                    		if(ListPlayer.get(player).GetColor() == GameBoard.ListArea.get(a).GetBuilding().GetPieceColor())
+                    		{
+                    			NumBuilding++;
+                    		}
+                    		
+                    	}
+                    	for(int DrawCount=0; DrawCount < NumBuilding; DrawCount++)
+                    	{
+                    		Cards c = CardManager.GetCard(CardType.GreenCards);
+                    		if(c==null) c = CardManager.GetCard(CardType.GreenCards);
+                    		ListPlayer.get(DrawCount).AddPlayerCard(c);
+                    	}
+                    }
+                    else if(object.contains("cards"))
+                    {
+                         	
+                     	for(int DrawCount=0; DrawCount < amount; DrawCount++)
+                     	{
+                     		Cards c = CardManager.GetCard(CardType.GreenCards);
+                     		if(c==null) c = CardManager.GetCard(CardType.GreenCards);
+                     		ListPlayer.get(DrawCount).AddPlayerCard(c);
+                     	}
+                    }
+                }
+                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("withdraw") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("exchange") ==0)
                 {}
@@ -1501,7 +1517,7 @@ public class GameEngine implements Serializable
 		int TotalBuildingPerPlayer = 6;
 		int TotalMinionPerPlayer = 12;
 		ListPlayer = new ArrayList<Player>();
-		//CardManager = new ManageCards(TotalPlayer);
+		CardManager = new ManageCards(TotalPlayer);
 		GameBoard = new Board();
 		
 		for(int PlayerCount = 0; PlayerCount <TotalPlayer; PlayerCount++)
@@ -1510,14 +1526,13 @@ public class GameEngine implements Serializable
 	        List<Cards> ListPlayerCards = new ArrayList<Cards>();
 	        int PlayerIndex = ListPlayer.size()+1;
 	        
-	        //DO LATER
 	        // fetch a random personality card
-	        //Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
+	        Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
 	        
 	        //fetch a random city area card
 	        for(int PlayerHandCount= 0; PlayerHandCount < PlayerHandSize; PlayerHandCount++)
 	        {
-	        	//ListPlayerCards.add(CardManager.GetCard(CardType.GreenCards));      	
+	        	ListPlayerCards.add(CardManager.GetCard(CardType.GreenCards));      	
 	        }
 	        
 	        //create a list minions and buildings for each player
@@ -1533,7 +1548,7 @@ public class GameEngine implements Serializable
 	        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
 	        } 
 	        
-	        ListPlayer.add(new Player(PlayerIndex, null, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
+	        ListPlayer.add(new Player(PlayerIndex, PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
 	        GameBoard.DeductFromBank(10);
 	        
 	        //each player should place one of their minions in the Shades, The Scours, and Dolly Sisters
