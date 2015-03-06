@@ -14,7 +14,7 @@ import java.util.List;
  
 public class GameEngine implements Serializable
 {
-	private List<Player> ListPlayer;
+	public List<Player> ListPlayer;
 	private ManageCards CardManager;
 	private Board GameBoard;
 	private int TotalPlayer;
@@ -26,7 +26,7 @@ public class GameEngine implements Serializable
 	public GameEngine() 
 	{
 		TotalPlayer = 2; //initialize to the minimal player in default constructor
-		InitializeData();
+		//InitializeData();
 	}
 	
 	/**
@@ -222,13 +222,29 @@ public class GameEngine implements Serializable
 		//fetch card of playchoice
 		Cards CardPlayed = ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
 		boolean ActionStatus = true;
+		GreenCards g = null;
+		BrownCards b = null;
+		List<String> s = null;
+		if (CardPlayed.GetCardType() == CardType.GreenCards)
+		{
+			g = (GreenCards)CardPlayed;
+			s = g.GetSymbol();
+		}
+		else if (CardPlayed.GetCardType() == CardType.BrownCards)
+		{
+			b = (BrownCards)CardPlayed;
+			s=g.GetSymbol();
 		
-        System.out.println("Player " + CurrentPlayerIndex + "decides to play " + CardPlayed.Name);
+
+		}
+		
+		
+        System.out.println("Player " + CurrentPlayerIndex + "decides to play " + CardPlayed.GetName());
         
 		//Execute the symbol of the
-		for(int sIterator = 0; ActionStatus && (sIterator < CardPlayed.CardAction.Symbol.size()); sIterator++)
+		for(int sIterator = 0; ActionStatus && (sIterator < s.size()); sIterator++)
 		{
-			String currentSymbol = CardPlayed.CardAction.Symbol.get(sIterator);
+			String currentSymbol = s.get(sIterator);
 			
 			if(currentSymbol.compareToIgnoreCase("B") == 0)
 				ActionStatus = PutBuilding(CurrentPlayerIndex);
@@ -260,10 +276,35 @@ public class GameEngine implements Serializable
 		return ActionStatus;
 	}
 
+	private boolean BelongToException(Cards c)
+    {
+        boolean b1 = c.GetName().contains("CMOT Dibbler");
+        boolean b2 = c.GetName().contains("The Fire Brigade");
+        boolean b3 = c.GetName().contains("Whiteface");
+        boolean b4 = c.GetName().contains("Errol");
+        boolean b5 = c.GetName().contains("HERE ");
+        
+        return (b1 && b2 &&b3 &&b4 && b5);
+    }
+	
     private boolean PlayEffect(Cards CardPlayed, int player)
     {
     	boolean ActionStatus = false;
-        Action currentEffect = CardPlayed.CardAction;
+    	GreenCards g = null;
+    	BrownCards b = null;
+    	Action currentEffect = null;
+    	
+    	if (CardPlayed.GetCardType() == CardType.GreenCards)
+		{
+			g = (GreenCards)CardPlayed;
+			currentEffect = g.GetAction(0);			
+		}
+		else if (CardPlayed.GetCardType() == CardType.BrownCards)
+		{
+			b = (BrownCards)CardPlayed;
+			currentEffect = b.GetAction(0);
+		}
+        
         
         //traverse the verb
         for(int verbCount=0; verbCount<currentEffect.Verb.size(); verbCount++)
@@ -450,65 +491,134 @@ public class GameEngine implements Serializable
                     
                     if(object.contains("minion in the Isle of Gods"))
                     {
+                        int TotalMinionInArea = 0;
                     	//The dysk & the opera house
-                    	
+                    	//count minion in Isle of Gods
+                        for(int a=0; a<GameBoard.ListArea.size(); a++)
+                        {
+                            if(GameBoard.ListArea.get(a).Name.contains("in Isle of Gods"))
+                                TotalMinionInArea = GameBoard.ListArea.get(a).ListMinions.size();
+                        }
+                        GameBoard.DeductFromBank(amount*TotalMinionInArea);
+                		ListPlayer.get(player).AddToMoney(amount*TotalMinionInArea);
             
                     }
                     else if(object.contains("times number of discarded card"))
                     {
                     	//Harry King
                     	//Shonky shop
-                        
+                        GameBoard.DeductFromBank(amount*DiscardCards.size());
+                		ListPlayer.get(player).AddToMoney(amount*DiscardCards.size());
                     }
-                    else if(object.contains("$ for each troublemaker in board"))
+                    else if(object.contains("for each troublemaker in board"))
                     {
                     	//Willian de worde
+                        ////Sacharissa Cripslock
+                        int TotalTroubleMaker = 0;
+                    	
+                        for(int a=0; a<GameBoard.ListArea.size(); a++)
+                        {
+                            if(GameBoard.ListArea.get(a).HasTroubleMaker())
+                                TotalTroubleMaker++;
+                        }
+                        GameBoard.DeductFromBank(amount*TotalTroubleMaker);
+                		ListPlayer.get(player).AddToMoney(amount*TotalTroubleMaker);
                     	
                     }
-                    else if(object.contains("$ for each building on board"))
+                    else if(object.contains("for each building on board"))
                     {
+                        //The Post office
                     	//Willian de worde
+                        int TotalBuilding = 0;
+                    	
+                        //TO DISCUSS
+                        for(int a=0; a<GameBoard.ListArea.size(); a++)
+                        {
+                            //TotalBuilding += GameBoard.ListArea.get(a).ListBuilding.size();
+                        }
+                        GameBoard.DeductFromBank(amount*TotalBuilding);
+                		ListPlayer.get(player).AddToMoney(amount*TotalBuilding);
                     	
                     }
                     else if(object.contains("$ from a player of choice"))
                     {
-                    	
+                    	Scanner scan = new Scanner(System.in);
                     	//Nobby Nobbs
-                    	
+                        System.out.println("Enter player to get money from.");
+                        int PlayerIndex = scan.nextInt();
+                        ListPlayer.get(player).AddToMoney(amount);
+                		ListPlayer.get(PlayerIndex).DeductFromMoney(amount);
                     }
                     else if(object.contains(" for each minion in area with troublemaker"))
                     {
                     	//mr slant
                     	//Otto Shriek
-                    }
-                    else if(object.contains("for each building on board"))
-                    {
-                    	//The Post office
-                    	
+                         int TotalMinionInArea = 0;
+                    	//The dysk & the opera house
+                    	//count minion in Isle of Gods
+                        for(int a=0; a<GameBoard.ListArea.size(); a++)
+                        {
+                            if(GameBoard.ListArea.get(a).HasTroubleMaker())
+                                TotalMinionInArea += GameBoard.ListArea.get(a).ListMinions.size();
+                        }
+                        GameBoard.DeductFromBank(amount*TotalMinionInArea);
+                		ListPlayer.get(player).AddToMoney(amount*TotalMinionInArea);
                     }
                     else if(object.contains("cards of other player and give back 1"))
                     {
-                    	//stanley
+                    	//stanley pick two cards randomly and randomly select 1
+                        System.out.println("Select a player to get cards from. ");
+                        Scanner scan = new Scanner(System.in);
+                        int PlayerIndex = scan.nextInt();
+                        int [] PlayerChoice = new int[2];
+                        
+                        System.out.println("Enter card index 0 to take from player:");
+                        PlayerChoice[0] = scan.nextInt();
+                        
+                        System.out.println("Enter card index 1 to take from player:");
+                        PlayerChoice[1] = scan.nextInt();
+                        
+                        Random r = new Random();
+                        int RandomIndex = r.nextInt()%2;
+                        System.out.println("God of random selected index # " + PlayerChoice[RandomIndex]);
+                        
+                        ListPlayer.get(player).PlayerCards.add(ListPlayer.get(PlayerIndex).PlayerCards.get(PlayerChoice[RandomIndex]));
+                        ListPlayer.get(PlayerIndex).PlayerCards.remove(PlayerChoice[RandomIndex]);
+                        
+                    }
+                    else if(object.contains("cards from a player"))
+                    {
+                    	Scanner scan = new Scanner(System.in);
+                    	
+                    	//Queen molly (selected player)
+                        System.out.println("Select a player to get cards from. ");
+                        int PlayerIndex = scan.nextInt();
+                        
+                        System.out.println("Player " + PlayerIndex + ": Enter card index 0 you are willing to give up:");
+                        int CardIndex0 = scan.nextInt();
+                        
+                        System.out.println("Player " + PlayerIndex + ": Enter card index 1 you are willing to give up:");
+                        int CardIndex1 = scan.nextInt();
+                        
+                        ListPlayer.get(player).PlayerCards.add(ListPlayer.get(PlayerIndex).PlayerCards.get(CardIndex0));
+                        ListPlayer.get(player).PlayerCards.add(ListPlayer.get(PlayerIndex).PlayerCards.get(CardIndex1));
+                        ListPlayer.get(PlayerIndex).PlayerCards.remove(CardIndex0);
+                        ListPlayer.get(PlayerIndex).PlayerCards.remove(CardIndex1);
                     }
                     else if(object.contains("cards"))
                     {
-                    	
                     	//Leonard of Quirm
                     	//the clacks
                     	//professor of recent runes
                     	//Sergeant Cheery Littlebottom
+                        List<Cards> DrawCardList = new ArrayList<Cards>();
+                        for(int i=0; i<amount; i++)
+                        {
+                            Cards c = CardManager.GetCard(CardType.GreenCards);
+                            if(c==null) c=CardManager.GetCard(CardType.BrownCards);
+                            ListPlayer.get(player).PlayerCards.add(c);
+                        }
                     	
-                    }
-                    else if(object.contains("for each trouble maker"))
-                    {
-                    	
-                    	//Sacharissa Cripslock
-                    	
-                    }
-                    else if(object.contains("cards from a player"))
-                    {
-                    	
-                    	//Queen molly (selected player)
                     }
                     
                 }
@@ -521,34 +631,82 @@ public class GameEngine implements Serializable
                     if(object.contains("up to 3 cards and fill hands"))
                     {
                     	//alchemist guild
+                    	Scanner scan = new Scanner(System.in);
+                    	
+                        System.out.println("Enter number of cards you want to discard (1-3)");
+                        int CardToTake = scan.nextInt();
+                        
+                        for(int i=0; i<CardToTake; i++)
+                        {
+                            System.out.println("Enter card index "+i+": you are willing to give up:");
+                            int CardIndex = scan.nextInt();
+                            ListPlayer.get(player).PlayerCards.remove(CardIndex);
+                        }
+                        for(int j=0; j<(5-ListPlayer.get(player).PlayerCards.size()); j++)
+                        {
+                            Cards c = CardManager.GetCard(CardType.GreenCards);
+                            if(c==null) c=CardManager.GetCard(CardType.BrownCards);
+                            ListPlayer.get(player).PlayerCards.add(c);
+                        }
+                     
                     }
                     else if(object.contains("card player card from a other hand"))
                     {
                     	//Cable Street Particular
+                    	Scanner scan = new Scanner(System.in);
+                        System.out.println("Enter player index you want to peek and discard");
+                        int PlayerIndex = scan.nextInt();
+                        
+                        //TODO: show card maybe
+                        System.out.println("Enter card index you want to discard");
+                        int CardToDiscard = scan.nextInt();
+                        ListPlayer.get(PlayerIndex).PlayerCards.remove(CardToDiscard);
                     }
-                    else if(object.contains(" card"))
+                    else if(object.contains("card"))
                     {
                     	///modo
                     	//The Mob
+                    	Scanner scan = new Scanner(System.in);
+                        for(int i=0; i<amount; i++)
+                        {  
+                            System.out.println("Enter card index you want to discard");
+                            int CardToDiscard = scan.nextInt();
+                            ListPlayer.get(player).PlayerCards.remove(CardToDiscard);
+                        }
+                        
                     } 
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
                 {
                 	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
-                    
-                    
+                    Scanner scan = new Scanner(System.in);
                     if(object.contains("minion in player order"))
                     {
                     	//The Auditors
+                        for(int i=0; i<TotalPlayer; i++)
+                        {
+                            if(i!=player)
+                            {
+                                System.out.println("Enter area index you want to remove minion");
+                                int Area = scan.nextInt();
+                                GameBoard.RemoveMinion(Area, ListPlayer.get(i).GetColor());
+                            }
+                        }
                     }
                     else if(object.contains("minion of choice in that area and roll dice twice"))
                     {
-                    	//Carcer
-                    }
-                    else if(object.contains("minion of choice in that area and roll dice twice"))
-                    {
-                    	//Carcer
+                 
+                        //Carcer
+                        int RollDieValue0 = GameBoard.RollDie();
+                        int RollDieValue1 = GameBoard.RollDie();
+                        
+                        System.out.println("Enter Player index to remove minion from for area "+RollDieValue0 +" : ");
+                        int PlayerIndex0 = scan.nextInt();
+                        System.out.println("Enter Player index to remove minion from for area "+RollDieValue1 +" : ");
+                        int PlayerIndex1 = scan.nextInt();
+                    	GameBoard.RemoveMinion(RollDieValue0, ListPlayer.get(PlayerIndex0).GetColor());
+                        GameBoard.RemoveMinion(RollDieValue1, ListPlayer.get(PlayerIndex1).GetColor());
                     }
                 }
                 //Parinaz
@@ -568,21 +726,111 @@ public class GameEngine implements Serializable
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
                 {}
+                
                 //Niloufar
+              
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("place") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                	// In "dorfi", "Adora Bell Dearheart" Place is the second verb????
+                    //move one minion your own minion from an area to another area
+                    
+                  //Deep Dwarves ,Mr Shine
+                	if (object.contains("1 minion in any area" ))
+                			{
+                		//place a minion in any area withount puting trouble marker
+                		System.out.println("Please select a area to put a Minion In.");
+                		boolean IsMinionIn=PutMinion(CurrentPlayer);
+                		if( !IsMinionIn)
+                			//throw exceptions;
+                			System.out.println("!!!!!IsMinionIn is TRUE...WHAT THE HELL!!!!!!!");
+                			
+                			}
+                	//Willikins
+                	else if (object.contains("1 minion in area with building in"  ))
+                	{
+                		System.out.println("Please select a area to put a Minion In.");
+                	}
+                	//Archchancellor Ridcully
+                	else if (object.contains("1 or 2 minion in or adjacent to Unreal Estate"  ))
+                	{
+                		
+                	}
+                	//The Senior Wrangler
+                	else if (object.contains("1 minion in or adjacent to Unreal Estate"  ))
+                	{
+                		
+                	}
+                	//The Smoking Gnu
+                	else if (object.contains("1 minion containing in area trouble marker" ))
+                	{
+                		
+                	}
+                	//Doctor Hix
+                	else if (object.contains("trouble marker in any area" ))
+                	{
+                		
+                	}
+                		
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("play") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    //Pondor Stibbons ,Drumknott
+                    if (object.contains("2 other cards"))
+                    {
+                    	
+                    }
+                    	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
-                {}
+                {
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("return") ==0)
-                {}
+                {
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("replace") ==0)
-                {}
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    
+                    //Sybil Vimes
+                    if (object.contains("1 building of your own with another player"))
+                    {
+                    
+                    }
+                    else  if (object.contains("1 building of your own with another player"))
+                    {
+                    	//pay the cost +must has a trouble marker
+                    }
+                    	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("stop") ==0)
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                    int amount = (int)object.charAt(0);
+                    //Gaspode
+                    
+                    if (object.contains("move or remove minion"))
+                    {
+                    	//pay the cost +must has a trouble marker
+                    }
+                    	//Susan
+                    else if (object.contains("1 minion from removing"))
+                    {
+                    	//pay the cost +must has a trouble marker
+                    }
+                    	
+                }
+                //there is two of verb choose
+                /*else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
                 {}
-                else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
-                {}
+                {}*/
                 //Gay
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("see") ==0)
                 {}
@@ -591,33 +839,213 @@ public class GameEngine implements Serializable
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("ignore") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("end") ==0)
-                {}
+                {
+                	//RIOT CARD : Games end of there are more then eight trouble markers
+                	int countTroubleMarkers = 0;
+                	
+                	for (Area area : this.GameBoard.ListArea)
+                	{
+                		if (area.GetIsTrouble())
+                		{
+                			countTroubleMarkers++;
+                		}
+                		
+                		if (countTroubleMarkers >= 8)
+                		{
+                			//END GAMES PROCEDURE
+                		}
+                	}
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("select") ==0)
-                {}
+                {
+                	//Queen Molly
+                	Scanner scan = new Scanner(System.in);
+                	
+                	System.out.println("Select one player:");
+                    int playerIndex= scan.nextInt();
+                    
+                    System.out.println("Player " + playerIndex + " give player " + player + " two cards of your choice by specifying the card number");
+                    ListPlayer.get(playerIndex).PrintCardsIndex();
+                    
+                    System.out.println("First Card:");
+                    int FirstCard= scan.nextInt();
+                    
+                    System.out.println("Second Card:");
+                    int SecondCard = scan.nextInt();
+                
+                    
+                    Cards c1 = ListPlayer.get(playerIndex).GetCards().get(FirstCard);
+                    Cards c2 = ListPlayer.get(playerIndex).GetCards().get(SecondCard);
+                  
+                    ListPlayer.get(player).AddPlayerCard(c1);
+                    ListPlayer.get(player).AddPlayerCard(c2);
+                    
+                    ListPlayer.get(playerIndex).RemovePlayerCard(FirstCard);
+                    ListPlayer.get(playerIndex).RemovePlayerCard(SecondCard);
+                   
+                	
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("putminion") ==0)
-                {}
+                {
+                	Player currentPlayer = ListPlayer.get(player);
+                	
+                	//Does player have a minion removed
+                	Colors PlayerColor = currentPlayer.GetColor();
+                	
+                	//Iterate through dead minions to see if player has a removed minions
+                	Pieces minionPiece = null;
+                	
+                	for(Pieces piece : this.GameBoard.GetDeadMinions())
+                	{
+                		if (piece.GetPieceColor() == PlayerColor)
+                		{
+                			minionPiece = piece;
+                			break;
+                		}
+                	}
+                	
+                	if (minionPiece != null)
+                	{
+	                	//Add minion piece to player minion bank
+	                	currentPlayer.RetrieveMinion(minionPiece);
+	                	
+	                	Scanner scan = new Scanner(System.in);
+	                	
+	                	boolean minionPlaced = false;
+	                	
+	                	while (!minionPlaced)
+	                	{
+		                	System.out.println("Enter area to place minion in: ");
+		                    int areaIndex = scan.nextInt() - 1;
+		                    
+		                    minionPlaced = this.GameBoard.PlaceMinion(areaIndex, currentPlayer);
+	                	}
+                	}
+                	else
+                	{
+                		System.out.println("You do not have a minion that was removed");
+                	}
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
-                {}
+                {
+                	//Player takes a 10$ loan
+                	ListPlayer.get(player).GetLoan(10);
+                	
+                	//Player owed 12$ at end of games
+                	ListPlayer.get(player).AddtoPayBack(12);
+                	
+                	//Player needs to pay back 12 at end of game or player will lose 15 points
+                	ListPlayer.get(player).IncreaseLostPoints(15);
+                }
                 else
                     System.out.println("!!!!!!! Unknown verb found !!!!!!!! : " + currentEffect.Verb.get(verbCount));
             }
             //order of execution not important. Can only execute one of them
             else 
             {
-                //only the following cards should come here. We will treat them exceptionally
-                
-                //name=CMOT Dibbler**
-                //verb=get; object=4$ bank; condition=dice>7 order=1;
-                // verb=pay; object=2$ bank; condition=dice=1 OR verb=remove; object=1 minion;
-                
-                //name=The Fire Brigade
-                //verb=get; object=5$ from a player OR verb=remove; object=building; symbol=S,C;
-                
-                //name=Dr Whiteface
-                //verb=take; object=5$ OR verb=give; object=card to player hand; symbol=S,M;
-                
-            	//Errol
-            	//here n now
+                if(CardPlayed.Name.contains("CMOT Dibbler"))
+                {
+                    int DieValue = GameBoard.RollDie();
+                    System.out.println("Value of Die is "+ DieValue);
+                    if(DieValue>7)
+                    {
+                        //get 4$ from bank
+                        GameBoard.DeductFromBank(4);
+                		ListPlayer.get(player).AddToMoney(4);
+                    }
+                    else
+                    {
+                        //pay 2$ from bank
+                        GameBoard.AddToBank(2);
+                		ListPlayer.get(player).DeductFromMoney(2);
+                    }
+                }
+                else if(CardPlayed.Name.contains("Fire Brigade"))
+                {
+                	Scanner scan = new Scanner(System.in);
+                    //Choose a player and have him pay 5$. If not, remove a building
+                    System.out.println("Enter the player index you want to get your money.");
+                    int PlayerIndex = scan.nextInt();
+                    System.out.println("Player " + PlayerIndex + ": Do you want to give 5$. If not, he will remove one of your building");
+                    String choice = scan.next();
+                    if(choice.compareToIgnoreCase("yes")==0)
+                    {
+                        ListPlayer.get(PlayerIndex).DeductFromMoney(5);
+                        ListPlayer.get(player).AddToMoney(5);
+                    }
+                    else
+                    {
+                        System.out.println("Enter area index to remove the minion:");
+                        int area = scan.nextInt();
+                        GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
+                    }
+                }
+                else if(CardPlayed.Name.contains("Dr Whiteface"))
+                {
+                	Scanner scan = new Scanner(System.in);
+                //Choose a player and have him pay 5$. If not, reduce hand size to 4
+                 //Choose a player and have him pay 5$. If not, remove a building
+                    System.out.println("Enter the player index you want to get your money.");
+                    int PlayerIndex = scan.nextInt();
+                    System.out.println("Player " + PlayerIndex + ": Do you want to give 5$. If not, you will need to keep this card which will reduce your hand size to 4.");
+                    String choice = scan.next();
+                    if(choice.compareToIgnoreCase("yes")==0)
+                    {
+                        ListPlayer.get(PlayerIndex).DeductFromMoney(5);
+                        ListPlayer.get(player).AddToMoney(5);
+                    }
+                    else
+                    {
+                    	//TO DISCUSS
+                        ListPlayer.get(PlayerIndex).HandSize--;
+                    }                
+                }
+                else if(CardPlayed.Name.contains("Errol"))
+                {
+                    //Remove minion of choice with area with Troublemaker
+                    int DieValue = GameBoard.RollDie();
+                    Scanner scan = new Scanner(System.in);
+                    System.out.println("Value of Die is "+ DieValue);
+                    if(DieValue>7)
+                    {
+                        //remove minion
+                        System.out.println("Enter the player index you want to remove minion.");
+                        int PlayerIndex = scan.nextInt();
+                        System.out.println("Enter area index to remove his minion:");
+                        int area = scan.nextInt();
+                        
+                        GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
+                    }
+                    else if(DieValue==1)
+                    {
+                        System.out.println("Enter area index to remove your minion:");
+                        int area = scan.nextInt();
+                        GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
+                    }
+                }
+                else if(CardPlayed.Name.contains("HERE "))// HERE �N� NOW
+                {
+                    //Remove minion of choice with area with Troublemaker
+                    int DieValue = GameBoard.RollDie();
+                    Scanner scan = new Scanner(System.in);
+                    System.out.println("Value of Die is "+ DieValue);
+                    if(DieValue>7)
+                    {
+                        //take 3$ from a player
+                        System.out.println("Enter the player index you want to get your money.");
+                        int PlayerIndex = scan.nextInt();
+                        ListPlayer.get(PlayerIndex).DeductFromMoney(3);
+                        ListPlayer.get(player).AddToMoney(3);
+                    }
+                    else if(DieValue==1)
+                    {
+                        //remove your own minion
+                        System.out.println("Enter area index to remove your minion:");
+                        int area = scan.nextInt();
+                        GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
+                    }
+                }
             }
             
         }
@@ -1073,7 +1501,7 @@ public class GameEngine implements Serializable
 		int TotalBuildingPerPlayer = 6;
 		int TotalMinionPerPlayer = 12;
 		ListPlayer = new ArrayList<Player>();
-		CardManager = new ManageCards(TotalPlayer);
+		//CardManager = new ManageCards(TotalPlayer);
 		GameBoard = new Board();
 		
 		for(int PlayerCount = 0; PlayerCount <TotalPlayer; PlayerCount++)
@@ -1082,13 +1510,14 @@ public class GameEngine implements Serializable
 	        List<Cards> ListPlayerCards = new ArrayList<Cards>();
 	        int PlayerIndex = ListPlayer.size()+1;
 	        
+	        //DO LATER
 	        // fetch a random personality card
-	        Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
+	        //Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
 	        
 	        //fetch a random city area card
 	        for(int PlayerHandCount= 0; PlayerHandCount < PlayerHandSize; PlayerHandCount++)
 	        {
-	        	ListPlayerCards.add(CardManager.GetCard(CardType.GreenCards));      	
+	        	//ListPlayerCards.add(CardManager.GetCard(CardType.GreenCards));      	
 	        }
 	        
 	        //create a list minions and buildings for each player
@@ -1104,7 +1533,7 @@ public class GameEngine implements Serializable
 	        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
 	        } 
 	        
-	        ListPlayer.add(new Player(PlayerIndex, PlayerPersonality, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
+	        ListPlayer.add(new Player(PlayerIndex, null, PlayerColor, ListPlayerCards, ListMinions, ListBuildings));
 	        GameBoard.DeductFromBank(10);
 	        
 	        //each player should place one of their minions in the Shades, The Scours, and Dolly Sisters

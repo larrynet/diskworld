@@ -20,9 +20,12 @@ public class Area implements Serializable
 		private Pieces TroubleMakers;
 		public  List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
-		private List<Pieces> ListMinions;
+		public List<Pieces> ListMinions;
+		//public List<Pieces> ListBuilding;
+		//public Pieces Building;
 		private Pieces Building;
 				
+		public Pieces GetBuilding() {return Building; }
 		
 		public String toString() 
 		{

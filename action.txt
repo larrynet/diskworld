@@ -23,7 +23,7 @@ name=The Duckman
 verb=move; object=minion from area; condition=adjacent area; symbol=S;
 
 name=Drumknott
-verb=playcard; object=2 other cards; symbol=S;
+verb=play; object=2 other cards; symbol=S;
 
 name=CMOT Dibbler
 verb=get; object=4$ bank; condition=dice>7 
@@ -63,6 +63,7 @@ name=Foul Ole Ron
 verb=move; object=minion to adjacent area; symbol=S,C;
 
 name=The Fire Brigade
+verb=choose ; object=1 player;
 verb=get; object=5$ from a player OR verb=remove; object=building; symbol=S,C;
 
 name=Zorgo the Retro-phrenologist
@@ -291,7 +292,7 @@ verb=exchange; object=all cards with another player; symbol=RE,S,C; actionnumber
 name=Sir Charles Lavatory
 verb=get; object=1$ for each building on board; symbol=S,B;
 
-name=Dorfi
+name=Dorfl
 verb=move ; object=1 minion; symbol=S,C; actionnumber=1;
 verb=place; object=1 minion in any area; actionnumber=2;
 
@@ -300,11 +301,10 @@ name=Sergeant Detritus
 symbol=RT,RT;
 
 name=Deep Dwarves
-verb=place; object=1 minion; condition= no trouble marker; symbol= S,C;
+verb=place; object=1 minion in any area ; condition= no trouble marker; symbol= S,C;
 
 name=Adora Bell Dearheart
-verb=move ; object=1 minion; symbol=S,M,B; actionnumber=1;
-verb=place; object=1 minion in any area; actionnumber=2;
+verb=place; object=1 minion only if move symbol=S,M,B;
 
 name=The Alchemists'Guild
 verb=discard; object=up to 3 cards and fill hands; symbol=S,B; actionnumber;
@@ -316,11 +316,11 @@ name=Buggy Swires
 symbol= RT;
 
 name=Susan
-verb=stop; object=minion; condition=minion is removing from board; symbol=I; actionnumber=1;
+verb=stop; object=1 minion from removing; condition=minion is removing from board; symbol=I; actionnumber=1;
 
 
 name=Sybil Vimes
-verb=replace; object=building of you own  and another player; symbol=T(3),S; actionnumber=1;
+verb=replace; object=1 building of you own with another player; symbol=T(3),S; actionnumber=1;
 
 name=Mr Teatime
 symbol=T(3),A,C; 
@@ -335,26 +335,26 @@ name=Willian de Worde
 verb=get; object=$ for each troublemaker in board; symbol=M,S; actionnumber=1;
 
 name=Willikins
-verb=place; object=minion in area ; condition=area has a building ; symbol=S; actionnumber=1;
+verb=place; object=1 minion in area with building in; condition=area has a building ; symbol=S; actionnumber=1;
 
 
 name=Archchancellor Ridcully
-verb=place ; object=1 or 2 minion in adjacent or Unreal Estate; symbol=RE,S; actionnumber=1;
+verb=place ; object=1 or 2 minion in or adjacent to Unreal Estate; symbol=RE,S; actionnumber=1;
 
 name=Ruby
 Symbol =M,B;
 
 name=The Senior Wrangler
-verb=place ; object=minion in adjacent or Unreal Estate; symbol=RE,S,C; actionnumber=1;
+verb=place ; object=1 minion in or adjacent to Unreal Estate; symbol=RE,S,C; actionnumber=1;
 
 name=Mr Shine
-verb=place; object=minion; symbol=S; actionnumber=1;
+verb=place; object=1 minion any area ;conditon=no trouble marker symbol=S; actionnumber=1;
 
 name=Mr Slant
 verb=get; object=2$ for each minion in area with troublemaker; symbol=S,B;
 
 name=The Smoking Gnu
-verb=place; object=1 minion; condition =count(trouble marker in area)>1; symbol =S,C; actionnumber=1;
+verb=place; object=1 minion containing in area trouble marker; condition =count(trouble marker in area)>1; symbol =S,C; actionnumber=1;
 
 name=Stanley
 verb=get ; object=2 cards of other player and give back 1; symbol=S,M; 
@@ -375,7 +375,7 @@ name=The Post Office
 verb=get; object 1$ for each building on board; symbol=S,M; actionnumber=1;
 
 name=Reacher Gilt
-verb=replace; object=building condition=troublemaker AND verb=pay; object=cost of the building; symbol=S;  
+verb=replace; object=1 building with another player building ;condition= area with troublemaker in it  AND verb=pay; object=cost of the building; symbol=S;  
 
 name=Professor of Recent Runes
 verb=get; object =2 cards; symbol =RE,S,C; actionnumber=1;
@@ -413,5 +413,5 @@ verb=remove; object =1 minion of choice from area has trouble maker; condition=d
 verb=remove; object=1 minion owned; condition=die number ==1; actionnumber =2; 
 
 name=Gargoyl
-verb=Draw card; object =1 card condition=1 card from each building ; symbol=S,B; actionnumber=1; 
+verb=Draw card; object =1 card for each building of yours; symbol=S,B; actionnumber=1; 
 

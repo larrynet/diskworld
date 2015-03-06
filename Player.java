@@ -15,10 +15,12 @@ public class Player implements Serializable {
     public List<Cards> CityAreaCards;
 	private Cards Personality;
 	public List<Cards> PlayerCards;
-    
+    public int HandSize;
 	private int PlayerNumber;
 	private int Money;
 	private int Loan;
+	private int PayBack;
+	private int LostPoints;
 	private Colors Color;
 	private List<Pieces> ListMinions;
 	private List<Pieces> ListBuildings;
@@ -39,6 +41,7 @@ public class Player implements Serializable {
 		PlayerNumber = _PlayerNumber;
 		Personality = _Personality;
 		Money = INITIAL_BANK;
+		HandSize = 5;
 		ListMinions = _ListMinion;
 		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
@@ -404,5 +407,35 @@ public class Player implements Serializable {
 		
 		return total; 
 	}
+	
+	/**
+	 * Add payback amount to player for loan cards
+	 * @param amount
+	 */
+	public void AddtoPayBack(int amount)
+	{
+		this.PayBack += amount;
+	}
+	
+	/**
+	 * Increment points to lose if payback not paid
+	 * @param points
+	 */
+	public void IncreaseLostPoints(int points)
+	{
+		this.LostPoints += points;
+	}
 
+	public void PrintCardsIndex()
+	{
+		StringBuilder strCards = new StringBuilder();
+		
+		for (int i = 0; i < this.PlayerCards.size(); i++)
+		{
+			strCards.append(i + ":" + this.PlayerCards.get(i).GetName() + "; ");
+		}
+		
+		System.out.println(strCards.toString());
+	}
+	
 }

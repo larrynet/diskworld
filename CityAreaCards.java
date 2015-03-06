@@ -39,10 +39,12 @@ public class CityAreaCards implements Cards, Serializable
 		 return this.Type;
 	 }
 	
+	public Action GetAction()
+	{return null;}
+	
 	public String toString() 
 	   {
 		 return  (this.toString());
-	   
 	  
 	   }
 }

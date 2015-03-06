@@ -1,18 +1,20 @@
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Niloufar
  *
  *
  */
-public class BrownCards implements Cards, Serializable
+public class BrownCards extends CardAction implements Cards, Serializable
 {
 
 	private String Name;
 	private int Id;
 	boolean Status;
 	private CardType Type;
-
+	
+	
 	public BrownCards(String _Name, int _Id, boolean _Status, CardType _Type)
 	{
 		Name = _Name;
@@ -22,6 +24,7 @@ public class BrownCards implements Cards, Serializable
 
 	}
 
+		
 	public String GetName() 
 	{
 		return this.Name;
@@ -37,10 +40,12 @@ public class BrownCards implements Cards, Serializable
 		return this.Type;
 	}
 
+
 	public String toString() 
 	{
 		return (this.toString());
 
 	}
+
 
 }

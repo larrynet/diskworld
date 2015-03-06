@@ -1,0 +1,140 @@
+//Green cards
+name=Mr Boggis
+verb=pay; object=2$ each player; 
+symbol=S,M;
+
+name=Mr Bent
+verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points end game; symbol=S,C;
+
+name=The beggars
+verb=take; object=2 cards of another players; symbol=S,M;
+
+name=The bank of Ankh-Morpork**
+verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points endgame; symbol=S,C;
+
+name=The dysk
+verb=get; object=1$ for each minion in the Isle of Gods; symbol=B,S;
+
+name=The Duckman
+verb=move; object=minion from area; condition=adjacent area; symbol=S;
+
+name=Drumknott
+verb=play; object=2 other cards; symbol=S;
+
+name=CMOT Dibbler
+verb=get; object=4$ bank; condition=dice>7 
+verb=pay; object=2$ bank; condition=dice=1 OR verb=remove; object=1 minion;
+
+name=Groat
+symbol=M;
+
+name=Gimlet's Dwarf Delicatessen
+symbol=S,T(3);
+
+name=Gaspode
+verb=stop; object=move or remove minion; symbol=I;
+
+name=Fresh Start Club
+verb=put minion; object=different area; condition=remove minion; symbol=I;
+
+name=The Ankh Morpork Sunshine Dragon Sanctuary
+verb=take; object=1$ or card; symbol=S,C;
+
+name=Segeant Angua
+symbol=RT,C;
+
+name=The Agony Aunts
+symbol=A,T(2),M;
+
+name=Dr Cruces
+symbol=A,T(3);
+
+name=captain carrot
+symbol=M,RT,T(1);
+
+name=mrs cake
+verb=look; object=all but one personality; symbol=S,T(2),M;
+
+name=Foul Ole Ron
+verb=move; object=minion to adjacent area; symbol=S,C;
+
+name=The Fire Brigade
+verb=choose ; object=1 player;
+verb=get; object=5$ from a player OR verb=remove; object=building; symbol=S,C;
+
+name=Zorgo the Retro-phrenologist
+verb=exchange; object=personality with one random unused; symbol=S,B;
+
+name=Dr Whiteface
+verb=take; object=5$ OR verb=give; object=card to player hand; symbol=S,M;
+
+name=Mr Pin & Mr  Tulip
+symbol=A,T(1);
+
+name=The thieves guild
+verb=pay; object=2$ from all player; symbol=S,M;
+
+name= Inigo Skimmer
+symbol=A,T(2);  
+
+name=History Monkes
+verb=shuffle; object=discard cards; actionnumber=1;
+verb=draw; object=4cards from discard cards; symbol=S,M; 
+
+name=Hex
+verb=draw; object=3 cards; symbol=S,B; 
+
+name=HERE AND NOW
+verb=roll; object=die;  symbol=S,C; actionnumber=1;
+verb=get; object=3$ from a player of choice; condition=number die>=7; actionnumber=2;
+verb=remove from board; object=1minion;  condition=number die==1; actionnumber=2;
+
+name=Harry King 
+verb=get; object=2$ times number of discarded card;  symbol=M,S;
+
+name=Horga's House of Ribs
+ symbol=T(3),M;
+
+name=Mr Gryle
+symbol=A,T(1); 
+
+ name=The Peeled Nuts
+
+name=The Opera House
+verb=get; object=1$ for each minion in the Isle of Gods; symbol=B,S; 
+
+name=Nobby Nobbs
+verb=get; object=3$ from a player of choice;  symbol=S,C;  actionnumber=1; 
+
+name=Modo
+verb=discard; object=1 card ; symbol=S,M;  
+
+name=The Mended Drum
+symbol=B,T(2);
+
+name=Librarian
+verb=get; object=4 cards;  symbol=S;  actionnumber= 1;
+
+name=Leonard of Quirm
+verb=get; object=4 cards;   symbol= S; actionnumber= 1; 
+
+name=Shonky Shop
+verb=get; object=1$ times number of discarded card;  symbol=M,S;
+
+name=Sacharissa Cripslock
+verb=get; object=1$ for each trouble maker on board; symbol=S,M ; actionnumber =1
+
+name=Rosie Palm
+verb=give; object=1 card condition=take 2$; symbol, M;S
+
+name=Rinsewind
+verb=move; object=1 minion from area with troublemaker to an adjacent area; symbol=RE,S,C;
+
+name=The Roya Mint
+symbol=B,T(5);
+
+name=Queen Molly
+verb=get; object=2cards from a player; symbol=M,S;
+
+name=The Pink PussyCat
+symbol=T(3),C;

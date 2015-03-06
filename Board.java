@@ -326,9 +326,16 @@ public class Board implements Serializable {
                     TotalTrouble++;
             return TotalTrouble;
         }
+        
         public Area GetArea(int i)
         {
             return ListArea.get(i);
         }
+        
+        public List<Pieces> GetDeadMinions()
+        {
+        	return this.ListDeadMinions;
+        }
 }
+
 

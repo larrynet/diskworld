@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -7,14 +8,18 @@ import java.util.Random;
  */
 public interface Cards 
 {
-	Action CardAction= null;
+	
 	 String Name = "";
 	 int Id = 0;
      boolean Status = false;
 	 CardType Type = null;
 	
+	 
 	public String GetName();
 	public int GetID();
 	public CardType GetCardType();
+	
+	
+	
 
 }
