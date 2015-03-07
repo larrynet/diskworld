@@ -141,7 +141,6 @@ public class Area implements Serializable
 			
 		}
 		
-				
 		
 		/**
 		 * @param p Piece of type Demon
@@ -296,7 +295,6 @@ public class Area implements Serializable
 		}
 		
 	
-	
 		/**
 		 * @return boolean to show if the Area has building or not
 		 */
@@ -329,8 +327,6 @@ public class Area implements Serializable
 			return "none";
 		}
 		
-		
-		
 			
 		/**
 		 * Prints State of Current Area: Name, Minions in Area, Trouble Marker present, Building present, Demon count, troll count
@@ -340,7 +336,6 @@ public class Area implements Serializable
 			 System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, IsBuilt,this.GetDemonCount(),this.GetTrollCount());
             
 		}
-		
 		
 		public void Assassinate(Pieces p)
 		{if (IsTrouble)
@@ -365,6 +360,10 @@ public class Area implements Serializable
 			
 		}
 			 
+		public boolean AreaAdjacency(int area1, int  area2)
+		{
+			return true;
+		}
 }
 	
 	
