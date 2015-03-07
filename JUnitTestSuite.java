@@ -52,7 +52,7 @@ public class JUnitTestSuite {
 		ListObject.add("3$ to another player of choice");
 //		/public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
 		
-		Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+		Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 		Hubert.AddAction(a);
 		Hubert.AddSymbols("s");
 		Hubert.AddSymbols("m");
@@ -97,7 +97,7 @@ public class JUnitTestSuite {
 
 	
 //	/public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-	Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+	Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 	card.AddAction(a);
 	
 	card.AddSymbols("S");
@@ -131,7 +131,7 @@ public class JUnitTestSuite {
 
 	
 //	/public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-	Action a = new Action(1, null,null , null, null, "and", false);
+	Action a = new Action(1, null,null , null, "and", false);
 	card.AddAction(a);
 	
 	card.AddSymbols("A");
@@ -173,7 +173,7 @@ GreenCards card = new GreenCards("captain carrot", 1, true, CardType.GreenCards)
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("M");
@@ -217,7 +217,7 @@ List<String> ListCondition=new Vector<String>();
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -259,7 +259,7 @@ ListObject.add("card to player hand");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "OR", false);
+Action a = new Action(1, ListVerb,ListObject , null, "OR", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -301,7 +301,7 @@ ListObject.add("1 minion of another player to adjacent area");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -343,7 +343,7 @@ ListCondition.add("remove minion");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("I");
@@ -385,7 +385,7 @@ ListObject.add("move or remove minion");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("I");
@@ -427,7 +427,7 @@ GreenCards card = new GreenCards("Gimlet's Dwarf Delicatessen", 1, true, CardTyp
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("M");
@@ -469,7 +469,7 @@ GreenCards card = new GreenCards("Groat", 1, true, CardType.GreenCards);
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("M");
@@ -483,7 +483,7 @@ assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Groat/////////////////////////
 
-///////////////////Horga’s House of Ribs//////////////////
+///////////////////Horgaï¿½s House of Ribs//////////////////
 @Test public void TestHorgasHouseofRibs()
 {//almost always the same
 GameEngine ge = new GameEngine(4);
@@ -492,7 +492,7 @@ int CurrentPlayerIndex = ge.GetCurrentPlayer();
 
 //SPECIFIC
 //public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
-GreenCards card = new GreenCards("Horga’s House of Ribs", 1, true, CardType.GreenCards);
+GreenCards card = new GreenCards("Horgaï¿½s House of Ribs", 1, true, CardType.GreenCards);
 //List<String> ListVerb = new Vector<String>(); 
 //ListVerb.add("roll");
 //ListVerb.add("get");
@@ -511,7 +511,7 @@ GreenCards card = new GreenCards("Horga’s House of Ribs", 1, true, CardType.Gree
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("T(3)");
@@ -523,7 +523,7 @@ ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
 assertTrue("Failed executing card", Success);
 }
-/////////////////////end of Horga’s House of Ribs/////////////////////////
+/////////////////////end of Horgaï¿½s House of Ribs/////////////////////////
 
 ///////////////////Harry King//////////////////
 @Test public void TestHarryKing()
@@ -553,7 +553,7 @@ ListObject.add("2$ times number of discarded card");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("M");
@@ -568,7 +568,7 @@ assertTrue("Failed executing card", Success);
 /////////////////////end of Harry King /////////////////////////
 
 
-///////////////////HERE ‘N’ NOW//////////////////
+///////////////////HERE ï¿½Nï¿½ NOW//////////////////
 @Test public void TestHERENNOW()
 {//almost always the same
 GameEngine ge = new GameEngine(4);
@@ -577,7 +577,7 @@ int CurrentPlayerIndex = ge.GetCurrentPlayer();
 
 //SPECIFIC
 //public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
-GreenCards card = new GreenCards("HERE ‘N’ NOW", 1, true, CardType.GreenCards);
+GreenCards card = new GreenCards("HERE ï¿½Nï¿½ NOW", 1, true, CardType.GreenCards);
 List<String> ListVerb = new Vector<String>(); 
 ListVerb.add("roll");
 ListVerb.add("get");
@@ -594,7 +594,7 @@ ListCondition.add("number die==1");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -606,7 +606,7 @@ ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
 assertTrue("Failed executing card", Success);
 }
-/////////////////////end of HERE ‘N’ NOW/////////////////////////
+/////////////////////end of HERE ï¿½Nï¿½ NOW/////////////////////////
 
 
 //////////////////Hex//////////////////
@@ -637,7 +637,7 @@ ListObject.add("3 cards");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -680,7 +680,7 @@ ListObject.add("4cards from discard cards");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -722,7 +722,7 @@ GreenCards card = new GreenCards("Inigo Skimmer", 1, true, CardType.GreenCards);
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("A");
@@ -765,7 +765,7 @@ ListObject.add("4 cards");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -808,7 +808,7 @@ ListObject.add("4 cards");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -851,7 +851,7 @@ ListObject.add("1 card");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -894,7 +894,7 @@ ListCondition.add("pay back 12$ or lose 15 points end game");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -937,7 +937,7 @@ ListObject.add("2$ from each player");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -980,7 +980,7 @@ GreenCards card = new GreenCards("Mr Gryle", 1, true, CardType.GreenCards);
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("A");
@@ -1004,25 +1004,25 @@ int CurrentPlayerIndex = ge.GetCurrentPlayer();
 //SPECIFIC
 //public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
 GreenCards card = new GreenCards("Mr Pin & Mr  Tulip", 1, true, CardType.GreenCards);
-//List<String> ListVerb = new Vector<String>(); 
-//ListVerb.add("loan");
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("loan");
 //ListVerb.add("get");
 //ListVerb.add("pay");
 //ListVerb.add("remove");
 
-//List<String> ListObject = new Vector<String>(); 
-//ListObject.add("10$ bank");
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("10$ bank");
 //ListObject.add("4$ from Bank");
 //ListObject.add("2$ to bank");
 //ListObject.add("1 minion");
 
-//List<String> ListCondition=new Vector<String>();
-//ListCondition.add("pay back 12$ or lose 15 points end game");
+List<String> ListCondition=new Vector<String>();
+ListCondition.add("pay back 12$ or lose 15 points end game");
 //ListCondition.add("dice=1");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("A");
@@ -1059,13 +1059,13 @@ ListObject.add("all but one personality");
 //ListObject.add("2$ to bank");
 //ListObject.add("1 minion");
 
-//List<String> ListCondition=new Vector<String>();
-//ListCondition.add("pay back 12$ or lose 15 points end game");
+List<String> ListCondition=new Vector<String>();
+ListCondition.add("pay back 12$ or lose 15 points end game");
 //ListCondition.add("dice=1");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1109,7 +1109,7 @@ ListObject.add("3$ from a player of choice");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1152,7 +1152,7 @@ GreenCards card = new GreenCards("The Pink PussyCat", 1, true, CardType.GreenCar
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("T(3)");
@@ -1196,7 +1196,7 @@ ListObject.add("2cards from a player");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("M");
@@ -1239,7 +1239,7 @@ ListObject.add("1 minion from area with troublemaker to an adjacent area");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("RE");
@@ -1284,7 +1284,7 @@ ListCondition.add("take 2$");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("M");
@@ -1328,7 +1328,7 @@ ListObject.add("1$ for each trouble maker on board");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1372,7 +1372,7 @@ GreenCards card = new GreenCards("Sergeant Angua", 1, true, CardType.GreenCards)
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null ,null, null, "and", false);
+Action a = new Action(1, null,null ,null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("RT");
@@ -1416,7 +1416,7 @@ ListObject.add("1$ times number of discarded card");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1459,7 +1459,7 @@ GreenCards card = new GreenCards("The Agony Aunts", 1, true, CardType.GreenCards
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null ,null, null, "and", false);
+Action a = new Action(1, null,null ,null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("A");
@@ -1503,7 +1503,7 @@ ListObject.add("1$ or card");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1546,7 +1546,7 @@ ListCondition.add("pay back 12$ or lose 15 points end game");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1589,7 +1589,7 @@ ListObject.add("2 cards of another players");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1633,7 +1633,7 @@ ListCondition.add("adjacent area");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1677,7 +1677,7 @@ ListObject.add("1$ for each minion in the Isle of Gods");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("B");
@@ -1721,7 +1721,7 @@ ListCondition.add("pay back 12$ or lose 15 points end game");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , ListCondition, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1764,7 +1764,7 @@ ListObject.add("card to player hand");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "OR", false);
+Action a = new Action(1, ListVerb,ListObject , null, "OR", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -1807,7 +1807,7 @@ GreenCards card = new GreenCards("The Mended Drum", 1, true, CardType.GreenCards
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null,null, null, "and", false);
+Action a = new Action(1, null,null,null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("B");
@@ -1850,7 +1850,7 @@ ListObject.add("1$ for each minion in the Isle of Gods");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("B");
@@ -1893,7 +1893,7 @@ GreenCards card = new GreenCards("The Peeled Nuts", 1, true, CardType.GreenCards
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 //card.AddSymbols("B");
@@ -1935,7 +1935,7 @@ GreenCards card = new GreenCards("The Royal Mint", 1, true, CardType.GreenCards)
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
+Action a = new Action(1, null,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("B");
@@ -1977,7 +1977,7 @@ ListObject.add("2$ from the player");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -2020,7 +2020,7 @@ ListObject.add("2$ from all player");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");
@@ -2063,7 +2063,7 @@ ListVerb.add("protected");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,null , null, null, "and", false);
+Action a = new Action(1, ListVerb,null , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("I");
@@ -2106,7 +2106,7 @@ ListObject.add("personality with one random unused");
 
 
 ///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 card.AddAction(a);
 
 card.AddSymbols("S");

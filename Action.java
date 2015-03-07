@@ -11,13 +11,13 @@ public class Action {
 	public String Relation;
 	public boolean KeepTillEnd;
 	
-	public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+	public Action(int n, List<String> v, List<String> o, List<String> c,String relation, boolean keep) 
 	{
 		NumberOfAction = n;
 		Verb = v;
 		Object=o;
 		Condition = c;
-		ActionNumber = a;
+		//ActionNumber = a;
 		Relation = relation;
 		KeepTillEnd = keep;
 	}
@@ -79,7 +79,7 @@ public class Action {
 			
 		}
 	
-		return new Action(nAction, verbs,objects,conditions, actionNumber, connector, KeepTillEnd);
+		return new Action(nAction, verbs,objects,conditions, connector, KeepTillEnd);
 	}
 	
 	public String GetVerbs(int index)
@@ -112,6 +112,7 @@ public class Action {
 		return "";
 	}
 	
+	/*
 	public String GetActionNumber(int index){
 		
 		if (!this.ActionNumber.isEmpty() && this.ActionNumber.size() >= index)
@@ -122,7 +123,7 @@ public class Action {
 		return "";
 		
 	}
-	
+	*/
 	
 	
 	public void PrintAll() {
@@ -131,7 +132,7 @@ public class Action {
 		
 		for (int i = 0; i < max; i++)
 		{
-			System.out.println("Verb=" + this.GetVerbs(i) + ";object=" + this.GetObject(i) + ";condition=" + this.GetCondition(i) + ";actionnumber=" + this.GetActionNumber(i) );
+			System.out.println("Verb=" + this.GetVerbs(i) + ";object=" + this.GetObject(i) + ";condition=" + this.GetCondition(i));
 		}
 	}
 	
