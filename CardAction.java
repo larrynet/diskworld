@@ -6,6 +6,8 @@ public abstract class CardAction {
 	 List<Action> ListCardAction= null;
 	 List<String> Symbols = null;
 	 
+	 public List<Action> GetActionList() {return ListCardAction;}
+	 
 	 public Action GetAction(int i)
 	 {
 		 return this.ListCardAction.get(i);

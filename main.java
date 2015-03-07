@@ -45,6 +45,17 @@ public class main {
 				count --;
 				System.out.println("\nCurrent player turn is " + CurrentPlayerIndex +"+++++++++++++++++++++++++++++++++++++++");
 				
+				//TODO -- Add encapsulation
+				//have draw cards if not full hand
+				if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
+				{
+					Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
+					if(c == null)
+						c = ge.GetCardManager().GetCard(CardType.BrownCards);
+					
+					ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
+					
+				}
 				//Show all the cards and let the person choose what he wants
 				System.out.println("1 - Peak at your card");
 				System.out.println("2 - Play card");
@@ -70,13 +81,18 @@ public class main {
 						//activating the area effect
 	                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
 	                    
-						System.out.println("Which card you want to play (1-5)?");
+						System.out.println("Which card you want to play?");
 						int playChoice = scan.nextInt();
 						boolean CardPlayed = ge.PlayCard(CurrentPlayerIndex, playChoice);
 						
 						if(CardPlayed )
 	                    {
 	                        System.out.println("Card played successfully");
+	                        
+	                        //increment turn
+	                        CurrentPlayerIndex = (CurrentPlayerIndex++)%NumPlayer;
+	                        
+	                        	
 	                    }
 						else
 	                    {
@@ -105,7 +121,7 @@ public class main {
 					}
                     
 				}
-				CurrentPlayerIndex = (CurrentPlayerIndex++)%NumPlayer; 
+				 
                 
                 //update current turn
                 ge.SetCurrentPlayer(CurrentPlayerIndex);
