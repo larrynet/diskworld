@@ -1,0 +1,13 @@
+//City Area
+name=The Hyppo
+name=The Sours
+name=Small Gods 
+name=Dragon's Landing
+name=Unreal Estate
+name=Dolly Sisters
+name=Nap Hill
+name=Seven Sleepers
+name=Isle of Gods 
+name=Longwall
+name=Dimwell 
+name=The Shades 

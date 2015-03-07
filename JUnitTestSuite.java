@@ -52,7 +52,7 @@ public class JUnitTestSuite {
 		ListObject.add("3$ to another player of choice");
 //		/public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
 		
-		Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+		Action a = new Action(1, ListVerb,ListObject , null, "and", false);
 		Hubert.AddAction(a);
 		Hubert.AddSymbols("s");
 		Hubert.AddSymbols("m");
@@ -230,5 +230,20 @@ public class JUnitTestSuite {
 	}
 	*/	
 	
+	@Test public void TestGreenCardCreation()
+	{
+		
+		ManageCards cardManager = new ManageCards(1);
+		for (int i = 0 ; i < cardManager.Event_Card.length; i++)
+		{
+			if (cardManager.Event_Card[i] != null)
+			{
+				System.out.println(cardManager.Event_Card[i].GetName());
+			}
+		}
+		
+		
+		
+	}
 
 }

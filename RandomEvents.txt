@@ -1,0 +1,13 @@
+//Event Cards
+name=The Dragon
+name=Flood
+name=Fire
+name=Fog
+name=Riots
+name=Explosion
+name=Mysterious Murders
+name=Demons From The Dungeon Dimension
+name=Subsidence
+name=Trolls
+name=Bloody Stupid Johnson  
+name=Earthquake
