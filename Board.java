@@ -261,7 +261,7 @@ public class Board implements Serializable {
 
 	}
 	
-	//check the adjacency of one other to another one-is a adjacent to b and return a boolean
+	//check the adjacency of one area to another one-is a adjacent to b and return a boolean
 	
 		public boolean AreaAdjacency(int Area1, int Area2)
 		{
