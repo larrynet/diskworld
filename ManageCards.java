@@ -28,7 +28,7 @@ public class ManageCards implements Serializable
 	public PersonalityCards[] Personality_Card=new PersonalityCards[7];
 	public EventCards []Event_Card =new EventCards[12];
 	public CityAreaCards []CityArea_Cards =new CityAreaCards[12];
-	public GreenCards[] Green_Cards=new GreenCards[48];
+	public GreenCards[] Green_Cards=new GreenCards[49];
 	private BrownCards[] Brown_Cards=new BrownCards[53];
 	
 	
@@ -257,14 +257,14 @@ public class ManageCards implements Serializable
 	private void CreateGreenCards()
 {
 	String  thisLine = null;
-	int iterator =  47;
+	int iterator =  48;
 	int j = 1;
 	 
 	  try
 	  {
 	     // open input stream test.txt for reading purpose. /Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/GreenCards.txt
 	     //BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/GreenCards.txt"));
-		  BufferedReader br = new BufferedReader(new FileReader("GreenCards.txt"));
+		  BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/GreenCards.txt"));
 	     while ((thisLine = br.readLine()) != null) {
 	    	 
 	    	//If not comment then read
@@ -310,7 +310,7 @@ public class ManageCards implements Serializable
 	
 	  try{
 	     // open input stream test.txt for reading purpose.
-	     BufferedReader br = new BufferedReader(new FileReader("BrownCards.txt"));
+	     BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/BrownCards.txt"));
 	     while ((thisLine = br.readLine()) != null) {
 	    	
 	    	 int iterator =  53;
@@ -354,7 +354,7 @@ public class ManageCards implements Serializable
 		
 		  try{
 		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader("PersonalityCards.txt"));
+		     BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/PersonalityCards.txt"));
 		    
 		     int iterator =  6;
 	    	 int j = 1;
@@ -390,7 +390,7 @@ public class ManageCards implements Serializable
 		
 		  try{
 		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader("CityArea.txt"));
+		     BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/CityArea.txt"));
 		    
 		     int iterator =  11;
 	    	 int j = 1;
@@ -428,7 +428,7 @@ public class ManageCards implements Serializable
 		
 		  try{
 		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader("RandomEvents.txt"));
+		     BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/RandomEvents.txt"));
 		    
 		     int iterator =  11;
 	    	 int j = 1;
