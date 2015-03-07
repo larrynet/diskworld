@@ -5,7 +5,7 @@
 
 //Green cards
 name=Mr Boggis
-verb=pay; object=2$ each player; symbol=S,M;
+verb=take; object=2$ from each player; symbol=S,M;
 
 name=Mr Bent
 verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points end game; symbol=S,C;
@@ -27,13 +27,13 @@ verb=play; object=2 other cards; symbol=S;
 
 name=CMOT Dibbler
 verb=Roll; object=die; condition=dice>7 verb=get object=4$ from Bank
-verb=pay; object=2$ to bank; condition=dice=1 OR verb=remove; object=1 minion;
+verb=pay; object=2$ to bank; condition=dice=1 OR verb=remove; object=1 minion;symbol=S,C;
 
 name=Groat
 symbol=M;
 
 name=Gimlet's Dwarf Delicatessen
-symbol=S,T(3);
+symbol=M,T(3);
 
 name=Gaspode
 verb=stop; object=move or remove minion; symbol=I;
@@ -60,7 +60,7 @@ name=mrs cake
 verb=look; object=all but one personality; symbol=S,T(2),M;
 
 name=Foul Ole Ron
-verb=move; object=minion to adjacent area; symbol=S,C;
+verb=move; object=1 minion of another player to adjacent area; symbol=S,C;
 
 name=The Fire Brigade
 verb=choose ; object=1 player;
@@ -72,11 +72,20 @@ verb=exchange; object=personality with one random unused; symbol=S,B;
 name=Dr Whiteface
 verb=take; object=5$ OR verb=give; object=card to player hand; symbol=S,M;
 
+name=The Mended Drum
+verb; object;Condition;symbol=B,T(2)
+
 name=Mr Pin & Mr  Tulip
 symbol=A,T(1);
 
 name=The thieves guild
 verb=take; object=2$ from all player; symbol=S,M;
+
+
+name=Wallace Sonky
+verb=Protected;object;condition
+symbol=I
+
 
 name= Inigo Skimmer
 symbol=A,T(2);  
@@ -134,7 +143,7 @@ verb=give; object=1 card condition=take 2$; symbol, M;S
 name=Rincewind
 verb=move; object=1 minion from area with troublemaker to an adjacent area; symbol=RE,S,C;
 
-name=The Roya Mint
+name=The Royal Mint
 symbol=B,T(5);
 
 name=Queen Molly

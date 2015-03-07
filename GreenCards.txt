@@ -6,12 +6,12 @@ name=Mr Bent
 verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points endgame
 symbol=S,C
 
-name=The beggars
+name=The beggars' Guild
 verb=take; object=2 cards of another players;condition
 symbol=S,M
 
 name=The bank of Ankh-Morpork
-verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points endgame 
+verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points end game 
 symbol=S,C
 
 name=The dysk
@@ -19,7 +19,7 @@ verb=get; object=1$ for each minion in the Isle of Gods;condition
 symbol=B,S
 
 name=The Duckman
-verb=move; object=minion from area; condition=adjacent area
+verb=move; object=1 minion of another player from area; condition=adjacent area
 symbol=S
 
 name=Drumknott
@@ -38,6 +38,11 @@ name=Gimlet's Dwarf Delicatessen
 verb;object;condition
 symbol=S,T(3)
 
+name=Wallace Sonky
+verb=Protected;object;condition
+symbol=I
+
+
 name=Gaspode
 verb=stop; object=move or remove minion;condition
 symbol=I
@@ -50,7 +55,7 @@ name=The Ankh Morpork Sunshine Dragon Sanctuary
 verb=take; object=1$ or card;condition
 symbol=S,C
 
-name=Segeant Angua
+name=Sergeant Angua
 verb;object;condition
 symbol=RT,C
 
@@ -68,7 +73,7 @@ symbol=M,RT,T(1)
 
 name=mrs cake
 verb=look; object=all but one personality;condition
-symbol=S,T(2),M
+symbol=S,T(2),B
 
 name=Foul Ole Ron
 verb=move; object=minion to adjacent area;condition
@@ -93,6 +98,11 @@ symbol=A,T(1)
 
 name=The thieves guild
 verb=take; object=2$ from all player;condition
+symbol=S,M
+
+name=The Seamstresses' Guild
+verb=give; object=1card of yours to a player;condition
+verb=get; object=2$ from the player;condition
 symbol=S,M
 
 name= Inigo Skimmer
@@ -154,21 +164,21 @@ symbol=S
 
 name=Shonky Shop
 verb=get; object=1$ times number of discarded card;condition
-symbol=M,S
+symbol=S,B
 
 name=Sacharissa Cripslock
 verb=get; object=1$ for each trouble maker on board;condition
 symbol=S,M
 
 name=Rosie Palm
-verb=give; object=1 card condition=take 2$;condition
+verb=give; object=1 card condition=take 2$;
 symbol=M,S
 
-name=Rinsewind
+name=Rincewind
 verb=move; object=1 minion from area with troublemaker to an adjacent area;condition
 symbol=RE,S,C
 
-name=The Roya Mint
+name=The Royal Mint
 verb;object;condition
 symbol=B,T(5)
 
@@ -179,3 +189,11 @@ symbol=M,S;
 name=The Pink PussyCat
 verb;object;condition
 symbol=T(3),C
+
+name=The Fools' Guild
+verb=take; object=5$ OR verb=give; object=card to player hand;
+symbol=S,M
+
+name=The Mended Drum
+verb; object;Condition
+symbol=B,T(2)

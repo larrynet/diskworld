@@ -69,82 +69,82 @@ public class JUnitTestSuite {
 		 
 	}
 	
-//////////////////CMOT Dibbler//////////////////
-@Test public void TestCMOTDibbler()
-{//almost always the same
-GameEngine ge = new GameEngine(4);
-ge.DetermineFirstPlayer();
-int CurrentPlayerIndex = ge.GetCurrentPlayer();
+	//////////////////CMOT Dibbler//////////////////
+	@Test public void TestCMOTDibbler()
+	{//almost always the same
+		GameEngine ge = new GameEngine(4);
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+	//SPECIFIC
+	//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+	GreenCards card = new GreenCards("CMOT Dibbler", 1, true, CardType.GreenCards);
+	List<String> ListVerb = new Vector<String>(); 
+	ListVerb.add("roll");
+	ListVerb.add("get");
+	ListVerb.add("pay");
+	ListVerb.add("remove");
+	
+	List<String> ListObject = new Vector<String>(); 
+	ListObject.add("die");
+	ListObject.add("4$ from Bank");
+	ListObject.add("2$ to bank");
+	ListObject.add("1 minion");
+	
+	List<String> ListCondition=new Vector<String>();
+	ListCondition.add("dice>7");
+	ListCondition.add("dice=1");
 
-//SPECIFIC
-//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
-GreenCards card = new GreenCards("CMOT Dibbler", 1, true, CardType.GreenCards);
-List<String> ListVerb = new Vector<String>(); 
-ListVerb.add("roll");
-ListVerb.add("get");
-ListVerb.add("pay");
-ListVerb.add("remove");
+	
+//	/public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+	Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+	card.AddAction(a);
+	
+	card.AddSymbols("S");
+	card.AddSymbols("C");
+		
+	ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+	//check if money transfered
+	
+	boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+	assertTrue("Failed executing card", Success);
+	}
+	
+	///////////////////Dr Cruces//////////////////
+	@Test public void TestDrCruces()
+	{//almost always the same
+		GameEngine ge = new GameEngine(4);
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+	//SPECIFIC
+	//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+	GreenCards card = new GreenCards("Dr Cruces", 1, true, CardType.GreenCards);
+	//List<String> ListVerb = new Vector<String>(); 
+	
+	
+	//List<String> ListObject = new Vector<String>(); 
+	
+	
+	//List<String> ListCondition=new Vector<String>();
+	
 
-List<String> ListObject = new Vector<String>(); 
-ListObject.add("die");
-ListObject.add("4$ from Bank");
-ListObject.add("2$ to bank");
-ListObject.add("1 minion");
-
-List<String> ListCondition=new Vector<String>();
-ListCondition.add("dice>7");
-ListCondition.add("dice=1");
-
-
-///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
-card.AddAction(a);
-
-card.AddSymbols("S");
-card.AddSymbols("C");
-
-ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
-//check if money transfered
-
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
-assertTrue("Failed executing card", Success);
-}
-
-///////////////////Dr Cruces//////////////////
-@Test public void TestDrCruces()
-{//almost always the same
-GameEngine ge = new GameEngine(4);
-ge.DetermineFirstPlayer();
-int CurrentPlayerIndex = ge.GetCurrentPlayer();
-
-//SPECIFIC
-//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
-GreenCards card = new GreenCards("Dr Cruces", 1, true, CardType.GreenCards);
-//List<String> ListVerb = new Vector<String>(); 
-
-
-//List<String> ListObject = new Vector<String>(); 
-
-
-//List<String> ListCondition=new Vector<String>();
-
-
-
-///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
-Action a = new Action(1, null,null , null, null, "and", false);
-card.AddAction(a);
-
-card.AddSymbols("A");
-card.AddSymbols("T(3)");
-
-ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
-//check if money transfered
-
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
-assertTrue("Failed executing card", Success);
-}
+	
+//	/public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+	Action a = new Action(1, null,null , null, null, "and", false);
+	card.AddAction(a);
+	
+	card.AddSymbols("A");
+	card.AddSymbols("T(3)");
+		
+	ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+	//check if money transfered
+	
+	boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+	assertTrue("Failed executing card", Success);
+	}
 /////////////////////end of Dr Cruces/////////////////////////
-
+	
 ///////////////////captain carrot//////////////////
 @Test public void Testcaptaincarrot()
 {//almost always the same
@@ -993,6 +993,1132 @@ boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Mr Gryle/////////////////////////
+
+///////////////////Mr Pin & Mr  Tulip//////////////////
+@Test public void TestMrPinAndMrTulip()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Mr Pin & Mr  Tulip", 1, true, CardType.GreenCards);
+//List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+//List<String> ListObject = new Vector<String>(); 
+//ListObject.add("10$ bank");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("A");
+card.AddSymbols("T(1)");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Mr Pin & Mr  Tulip/////////////////////////
+
+
+///////////////////mrs cake//////////////////
+@Test public void Testmrscake()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("mrs cake", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("look");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("all but one personality");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("T(2)");
+card.AddSymbols("B");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of mrs cake/////////////////////////
+
+
+///////////////////Nobby Nobbs//////////////////
+@Test public void TestNobbyNobbs()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Nobby Nobbs", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("get");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("3$ from a player of choice");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("C");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Nobby Nobbs/////////////////////////
+
+
+///////////////////The Pink PussyCat//////////////////
+@Test public void TestThePinkPussyCat()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Pink PussyCat", 1, true, CardType.GreenCards);
+//List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+//List<String> ListObject = new Vector<String>(); 
+//ListObject.add("10$ bank");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, null,null , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("T(3)");
+card.AddSymbols("C");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Pink PussyCat/////////////////////////
+
+
+
+///////////////////Queen Molly//////////////////
+@Test public void TestQueenMolly()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Queen Molly", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("get");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("2cards from a player");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("M");
+card.AddSymbols("S");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Queen Molly/////////////////////////
+
+
+///////////////////Rincewind//////////////////
+@Test public void TestRincewind()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Rincewind", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("move");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1 minion from area with troublemaker to an adjacent area");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("RE");
+card.AddSymbols("S");
+card.AddSymbols("C");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Rincewind/////////////////////////
+
+
+
+///////////////////Rosie Palm//////////////////
+@Test public void TestRosiePalm()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Rosie Palm", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("give");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1 card");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+List<String> ListCondition=new Vector<String>();
+ListCondition.add("take 2$");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("M");
+card.AddSymbols("S");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Rosie Palm/////////////////////////
+
+
+
+///////////////////Sacharissa Cripslock//////////////////
+@Test public void TestSacharissaCripslock()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Sacharissa Cripslock", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1$ for each trouble maker on board");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("M");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Sacharissa Cripslock/////////////////////////
+
+
+
+///////////////////Sergeant Angua//////////////////
+@Test public void TestSergeantAngua()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Sergeant Angua", 1, true, CardType.GreenCards);
+//List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+//List<String> ListObject = new Vector<String>(); 
+//ListObject.add("10$ bank");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, null,null ,null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("RT");
+card.AddSymbols("C");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Sergeant Angua/////////////////////////
+
+
+
+///////////////////Shonky Shop//////////////////
+@Test public void TestShonkyShop()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Shonky Shop", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1$ times number of discarded card");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("B");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Shonky Shop/////////////////////////
+
+
+///////////////////The Agony Aunts//////////////////
+@Test public void TestTheAgonyAunts()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Agony Aunts", 1, true, CardType.GreenCards);
+//List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+//List<String> ListObject = new Vector<String>(); 
+//ListObject.add("10$ bank");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, null,null ,null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("A");
+card.AddSymbols("T(2)");
+card.AddSymbols("M");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Agony Aunts/////////////////////////
+
+
+///////////////////patternThe Ankh Morpork Sunshine Dragon Sanctuary//////////////////
+@Test public void TestTheAnkhMorporkSunshineDragonSanctuary()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Ankh Morpork Sunshine Dragon Sanctuary", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("take");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1$ or card");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("C");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Ankh Morpork Sunshine Dragon Sanctuary/////////////////////////
+
+
+///////////////////The bank of Ankh-Morpork//////////////////
+@Test public void TestThebankofAnkhMorpork()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The bank of Ankh-Morpork", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("loan");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("10$ bank");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+List<String> ListCondition=new Vector<String>();
+ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("C");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The bank of Ankh-Morpork/////////////////////////
+
+
+///////////////////The beggars' Guild//////////////////
+@Test public void TestThebeggarsGuild()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The beggars' Guild", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("take");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("2 cards of another players");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("M");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The beggars' Guild/////////////////////////
+
+
+
+///////////////////The Duckman//////////////////
+@Test public void TestTheDuckman()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Duckman", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("move");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1 minion of another player from area ");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+List<String> ListCondition=new Vector<String>();
+ListCondition.add("adjacent area");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+//card.AddSymbols("C");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Duckman/////////////////////////
+
+
+
+///////////////////The dysk//////////////////
+@Test public void TestThedysk()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The dysk", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1$ for each minion in the Isle of Gods");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("B");
+card.AddSymbols("S");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The dysk/////////////////////////
+
+
+
+///////////////////The Fire Brigade//////////////////
+@Test public void TestTheFireBrigade()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Fire Brigade", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("choose");
+ListVerb.add("get");
+ListVerb.add("remove");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1 player");
+ListObject.add("5$ from a player");
+ListObject.add("building");
+//ListObject.add("1 minion");
+
+List<String> ListCondition=new Vector<String>();
+ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , ListCondition, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("C");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Fire Brigade/////////////////////////
+
+
+///////////////////The Fools' Guild//////////////////
+@Test public void TestTheFoolsGuild()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Fools' Guild", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("take");
+ListVerb.add("give");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("5$");
+ListObject.add("card to player hand");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "OR", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("M");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Fools' Guild/////////////////////////
+
+
+///////////////////The Mended Drum//////////////////
+@Test public void TestTheMendedDrum()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Mended Drum", 1, true, CardType.GreenCards);
+//List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+//List<String> ListObject = new Vector<String>(); 
+//ListObject.add("10$ bank");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, null,null,null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("B");
+card.AddSymbols("T(2)");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Mended Drum/////////////////////////
+
+
+///////////////////The Opera House//////////////////
+@Test public void TestTheOperaHouse()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Opera House", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1$ for each minion in the Isle of Gods");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("B");
+card.AddSymbols("S");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Opera House/////////////////////////
+
+
+///////////////////The Peeled Nuts//////////////////
+@Test public void TestThePeeledNuts()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Peeled Nuts", 1, true, CardType.GreenCards);
+//List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+//List<String> ListObject = new Vector<String>(); 
+//ListObject.add("1$ for each minion in the Isle of Gods");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, null,null , null, null, "and", false);
+card.AddAction(a);
+
+//card.AddSymbols("B");
+//card.AddSymbols("S");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Peeled Nuts/////////////////////////
+
+///////////////////The Royal Mint//////////////////
+@Test public void TestTheRoyalMint()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Royal Mint", 1, true, CardType.GreenCards);
+//List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+//ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+//List<String> ListObject = new Vector<String>(); 
+//ListObject.add("1$ for each minion in the Isle of Gods");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, null,null , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("B");
+card.AddSymbols("T(5)");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Royal Mint/////////////////////////
+
+///////////////////The Seamstresses' Guild//////////////////
+@Test public void TestTheSeamstressesGuild()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The Seamstresses' Guild", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+ListVerb.add("give");
+ListVerb.add("get");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("1card of yours to a player");
+ListObject.add("2$ from the player");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("M");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The Seamstresses' Guild/////////////////////////
+
+
+///////////////////The thieves guild//////////////////
+@Test public void TestThethievesguild()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("The thieves guild", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+ListVerb.add("take");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("2$ from all player");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("M");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of The thieves guild/////////////////////////
+
+
+///////////////////Wallace Sonky//////////////////
+@Test public void TestWallaceSonky()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Wallace Sonky", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+ListVerb.add("protected");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+//List<String> ListObject = new Vector<String>(); 
+//ListObject.add("1$ for each minion in the Isle of Gods");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,null , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("I");
+//card.AddSymbols("S");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Wallace Sonky/////////////////////////
+
+
+///////////////////Zorgo the Retro-phrenologist//////////////////
+@Test public void TestZorgotheRetrophrenologist()
+{//almost always the same
+GameEngine ge = new GameEngine(4);
+ge.DetermineFirstPlayer();
+int CurrentPlayerIndex = ge.GetCurrentPlayer();
+
+//SPECIFIC
+//public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
+GreenCards card = new GreenCards("Zorgo the Retro-phrenologist", 1, true, CardType.GreenCards);
+List<String> ListVerb = new Vector<String>(); 
+//ListVerb.add("loan");
+ListVerb.add("exchange");
+//ListVerb.add("pay");
+//ListVerb.add("remove");
+
+List<String> ListObject = new Vector<String>(); 
+ListObject.add("personality with one random unused");
+//ListObject.add("4$ from Bank");
+//ListObject.add("2$ to bank");
+//ListObject.add("1 minion");
+
+//List<String> ListCondition=new Vector<String>();
+//ListCondition.add("pay back 12$ or lose 15 points end game");
+//ListCondition.add("dice=1");
+
+
+///public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,String relation, boolean keep) 
+Action a = new Action(1, ListVerb,ListObject , null, null, "and", false);
+card.AddAction(a);
+
+card.AddSymbols("S");
+card.AddSymbols("B");
+
+ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+//check if money transfered
+
+boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+assertTrue("Failed executing card", Success);
+}
+/////////////////////end of Zorgo the Retro-phrenologist/////////////////////////
 
 
 
