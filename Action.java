@@ -71,8 +71,14 @@ public class Action {
 			
 			verbs.add(ReturnDesc(separated[0]));
 			objects.add(ReturnDesc(separated[1]));
-			conditions.add(ReturnDesc(separated[2]));
-			actionNumber.add(ReturnDesc(separated[3]));
+			if(separated.length>3)
+				conditions.add(ReturnDesc(separated[2]));
+			else
+				conditions.add("");
+			if(separated.length>3)
+				actionNumber.add(ReturnDesc(separated[3]));
+			else
+				actionNumber.add("");
 			
 		}
 	

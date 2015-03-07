@@ -9,6 +9,7 @@
 import java.util.Scanner;
 import java.io.File;
 public class main {
+
 	/**
 	 * @param args
 	 */
@@ -50,35 +51,64 @@ public class main {
 				int choice = scan.nextInt();
 				if(choice == 1)
 				{
-					System.out.println("Which card you want to see (1-5)?");
-					int peekChoice = scan.nextInt();	
+					//System.out.println("Which card you want to see (1-5)?");
+					//int peekChoice = scan.nextInt();	
 					
+					//show card
+                    ge.ShowCard(CurrentPlayerIndex);
 				}
 				else
 				{
-                    //activating the area effect
-                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
-                    
-					System.out.println("Which card you want to play (1-5)?");
-					int playChoice = scan.nextInt();
-					boolean CardPlayed = ge.PlayCard(CurrentPlayerIndex, playChoice);
-					
-					if(CardPlayed )
-						System.out.println("Card played successfully");
-					else
-						System.out.println("Card failed to play");
+					//check if someone won first
 					if(ge.IsWinner())
 					{
 						System.out.println("!!!! Congratulation. Player " + CurrentPlayerIndex + "won the game !!!! ");
 						Continue = false;
 					}
-					if(count == 0)
+					else
 					{
-						System.out.println("PROBLEM. INFINITE LOOP DETECTED ");
-						Continue = false;
+						//activating the area effect
+	                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+	                    
+						System.out.println("Which card you want to play (1-5)?");
+						int playChoice = scan.nextInt();
+						boolean CardPlayed = ge.PlayCard(CurrentPlayerIndex, playChoice);
+						
+						if(CardPlayed )
+	                    {
+	                        System.out.println("Card played successfully");
+	                    }
+						else
+	                    {
+	                        
+	                        boolean PlayUntilSuccess = false;
+	                        while(!PlayUntilSuccess)
+	                        {
+	                            System.out.println("Card failed to play. You will need to try again. Which card you want to play (1-5)?");
+	                            playChoice = scan.nextInt();
+	                            PlayUntilSuccess = ge.PlayCard(CurrentPlayerIndex, playChoice);
+	                        }
+	                        
+	                    }
+							
+						
+	                    if(ge.IsGameEnded())
+	                    {
+	                        System.out.println("The Game Engine signaled a game end event preemptively because certains cards force to end. ");
+	                        Continue = false;
+	                    }
+						if(count == 0)
+						{
+							System.out.println("PROBLEM. INFINITE LOOP DETECTED ");
+							Continue = false;
+						}
 					}
+                    
 				}
 				CurrentPlayerIndex = (CurrentPlayerIndex++)%NumPlayer; 
+                
+                //update current turn
+                ge.SetCurrentPlayer(CurrentPlayerIndex);
 			} while (Continue);	
 		}
 		

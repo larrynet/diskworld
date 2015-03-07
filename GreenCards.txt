@@ -1,5 +1,5 @@
 name=Mr Boggis
-verb=pay; object=2$ each player;condition
+verb=pay; object=2$ each player; condition
 symbol=S,M
 
 name=Mr Bent
@@ -92,7 +92,7 @@ verb;object;condition
 symbol=A,T(1)
 
 name=The thieves guild
-verb=pay; object=2$ from all player;condition
+verb=take; object=2$ from all player;condition
 symbol=S,M
 
 name= Inigo Skimmer

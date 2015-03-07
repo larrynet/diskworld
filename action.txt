@@ -76,7 +76,7 @@ name=Mr Pin & Mr  Tulip
 symbol=A,T(1);
 
 name=The thieves guild
-verb=pay; object=2$ from all player; symbol=S,M;
+verb=take; object=2$ from all player; symbol=S,M;
 
 name= Inigo Skimmer
 symbol=A,T(2);  
@@ -272,7 +272,7 @@ name=HELLO
 symbol=A,A,B;
 
 name=Burleigh & Stronginth
-verb=pay; object=2$ another player; AND verb=assassinate; object= 1 minion; actionnumber=2; symbol=S,B;
+verb=pay; object=2$ another player and assassinate 1 minion; symbol=S,B;
 
 name=The Bursar
 verb=exchange; object =2 minion position on Board; symbol=RE,S,C; actionnumber=1;
@@ -284,7 +284,7 @@ name=Canting Crew
 verb=move; object=1 minion of another player to adjacent area ; symbol=S,M; actionnumber=1;
 
 name=Carcer
-verb=roll; object=2 die; and verb=remove; object=1 minion of choice in that area; symbol=S,C;
+verb=remove; object=1 minion of choice in that area; symbol=S,C;
 
 name=The Chair of Indefinite Studies
 verb=exchange; object=all cards with another player; symbol=RE,S,C; actionnumber=1;
@@ -374,8 +374,8 @@ verb=play; object =2 other cards; symbol=RE,S; actionnumber=1;
 name=The Post Office
 verb=get; object 1$ for each building on board; symbol=S,M; actionnumber=1;
 
-name=Reacher Gilt
-verb=replace; object=1 building with another player building ;condition= area with troublemaker in it  AND verb=pay; object=cost of the building; symbol=S;  
+name=Reacher Gilt  
+verb=pay object=cost of original building of another player and take over their building. Area must have troublemaker; symbol=S;
 
 name=Professor of Recent Runes
 verb=get; object =2 cards; symbol =RE,S,C; actionnumber=1;
@@ -384,7 +384,7 @@ name=Doctor Hix
 verb=place; object=trouble marker in any area; symbol=RE,S,C; actionnumber=1;
 
 name=Hobsons's Livery Stable
-verb=pay; object=2$ another player; AND verb=move; object= 1 minion to any area; actionnumber=3;
+verb=pay; object=2$ another player and move 1 minion to any area; symbol=S,B;
 
 name=Hubert
 verb=give; object=3$ to another player of choice; symbol=S,M;
