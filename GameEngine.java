@@ -1038,7 +1038,7 @@ public class GameEngine implements Serializable
               
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("place") ==0)
                 {
-                	object = currentEffect.Object.get(verbCount);
+                	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     
                 	// In "dorfi", "Adora Bell Dearheart" Place is the second verb????
@@ -1046,26 +1046,60 @@ public class GameEngine implements Serializable
                     
                   //Deep Dwarves ,Mr Shine
                 	if (object.contains("1 minion in any area" ))
-        			{
-			        		//place a minion in any area withount puting trouble marker
-			        		System.out.println("Please select a area to put a Minion In.");
-			        		boolean IsMinionIn=PutMinion(CurrentPlayer);
-			        		if( !IsMinionIn)
-			        		{
-			        			//throw exceptions;
-			        			System.out.println("!!!!!IsMinionIn is TRUE...WHAT THE HELL!!!!!!!");
-			        		}	
-        			}
+                			{
+                		//place a minion in any area withount puting trouble marker
+                		
+                		boolean IsMinionIn=PutMinion(CurrentPlayer);
+                			
+                			}
                 	//Willikins
                 	else if (object.contains("1 minion in area with building in"  ))
                 	{
-                		System.out.println("Please select a area to put a Minion In.");
-                	}
+                		
+                		 
+                		System.out.println("Please select an area to put a Minion In. Please enter an area that has a building in it.");
+                	
+                		Scanner scan = new Scanner(System.in);
+                		 int AreaNumber=scan.nextInt();
+                		 boolean IsMinionIn=true;
+                		 if (IsMinionIn)
+                		 {
+                		 while( ! (GameBoard.ListArea.get(AreaNumber).HasBuilding() ) )
+                		 {
+                    			
+                    			 System.out.println("Your Area number you choose has no building.Please enter an area that has a building");
+                    			 AreaNumber=scan.nextInt();
+                		 }
+                    		
+                		  IsMinionIn=PutMinion(CurrentPlayer);
+                		 }
+                		 else
+                			 System.out.println("Can not put the Minion");
+                		 
+                		}
+                	
                 	//Archchancellor Ridcully
                 	else if (object.contains("1 or 2 minion in or adjacent to Unreal Estate"  ))
                 	{
-                		
-                	}
+                		System.out.println("Please how many building you want to place ? please enter 1 or 2");
+                		Scanner scan = new Scanner(System.in);
+               		    int NumberofMinion = scan.nextInt();
+               		    
+               		    //put one or two minion in any Area
+               		    if (NumberofMinion==1)
+               		    {
+               		    	boolean IsMinionIn=PutMinion(CurrentPlayer);
+               		    }
+               		    else
+                   		    for (int i=0;i<2;i++)
+                   		    {
+                   		    boolean IsMinionIn=PutMinion(CurrentPlayer);
+                   		    }
+               		        //there is no method to check the adjacent areas !!!!
+               		    }
+               		    	
+               		    
+                	
                 	//The Senior Wrangler
                 	else if (object.contains("1 minion in or adjacent to Unreal Estate"  ))
                 	{
@@ -1074,43 +1108,107 @@ public class GameEngine implements Serializable
                 	//The Smoking Gnu
                 	else if (object.contains("1 minion containing in area trouble marker" ))
                 	{
-                		
+                		 
+                		System.out.println("Please select an area to put a Minion In. Please enter an area that has a building in it.");
+                	
+                		Scanner scan = new Scanner(System.in);
+                		 int AreaNumber=scan.nextInt();
+                		 boolean IsMinionIn=true;
+                		 if (IsMinionIn)
+                		 {
+                		 while( ! (GameBoard.ListArea.get(AreaNumber).HasTroubleMaker() ) )
+                		     
+                		   {
+                    			 System.out.println("Your Area number you choose has no building.Please enter an area that has a building");
+                    			 AreaNumber=scan.nextInt();
+                		    }   
+                    		
+                		    IsMinionIn=PutMinion(CurrentPlayer);
+                		 }
+                		 else
+                		     
+                			 System.out.println("Can not put the Minion");
+                		    
                 	}
+                        
                 	//Doctor Hix
                 	else if (object.contains("trouble marker in any area" ))
                 	{
+                		System.out.println("Please select any area to put trouble marker in.");
                 		
+                		Scanner scan = new Scanner(System.in);
+               		    int AreaNumber = scan.nextInt();
+               		  boolean ActionSuccessful= PlaceTroubleMarker( AreaNumber);
+               		  if(ActionSuccessful)
+               			  System.out.println("A trouble Marker has been added in Area Number"+AreaNumber);
+               		   // boolean IsActionSuccessful= GameBoard.ListArea.get(NumberofMinion).AddTroubleMaker(ListPlayer.get(CurrentPlayer).););
+               		  else
+               			  System.out.println("Action not Successful");
+               			  
+           			     
                 	}
                 		
-                }
+                 }
+           
+                
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("play") ==0)
                 {
-                	object = currentEffect.Object.get(verbCount);
+                	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     //Pondor Stibbons ,Drumknott
-                    if (object.contains("2 other cards"))
-                    {
+                    //I'm not sure what this card has to return ?????
+                   
+                      if (object.contains("2 other cards"))
+                       {
+                        	System.out.println("Enter name of first card you want to play");
+                        	 int counter=0;
+                        do{
+                        	 Scanner scan = new Scanner(System.in);
+                        	 String CardName= scan.next();
+                
+                        	int CurrentPlayerCardSize=ListPlayer.get(CurrentPlayer).GetCards().size();//get player hand count
+                    			
+                        	for (int CardIndex=0 ;CardIndex<CurrentPlayerCardSize; CardIndex++)
+                        	{
+                             if( ListPlayer.get(CurrentPlayer).GetCards().get(CardIndex).GetName()== CardName )
+                            	ListPlayer.get(CurrentPlayer).GetCards().get(CardIndex);
+                     
+                        	}
+                        	counter++;
+                        } while(counter < 2);
+                       	
+                      }
                     	
-                    }
-                    	
-                }
+                 }
+                	
+               
+        
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
                 {
-                	
+                	//there is no verb in test !!!!
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("return") ==0)
                 {
+                	//there is no verb in test !!!!
                 	
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("replace") ==0)
                 {
-                	object = currentEffect.Object.get(verbCount);
+                	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     
                     //Sybil Vimes
+                    
                     if (object.contains("1 building of your own with another player"))
                     {
-                    
+                    	/*System.out.println("Enter one of your bulding Index");
+                    	 Scanner scan = new Scanner(System.in);
+                    	 int BuildingIndex= scan.nextInt();
+                    	 System.out.println("Enter with whome you want to exchange building");
+                    	 //Scanner scan = new Scanner(System.in);
+                    	 int AnotherPlayerIndex=scan.nextInt();
+                    	 
+                    	*/
                     }
                     else  if (object.contains("1 building of your own with another player"))
                     {
@@ -1120,7 +1218,7 @@ public class GameEngine implements Serializable
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("stop") ==0)
                 {
-                	object = currentEffect.Object.get(verbCount);
+                	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     //Gaspode
                     
@@ -1135,11 +1233,6 @@ public class GameEngine implements Serializable
                     }
                     	
                 }
-        	
-                //there is two of verb choose
-                /*else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
-                {}
-                {}*/
         	
         		// ********************** END NILOUFAR SECTION ****************************
         	
