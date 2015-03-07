@@ -52,7 +52,6 @@ public class Player implements Serializable {
 		
 	}
 	
-
 	
 	/**
 	 * Public Getter for Player Personality Cards
@@ -439,4 +438,9 @@ public class Player implements Serializable {
 		System.out.println(strCards.toString());
 	}
 	
+	public void SetPlayerPersonality(Cards PersoCard)
+	{
+		    this.Personality=PersoCard;
+			
+	}
 }
