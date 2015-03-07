@@ -7,6 +7,7 @@ import java.io.IOException;
 
 /**
  * @author parinaz Barakhshan
+ * @param <ListAdjacentAreas>
  *
  */
 public class Board implements Serializable {
@@ -37,6 +38,7 @@ public class Board implements Serializable {
 						  {9,10,2,12,0,0},
 						  {11,2,1,0,0,0}};
 	
+	//public int[] ListAdjacentAreas=new int[6];
 	//Board Public Methods
 
 	public String toString() 
@@ -348,6 +350,18 @@ public class Board implements Serializable {
         public List<Pieces> GetDeadMinions()
         {
         	return this.ListDeadMinions;
+        }
+        
+        
+        //returns an array containing the areas adjacent.we do not have area 0
+        public int[] GetAdjacent(int AreaIndex)
+        {
+        	int[] ListAdjacentAreas=new int[6];
+        
+        	AreaIndex--;
+        	for (int i=0;i<6;i++)
+        	ListAdjacentAreas[i]=AdjacentAreas[AreaIndex][i];
+        	return ListAdjacentAreas;
         }
 }
 
