@@ -219,16 +219,31 @@ public class GameEngine implements Serializable
 	{
 		boolean isCardPlayed = false;
 		
+		GreenCards g = null;
+		BrownCards b = null;
+		List<String> lstSymbols = null;
+		
 		//fetch card of playchoice
 		Cards CardPlayed = (GreenCards)ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
 		boolean ActionStatus = true;
 		
+		if (CardPlayed.GetCardType() == CardType.GreenCards)
+		{
+			g = (GreenCards)CardPlayed;
+			lstSymbols = g.GetSymbol();
+		}
+		else if ((CardPlayed.GetCardType() == CardType.BrownCards))
+		{
+			b = (BrownCards)CardPlayed;
+			lstSymbols = b.GetSymbol();
+		}
+		
         System.out.println("Player " + CurrentPlayerIndex + " decides to play " + CardPlayed.GetName());
         
 		//Execute the symbol of the
-		for(int sIterator = 0; ActionStatus && (sIterator < CardPlayed.CardAction.Symbol.size()); sIterator++)
+		for(int sIterator = 0; ActionStatus && (sIterator < lstSymbols.size()); sIterator++)
 		{
-			String currentSymbol = CardPlayed.CardAction.Symbol.get(sIterator);
+			String currentSymbol = lstSymbols.get(sIterator);
 			
 			if(currentSymbol.compareToIgnoreCase("B") == 0)
 				ActionStatus = PutBuilding(CurrentPlayerIndex);
@@ -274,7 +289,21 @@ public class GameEngine implements Serializable
     private boolean PlayEffect(Cards CardPlayed, int player)
     {
     	boolean ActionStatus = false;
-        Action currentEffect = CardPlayed.CardAction;
+        Action currentEffect = null;
+        GreenCards g = null;
+        BrownCards b = null;
+        
+        if (CardPlayed.GetCardType() == CardType.GreenCards)
+        {
+        	g = (GreenCards)CardPlayed;
+        	currentEffect = g.GetAction(1);
+        }
+        else if (CardPlayed.GetCardType() == CardType.BrownCards)
+        {
+        	b = (BrownCards)CardPlayed;
+        	currentEffect = b.GetAction(1);
+        }
+        
         
         //traverse the verb
         for(int verbCount=0; verbCount<currentEffect.Verb.size(); verbCount++)
@@ -288,10 +317,12 @@ public class GameEngine implements Serializable
                 {
                 	String object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
+                    
                     if(object.contains("another player and have them remove 1 minion with troublemaker"))
                     {
                     	//cosmos lavish
                     }
+                    
                     else if(object.contains("player"))
                     {
                     	//pay to each player?
@@ -317,6 +348,7 @@ public class GameEngine implements Serializable
             				ListPlayer.get(player).DeductFromMoney(amount);
                     	}
                     }
+                    
                     else if(object.contains("bank"))
                     {
                     	ListPlayer.get(player).DeductFromMoney(amount);
@@ -683,7 +715,10 @@ public class GameEngine implements Serializable
                         GameBoard.RemoveMinion(RollDieValue1, ListPlayer.get(PlayerIndex1).GetColor());
                     }
                 }
-                //Parinaz
+                
+                
+                // ***************** PARINAZ SECTION ***********************************
+                
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("draw") ==0)
                 {
                 	//verb=shuffle; object=discard cards; actionnumber=1;
@@ -728,7 +763,9 @@ public class GameEngine implements Serializable
                     }
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("withdraw") ==0)
-                {//no verb found}
+                {
+                	//no verb found
+                }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("exchange") ==0)
                 {  
                 	String object = currentEffect.Object.get(verbCount);
@@ -802,10 +839,11 @@ public class GameEngine implements Serializable
                 	
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("roll") ==0)
-                {String object = currentEffect.Object.get(verbCount);
-               // int amount = (int)object.charAt(0);
+                {
+                	String object = currentEffect.Object.get(verbCount);
+                	// int amount = (int)object.charAt(0);
                 
-                 //HERE ‘N’ NOW - //Carcer  -//Eroll     
+                 //HERE ï¿½Nï¿½ NOW - //Carcer  -//Eroll     
                 if(object.contains("die"))
                 { 
                 	int amount = (int)object.charAt(0);
@@ -842,7 +880,9 @@ public class GameEngine implements Serializable
                     	ListPlayer.get(CurrentPlayer).AddToMoney(4);
                     	GameBoard.DeductFromBank(4);
                     	
-                    }else if(CardPlayed.GetName()=="CMOT Dibbler" && roll[i]==1)
+                    }
+                    
+                    else if(CardPlayed.GetName()=="CMOT Dibbler" && roll[i]==1)
                     {   
                     	Scanner scan = new Scanner(System.in);
                     	System.out.println("Enter 1 to pay 2$ to bank or 2 to remove your minion");
@@ -850,19 +890,23 @@ public class GameEngine implements Serializable
                     	
                     	if(choice==1)
                     	{
-                    	ListPlayer.get(CurrentPlayer).DeductFromMoney(2);
-                    	GameBoard.AddToBank(2);
-                    	}else if(choice==2)
+	                    	ListPlayer.get(CurrentPlayer).DeductFromMoney(2);
+	                    	GameBoard.AddToBank(2);
+                    	}
+                    	
+                    	else if(choice==2)
                     	{
-                    	System.out.println("Enter area index where your minion should be removed ");
-                        int area = scan.nextInt();
-                    	GameBoard.RemoveMinion(area, ListPlayer.get(CurrentPlayer).GetColor());
+	                    	System.out.println("Enter area index where your minion should be removed ");
+	                        int area = scan.nextInt();
+	                    	GameBoard.RemoveMinion(area, ListPlayer.get(CurrentPlayer).GetColor());
                     	}
                     }
             	}
                 //Carcer
                 if(CardPlayed.GetName()=="Carcer" )
-                {	Scanner scan = new Scanner(System.in);
+                {	
+                	
+                	Scanner scan = new Scanner(System.in);
             	
                     //int RollDieValue1 = GameBoard.RollDie();
                     
@@ -870,7 +914,7 @@ public class GameEngine implements Serializable
                     int PlayerIndex0 = scan.nextInt();
                     System.out.println("Enter Player index to remove minion from area "+roll[1] +" : ");
                     int PlayerIndex1 = scan.nextInt();
-                	GameBoard.RemoveMinion(roll[0]+ ListPlayer.get(PlayerIndex0).GetColor());
+                	GameBoard.RemoveMinion(roll[0], ListPlayer.get(PlayerIndex0).GetColor());
                     GameBoard.RemoveMinion(roll[1], ListPlayer.get(PlayerIndex1).GetColor());
                 }
                 }
@@ -896,7 +940,8 @@ public class GameEngine implements Serializable
                              
                              if(CardPlayed.GetName()=="The Duckman" || CardPlayed.GetName()=="Foul Ole Ron" ||CardPlayed.GetName()=="Canting Crew")
                              {
-                            	 if (GameBoard.ListArea.AreaAdjacency(Source,Destination))
+                            	 //TODO Review with Parinaz
+                            	 if (GameBoard.ListArea.get(1).AreaAdjacency(Source,Destination))
                             	 {
                             		 GameBoard.RemoveMinion(Source,ListPlayer.get(PlayerIndex).GetColor()) ;
                             		 GameBoard.PlaceMinion(Destination, ListPlayer.get(PlayerIndex));
@@ -910,7 +955,8 @@ public class GameEngine implements Serializable
                              System.out.println("Enter area index to where you want to move minion-it should be adjacent");
                              int destination = scan.nextInt();
                             
-                             if(GameBoard.GetArea(source).HasTroubleMaker() && GameBoard.ListArea.AreaAdjacency(source,destination))
+                             //TODO Review with Parinaz
+                             if(GameBoard.GetArea(source).HasTroubleMaker() && GameBoard.ListArea.get(1).AreaAdjacency(source,destination))
                              {
                             	 GameBoard.RemoveMinion(source,ListPlayer.get(CurrentPlayer).GetColor()) ;
                         		 GameBoard.PlaceMinion(destination, ListPlayer.get(CurrentPlayer)); 
@@ -932,7 +978,7 @@ public class GameEngine implements Serializable
                          }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
                 {
-                	String object = currentEffect.Object.get(verbCount);
+                	object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     
                     
@@ -947,15 +993,17 @@ public class GameEngine implements Serializable
                             int area = scan.nextInt();
                             GameBoard.RemoveBuilding(area, ListPlayer.get(PlayerIndex));
                             
-                    }//HERE ‘N’ NOW
-                    else if (object.contains("minion") && CardPlayed.GetName()=="HERE ‘N’ NOW"  )
+                    }//HERE ï¿½Nï¿½ NOW
+                    else if (object.contains("minion") && CardPlayed.GetName()=="HERE ï¿½Nï¿½ NOW"  )
                     {
-                    Scanner scan = new Scanner(System.in);
+                    	Scanner scan = new Scanner(System.in);
                 	
-                    System.out.println("Enter area index from where you want to move building");
-                    int area = scan.nextInt();
-                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
-                    }//The Dean
+                    	System.out.println("Enter area index from where you want to move building");
+                    	int area = scan.nextInt();
+                    	//TODO Review with Parinaz
+                    	GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
+                    }
+                    //The Dean
                      else if (object.contains("minion") && CardPlayed.GetName()=="The Dean"  )
                 	{
                     	 Scanner scan = new Scanner(System.in);
@@ -963,26 +1011,34 @@ public class GameEngine implements Serializable
                          System.out.println("Enter the player index you want to move his building ");
                          int PlayerIndex = scan.nextInt();
                 		 GameBoard.RemoveMinion(1, ListPlayer.get(PlayerIndex).GetColor());
-                	}//The Auditors
-                     else if (object.contains("player order") && CardPlayed.GetName()=="The Auditors"  )
-                     {int _CurrentPlayer=ListPlayer.get(CurrentPlayer)
-                     for (Player player : this.ListPlayer)
-             			{if (PlayerNumber!=_CurrentPlayer)
-             			{
-             				System.out.println("Enter area number from where you want to remove Minion");
-             				int area = scan.nextInt();
-             				GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex));
-             			}
+                	}
+                    //The Auditors
+                    else if (object.contains("player order") && CardPlayed.GetName()=="The Auditors"  )
+                    {
+                    	 	Player _CurrentPlayer=ListPlayer.get(player);
+                    	 	
+                    	    for (Player thisPlayer : this.ListPlayer)
+                    	 	{
+                    	 		if (thisPlayer !=_CurrentPlayer)
+                    	 		{
+                    	 			Scanner scan = new Scanner(System.in);
+                    	 			System.out.println("Enter area number from where you want to remove Minion");
+                    	 			int area = scan.nextInt();
+                    	 			GameBoard.RemoveMinion(area, thisPlayer.GetColor());
+                    	 		}
                     	 
-             			}
+                    	 	}
                     }
-                    }
+                    
                 }
-                //Niloufar
+        	
+        		// ***************** END PARINAZ SECTION *******************************
+        	
+                // ***************** NILOUFAR SECTION **********************************
               
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("place") ==0)
                 {
-                	String object = currentEffect.Object.get(verbCount);
+                	object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     
                 	// In "dorfi", "Adora Bell Dearheart" Place is the second verb????
@@ -990,15 +1046,16 @@ public class GameEngine implements Serializable
                     
                   //Deep Dwarves ,Mr Shine
                 	if (object.contains("1 minion in any area" ))
-                			{
-                		//place a minion in any area withount puting trouble marker
-                		System.out.println("Please select a area to put a Minion In.");
-                		boolean IsMinionIn=PutMinion(CurrentPlayer);
-                		if( !IsMinionIn)
-                			//throw exceptions;
-                			System.out.println("!!!!!IsMinionIn is TRUE...WHAT THE HELL!!!!!!!");
-                			
-                			}
+        			{
+			        		//place a minion in any area withount puting trouble marker
+			        		System.out.println("Please select a area to put a Minion In.");
+			        		boolean IsMinionIn=PutMinion(CurrentPlayer);
+			        		if( !IsMinionIn)
+			        		{
+			        			//throw exceptions;
+			        			System.out.println("!!!!!IsMinionIn is TRUE...WHAT THE HELL!!!!!!!");
+			        		}	
+        			}
                 	//Willikins
                 	else if (object.contains("1 minion in area with building in"  ))
                 	{
@@ -1028,7 +1085,7 @@ public class GameEngine implements Serializable
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("play") ==0)
                 {
-                	String object = currentEffect.Object.get(verbCount);
+                	object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     //Pondor Stibbons ,Drumknott
                     if (object.contains("2 other cards"))
@@ -1047,7 +1104,7 @@ public class GameEngine implements Serializable
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("replace") ==0)
                 {
-                	String object = currentEffect.Object.get(verbCount);
+                	object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     
                     //Sybil Vimes
@@ -1063,7 +1120,7 @@ public class GameEngine implements Serializable
                 }
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("stop") ==0)
                 {
-                	String object = currentEffect.Object.get(verbCount);
+                	object = currentEffect.Object.get(verbCount);
                     int amount = (int)object.charAt(0);
                     //Gaspode
                     
@@ -1078,11 +1135,17 @@ public class GameEngine implements Serializable
                     }
                     	
                 }
+        	
                 //there is two of verb choose
                 /*else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("choose") ==0)
                 {}
                 {}*/
-                //Gay
+        	
+        		// ********************** END NILOUFAR SECTION ****************************
+        	
+        	
+                // ********************** GAY SECTION *************************************
+        	
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("see") ==0)
                 {}
                 else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("exchange") ==0)
@@ -1190,8 +1253,13 @@ public class GameEngine implements Serializable
                 	ListPlayer.get(player).IncreaseLostPoints(15);
                 }
                 else
+                {
                     System.out.println("!!!!!!! Unknown verb found !!!!!!!! : " + currentEffect.Verb.get(verbCount));
-            }
+                }
+        	}
+        
+        	// ************************* END GAY SECTION ***************************************
+        
             //order of execution not important. Can only execute one of them
             else 
             {
@@ -1303,6 +1371,7 @@ public class GameEngine implements Serializable
         
         return ActionStatus;
     }
+
 	private boolean PlayEvent(Cards CardPlayed, int player)
 	{
 		boolean ActionSuccess = false;
@@ -1478,6 +1547,7 @@ public class GameEngine implements Serializable
         
 		return ActionSuccess;
 	}
+
 	private boolean RemoveTrouble(int player)
 	{
 		boolean ActionSuccess = false;
@@ -1547,6 +1617,7 @@ public class GameEngine implements Serializable
 		ActionSuccess =GameBoard.PlaceBuilding(AreaNumber,ListPlayer.get(player));
 		return ActionSuccess;
 	}
+	
 	/**
 	 * Called Internally to test if PlayerIndex is valid.
 	 * 
@@ -1576,6 +1647,7 @@ public class GameEngine implements Serializable
 	{
 		CardManager.GetState();
 	}
+	
 	/**
 	 * @param PlayerIndex whom to pay
 	 * @param amount to pay
@@ -1823,6 +1895,7 @@ public class GameEngine implements Serializable
 	{
 		return (TotalPlayer>0);
 	}
+	
 	/**
 	 * @return true if the current player meet its required winning conditons.
 	 */
@@ -1908,4 +1981,5 @@ public class GameEngine implements Serializable
 	{
 		return this.toString();
 	}
+
 }
