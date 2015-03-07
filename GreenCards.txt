@@ -1,5 +1,5 @@
 name=Mr Boggis
-verb=pay; object=2$ each player; condition
+verb=take; object=2$ from each player; condition
 symbol=S,M
 
 name=Mr Bent
