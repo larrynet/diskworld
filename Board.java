@@ -24,6 +24,18 @@ public class Board implements Serializable {
 	private List<Pieces> ListDemons;
 	private List<Pieces> ListTrolls;
 	private List<Pieces> ListDeadMinions;
+	private int[][] AdjacentAreas={{3,2,12,0,0,0},
+						  {1,12,11,10,3,4},
+						  {1,2,4,0,0,0},
+						  {3,10,5,0,0,0},
+						  {6,4,10,7,8,0},
+						  {4,5,7,0,0,0},
+						  {6,5,8,0,0,0},
+						  {7,5,9,0,0,0},
+						  {8,10,11,0,0,0},
+						  {4,5,9,11,2,0},
+						  {9,10,2,12,0,0},
+						  {11,2,1,0,0,0}};
 	
 	//Board Public Methods
 
@@ -251,11 +263,12 @@ public class Board implements Serializable {
 	
 	//check the adjacency of one other to another one-is a adjacent to b and return a bolean
 	
-		/*public boolean AreaAdjacency(int Area1, int Area2)
+		public boolean AreaAdjacency(int Area1, int Area2)
 		{
 			//since the array starts from array index 0
 			Area1--;
-			for (int i=0;i<7;i++)
+			boolean IsAdjacent=false;
+			for (int i=0;i<6;i++)
 			{
 				if (AdjacentAreas[Area1][i]==Area2)
 					{
@@ -270,7 +283,7 @@ public class Board implements Serializable {
 			}
 			return IsAdjacent;
 			
-		}*/
+		}
 		
 		public void Assassinate(int AreaNumber,Pieces p)
 		{
