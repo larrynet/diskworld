@@ -320,8 +320,7 @@ public class GameEngine implements Serializable
         else if (CardPlayed.GetCardType() == CardType.BrownCards)
         {
         	b = (BrownCards)CardPlayed;
-        	lstCardActions = b.GetActionList();
-        	
+        	lstCardActions = b.GetActionList();	
         }
         
         if(BelongToException(CardPlayed))
@@ -339,9 +338,19 @@ public class GameEngine implements Serializable
                 }
                 else
                 {
+                	String choice = "";
+                	if(!ListPlayer.get(player).HasInterruptCard())
+                    {
+                    	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                    	choice = scan.next();
+                    	
+                    }
+                	if(choice.compareToIgnoreCase("no") == 0)
+                	{
                     //pay 2$ from bank
                     GameBoard.AddToBank(2);
             		ListPlayer.get(player).DeductFromMoney(2);
+                	}
                 }
             }
             else if(CardPlayed.Name.contains("Fire Brigade"))
@@ -349,6 +358,16 @@ public class GameEngine implements Serializable
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
                 int PlayerIndex = scan.nextInt();
+                if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                {
+                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                	String choice = scan.next();
+                	if(choice.compareToIgnoreCase("yes") == 0)
+                	{
+                		return true;
+                	}
+                }
+                
                 System.out.println("Player " + PlayerIndex + ": Do you want to give 5$. If not, he will remove one of your building");
                 String choice = scan.next();
                 if(choice.compareToIgnoreCase("yes")==0)
@@ -365,11 +384,18 @@ public class GameEngine implements Serializable
             }
             else if(CardPlayed.Name.contains("Dr Whiteface"))
             {
-            	
-                //Choose a player and have him pay 5$. If not, reduce hand size to 4
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
                 int PlayerIndex = scan.nextInt();
+                if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                {
+                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                	String choice = scan.next();
+                	if(choice.compareToIgnoreCase("yes") == 0)
+                	{
+                		return true;
+                	}
+                }
                 System.out.println("Player " + PlayerIndex + ": Do you want to give 5$. If not, you will need to keep this card which will reduce your hand size to 4.");
                 String choice = scan.next();
                 if(choice.compareToIgnoreCase("yes")==0)
@@ -379,7 +405,6 @@ public class GameEngine implements Serializable
                 }
                 else
                 {
-                	//TO DISCUSS
                     ListPlayer.get(PlayerIndex).HandSize--;
                 }                
             }
@@ -393,6 +418,15 @@ public class GameEngine implements Serializable
                     //remove minion
                     System.out.println("Enter the player index you want to remove minion.");
                     int PlayerIndex = scan.nextInt();
+                    if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                    {
+                    	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                    	String choice = scan.next();
+                    	if(choice.compareToIgnoreCase("yes") == 0)
+                    	{
+                    		return true;
+                    	}
+                    }
                     System.out.println("Enter area index to remove his minion:");
                     int area = scan.nextInt();
                     
@@ -400,9 +434,19 @@ public class GameEngine implements Serializable
                 }
                 else if(DieValue==1)
                 {
+                	String choice = "";
+                	if(!ListPlayer.get(player).HasInterruptCard())
+                    {
+                    	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                    	choice = scan.next();
+                    	
+                    }
+                	if(choice.compareToIgnoreCase("no") == 0)
+                	{
                     System.out.println("Enter area index to remove your minion:");
                     int area = scan.nextInt();
                     GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
+                	}
                 }
             }
             else if(CardPlayed.Name.contains("HERE "))// HERE AND NOW
@@ -415,15 +459,35 @@ public class GameEngine implements Serializable
                     //take 3$ from a player
                     System.out.println("Enter the player index you want to get your money.");
                     int PlayerIndex = scan.nextInt();
+                    if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                    {
+                    	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                    	String choice = scan.next();
+                    	if(choice.compareToIgnoreCase("yes") == 0)
+                    	{
+                    		return true;
+                    	}
+                    }
                     ListPlayer.get(PlayerIndex).DeductFromMoney(3);
                     ListPlayer.get(player).AddToMoney(3);
                 }
                 else if(DieValue==1)
                 {
+                	String choice = "";
+                	if(!ListPlayer.get(player).HasInterruptCard())
+                    {
+                    	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                    	choice = scan.next();
+                    	
+                    }
+                	if(choice.compareToIgnoreCase("no") == 0)
+                	{
                     //remove your own minion
                     System.out.println("Enter area index to remove your minion:");
                     int area = scan.nextInt();
                     GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
+                
+                	}
                 }
             }
         }
@@ -436,7 +500,6 @@ public class GameEngine implements Serializable
         		//traverse the verb
                 for(int verbCount=0; verbCount<currentEffect.Verb.size(); verbCount++)
                 {
-                    	//TODO check condition
                         if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("pay") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
@@ -447,40 +510,85 @@ public class GameEngine implements Serializable
                             	//cosmos lavish
                             	System.out.println("Please enter Player index which you wish to remove minion");
                             	int PlayerIndex = scan.nextInt();
-                            	System.out.println("Please enter Area index which you wish to remove minion. (Area must have troublemaker)");
-                            	int AreaIndex = scan.nextInt();
                             	
-                            	//get cost of building
-                            	GameBoard.RemoveMinion(AreaIndex, ListPlayer.get(PlayerIndex).GetColor());
+                            	String choice = "";
+                            	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                                {
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	choice = scan.next();
+                                	
+                                }
+                            	if(choice.compareToIgnoreCase("no") == 0)
+                            	{
+                            		System.out.println("Please enter Area index which you wish to remove minion. (Area must have troublemaker)");
+                                	int AreaIndex = scan.nextInt();
+                                	
+                                	//get cost of building
+                                	GameBoard.RemoveMinion(AreaIndex, ListPlayer.get(PlayerIndex).GetColor());
+                               
+                            	}
                             }
                             else if(object.contains("another player and move 1 minion to any area"))
                             {
                             	//Hobsons's Livery Stable
                             	System.out.println("Please enter Player index which you move minion");
                             	int PlayerIndex = scan.nextInt();
-                            	System.out.println("Please enter Area index where minion is found.");
-                            	int AreaIndex = scan.nextInt();
-                            	System.out.println("Please enter new Area index where minion you want to put minion.");
-                            	int NewArea = scan.nextInt();
-                            	GameBoard.RemoveMinion(AreaIndex, ListPlayer.get(PlayerIndex).GetColor());
-                            	GameBoard.PlaceMinion(NewArea, ListPlayer.get(PlayerIndex));
+                            	
+                            	String choice = "";
+                            	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                                {
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	choice = scan.next();
+                                	
+                                }
+                            	if(choice.compareToIgnoreCase("no") == 0)
+                            	{
+                            		System.out.println("Please enter Area index where minion is found.");
+                                	int AreaIndex = scan.nextInt();
+                                	System.out.println("Please enter new Area index where minion you want to put minion.");
+                                	int NewArea = scan.nextInt();
+                                	GameBoard.RemoveMinion(AreaIndex, ListPlayer.get(PlayerIndex).GetColor());
+                                	GameBoard.PlaceMinion(NewArea, ListPlayer.get(PlayerIndex));
+                            	}
+                            	
                             }
                             else if(object.contains(" another player and assassinate 1 minion"))
                             {
+                            	int AreaIndex = 0;
                             	//Burleigh & Stronginth
                             	System.out.println("Please enter Player index which you assasinate minion");
                             	int PlayerIndex = scan.nextInt();
+                            	String choice = "";
+                            
+                            	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                                {
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	choice = scan.next();
+                                	
+                                }
+                            	if(choice.compareToIgnoreCase("no") == 0)
+                            	{
                             	System.out.println("Please enter Area index where minion is found.");
-                            	int AreaIndex = scan.nextInt();
+                            	AreaIndex = scan.nextInt();
+                            	}
                             	
                             	GameBoard.RemoveMinion(AreaIndex, ListPlayer.get(PlayerIndex).GetColor());
                             }
                             
                             else if(object.contains("bank"))
                             {
-                            	
+                            	String choice = "";
+                            	if(!ListPlayer.get(player).HasInterruptCard())
+                                {
+                                	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                                	choice = scan.next();
+                                	
+                                }
+                            	if(choice.compareToIgnoreCase("no") == 0)
+                            	{
                             	ListPlayer.get(player).DeductFromMoney(amount);
                             	GameBoard.AddToBank(amount);
+                            	}
                             }
                             else if(object.contains("building"))
                             {
@@ -489,35 +597,74 @@ public class GameEngine implements Serializable
                             	int AreaIndex = scan.nextInt();
                             	System.out.println("Please enter Player index which you wish to take over building");
                             	int PlayerIndex = scan.nextInt();
-                            	
+                            	String choice = "";
+                            	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                                {
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	choice = scan.next();
+                                	
+                                }
+                            	if(choice.compareToIgnoreCase("no") == 0)
+                            	{
                             	//get cost of building
                             	int Cost = GameBoard.GetArea(AreaIndex).GetAreaCost();
                             	System.out.println("Area " + AreaIndex + " (" + GameBoard.GetArea(AreaIndex).GetName()+") cost "+Cost +". Proceeding payment");
                             	ListPlayer.get(PlayerIndex).AddToMoney(Cost);
                 				ListPlayer.get(player).DeductFromMoney(Cost);
+                            	}
                             }
                             else if(object.contains("player"))
                             {
                             	//pay to each player - Mr Boggis
                             	if(object.contains("each"))
                             	{
-                            		for(int i=0; i<ListPlayer.size(); i++)
-                            		{
-                            			if(i != player) {
-                            				ListPlayer.get(i).AddToMoney(amount);
-                            				ListPlayer.get(player).DeductFromMoney(amount);
-                            			}
-                            		}
+                            		String choice = "";
+                                	if(!ListPlayer.get(player).HasInterruptCard())
+                                    {
+                                    	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                                    	choice = scan.next();
+                                    	
+                                    }
+                                	if(choice.compareToIgnoreCase("no") == 0)
+                                	{
+	                            		for(int i=0; i<ListPlayer.size(); i++)
+	                            		{
+	                            			if(i != player) {
+	                            				String choice2 = "";
+	                                        	if(!ListPlayer.get(i).HasInterruptCard())
+	                                            {
+	                                            	System.out.println("Player " + i + "has an interrupt card. Do you want he wants to play it?");
+	                                            	choice2 = scan.next();
+	                                            	
+	                                            }
+	                                        	if(choice2.compareToIgnoreCase("no") == 0)
+	                                        	{
+	                                        		ListPlayer.get(i).AddToMoney(amount);
+	                                        		ListPlayer.get(player).DeductFromMoney(amount);
+	                                        	}
+	                                        }
+	                            		}
+                                	}
                             		
                             	}
                             	else //if(object.contains("another"))//pay to a specific player
                             	{
-                            		
+                            		String choice = "";
+                                	if(!ListPlayer.get(player).HasInterruptCard())
+                                    {
+                                    	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                                    	choice = scan.next();
+                                    	
+                                    }
+                                	if(choice.compareToIgnoreCase("no") == 0)
+                                	{
                             		System.out.println("Please enter the Area index you want to remove the troublemaker.");
                                     
                                     int otherPlayer = scan.nextInt();
                                     ListPlayer.get(otherPlayer).AddToMoney(amount);
                     				ListPlayer.get(player).DeductFromMoney(amount);
+                            	
+                                	}
                             	}
                             }
                             
@@ -559,8 +706,19 @@ public class GameEngine implements Serializable
                                 System.out.println("Enter another player index who you will exchange card for 2$");
                                 int playerIndex= scan.nextInt();
                                 
+                                String choice = "";
+                            	if(!ListPlayer.get(playerIndex).HasInterruptCard())
+                                {
+                                	System.out.println("Player " + playerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	choice = scan.next();
+                                	
+                                }
+                            	if(choice.compareToIgnoreCase("no") == 0)
+                            	{
                                 ListPlayer.get(playerIndex).AddPlayerCard(CardPlayed);
                                 ListPlayer.get(player).RemovePlayerCard(cardIndex);
+                            
+                            	}
                             }
                             else //Hubert
                             {
@@ -568,11 +726,22 @@ public class GameEngine implements Serializable
                             	System.out.println("Enter player who needs to give 3$.");
                                 int Src= scan.nextInt();
                                 
-                                System.out.println("Enter another player who will receive 3$");
+                                String choice = "";
+                            	if(!ListPlayer.get(Src).HasInterruptCard())
+                                {
+                                	System.out.println("Player " + Src + "has an interrupt card. Do you want he wants to play it?");
+                                	choice = scan.next();
+                                	
+                                }
+                            	if(choice.compareToIgnoreCase("no") == 0)
+                            	{
+                            	 System.out.println("Enter another player who will receive 3$");
                                 int Dst= scan.nextInt();
                                 
                                 ListPlayer.get(Dst).AddToMoney(3);
-                				ListPlayer.get(Src).DeductFromMoney(3);
+                				ListPlayer.get(Src).DeductFromMoney(3);	
+                            	}
+                               
                                 
                             }
                         }
@@ -588,7 +757,15 @@ public class GameEngine implements Serializable
 
                             	System.out.println("Enter player index to take cards from.");
                                 int playerIndex= scan.nextInt();
-                                
+                                String choice = "";
+                            	if(!ListPlayer.get(playerIndex).HasInterruptCard())
+                                {
+                                	System.out.println("Player " + playerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	choice = scan.next();
+                                	
+                                }
+                            	if(choice.compareToIgnoreCase("no") == 0)
+                            	{
                             	System.out.println("Enter card index0 to take.");
                                 int cardIndex0= scan.nextInt();
                                 
@@ -600,6 +777,7 @@ public class GameEngine implements Serializable
                                 ListPlayer.get(player).AddPlayerCard(c2);
                                 ListPlayer.get(playerIndex).RemovePlayerCard(cardIndex0);
                                 ListPlayer.get(playerIndex).RemovePlayerCard(cardIndex1);
+                            	}
                             }
                             else if(object.contains("1$ or card"))
                             {
@@ -607,24 +785,33 @@ public class GameEngine implements Serializable
                             	//The Ankh Morpork Sunshine Dragon Sanctuary
                             	System.out.println("Enter player index to take card or 1$ from.");
                                 int playerIndex= scan.nextInt();
-                                
-                                System.out.println("Give $ or card?");
-                                String choice= scan.next();
-                                if(choice.contains("$"))
+                                String choice1 = "";
+                            	if(!ListPlayer.get(playerIndex).HasInterruptCard())
                                 {
-                                	ListPlayer.get(player).AddToMoney(1);
-                    				ListPlayer.get(playerIndex).DeductFromMoney(1);
+                                	System.out.println("Player " + playerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	choice1 = scan.next();
+                                	
                                 }
-                                else
-                                {
-                                	System.out.println("Enter card index to take.");
-                                    int cardIndex0= scan.nextInt();
-                                    Cards c1 = ListPlayer.get(playerIndex).GetCards().get(cardIndex0);
-                                  
-                                    ListPlayer.get(player).AddPlayerCard(c1);
-                                    ListPlayer.get(playerIndex).RemovePlayerCard(cardIndex0);
-                                 
-                                }
+                            	if(choice1.compareToIgnoreCase("no") == 0)
+                            	{
+	                                System.out.println("Give $ or card?");
+	                                String choice= scan.next();
+	                                if(choice.contains("$"))
+	                                {
+	                                	ListPlayer.get(player).AddToMoney(1);
+	                    				ListPlayer.get(playerIndex).DeductFromMoney(1);
+	                                }
+	                                else
+	                                {
+	                                	System.out.println("Enter card index to take.");
+	                                    int cardIndex0= scan.nextInt();
+	                                    Cards c1 = ListPlayer.get(playerIndex).GetCards().get(cardIndex0);
+	                                  
+	                                    ListPlayer.get(player).AddPlayerCard(c1);
+	                                    ListPlayer.get(playerIndex).RemovePlayerCard(cardIndex0);
+	                                 
+	                                }
+                            	}
                                 
                             }
                             else if(object.contains("$ from all"))
@@ -633,8 +820,18 @@ public class GameEngine implements Serializable
                             	for(int i=0; i<ListPlayer.size(); i++)
                         		{
                         			if(i != player) {
-                        				ListPlayer.get(i).AddToMoney(amount);
-                        				ListPlayer.get(player).DeductFromMoney(amount);
+                        				String choice = "";
+                                    	if(!ListPlayer.get(i).HasInterruptCard())
+                                        {
+                                        	System.out.println("Player " + i + "has an interrupt card. Do you want he wants to play it?");
+                                        	choice = scan.next();
+                                        	
+                                        }
+                                    	if(choice.compareToIgnoreCase("no") == 0)
+                                    	{
+                        				ListPlayer.get(player).AddToMoney(amount);
+                        				ListPlayer.get(i).DeductFromMoney(amount);
+                                    	}
                         			}
                         		}
                             }
@@ -642,10 +839,12 @@ public class GameEngine implements Serializable
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("interrupt") ==0)
                         {
+                        	//todo
                         	//have to findout how to play Doctor Mossy Lawn
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
                         {
+                        	//todo
                             //have to find out how to do the loan
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("get") ==0)
