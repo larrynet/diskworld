@@ -1775,20 +1775,24 @@ public class GameEngine implements Serializable
             if(choice.compareToIgnoreCase("demon") == 0)
             {
             	//To activate later
-                //ActionSuccess = RemoveDemon( AreaNumber);
+                ActionSuccess = this.GameBoard.RemoveDemon( AreaNumber);
+                
+                Continue = !ActionSuccess;
 	
             }
             else if(choice.compareToIgnoreCase("troll") == 0)
             {
             	//to activate later
-                //ActionSuccess = RemoveTroll( AreaNumber);
+                ActionSuccess = this.GameBoard.RemoveTroll( AreaNumber);
+                Continue = !ActionSuccess;
             }
             else if(choice.compareToIgnoreCase("minion") == 0)
             {
                 System.out.println("Please enter the player you want to remove the index from: ");
-                String PlayerIndex  = scan.next();
+                int PlayerIndex  = scan.nextInt();
                 //To activate later
-                //ActionSuccess = RemoveMinion( AreaNumber, PlayerIndex);
+                ActionSuccess = this.GameBoard.RemoveMinion( AreaNumber, this.ListPlayer.get(PlayerIndex).GetColor());
+                Continue = !ActionSuccess;
             }
             else
             {

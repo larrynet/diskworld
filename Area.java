@@ -24,6 +24,7 @@ public class Area implements Serializable
 		//public List<Pieces> ListBuilding;
 		//public Pieces Building;
 		private Pieces Building;
+		private String AdjArea; 
 				
 		public Pieces GetBuilding() {return Building; }
 		
@@ -39,7 +40,7 @@ public class Area implements Serializable
 		 * @param _Number Area Number
 		 * @param _Cost Area Cost
 		 */
-		public Area(String _Name, int _Number, int _Cost) 
+		public Area(String _Name, int _Number, int _Cost, String adjArea) 
 		{
 			Name = _Name;
 			Number = _Number;
@@ -51,6 +52,7 @@ public class Area implements Serializable
 			ListTrolls = new ArrayList<Pieces>();
 			ListMinions = new ArrayList<Pieces>();
 			Building = null;
+			AdjArea = adjArea;
 		}
 		
 		/**
@@ -239,7 +241,7 @@ public class Area implements Serializable
 		 */
 		public boolean RemoveTroubleMaker() 
 		{
-			if (TroubleMakers != null)
+			if (this.TroubleMakers != null)
 			{
 				TroubleMakers = null;
 				this.IsTrouble=false ;
@@ -264,7 +266,8 @@ public class Area implements Serializable
 				if (Minion.GetPieceColor() == Color)
 				{
 					ListMinions.remove(Minion);
-					if ((GetMinionCount(Colors.None)>1) && (this.IsTrouble))
+					
+					if ((this.IsTrouble))
 					{
 					  RemoveTroubleMaker();	
 					}
@@ -360,9 +363,32 @@ public class Area implements Serializable
 			
 		}
 			 
-		public boolean AreaAdjacency(int area1, int  area2)
+		public boolean AreaAdjacency(int  area2)
 		{
-			return true;
+			String [] adjAreas = this.AdjArea.split(",");
+			
+			for (String s : adjAreas)
+			{
+				if (s == Integer.toString(area2))
+				{
+					return true;
+				}
+			}
+			
+			return false;
+		}
+		
+		public int[] GetAdjAreas(){
+			
+			String [] ArrAdjArr = this.AdjArea.split(",");
+			int [] ArrIntAdjArr = new int[ArrAdjArr.length];
+			
+			for (int i = 0 ; i < ArrAdjArr.length; i++)
+			{
+				ArrIntAdjArr[i] = Integer.parseInt(ArrAdjArr[i]);
+			}
+			
+			return ArrIntAdjArr;
 		}
 }
 	
