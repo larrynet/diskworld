@@ -27,7 +27,8 @@ public class Player implements Serializable {
 	private List<Pieces> ListBuildings;
 	public List<Cards> ListCityAreaCards;
 	
-	
+	public int GetPlayerNumber()
+	{return PlayerNumber;}
 	/**
 	 * Player constructor 
 	 * 
