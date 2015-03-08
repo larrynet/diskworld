@@ -457,6 +457,15 @@ public class Player implements Serializable {
 	{
 		this.LostPoints += points;
 	}
+	
+	/**
+	 * If condtion met remove lost points bank
+	 * @param points
+	 */
+	public void DecreaseLostPoints(int points)
+	{
+		this.LostPoints -= points;
+	}
 
 	public void PrintCardsIndex()
 	{

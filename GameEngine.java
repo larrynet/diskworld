@@ -1983,6 +1983,44 @@ public class GameEngine implements Serializable
 		return WiningCondition;
 	}
 	
+	
+	/**
+	 * Calculate points for  a player
+	 * @param playerIndex
+	 * @return
+	 */
+    public int GetPlayerPoints(int playerIndex)
+    {
+    	
+    	int totalPoints = 0 ;
+    	
+    	//Retrieve player object 
+    	Player player = this.ListPlayer.get(playerIndex);
+    	
+    	
+    	
+    	//First calculate point from minions
+    	for (Area area : this.GameBoard.ListArea)
+    	{
+    		totalPoints += 5 * area.GetMinionCount(player.GetColor());
+    	}
+    	
+    	////Calucalute Points from buildings
+    	for (Area area : this.GameBoard.ListArea)
+    	{
+    		if (area.GetBuilding().GetPieceColor() == player.GetColor())
+    		{
+    			totalPoints += area.GetAreaCost();
+    		}
+    	}
+    	
+    	//Calculate Total Dollars
+    	totalPoints += player.TotalMoney();
+    	
+    	return totalPoints;
+    	
+    }
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
