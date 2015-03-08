@@ -240,7 +240,7 @@ public class GameEngine implements Serializable
 				
 		//fetch card of playchoice
 		Cards CardPlayed = (GreenCards)ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
-		boolean ActionStatus = false;
+		boolean ActionStatus = true;
 		
 		if (CardPlayed.GetCardType() == CardType.GreenCards)
 		{
@@ -1557,7 +1557,7 @@ public class GameEngine implements Serializable
 		System.out.println("Please enter the Area index you want to remove the troublemaker.");
         Scanner scan = new Scanner(System.in);
         int AreaNumber = scan.nextInt();
-        ActionSuccess = RemoveTrouble(AreaNumber);
+        ActionSuccess = this.GameBoard.Removetrouble(AreaNumber);
 		return ActionSuccess;
 	}
 	
