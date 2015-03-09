@@ -3,8 +3,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.Vector;
 
@@ -259,12 +259,14 @@ public class ManageCards implements Serializable
 	String  thisLine = null;
 	int iterator =  48;
 	int j = 1;
+	
+	ClassLoader classLoader = getClass().getClassLoader();
+	File file = new File(classLoader.getResource("GreenCards.txt").getFile());
 	 
 	  try
 	  {
-	     // open input stream test.txt for reading purpose. /Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/GreenCards.txt
-	     //BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/GreenCards.txt"));
-		  BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/GreenCards.txt"));
+	    
+		 BufferedReader br = new BufferedReader(new FileReader(file));
 	     while ((thisLine = br.readLine()) != null) {
 	    	 
 	    	//If not comment then read
@@ -307,14 +309,18 @@ public class ManageCards implements Serializable
 	private void CreateBrownCards()
 {
 	String  thisLine = null;
-	
+	ClassLoader classLoader = getClass().getClassLoader();
+	File file = new File(classLoader.getResource("BrownCards.txt").getFile());
 	  try{
 	     // open input stream test.txt for reading purpose.
-	     BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/BrownCards.txt"));
+	     BufferedReader br = new BufferedReader(new FileReader(file));
+	     
+	     int iterator =  53;
+    	 int j = 1;
+    	 
 	     while ((thisLine = br.readLine()) != null) {
 	    	
-	    	 int iterator =  53;
-	    	 int j = 1;
+	    	
 	    	//If not comment then read
 	    	 if (!thisLine.contains("name"))
 	    	 {
@@ -351,10 +357,12 @@ public class ManageCards implements Serializable
 	private void CreatePersoCards()
 	{
 		String  thisLine = null;
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource("PersonalityCards.txt").getFile());
 		
 		  try{
 		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/PersonalityCards.txt"));
+		     BufferedReader br = new BufferedReader(new FileReader(file));
 		    
 		     int iterator =  6;
 	    	 int j = 1;
@@ -387,10 +395,12 @@ public class ManageCards implements Serializable
 	private void CreateCityCards()
 	{
 		String  thisLine = null;
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource("CityArea.txt").getFile());
 		
 		  try{
 		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/CityArea.txt"));
+		     BufferedReader br = new BufferedReader(new FileReader(file));
 		    
 		     int iterator =  11;
 	    	 int j = 1;
@@ -423,12 +433,12 @@ public class ManageCards implements Serializable
 	private void RandomEventCards()
 	{
 		String  thisLine = null;
-		
-		
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource("RandomEvents.txt").getFile());
 		
 		  try{
 		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader("/Users/Gay/Documents/workspace/SOEN6441/LocDiskworld/src/RandomEvents.txt"));
+		     BufferedReader br = new BufferedReader(new FileReader(file));
 		    
 		     int iterator =  11;
 	    	 int j = 1;
