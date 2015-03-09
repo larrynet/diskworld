@@ -124,18 +124,13 @@ public class Board implements Serializable {
 	 * @param player
 	 * @return boolaen to show if it is done or not
 	 */
-	public boolean PlaceMinion(int AreaNumber,Player player, boolean initialize)
+	public boolean PlaceMinion(int AreaNumber,Player player)
 	{
-		//Check Area to see if we place a minion
-		
-		if (initialize || CheckPlaceMinion(AreaNumber, player))
+		if(player.GetMinionCount()!=0)
 		{
-			if(player.GetMinionCount()!=0)
-			{
-				ListArea.get(AreaNumber-1).AddMinions(player.PlaceMinion());
+			ListArea.get(AreaNumber-1).AddMinions(player.PlaceMinion());
 
-				return true;
-			}
+			return true;
 		}
 		return false;
 	}
