@@ -261,32 +261,60 @@ public class GameEngine implements Serializable
 		{
 			String currentSymbol = lstSymbols.get(sIterator);
 			
+			//Place a building
 			if(currentSymbol.compareToIgnoreCase("B") == 0)
+			{
 				ActionStatus = PutBuilding(CurrentPlayerIndex);
+			}
+			//Place a minion
 			else if(currentSymbol.compareToIgnoreCase("M") == 0)
+			{
 				ActionStatus = PutMinion(CurrentPlayerIndex);
+			}
+			//Assassination
 			else if(currentSymbol.compareToIgnoreCase("A") == 0)
+			{
 				ActionStatus = Assassinate(CurrentPlayerIndex);
+			}
+			//Remove one trouble marker
 			else if(currentSymbol.compareToIgnoreCase("RT") == 0)
+			{
 				ActionStatus = RemoveTrouble(CurrentPlayerIndex);
+			}
+			//Take money
 			else if(currentSymbol.contains("T("))
+			{
 				ActionStatus = PayPlayer(CurrentPlayerIndex, (int)currentSymbol.charAt(2));
+			}
+			//Random Event
 			else if(currentSymbol.compareToIgnoreCase("RE") == 0)
+			{
 				ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex);
+			}
+			//Play another card
 			else if(currentSymbol.compareToIgnoreCase("C") == 0)
 			{
 				@SuppressWarnings("resource")
 				Scanner scan = new Scanner(System.in);
-				System.out.println("Again? Which card you now want to play?");
+				System.out.println("What card do you want to play next ? (Enter index of card)");
 				int newCard = scan.nextInt();
 				ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
 			}
+			//Interupt
 			else if(currentSymbol.compareToIgnoreCase("I") == 0)
+			{
 				System.out.println("Interrupt symbol has no effect. Oh well too late now :)");
-            else if(currentSymbol.compareToIgnoreCase("S") == 0)
-                ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
-            else
+			}
+			//Scroll: Play action described in card
+			else if(currentSymbol.compareToIgnoreCase("S") == 0)
+			{
+				ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
+			}
+			//No such symbol
+			else
+			{
                 System.out.println("Symbol " + currentSymbol + " is invalid. ");
+			}
 		}
 		
 		return ActionStatus;
@@ -294,18 +322,21 @@ public class GameEngine implements Serializable
 
 	private boolean BelongToException(Cards c)
     {
-        boolean b1 = c.GetName().contains("CMOT Dibbler");
-        boolean b2 = c.GetName().contains("The Fire Brigade");
-        boolean b3 = c.GetName().contains("Whiteface");
-        boolean b4 = c.GetName().contains("Errol");
-        boolean b5 = c.GetName().contains("HERE ");
+		String CardName = c.GetName().toLowerCase();
+		
+        boolean b1 = CardName.contains("cmot");
+        boolean b2 = CardName.contains("brigade");
+        boolean b3 = CardName.contains("whiteface");
+        boolean b4 = CardName.contains("errol");
+        boolean b5 = CardName.contains("here ");
         
-        return (b1 && b2 &&b3 &&b4 && b5);
+        return (b1 || b2 || b3 || b4 || b5);
     }
 	
     private boolean PlayEffect(Cards CardPlayed, int player)
     {
     	int IndexOfCardPlayed = 0;
+    	
     	for(int i=0; i<ListPlayer.get(player).PlayerCards.size(); i++)
     	{
     		if(CardPlayed == ListPlayer.get(player).PlayerCards.get(i))
@@ -314,28 +345,33 @@ public class GameEngine implements Serializable
     			break;
     		}
     	}
+    	
     	boolean ActionStatus = false;
         Action currentEffect = null;
         GreenCards g = null;
         BrownCards b = null;
         List<Action> lstCardActions= null;
         
+        String CardName = "";
+        
         Scanner scan = new Scanner(System.in);
         if (CardPlayed.GetCardType() == CardType.GreenCards)
         {
         	g = (GreenCards)CardPlayed;
         	lstCardActions = g.GetActionList();
+        	CardName = g.GetName().toLowerCase();
         }
         else if (CardPlayed.GetCardType() == CardType.BrownCards)
         {
         	b = (BrownCards)CardPlayed;
         	lstCardActions = b.GetActionList();	
+        	CardName = g.GetName().toLowerCase();
         }
-        
+  
         if(BelongToException(CardPlayed))
         {
-        	
-            if(CardPlayed.Name.contains("CMOT Dibbler"))
+        	// *************************** CMOT Dibbler ********************************
+            if(CardName.equalsIgnoreCase("CMOT Dibbler"))
             {
                 int DieValue = GameBoard.RollDie();
                 System.out.println("Value of Die is "+ DieValue);
@@ -367,7 +403,8 @@ public class GameEngine implements Serializable
                 	}
                 }
             }
-            else if(CardPlayed.Name.contains("Fire Brigade"))
+         // *************************** Fire Brigade ********************************
+            else if(CardName.equalsIgnoreCase("Fire Brigade"))
             {
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
@@ -397,14 +434,15 @@ public class GameEngine implements Serializable
                     GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
                 }
             }
-            else if(CardPlayed.Name.contains("Dr Whiteface"))
+            // *************************** DR Whiteface ********************************
+            else if(CardName.equalsIgnoreCase("Dr Whiteface"))
             {
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
                 int PlayerIndex = scan.nextInt();
                 if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                 {
-                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he want to play it? (yes/no)");
                 	String choice = scan.next();
                 	if(choice.compareToIgnoreCase("yes") == 0)
                 	{
@@ -412,19 +450,24 @@ public class GameEngine implements Serializable
                 		return true;
                 	}
                 }
-                System.out.println("Player " + PlayerIndex + ": Do you want to give 5$. If not, you will need to keep this card which will reduce your hand size to 4.");
+                
+                System.out.println("Player " + PlayerIndex + ": Do you want to give 5$ ? If not, you will need to keep this card which will count toward your hand size. You cannot get rid of thsi card.");
                 String choice = scan.next();
                 if(choice.compareToIgnoreCase("yes")==0)
                 {
                     ListPlayer.get(PlayerIndex).DeductFromMoney(5);
                     ListPlayer.get(player).AddToMoney(5);
+                   
                 }
                 else
                 {
                     ListPlayer.get(PlayerIndex).HandSize--;
-                }                
+                }
+                
+               
             }
-            else if(CardPlayed.Name.contains("Errol"))
+         // *************************** Errol ********************************
+            else if(CardName.equalsIgnoreCase("Errol"))
             {
                 //Remove minion of choice with area with Troublemaker
                 int DieValue = GameBoard.RollDie();
@@ -468,7 +511,7 @@ public class GameEngine implements Serializable
 						ListPlayer.get(player).RemoveInterruptCard();
                 }
             }
-            else if(CardPlayed.Name.contains("HERE "))// HERE AND NOW
+            else if(CardName.contains("here "))// HERE AND NOW
             {
                 //Remove minion of choice with area with Troublemaker
                 int DieValue = GameBoard.RollDie();
