@@ -124,13 +124,18 @@ public class Board implements Serializable {
 	 * @param player
 	 * @return boolaen to show if it is done or not
 	 */
-	public boolean PlaceMinion(int AreaNumber,Player player)
+	public boolean PlaceMinion(int AreaNumber,Player player, boolean initialize)
 	{
-		if(player.GetMinionCount()!=0)
+		//Check Area to see if we place a minion
+		
+		if (initialize || CheckPlaceMinion(AreaNumber, player))
 		{
-			ListArea.get(AreaNumber-1).AddMinions(player.PlaceMinion());
-			
-			return true;
+			if(player.GetMinionCount()!=0)
+			{
+				ListArea.get(AreaNumber-1).AddMinions(player.PlaceMinion());
+
+				return true;
+			}
 		}
 		return false;
 	}
@@ -343,6 +348,26 @@ public class Board implements Serializable {
         {
         	return this.ListArea.get(AreaIndex--).GetAdjAreas();
         	
+        }
+        
+        private boolean CheckPlaceMinion(int AreaNumber,Player player)
+        {
+        	//Does player have minion in area
+        	if (this.ListArea.get(AreaNumber).GetMinionCount(player.GetColor()) > 0)
+        	{
+        		return true;
+        	}
+        	else
+        	{
+        		for (int i : this.ListArea.get(AreaNumber).GetAdjAreas())
+        		{
+        			if (this.ListArea.get(i).GetMinionCount(player.GetColor()) > 0)
+                	{
+                		return true;
+                	}
+        		}
+        	}
+        	return false;
         }
 }
 
