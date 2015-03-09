@@ -49,6 +49,7 @@ public String GetName ()
 	
 	public void ShowImage(String _Title)
 	{
+		
 		//replace all space in Name
 		Name = Name.replace(" ", "");
 		String path = "src\\Cards\\GreenCards\\" + Name+".jpg";

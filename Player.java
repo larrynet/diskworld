@@ -126,8 +126,19 @@ public class Player implements Serializable {
 	{
 		return this.Personality;
 	}
-	
-	
+	/**
+	 * Show players hands
+	 * 
+	 * @return Cards personality card object
+	 */
+	public void ShowMyHand()
+	{
+		for(int i=0; i<PlayerCards.size(); i++)
+		{
+			GreenCards g = (GreenCards)PlayerCards.get(i); 
+			g.ShowImage("Player" + PlayerNumber  + " (Card Index " + (i+1) + ")  - " + g.GetName());
+		}
+	}
 	
 	/**
 	 * Method to play a player card and remove it from the players hand

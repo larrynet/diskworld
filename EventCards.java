@@ -40,6 +40,7 @@ public class EventCards implements Cards, Serializable
 		String path = "src\\Cards\\RandomEvents\\" + Name+".jpg";
 		System.out.println("Looking for file in " + path);
         JFrame editorFrame = new JFrame(_Title);
+        
 
         editorFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

@@ -65,6 +65,7 @@ public class CityAreaCards implements Cards, Serializable
 
         BufferedImage image = null;
 
+        
         try
 
         {

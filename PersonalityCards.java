@@ -89,6 +89,7 @@ public PersonalityCards()
 			return this.Type;
 		}
 		public void ShowImage(String _Title)
+		
 		{
 			//replace all space in Name
 			Name = Name.replace(" ", "");

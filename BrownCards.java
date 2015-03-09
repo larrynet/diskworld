@@ -25,6 +25,7 @@ public class BrownCards extends CardAction implements Cards, Serializable
 	private CardType Type;
 	
 	
+	
 	public BrownCards(String _Name, int _Id, boolean _Status, CardType _Type)
 	{
 		Name = _Name;
