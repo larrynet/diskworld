@@ -25,18 +25,18 @@ public class Board implements Serializable {
 	private List<Pieces> ListDemons;
 	private List<Pieces> ListTrolls;
 	private List<Pieces> ListDeadMinions;
-	private int[][] AdjacentAreas={{3,2,12,0,0,0},
-						  {1,12,11,10,3,4},
-						  {1,2,4,0,0,0},
-						  {3,10,5,0,0,0},
-						  {6,4,10,7,8,0},
-						  {4,5,7,0,0,0},
-						  {6,5,8,0,0,0},
-						  {7,5,9,0,0,0},
-						  {8,10,11,0,0,0},
-						  {4,5,9,11,2,0},
-						  {9,10,2,12,0,0},
-						  {11,2,1,0,0,0}};
+	private String[] AdjacentAreas={"3,2,12",
+						  "1,12,11,10,3,4",
+						  "1,2,4",
+						  "3,10,5",
+						  "6,4,10,7,8",
+						  "4,5,7",
+						  "6,5,8",
+						  "7,5,9",
+						  "8,10,11",
+						  "4,5,9,11,2",
+						  "9,10,2,12",
+						  "11,2,1"};
 	
 	//public int[] ListAdjacentAreas=new int[6];
 	//Board Public Methods
@@ -221,7 +221,7 @@ public class Board implements Serializable {
 	{
 		for (int i=0;i< ArrName.length;i++)
 		{
-			Area NewArea = new Area(ArrName[i],i+1,ArrBuildingCost[i]);
+			Area NewArea = new Area(ArrName[i],i+1,ArrBuildingCost[i], AdjacentAreas[i]);
 			this.ListArea.add(i,NewArea);
 		}
 	}
@@ -268,22 +268,7 @@ public class Board implements Serializable {
 		public boolean AreaAdjacency(int Area1, int Area2)
 		{
 			//since the array starts from array index 0
-			Area1--;
-			boolean IsAdjacent=false;
-			for (int i=0;i<6;i++)
-			{
-				if (AdjacentAreas[Area1][i]==Area2)
-					{
-					IsAdjacent= true;
-					break;
-					}
-					
-				else 
-					{
-					IsAdjacent= false;
-					}
-			}
-			return IsAdjacent;
+			return this.ListArea.get(Area1--).AreaAdjacency(Area2--);
 			
 		}
 		
@@ -356,12 +341,8 @@ public class Board implements Serializable {
         //returns an array containing the areas adjacent.we do not have area 0
         public int[] GetAdjacent(int AreaIndex)
         {
-        	int[] ListAdjacentAreas=new int[6];
-        
-        	AreaIndex--;
-        	for (int i=0;i<6;i++)
-        	ListAdjacentAreas[i]=AdjacentAreas[AreaIndex][i];
-        	return ListAdjacentAreas;
+        	return this.ListArea.get(AreaIndex--).GetAdjAreas();
+        	
         }
 }
 

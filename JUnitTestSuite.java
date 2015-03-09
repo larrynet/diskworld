@@ -61,7 +61,7 @@ public class JUnitTestSuite {
 		ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(Hubert);
 		//check if money transfered
 		
-		boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+		boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 		//assertTrue("Failed executing Hubert", Success);
 		//public Action(int n, List<String> v, List<String> o, List<String> c, List<String> a,List<String> s ,String relation, boolean keep) 
 		
@@ -106,7 +106,7 @@ public class JUnitTestSuite {
 	ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 	//check if money transfered
 	
-	boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+	boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 	assertTrue("Failed executing card", Success);
 	}
 	
@@ -140,7 +140,7 @@ public class JUnitTestSuite {
 	ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 	//check if money transfered
 	
-	boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+	boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 	assertTrue("Failed executing card", Success);
 	}
 /////////////////////end of Dr Cruces/////////////////////////
@@ -183,7 +183,7 @@ card.AddSymbols("T(1)");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of captain carrot/////////////////////////
@@ -226,7 +226,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Drumknott/////////////////////////
@@ -268,7 +268,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Dr Whiteface////////////////////////
@@ -310,7 +310,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Foul Ole Ron/////////////////////////
@@ -352,7 +352,7 @@ card.AddSymbols("I");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Fresh Start Club/////////////////////////
@@ -394,7 +394,7 @@ card.AddSymbols("I");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Gaspode/////////////////////////
@@ -436,7 +436,7 @@ card.AddSymbols("T(3)");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Gimlet's Dwarf Delicatessen/////////////////////////
@@ -478,7 +478,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Groat/////////////////////////
@@ -520,7 +520,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Horga�s House of Ribs/////////////////////////
@@ -562,7 +562,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Harry King /////////////////////////
@@ -603,7 +603,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of HERE �N� NOW/////////////////////////
@@ -646,7 +646,7 @@ card.AddSymbols("B");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Hex/////////////////////////
@@ -689,7 +689,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of History Monkes/////////////////////////
@@ -731,7 +731,7 @@ card.AddSymbols("T(2)");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Inigo Skimmer/////////////////////////
@@ -774,7 +774,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Leonard of Quirm/////////////////////////
@@ -817,7 +817,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Librarian/////////////////////////
@@ -860,7 +860,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Modo/////////////////////////
@@ -903,7 +903,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Mr Bent/////////////////////////
@@ -946,7 +946,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Mr Boggis/////////////////////////
@@ -989,7 +989,7 @@ card.AddSymbols("T(1)");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Mr Gryle/////////////////////////
@@ -1031,7 +1031,7 @@ card.AddSymbols("T(1)");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Mr Pin & Mr  Tulip/////////////////////////
@@ -1075,7 +1075,7 @@ card.AddSymbols("B");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of mrs cake/////////////////////////
@@ -1118,7 +1118,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Nobby Nobbs/////////////////////////
@@ -1161,7 +1161,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Pink PussyCat/////////////////////////
@@ -1205,7 +1205,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Queen Molly/////////////////////////
@@ -1249,7 +1249,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Rincewind/////////////////////////
@@ -1293,7 +1293,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Rosie Palm/////////////////////////
@@ -1337,7 +1337,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Sacharissa Cripslock/////////////////////////
@@ -1346,7 +1346,8 @@ assertTrue("Failed executing card", Success);
 
 ///////////////////Sergeant Angua//////////////////
 @Test public void TestSergeantAngua()
-{//almost always the same
+{
+//almost always the same
 GameEngine ge = new GameEngine(4);
 ge.DetermineFirstPlayer();
 int CurrentPlayerIndex = ge.GetCurrentPlayer();
@@ -1379,9 +1380,10 @@ card.AddSymbols("RT");
 card.AddSymbols("C");
 
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
+int playthis = ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1;
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, playthis);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Sergeant Angua/////////////////////////
@@ -1425,7 +1427,7 @@ card.AddSymbols("B");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Shonky Shop/////////////////////////
@@ -1469,7 +1471,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Agony Aunts/////////////////////////
@@ -1512,7 +1514,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Ankh Morpork Sunshine Dragon Sanctuary/////////////////////////
@@ -1555,7 +1557,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The bank of Ankh-Morpork/////////////////////////
@@ -1598,7 +1600,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The beggars' Guild/////////////////////////
@@ -1642,7 +1644,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Duckman/////////////////////////
@@ -1686,7 +1688,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The dysk/////////////////////////
@@ -1730,7 +1732,7 @@ card.AddSymbols("C");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Fire Brigade/////////////////////////
@@ -1773,7 +1775,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Fools' Guild/////////////////////////
@@ -1816,7 +1818,7 @@ card.AddSymbols("T(2)");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Mended Drum/////////////////////////
@@ -1859,7 +1861,7 @@ card.AddSymbols("S");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Opera House/////////////////////////
@@ -1902,7 +1904,7 @@ card.AddAction(a);
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Peeled Nuts/////////////////////////
@@ -1944,7 +1946,7 @@ card.AddSymbols("T(5)");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Royal Mint/////////////////////////
@@ -1986,7 +1988,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The Seamstresses' Guild/////////////////////////
@@ -2029,7 +2031,7 @@ card.AddSymbols("M");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of The thieves guild/////////////////////////
@@ -2072,7 +2074,7 @@ card.AddSymbols("I");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Wallace Sonky/////////////////////////
@@ -2115,7 +2117,7 @@ card.AddSymbols("B");
 ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(card);
 //check if money transfered
 
-boolean Success = ge.PlayCard(CurrentPlayerIndex, 0);
+boolean Success = ge.PlayCard(CurrentPlayerIndex, ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size()-1);
 assertTrue("Failed executing card", Success);
 }
 /////////////////////end of Zorgo the Retro-phrenologist/////////////////////////
@@ -2288,11 +2290,11 @@ assertTrue("Failed executing card", Success);
 	{
 		
 		ManageCards cardManager = new ManageCards(1);
-		for (int i = 0 ; i < cardManager.Event_Card.length; i++)
+		for (int i = 0 ; i < cardManager.Green_Cards.length; i++)
 		{
-			if (cardManager.Event_Card[i] != null)
+			if (cardManager.Green_Cards[i] != null)
 			{
-				System.out.println(cardManager.Event_Card[i].GetName());
+				System.out.println(cardManager.Green_Cards[i].GetName());
 			}
 		}
 		
