@@ -440,7 +440,7 @@ public class GameEngine implements Serializable
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
                 int PlayerIndex = scan.nextInt();
-                if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                 {
                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                 	String choice = scan.next();
