@@ -166,7 +166,7 @@ public class GameEngine implements Serializable
                     {
                     	System.out.println("Enter the area index where you want to put minion. Dimwell index is 8, Longwall index is 9 and the Shades index is 7.");
                     	int Area = scan.nextInt();
-                    	GameBoard.PlaceMinion(Area, ListPlayer.get(player));
+                    	GameBoard.PlaceMinion(Area, ListPlayer.get(player),false);
                     }
                 }
                 else if(CityArea.Name.compareToIgnoreCase("The Hippo") == 0)
@@ -198,7 +198,7 @@ public class GameEngine implements Serializable
                     	//TODO
                     	System.out.println("Enter the area index where you want to put minion. Dolly Sisters index is 1, Unreal Estate index is 2 and Nap Hill index is 12.");
                     	int Area = scan.nextInt();
-                    	GameBoard.PlaceMinion(Area, ListPlayer.get(player));
+                    	GameBoard.PlaceMinion(Area, ListPlayer.get(player),false);
                     }
                 }
                 else if(CityArea.Name.compareToIgnoreCase("The Shades") == 0)
@@ -442,7 +442,7 @@ public class GameEngine implements Serializable
                 int PlayerIndex = scan.nextInt();
                 if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                 {
-                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he want to play it? (yes/no)");
+                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                 	String choice = scan.next();
                 	if(choice.compareToIgnoreCase("yes") == 0)
                 	{
@@ -451,17 +451,19 @@ public class GameEngine implements Serializable
                 	}
                 }
                 
-                System.out.println("Player " + PlayerIndex + ": Do you want to give 5$ ? If not, you will need to keep this card which will count toward your hand size. You cannot get rid of thsi card.");
+                System.out.println("Player " + PlayerIndex + ": Do you want to give 5$ ? If not, you will need to keep this card which will count toward your hand size. You cannot get rid of this card.(yes/no)");
                 String choice = scan.next();
                 if(choice.compareToIgnoreCase("yes")==0)
                 {
                     ListPlayer.get(PlayerIndex).DeductFromMoney(5);
                     ListPlayer.get(player).AddToMoney(5);
+                    return true;
                    
                 }
                 else
                 {
                     ListPlayer.get(PlayerIndex).HandSize--;
+                    return true;
                 }
                 
                
@@ -616,7 +618,7 @@ public class GameEngine implements Serializable
                                 	System.out.println("Please enter new Area index where minion you want to put minion.");
                                 	int NewArea = scan.nextInt();
                                 	GameBoard.RemoveMinion(AreaIndex, ListPlayer.get(PlayerIndex).GetColor());
-                                	GameBoard.PlaceMinion(NewArea, ListPlayer.get(PlayerIndex));
+                                	GameBoard.PlaceMinion(NewArea, ListPlayer.get(PlayerIndex),false);
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
@@ -1354,7 +1356,7 @@ public class GameEngine implements Serializable
 									int area2 = scan.nextInt();
 									
 									GameBoard.RemoveMinion(area2, ListPlayer.get(PlayerIndex2).GetColor());
-									GameBoard.PlaceMinion(area2, ListPlayer.get(PlayerIndex));
+									GameBoard.PlaceMinion(area2, ListPlayer.get(PlayerIndex),false);
 									GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex2).GetColor());
                             	}
 								else
@@ -1449,7 +1451,7 @@ public class GameEngine implements Serializable
 											 if (GameBoard.ListArea.get(Source).AreaAdjacency(Destination))
 											 {
 												 GameBoard.RemoveMinion(Source,ListPlayer.get(PlayerIndex).GetColor()) ;
-												 GameBoard.PlaceMinion(Destination, ListPlayer.get(PlayerIndex));
+												 GameBoard.PlaceMinion(Destination, ListPlayer.get(PlayerIndex),false);
 											 }//Rincewind
 										 }else if(CardPlayed.GetName()=="Rincewind")
 										 {
@@ -1464,7 +1466,7 @@ public class GameEngine implements Serializable
 											 if(GameBoard.GetArea(source).HasTroubleMaker() && GameBoard.ListArea.get(source).AreaAdjacency(destination))
 											 {
 												 GameBoard.RemoveMinion(source,ListPlayer.get(CurrentPlayer).GetColor()) ;
-												 GameBoard.PlaceMinion(destination, ListPlayer.get(CurrentPlayer)); 
+												 GameBoard.PlaceMinion(destination, ListPlayer.get(CurrentPlayer),false); 
 											 }//Dorfl--//Hobsons's Livery Stable
 										 }
 									 }
@@ -1481,7 +1483,7 @@ public class GameEngine implements Serializable
                                      int _Destination = scan.nextInt();
                                      
                                      GameBoard.RemoveMinion(_Source,ListPlayer.get(CurrentPlayer).GetColor()) ;
-                                	 GameBoard.PlaceMinion(_Destination, ListPlayer.get(CurrentPlayer)); 
+                                	 GameBoard.PlaceMinion(_Destination, ListPlayer.get(CurrentPlayer),false); 
                                      
                                      }
                                      
@@ -1763,7 +1765,7 @@ public class GameEngine implements Serializable
         		                	System.out.println("Enter area to place minion in: ");
         		                    int areaIndex = scan.nextInt() - 1;
         		                    
-        		                    minionPlaced = this.GameBoard.PlaceMinion(areaIndex, currentPlayer);
+        		                    minionPlaced = this.GameBoard.PlaceMinion(areaIndex, currentPlayer,false);
         	                	}
                         	}
                         	else
@@ -2056,7 +2058,7 @@ public class GameEngine implements Serializable
         System.out.println("Please enter the Area index you want to put your minion. Keep in mind that you must place minion in either an area that you already have a minion in or an adjacent area. ");
         Scanner scan = new Scanner(System.in);
         int AreaNumber = scan.nextInt();
-		ActionSuccess =GameBoard.PlaceMinion(AreaNumber,ListPlayer.get(player));
+		ActionSuccess = GameBoard.PlaceMinion(AreaNumber,ListPlayer.get(player),false);
 		return ActionSuccess;
 	}
 	
@@ -2136,9 +2138,11 @@ public class GameEngine implements Serializable
 	public boolean PlaceMinion(int AreaNumber,int player)
 	{
 		if(ValidPlayerIndex(player) && ValidAreaIndex(AreaNumber))
-			return GameBoard.PlaceMinion(AreaNumber, ListPlayer.get(player-1));
-		else 
-			return false;
+		{
+			return GameBoard.PlaceMinion(AreaNumber, ListPlayer.get(player-1),false);
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -2314,9 +2318,9 @@ public class GameEngine implements Serializable
 	        
 	        //each player should place one of their minions in the Shades, The Scours, and Dolly Sisters
 	        Player p = ListPlayer.get(PlayerCount);
-	        GameBoard.PlaceMinion(1, ListPlayer.get(PlayerCount)); //dolly sister index
-	        GameBoard.PlaceMinion(5, ListPlayer.get(PlayerCount)); //The Scouts index
-	        GameBoard.PlaceMinion(7, ListPlayer.get(PlayerCount)); //The Shades index
+	        GameBoard.PlaceMinion(1, ListPlayer.get(PlayerCount),true); //dolly sister index
+	        GameBoard.PlaceMinion(5, ListPlayer.get(PlayerCount),true); //The Scouts index
+	        GameBoard.PlaceMinion(7, ListPlayer.get(PlayerCount),true); //The Shades index
 	        GameBoard.PlaceTroubleMarker(1);
 	        GameBoard.PlaceTroubleMarker(5);
 	        GameBoard.PlaceTroubleMarker(7);
