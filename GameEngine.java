@@ -954,6 +954,8 @@ public class GameEngine implements Serializable
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
                         {
+                    		this.GetPlayerLoanBank("Current Finances: ", ListPlayer.get(player));
+                        	
                         	//Player takes a 10$ loan
                         	ListPlayer.get(player).GetLoan(10);
                         	
@@ -962,11 +964,15 @@ public class GameEngine implements Serializable
                         	
                         	//Player needs to pay back 12 at end of game or player will lose 15 points
                         	ListPlayer.get(player).IncreaseLostPoints(15);
+                        	
+                        	this.GetPlayerLoanBank("New Finances: ", ListPlayer.get(player));
+                        	
+                        	return true;
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("get") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
-                            int amount = (int)object.charAt(0);
+                            int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("minion in the Isle of Gods"))
                             {
@@ -1113,53 +1119,68 @@ public class GameEngine implements Serializable
                             	//the clacks
                             	//professor of recent runes
                             	//Sergeant Cheery Littlebottom
+                            	
                                 List<Cards> DrawCardList = new ArrayList<Cards>();
+                                
+                                Player thisPlayer = ListPlayer.get(player);
+                                
+                                //Print Cards Before
+                                this.PrintHandState("Current Hand", thisPlayer);
+                                
                                 for(int i=0; i<amount; i++)
                                 {
                                     Cards c = CardManager.GetCard(CardType.GreenCards);
                                     if(c==null) c=CardManager.GetCard(CardType.BrownCards);
-                                    ListPlayer.get(player).PlayerCards.add(c);
+                                    thisPlayer.PlayerCards.add(c);
                                 }
                             	
+                                //Print Cards after
+                                this.PrintHandState("New Hand", thisPlayer);
+                                
+                                return true;
                             }
                             
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("discard") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
-                            int amount = (int)object.charAt(0);
+                            int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("up to 3 cards and fill hands"))
                             {
                             	String choice = "";
-                            	if(!ListPlayer.get(player).HasInterruptCard())
+                            	if(ListPlayer.get(player).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                            		System.out.println("Player " + player + "has an interrupt card. Player " + player + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
+                                	
+                                	if(choice.compareToIgnoreCase("yes") == 0)
+                                	{
+                                		ListPlayer.get(player).RemoveInterruptCard();
+                                		return true;
+                                	}
                                 }
-                            	if(choice.compareToIgnoreCase("no") == 0)
-                            	{
-	                            	//alchemist guild                   	
-	                                System.out.println("Enter number of cards you want to discard (1-3)");
-	                                int CardToTake = scan.nextInt();
-	                                
-	                                for(int i=0; i<CardToTake; i++)
-	                                {
-	                                    System.out.println("Enter card index "+i+": you are willing to give up:");
-	                                    int CardIndex = scan.nextInt();
-	                                    ListPlayer.get(player).PlayerCards.remove(CardIndex);
-	                                }
-	                                for(int j=0; j<(5-ListPlayer.get(player).PlayerCards.size()); j++)
-	                                {
-	                                    Cards c = CardManager.GetCard(CardType.GreenCards);
-	                                    if(c==null) c=CardManager.GetCard(CardType.BrownCards);
-	                                    ListPlayer.get(player).PlayerCards.add(c);
-	                                }
-                            	}
-								else
-									ListPlayer.get(player).RemoveInterruptCard();
+                            	
+                            	//alchemist guild                   	
+                                System.out.println("Enter number of cards you want to discard (1-3)");
+                                int CardToTake = scan.nextInt();
+                                
+                                for(int i=0; i<CardToTake; i++)
+                                {
+                                    System.out.println("Enter card index "+i+": you are willing to give up:");
+                                    int CardIndex = scan.nextInt();
+                                    ListPlayer.get(player).PlayerCards.remove(CardIndex);
+                                }
+                                for(int j=0; j<(5-ListPlayer.get(player).PlayerCards.size()); j++)
+                                {
+                                    Cards c = CardManager.GetCard(CardType.GreenCards);
+                                    if(c==null) c=CardManager.GetCard(CardType.BrownCards);
+                                    ListPlayer.get(player).PlayerCards.add(c);
+                                }
+                     
                              
                             }
+                            
                             else if(object.contains("card player card from a other hand"))
                             {
                             	//Cable Street Particular
@@ -1189,25 +1210,35 @@ public class GameEngine implements Serializable
                             else if(object.contains("card"))
                             {
                             	String choice = "";
-                            	if(!ListPlayer.get(player).HasInterruptCard())
+                            	if(ListPlayer.get(player).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                            		System.out.println("Player " + player + "has an interrupt card. Player " + player + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
+                                	
+                                	if(choice.compareToIgnoreCase("yes") == 0)
+                                	{
+                                		ListPlayer.get(player).RemoveInterruptCard();
+                                		return true;
+                                	}
                                 }
-                            	if(choice.compareToIgnoreCase("no") == 0)
-                            	{
-	                            	///modo
-	                            	//The Mob
-	                                for(int i=0; i<amount; i++)
-	                                {  
-	                                    System.out.println("Enter card index you want to discard");
-	                                    int CardToDiscard = scan.nextInt();
-	                                    ListPlayer.get(player).PlayerCards.remove(CardToDiscard);
-	                                }
-                            	}
-								else
-									ListPlayer.get(player).RemoveInterruptCard();
-                                
+                            	
+                            	///modo
+                            	//The Mob
+                            	
+                            	this.PrintHandState("Current Hand", ListPlayer.get(player));
+                            	
+                            	for(int i=0; i<amount; i++)
+                                {  
+                                	System.out.println("Enter card index you want to discard");
+                                    
+                                	int CardToDiscard = scan.nextInt();
+                                    ListPlayer.get(player).PlayerCards.remove(CardToDiscard);
+                                    
+                                }
+                            	
+                            	this.PrintHandState("New Hand", ListPlayer.get(player));
+                            	return true;
+                            	
                             } 
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
@@ -1830,6 +1861,8 @@ public class GameEngine implements Serializable
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
                         {
+                        	this.GetPlayerLoanBank("Current Finances: ", ListPlayer.get(player));
+                        	
                         	//Player takes a 10$ loan
                         	ListPlayer.get(player).GetLoan(10);
                         	
@@ -1838,6 +1871,10 @@ public class GameEngine implements Serializable
                         	
                         	//Player needs to pay back 12 at end of game or player will lose 15 points
                         	ListPlayer.get(player).IncreaseLostPoints(15);
+                        	
+                        	this.GetPlayerLoanBank("New Finances: ", ListPlayer.get(player));
+                        	
+                        	return true;
                         }
                         else
                         {
@@ -2122,18 +2159,20 @@ public class GameEngine implements Serializable
 	{
 		boolean ActionSuccess = false;
 		
+		this.GameBoard.PrintState();
+		
         System.out.println("Please enter the Area index you want to put your minion. Keep in mind that you must place minion in either an area that you already have a minion in or an adjacent area. ");
                         
         Scanner scan = new Scanner(System.in);
         
         int AreaNumber = scan.nextInt();
-        AreaNumber --;
         
+                
         //Get player object
         Player thisPlayer = this.ListPlayer.get(player);
 		
         //Minion count of player in area
-        int PlayerMinionCountinArea = this.GameBoard.ListArea.get(AreaNumber).GetMinionCount(thisPlayer.GetColor());
+        int PlayerMinionCountinArea = this.GameBoard.ListArea.get(AreaNumber-1).GetMinionCount(thisPlayer.GetColor());
         
         //Player have minion in this area
         if (PlayerMinionCountinArea > 0)
@@ -2150,6 +2189,8 @@ public class GameEngine implements Serializable
             	}
     		}
         }
+        
+        this.PrintAreaState(AreaNumber);
         
 		return ActionSuccess;
 	}
@@ -2596,7 +2637,29 @@ public class GameEngine implements Serializable
          this.GameBoard.ListArea.get(AreaNumber - 1).PrintState();
     }
     
-	/* (non-Javadoc)
+    /**
+     * 
+     * @param message
+     * @param player
+     */
+    private void PrintHandState(String message, Player player)
+    {
+    	System.out.println(message);
+    	player.PrintCardsIndex();
+    }
+	
+    
+    private void GetPlayerLoanBank(String Message, Player player)
+    {
+    	System.out.println(Message);
+    	System.out.println("Current Balance: " + player.GetMoneyCount()) ;
+    	System.out.println("Current Loan Balance: " + player.TotalLoan());
+    	
+    }
+    
+    
+    
+    /* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString()
