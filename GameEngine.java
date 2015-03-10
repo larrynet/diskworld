@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.Serializable;
 import java.util.List;
+
 
 /**
  * GameEngine is the class which the user will interact. It will call the other class according to user decisions inputted from the console or UI (later build). 
@@ -296,7 +298,11 @@ public class GameEngine implements Serializable
 			{
 				@SuppressWarnings("resource")
 				Scanner scan = new Scanner(System.in);
+				
+				//Print Player Cards and Play next card
+				this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
 				System.out.println("What card do you want to play next ? (Enter index of card)");
+				
 				int newCard = scan.nextInt();
 				ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
 			}
@@ -564,6 +570,8 @@ public class GameEngine implements Serializable
                 		
                 		return true;
                 }
+                
+                return true;
             }
         }
         else //go through normal cards
@@ -1277,7 +1285,7 @@ public class GameEngine implements Serializable
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("draw") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
-                            int amount = (int)object.charAt(0);
+                            int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("discard"))
                             {
@@ -1285,9 +1293,11 @@ public class GameEngine implements Serializable
                             	for(int i=0; i<4; i++)
                             	{
                             	   if(this.DiscardCards.get(i) != null)
+                            	   {
                             		   ListPlayer.get(player).PlayerCards.add(this.DiscardCards.get(i));
-                            	}
                             	
+                            	   }
+                            	}
                             }
                             else if(object.contains("building"))
                             {
@@ -1313,9 +1323,11 @@ public class GameEngine implements Serializable
                              	for(int DrawCount=0; DrawCount < amount; DrawCount++)
                              	{
                              		Cards c = CardManager.GetCard(CardType.GreenCards);
-                             		if(c==null) c = CardManager.GetCard(CardType.GreenCards);
-                             		ListPlayer.get(DrawCount).AddPlayerCard(c);
+                             		//if(c==null) c = CardManager.GetCard(CardType.GreenCards);
+                             		ListPlayer.get(player).AddPlayerCard(c);
                              	}
+                             	
+                             	return true;
                             }
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("exchange") ==0)
@@ -1422,6 +1434,36 @@ public class GameEngine implements Serializable
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
                             }
                         	
+                        }
+                        else if (currentEffect.Verb.get(verbCount).compareToIgnoreCase("shuffle") == 0)
+                        {
+                        	//History Monks
+                        	//Shuffle Discarded Cards
+                        	if (DiscardCards != null && DiscardCards.size() > 0)
+                        	{
+                        		long seed = System.nanoTime();
+                        		Collections.shuffle(DiscardCards, new Random(seed));
+                        		
+                        		if (DiscardCards.size() > 4)
+                        		{
+                        			for (int i = 0; i < 4; i++)
+                        			{
+                        				Cards c = DiscardCards.remove(0);
+                        				this.ListPlayer.get(player).AddPlayerCard(c);
+                        			}
+                        		}
+                        		else
+                        		{
+                        			for (int i = 0; i< DiscardCards.size(); i++)
+                        			{
+                        				Cards c = DiscardCards.remove(0);
+                        				this.ListPlayer.get(player).AddPlayerCard(c);
+                        			}
+                        		}
+                        		
+                        	}
+                        	
+                        	return true;
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("roll") ==0)
                         {
