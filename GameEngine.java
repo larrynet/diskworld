@@ -778,7 +778,7 @@ public class GameEngine implements Serializable
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("give") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
-                            int amount = (int)object.charAt(0);
+                            int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("cards"))
                             {
@@ -825,28 +825,27 @@ public class GameEngine implements Serializable
                             else //Hubert
                             {
                             	
-                            	System.out.println("Enter player who needs to give 3$.");
+                            	System.out.println("Enter player index  who will be forced to give 3$.");
                                 int Src= scan.nextInt();
                                 
                                 String choice = "";
-                            	if(!ListPlayer.get(Src).HasInterruptCard())
+                            	if(ListPlayer.get(Src).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + Src + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + Src + "has an interrupt card. Player " + Src + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 	
+                                	if(choice.compareToIgnoreCase("yes") == 0)
+                                	{
+                                		ListPlayer.get(Src).RemoveInterruptCard();
+                                		return true;
+                                	}
                                 }
-                            	if(choice.compareToIgnoreCase("no") == 0)
-                            	{
-                            	 System.out.println("Enter another player who will receive 3$");
+                               
+                            	System.out.println("Enter player index who will receive 3$");
                                 int Dst= scan.nextInt();
                                 
                                 ListPlayer.get(Dst).AddToMoney(3);
                 				ListPlayer.get(Src).DeductFromMoney(3);	
-                            	}
-								else
-									ListPlayer.get(Src).RemoveInterruptCard();
-								
-                               
                                 
                             }
                         }
@@ -2069,12 +2068,17 @@ public class GameEngine implements Serializable
 	{
 		boolean ActionSuccess = false;
         boolean Continue = true;
+        int AreaNumber;
         Scanner scan = new Scanner(System.in);
         do
         {
             System.out.println("You are about to remove one minion or troll or demon. Please enter the Area index you want to do that. ");
             
-            int AreaNumber = scan.nextInt();
+            AreaNumber = scan.nextInt();
+            
+            //Show Current Area Info
+           this.PrintAreaState(AreaNumber);
+            
             System.out.println("Do you want to remove a troll, demon or minion?");
             String choice  = scan.next();
             if(choice.compareToIgnoreCase("demon") == 0)
@@ -2094,7 +2098,10 @@ public class GameEngine implements Serializable
             else if(choice.compareToIgnoreCase("minion") == 0)
             {
                 System.out.println("Please enter the player you want to remove the index from: ");
+                System.out.println(this.ShowPlayerIndexAndColor());
+                
                 int PlayerIndex  = scan.nextInt();
+                
                 //To activate later
                 ActionSuccess = this.GameBoard.RemoveMinion( AreaNumber, this.ListPlayer.get(PlayerIndex).GetColor());
                 Continue = !ActionSuccess;
@@ -2105,6 +2112,9 @@ public class GameEngine implements Serializable
             }
         } while(Continue);
 		
+        //Show Current Area Info
+        this.PrintAreaState(AreaNumber);
+        
 		return ActionSuccess;
 	}
 	
@@ -2372,7 +2382,7 @@ public class GameEngine implements Serializable
 		{
 			//Assign set of RandomCard to player
 	        List<Cards> ListPlayerCards = new ArrayList<Cards>();
-	        int PlayerIndex = ListPlayer.size()+1;
+	        int PlayerIndex = ListPlayer.size();
 	        
 	        // fetch a random personality card
 	        Cards PlayerPersonality = CardManager.GetCard(CardType.PersonalityCards);
@@ -2558,6 +2568,34 @@ public class GameEngine implements Serializable
     	
     }
 	
+    /**
+     * Display player index with color
+     * @return
+     */
+    private String ShowPlayerIndexAndColor()
+    {
+    	StringBuilder AllPlayers = new StringBuilder();
+    	
+    	for(Player player : this.ListPlayer)
+    	{
+    		AllPlayers.append("Player " + player.GetPlayerNumber() + ":" + player.GetColor() + ";");
+    	}
+    	
+    	AllPlayers.deleteCharAt(AllPlayers.length()-1);
+    	return AllPlayers.toString();
+    }
+    
+    /**
+     * Print the current state of an Area
+     * @param AreaNumber
+     */
+    private void PrintAreaState(int AreaNumber)
+    {
+    	 System.out.println("AREA INFO");
+         System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n","area","minions","trouble?","building?","demons","trolls");
+         this.GameBoard.ListArea.get(AreaNumber - 1).PrintState();
+    }
+    
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
