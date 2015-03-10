@@ -411,7 +411,7 @@ public class GameEngine implements Serializable
                 int PlayerIndex = scan.nextInt();
                 if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                 {
-                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                 	String choice = scan.next();
                 	if(choice.compareToIgnoreCase("yes") == 0)
                 	{
@@ -481,7 +481,7 @@ public class GameEngine implements Serializable
                     int PlayerIndex = scan.nextInt();
                     if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                     {
-                    	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                    	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                     	String choice = scan.next();
                     	if(choice.compareToIgnoreCase("yes") == 0)
                     	{
@@ -517,15 +517,16 @@ public class GameEngine implements Serializable
             {
                 //Remove minion of choice with area with Troublemaker
                 int DieValue = GameBoard.RollDie();
+
                 System.out.println("Value of Die is "+ DieValue);
-                if(DieValue>7)
+                if(DieValue>=7)
                 {
                     //take 3$ from a player
                     System.out.println("Enter the player index you want to get your money.");
                     int PlayerIndex = scan.nextInt();
-                    if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
+                    if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                     {
-                    	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                    	System.out.println("Player " + PlayerIndex + "has an interrupt card, does player " + PlayerIndex + " want to play it.");
                     	String choice = scan.next();
                     	if(choice.compareToIgnoreCase("yes") == 0)
                     	{
@@ -536,26 +537,32 @@ public class GameEngine implements Serializable
 					
                     ListPlayer.get(PlayerIndex).DeductFromMoney(3);
                     ListPlayer.get(player).AddToMoney(3);
+                    
+                    return true;
                 }
                 else if(DieValue==1)
                 {
                 	String choice = "";
-                	if(!ListPlayer.get(player).HasInterruptCard())
+                	
+                	if(ListPlayer.get(player).HasInterruptCard())
                     {
                     	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
                     	choice = scan.next();
                     	
+                    	if (choice.compareToIgnoreCase("yes") == 0)
+                    	{
+							ListPlayer.get(player).RemoveInterruptCard();
+                    		return true;
+                    	}
+                    	
                     }
-                	if(choice.compareToIgnoreCase("no") == 0)
-                	{
-                    //remove your own minion
-                    System.out.println("Enter area index to remove your minion:");
-                    int area = scan.nextInt();
-                    GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
-                
-                	}
-					else
-						ListPlayer.get(player).RemoveInterruptCard();
+                	
+                		//remove your own minion
+                		System.out.println("Enter area index to remove your minion:");
+                		int area = scan.nextInt();
+                		GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
+                		
+                		return true;
                 }
             }
         }
@@ -582,7 +589,7 @@ public class GameEngine implements Serializable
                             	String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 	
                                 }
@@ -607,7 +614,7 @@ public class GameEngine implements Serializable
                             	String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 	
                                 }
@@ -634,7 +641,7 @@ public class GameEngine implements Serializable
                             
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 	
                                 }
@@ -677,7 +684,7 @@ public class GameEngine implements Serializable
                             	String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 	
                                 }
@@ -794,7 +801,7 @@ public class GameEngine implements Serializable
                                 String choice = "";
                             	if(!ListPlayer.get(playerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + playerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 	
                                 }
@@ -850,7 +857,7 @@ public class GameEngine implements Serializable
                                 String choice = "";
                             	if(!ListPlayer.get(playerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + playerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 	
                                 }
@@ -880,7 +887,7 @@ public class GameEngine implements Serializable
                                 String choice1 = "";
                             	if(!ListPlayer.get(playerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + playerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
                                 	choice1 = scan.next();
                                 	
                                 }
@@ -970,8 +977,7 @@ public class GameEngine implements Serializable
                             }
                             else if(object.contains("times number of discarded card"))
                             {
-                            	//Harry King
-                            	//Shonky shop
+                            	//Harry King -- Shonky shop
                                 GameBoard.DeductFromBank(amount*DiscardCards.size());
                         		ListPlayer.get(player).AddToMoney(amount*DiscardCards.size());
                             }
@@ -1042,7 +1048,7 @@ public class GameEngine implements Serializable
                                 String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 }
                             	if(choice.compareToIgnoreCase("no") == 0)
@@ -1073,7 +1079,7 @@ public class GameEngine implements Serializable
                                 String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 }
                             	if(choice.compareToIgnoreCase("no") == 0)
@@ -1156,7 +1162,7 @@ public class GameEngine implements Serializable
                                 String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 }
                             	if(choice.compareToIgnoreCase("no") == 0)
@@ -1340,7 +1346,7 @@ public class GameEngine implements Serializable
         	                    String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 }
                             	if(choice.compareToIgnoreCase("no") == 0)
@@ -1373,7 +1379,7 @@ public class GameEngine implements Serializable
                                 String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 }
                             	if(choice.compareToIgnoreCase("no") == 0)
@@ -1402,7 +1408,7 @@ public class GameEngine implements Serializable
                                 String choice = "";
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                 	choice = scan.next();
                                 }
                             	if(choice.compareToIgnoreCase("no") == 0)
@@ -1509,7 +1515,7 @@ public class GameEngine implements Serializable
                                  String choice = "";
                              	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                  {
-                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Do you want he wants to play it?");
+                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
                                  	choice = scan.next();
                                  }
                              	if(choice.compareToIgnoreCase("no") == 0)
@@ -1714,7 +1720,7 @@ public class GameEngine implements Serializable
                             String choice = "";
                         	if(!ListPlayer.get(playerIndex).HasInterruptCard())
                             {
-                            	System.out.println("Player " + playerIndex + "has an interrupt card. Do you want he wants to play it?");
+                            	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
                             	choice = scan.next();
                             }
                         	if(choice.compareToIgnoreCase("no") == 0)
@@ -2069,6 +2075,7 @@ public class GameEngine implements Serializable
         Scanner scan = new Scanner(System.in);
         
         int AreaNumber = scan.nextInt();
+        AreaNumber --;
         
         //Get player object
         Player thisPlayer = this.ListPlayer.get(player);
