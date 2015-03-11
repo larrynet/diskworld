@@ -53,6 +53,11 @@ public class Player implements Serializable {
 		
 	}
 	
+	//used for testing
+	public void SetPersonalityCard(PersonalityCards p)
+	{
+		Personality = p;
+	}
 	public boolean HasInterruptCard()
 	{
 		GreenCards g = null;

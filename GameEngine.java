@@ -22,8 +22,9 @@ public class GameEngine implements Serializable
 	private int TotalPlayer;
 	private int CurrentPlayer;
 	private List<Cards> DiscardCards;
-	
+	private int CurrentDie;
 	private boolean HasGameEnded;
+	private int BoardDie;
 	/**
 	 * Default constructor who will init all internal structure with minimum supported player 
 	 */
@@ -1895,7 +1896,7 @@ public class GameEngine implements Serializable
         return ActionStatus;
     }
 
-	private boolean PlayEvent(Cards CardPlayed, int player)
+	public boolean PlayEvent(Cards CardPlayed, int player)
 	{
 		boolean ActionSuccess = false;
 		System.out.println("Activating the event effect now");
@@ -1904,6 +1905,7 @@ public class GameEngine implements Serializable
         {
             System.out.println("Dragon Event \n===========================================");
             int AreaAffected = GameBoard.RollDie();
+            BoardDie = AreaAffected;
             
             System.out.println("Area " + AreaAffected + " will be affected by the fire. Removing all minions in it");
             for(int i=0; i<TotalPlayer; i++)
@@ -1921,11 +1923,32 @@ public class GameEngine implements Serializable
             for(int FloodCount=0; FloodCount<2; FloodCount++)
             {
                 int AreaAffected = GameBoard.RollDie();
+                CurrentDie = AreaAffected;
                 for(int EachPlayer= CurrentPlayer; EachPlayer<(CurrentPlayer+4); EachPlayer++)
                 {
                     if(EachPlayer > 4) EachPlayer=EachPlayer%4;
                     
-                    //TODO move minion to an adjacent area
+                    int[] ListAdjacentArea = GameBoard.ListArea.get(AreaAffected).GetAdjAreas();
+                    boolean userChoice= false;
+                    Scanner scan = new Scanner(System.in);
+                    while(!userChoice)
+                    {   
+                        for(int i=0; i<ListAdjacentArea.length; i++)
+                        {
+                            System.out.println("Area " + ListAdjacentArea[i] + "is adjacent to " + AreaAffected + ". Would you like to move your minion there?");
+                            String chooseMove = scan.next();
+                            if(chooseMove.compareToIgnoreCase("yes") == 0)
+                            {
+                            	
+                                GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(EachPlayer).GetColor());
+                                GameBoard.PlaceMinion(AreaAffected, ListPlayer.get(EachPlayer));
+                                userChoice = true;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    
                 }
             }
         }
@@ -1992,7 +2015,21 @@ public class GameEngine implements Serializable
                 GameBoard.RemoveBuilding(AreaAffected, ListPlayer.get(i));
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Mysteriuos Murderer") == 0)
+        else if(CardPlayed.Name.compareToIgnoreCase("Earthquake") == 0)
+        {
+            System.out.println("Earthquake Event \n===========================================");
+            int AreaAffected0 = GameBoard.RollDie();
+            int AreaAffected1 = GameBoard.RollDie();
+            
+            System.out.println("Removing building in Area " + AreaAffected0 + ".");
+            System.out.println("Removing building in Area " + AreaAffected1 + ".");
+            for(int i=0; i<TotalPlayer; i++)
+            {
+                GameBoard.RemoveBuilding(AreaAffected0, ListPlayer.get(i));
+                GameBoard.RemoveBuilding(AreaAffected1, ListPlayer.get(i));
+            }
+        }
+        else if(CardPlayed.Name.compareToIgnoreCase("Mysterious Murders") == 0)
         {
         	Scanner scan = new Scanner(System.in);
             System.out.println("Mysterious Murdered Event \n===========================================");
@@ -2048,11 +2085,11 @@ public class GameEngine implements Serializable
             	}
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Bloody Stupid Johson") == 0)
+        else if(CardPlayed.Name.compareToIgnoreCase("Bloody Stupid Johnson") == 0)
         {
             System.out.println("Bloody Stupid Johson \n===========================================");
             int AreaAffected = GameBoard.RollDie();
-            
+            CurrentDie = AreaAffected;
             //disable effect of City Area of that card by discarding the card
             for(int i=0; i<TotalPlayer; i++)
             {
@@ -2091,6 +2128,8 @@ public class GameEngine implements Serializable
 		return ActionSuccess;
 	}
 
+	
+	
 	private boolean RemoveTrouble(int player)
 	{
 		boolean ActionSuccess = false;
@@ -2555,8 +2594,8 @@ public class GameEngine implements Serializable
 		//Commandor Vimes .If cards run out he whill be the winner
 		else if (this.CurrentPlayer==2)
 		{// GreenCard=48 +BrownCards =53 
-			if (this.DiscardCards.size()==101)
-				 WiningCondition=true;
+			
+			WiningCondition=NoMoreCard();
 		}
 		//Chrysoprase
 		else if (this.CurrentPlayer==7)
@@ -2666,5 +2705,96 @@ public class GameEngine implements Serializable
 	{
 		return this.toString();
 	}
+	public void SetBoardDie (int i) {BoardDie = i;}
+	public int GetBoardDie () {return BoardDie;}
+	
+    public void PlaceMinionInEachArea(int player)
+    {
+        for(int i=0; i<GameBoard.ListArea.size(); i++)
+            GameBoard.PlaceMinion(i,ListPlayer.get(player));
+    }
+    
+    public void PlaceBuildingInEachArea(int player)
+    {
+        for(int i=0; i<GameBoard.ListArea.size(); i++)
+            GameBoard.PlaceBuilding(i,ListPlayer.get(player));
+    }
+    public void PlaceTrollInEachArea(int player)
+    {
+        for(int i=0; i<GameBoard.ListArea.size(); i++)
+            GameBoard.PlaceTroll(i);
+    }
+    
+    public void PlaceDemonsInEachArea(int player)
+    {
+        for(int i=0; i<GameBoard.ListArea.size(); i++)
+            GameBoard.PlaceDemon(i);
+    }
+    public int GetBuildingCount()
+    {
+    	int TotalBuilding = 0;
+        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        {
+        	Pieces b =GameBoard.ListArea.get(i).GetBuilding();
+        	if(b!=null) TotalBuilding++;
+        }
+        return TotalBuilding;
+    }
+	public int CountDemonsInArea()
+    {
+        int TotalDemons = 0;
+        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        {
+            TotalDemons +=GameBoard.ListArea.get(i).GetDemonCount();
+        }
+        return TotalDemons;
+    }
+    public int CountTrollsInArea()
+    {
+        int TotalTrolls= 0;
+        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        {
+        	TotalTrolls +=GameBoard.ListArea.get(i).GetTrollCount();
+        }
+        return TotalTrolls;
+    }
+    
+    public int GetPlayerBalance(int player)
+    {
+        return ListPlayer.get(player).GetMoneyCount();
+    }
+    public boolean NoMoreCard()
+    {
+    	Cards g = CardManager.GetCard(CardType.GreenCards);
+    	Cards b = CardManager.GetCard(CardType.BrownCards);
+    	return (g==null && b==null);
+    }
+    public boolean RemoveMinion(int area, int player)
+    {
+    	return GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
+    }
+    //only for testing
+    public void EmptyCard()
+    {
+    	Cards c;
+    	do
+    	{
+    		c = CardManager.GetCard(CardType.GreenCards);
+    		if(c == null) CardManager.GetCard(CardType.BrownCards);
+    	}
+    	while(c != null);
+    	
+    }
+    public int GetTotalMinion()
+    {
+    	int TotalMinion = 0;
+    	for(int i=0; i<GameBoard.ListArea.size(); i++)
+    	{
+    		
+    	}
+    	return TotalMinion;
+    }
+    public boolean RemoveTroubleMaker(int areaNumber) {return GameBoard.Removetrouble(areaNumber);}
+    public int ReturnCurrentDieValue() { return CurrentDie;}
 
 }

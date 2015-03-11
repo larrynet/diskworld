@@ -13,7 +13,7 @@ public class JUnitTestSuite {
 	/**
 	 * Test if functions for import/export GameEngine is working fine
 	 */
-	/*@Test public void TestStateManager() {
+	@Test public void TestStateManager() {
 		boolean ExportSuccess = false,
 				ImportSuccess = false;
         int RandomAmountOfMoney = 15;
@@ -32,8 +32,580 @@ public class JUnitTestSuite {
 		//evaluate test result
 		assertTrue("Failed while import state", ImportSuccess);
 		assertTrue("Failed while export state", ExportSuccess);
-	}*/
+	}
+	//Test personality
+	@Test public void TestChrysoprase()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        PersonalityCards Chrysoprase = new PersonalityCards("Chrysoprase", 1, true, CardType.PersonalityCards);
+        
+        //Assign new personality to current player
+        ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(Chrysoprase);
+		ge.ListPlayer.get(CurrentPlayerIndex).AddToMoney(50);
+        
+        boolean Win = ge.IsWinner();
+        
+		assertTrue("Winning Condition for Chrysoprase not executed properly", Win);
+    }
+	//win if no more cards
+	@Test public void TestCommanderVimes()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        PersonalityCards CommanderVimes = new PersonalityCards("Commander Vimes", 1, true, CardType.PersonalityCards);
+        
+        //Assign new personality to current player
+        ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(CommanderVimes);
+		ge.EmptyCard();
+		
+        boolean Win = ge.IsWinner();
+        
+		assertTrue("Winning Condition for Commander Vimes not executed properly", Win);
+    }
+	@Test public void TestDragonKingofArms()
+	{
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        PersonalityCards DragonKingOfArms = new PersonalityCards("Dragon King of Arms", 1, true, CardType.PersonalityCards);
+        ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(DragonKingOfArms);
+        
+        //Assign troubleMaker in every area
+        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+		
+        boolean Win = ge.IsWinner();
+        
+		assertTrue("Winning Condition for DragonKing Of Arms not executed properly", Win);
+	}
 	
+	//control many area
+	@Test public void TestLorddeWorde()
+	{
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        PersonalityCards LordWorde = new PersonalityCards("Lord Worde", 1, true, CardType.PersonalityCards);
+        ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(LordWorde);
+        
+        //Assign troubleMaker in every area
+        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+		
+        boolean Win = ge.IsWinner();
+        
+		assertTrue("Winning Condition for Lord Worde not executed properly", Win);
+	}
+	
+	@Test public void TestLordRust()
+	{
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        PersonalityCards LordRust = new PersonalityCards("Lord Rust", 1, true, CardType.PersonalityCards);
+        ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(LordRust);
+        
+        //Assign troubleMaker in every area
+        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+		
+        boolean Win = ge.IsWinner();
+        
+		assertTrue("Winning Condition for Lord Rust not executed properly", Win);
+	}
+	@Test public void TestLordSelachii()
+	{
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        PersonalityCards LordSelachii = new PersonalityCards("Lord Selachii", 1, true, CardType.PersonalityCards);
+        ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(LordSelachii);
+        
+        //Assign troubleMaker in every area
+        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+		
+        boolean Win = ge.IsWinner();
+        
+		assertTrue("Winning Condition for Lord Selachii not executed properly", Win);
+	}
+	@Test public void TestLordVetinari()
+	{
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        PersonalityCards LordVetinari = new PersonalityCards("Lord Vetinari", 1, true, CardType.PersonalityCards);
+        ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(LordVetinari);
+        
+        //Assign troubleMaker in every area
+        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+		
+        boolean Win = ge.IsWinner();
+        
+		assertTrue("Winning Condition for Lord Vetinari not executed properly", Win);
+	}
+	
+	//Test City Area cards
+    //City Area
+    /*name=The Hyppo
+    name=The Sours
+    name=Small Gods 
+    name=Dragon's Landing
+    name=Unreal Estate
+    name=Dolly Sisters
+    name=Nap Hill
+    name=Seven Sleepers
+    name=Isle of Gods 
+    name=Longwall
+    name=Dimwell 
+    name=The Shades */
+    
+    //once per turn, you can pay 3$ and place of your minion in DimWell or an adjacent area
+	@Test public void TestDimWell()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		int DieValue = ge.ReturnCurrentDieValue();
+		
+        //dim well index is 8
+		CityAreaCards Dimwell = new CityAreaCards("Dimwell", 1, true, CardType.CityAreaCards); 
+		
+        int TotalAmountBefore = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(Dimwell);
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+        
+        int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        
+        //TODO try to remove all dimwell area and all adjacent area...one of them must be true
+        boolean RemoveSuccess = ge.RemoveMinion(8, CurrentPlayerIndex);
+        
+		assertFalse("Failed executing Dm well city area", RemoveSuccess);
+        assertTrue("Failed executing Dm well city area", ((TotalAmountBefore-TotalAmountAfter)==3));
+    }
+    
+    //once per turn, you can take 2$ from bank
+	@Test public void TestDragonsLanding()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		CityAreaCards DragonLanding = new CityAreaCards("Dragon's Landing", 1, true, CardType.CityAreaCards); 
+		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(DragonLanding);
+		
+        int TotalAmountBefore = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankBefore = ge.GetBankBalance();
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+        
+        int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankAfter = ge.GetBankBalance();
+        
+		assertTrue("Failed executing DragonLanding city area", ((BankBefore - BankAfter)==2));
+        assertTrue("Failed executing DragonLanding city area", ((TotalAmountAfter - TotalAmountBefore)==2));
+    }
+    
+    //once per turn you can pay 2$ and remove one troublemaker from the board
+	@Test public void TestIsleOfGods()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        
+		EventCards IsleOfGod = new EventCards("Isle of Gods", 1, true, CardType.CityAreaCards); 
+		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(IsleOfGod);
+		
+        //put a troublemaker
+        ge.PlaceTroubleMarker(1);
+        int TotalAmountBefore = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        
+		
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+		
+		//check if area is empty afterward
+		boolean RemoveEmptyArea = ge.RemoveTroubleMaker(1);
+        int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        
+        assertFalse("Failed executing IsleOfGod city area", RemoveEmptyArea);
+        assertTrue("Failed executing IsleOfGod city area", ((TotalAmountBefore - TotalAmountAfter)==2));
+    }
+    
+    //once per turn, you can take $1 from the bank
+	@Test public void TestLongwall()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		CityAreaCards Longwall = new CityAreaCards("Longwall", 1, true, CardType.CityAreaCards); 
+		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(Longwall);
+		
+        int TotalAmountBefore = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankBefore = ge.GetBankBalance();
+		
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+        
+        int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankAfter = ge.GetBankBalance();
+        
+		assertTrue("Failed executing Longwall city area", ((BankBefore - BankAfter)==1));
+        assertTrue("Failed executing Longwall city area", ((TotalAmountAfter - TotalAmountBefore)==1));
+    }
+    
+	@Test public void TestNapHill()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        CityAreaCards NapHill = new CityAreaCards("Nap Hill", 1, true, CardType.CityAreaCards); 
+		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(NapHill);
+		
+        int TotalAmountBefore = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankBefore = ge.GetBankBalance();
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+        
+        int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankAfter = ge.GetBankBalance();
+        
+		assertTrue("Failed ex	ecuting NapHill city area", ((BankBefore - BankAfter)==1));
+        assertTrue("Failed executing NapHill city area", ((TotalAmountAfter - TotalAmountBefore)==1));
+    }
+    
+	@Test public void TestSevenSleepers()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+	
+		CityAreaCards SevenSleepers = new CityAreaCards("Seven Sleepers", 1, true, CardType.CityAreaCards); 
+		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(SevenSleepers);
+		
+        int TotalAmountBefore = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankBefore = ge.GetBankBalance();
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+        
+        int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankAfter = ge.GetBankBalance();
+        
+		assertTrue("Failed executing Seven Sleepers city area", ((BankBefore - BankAfter)==3));
+        assertTrue("Failed executing Seven Sleepers city area", ((TotalAmountAfter - TotalAmountBefore)==3));
+    }
+    
+    //can't test this event
+	//@Test public void TestSmallGods()
+	//{
+    //
+    //}
+	@Test public void TestTheHippo()
+	{
+       GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		CityAreaCards Hippo = new CityAreaCards("The Hyppo", 1, true, CardType.CityAreaCards); 
+		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(Hippo);
+		
+        int TotalAmountBefore = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankBefore = ge.GetBankBalance();
+		//
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+        
+        int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankAfter = ge.GetBankBalance();
+        
+		assertTrue("Failed executing The Hippo city area", ((BankBefore - BankAfter)==2));
+        assertTrue("Failed executing The Hippo city area", ((TotalAmountAfter - TotalAmountBefore)==2));
+    }
+    
+	@Test public void TestTheScours()
+	{
+       GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		CityAreaCards TheScours = new CityAreaCards("The Sours", 1, true, CardType.CityAreaCards); 
+		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(TheScours);
+		
+		int PlayerHandBefore = ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size();
+        
+        int TotalAmountBefore = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankBefore = ge.GetBankBalance();
+
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+        int PlayerHandAfter = ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size();
+        
+        int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
+        int BankAfter = ge.GetBankBalance();
+        
+        assertTrue("Failed executing The Scours city area", ((PlayerHandBefore - PlayerHandAfter)==1));
+		assertTrue("Failed executing The Scours city area", ((BankBefore - BankAfter)==2));
+        assertTrue("Failed executing The Scours city area", ((TotalAmountAfter - TotalAmountBefore)==2));
+    }
+    
+    //once per turn, you can place a trouble marker in the Shades or Adjacent area
+	@Test public void TestTheShades()
+	{
+        GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        //dim well index is 8
+        
+		CityAreaCards TheShades = new CityAreaCards("The Shades", 1, true, CardType.CityAreaCards); 
+		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(TheShades);
+        
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+        
+        //TODO try to remove all the shades area and all adjacent area...one of them must be true
+        boolean RemoveSuccess = ge.RemoveTroubleMaker(7);
+        
+		assertTrue("Failed executing The Shades city area", RemoveSuccess);
+    }
+    
+    //once per turn, you can discard a card and take anther one
+	//@Test public void TestUnrealEstate()
+	//{
+        //tough to test
+    //}
+	
+	//Test Random Events
+    
+    //Roll the die. If the city area card of the same value is in play then that card is placed to one side. The owner of
+    //the card must remove one of his minions from the same area as the card
+	@Test public void TestBloodyStupidJohnsonEvent()
+	{
+		
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		EventCards StupidJohnson = new EventCards("Bloody Stupid Johnson", 1, true, CardType.CityAreaCards); 
+        boolean Success = ge.PlayEvent(StupidJohnson, CurrentPlayerIndex);
+        int areaAffected = ge.GetBoardDie();
+        
+		boolean RemoveStatus = ge.RemoveMinion( areaAffected, CurrentPlayerIndex);
+        
+		assertTrue("Failed executing Bloody Stupid Johnson event", Success);
+		assertFalse("Failed executing Bloody Stupid Johnson event", RemoveStatus);
+	}
+    
+    //Roll the die 4 times and place a demon on that area
+	@Test public void TestDemonsfromtheDungeonDimensionsEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		CityAreaCards DemonsFromDungeonDimension = new CityAreaCards("Demons From The Dungeon Dimension", 1, true, CardType.CityAreaCards); 
+		
+		boolean Success = ge.PlayEvent(DemonsFromDungeonDimension, CurrentPlayerIndex);
+		
+        //count if there is 4 demons
+        int TotalDemons = ge.CountDemonsInArea();
+		assertTrue("Failed executing Demons From The Dungeon Dimension event", (TotalDemons==4));
+		assertTrue("Failed executing Demons From The Dungeon Dimension event", Success);
+	}
+    
+    //roll the dice twice and remove any building in those areas
+	@Test public void TestEarthquakeEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        //put a building in each area and count afterward
+		CityAreaCards Earthquake = new CityAreaCards("Earthquake", 1, true, CardType.CityAreaCards); 
+		
+        //Used in testing only
+        ge.PlaceBuildingInEachArea(CurrentPlayerIndex);
+        
+		boolean Success = ge.PlayEvent(Earthquake, CurrentPlayerIndex);
+		
+        int TotalBuilding = ge.GetBuildingCount();
+        
+		assertTrue("Failed executing Earthquake event", (TotalBuilding==10));
+	}
+    
+    //roll the die once and remove any building in that area
+	@Test public void TestExplosionsEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		CityAreaCards Explosion = new CityAreaCards("Explosion", 1, true, CardType.CityAreaCards); 
+		
+        //Used in testing only
+        ge.PlaceBuildingInEachArea(CurrentPlayerIndex);
+        
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		boolean Success = ge.PlayEvent(Explosion, CurrentPlayerIndex);
+		
+		int TotalBuilding = ge.GetBuildingCount();
+        
+		assertTrue("Failed executing Earthquake event", (TotalBuilding==11));
+	}
+    
+    //Roll the die to see where it started and continue rolling to see where it spreads
+	@Test public void TestFireEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		CityAreaCards Fire = new CityAreaCards("Fire", 1, true, CardType.CityAreaCards); 
+		
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		boolean Success = ge.PlayEvent(Fire, CurrentPlayerIndex);
+		int TotalBuilding = ge.GetBuildingCount();
+		assertTrue("Failed executing Fire event", (TotalBuilding<12));
+		assertTrue("Failed executing Fire event", Success);
+	}
+    
+    //roll the die twice to see which area are affected. If the area rolled is adjacent to the river
+    //then players must move their minions to adjacent areas. Trolls and demons remain in the area
+	@Test public void TestFloodEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+        
+        //try putting minione everywhere
+		ge.PlaceMinionInEachArea(CurrentPlayerIndex );
+        int TotalMinionBefore = ge.GetTotalMinion();
+        
+        
+		CityAreaCards Flood = new CityAreaCards("Flood", 1, true, CardType.CityAreaCards); 
+		
+        //test if
+        boolean TryToRemoveEmptyArea = ge.RemoveMinion(ge.GetBoardDie(), CurrentPlayerIndex);
+        
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		boolean Success = ge.PlayEvent(Flood, CurrentPlayerIndex);
+		int TotalMinionAfter = ge.GetTotalMinion();
+        
+        assertTrue("Failed executing Flood event", (TotalMinionBefore == TotalMinionAfter));
+        assertFalse("Failed executing Flood event", TryToRemoveEmptyArea);
+		assertTrue("Failed executing Flood event", Success);
+	}
+    
+    //Each player takes it in turn to roll the die and remove one minion from the area rolled, even
+    //if it does not contain a troublemaker
+	@Test public void TestMysteriousMurdersEvent()
+	{
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        ge.PlaceMinionInEachArea(CurrentPlayerIndex);
+        
+		CityAreaCards MysteriousMurders = new CityAreaCards("Mysterious Murders", 1, true, CardType.CityAreaCards); 
+		
+		boolean Success = ge.PlayEvent(MysteriousMurders, CurrentPlayerIndex);
+		
+        int TotalMinion = ge.GetTotalMinion();
+        
+		assertTrue("Failed executing MysteriousMurders event", (TotalMinion==10));
+		assertTrue("Failed executing MysteriousMurders event", Success);
+	}
+    
+    //If there are eight or more troublemaker on board, games ends immediately
+	@Test public void TestRiotsEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+		CityAreaCards Riots = new CityAreaCards("Riots", 1, true, CardType.CityAreaCards); 
+		
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		boolean Success = ge.PlayEvent(Riots, CurrentPlayerIndex);
+		boolean GameEnded = ge.IsGameEnded();
+		assertTrue("Failed executing Riots event", GameEnded);
+		assertTrue("Failed executing Riots event", Success);
+	}
+    
+    //all players must pay 2$ for each building they have or remove it instead
+	@Test public void TestSubsidenceEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        //put 2 buildings for player 0
+        ge.PlaceMinion(1, CurrentPlayerIndex);
+        ge.PlaceMinion(2, CurrentPlayerIndex);
+        ge.PlaceMinion(3, CurrentPlayerIndex);
+        
+        int originalAmount = ge.GetPlayerBalance(CurrentPlayerIndex);
+        
+		CityAreaCards Subsidence = new CityAreaCards("Subsidence", 1, true, CardType.CityAreaCards); 
+		
+		boolean Success = ge.PlayEvent(Subsidence, CurrentPlayerIndex);
+        int afterAmount = ge.GetPlayerBalance(CurrentPlayerIndex);
+        
+		boolean AmountCorrect = ((originalAmount-afterAmount)==6);
+		assertTrue("Failed executing Subsidence event", AmountCorrect);
+		assertTrue("Failed executing Subsidence event", Success);
+	}
+    
+    //Roll the die to see where it lands. Remove all pieces from the area.
+	@Test public void TestTheDragonEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+        //place minion in every area
+        
+		CityAreaCards TheDragon = new CityAreaCards("The Dragon", 1, true, CardType.CityAreaCards); 
+		boolean Success = ge.PlayEvent(TheDragon, CurrentPlayerIndex);
+		
+        //get current die
+        int AffectedArea = ge.GetBoardDie();
+        boolean RemoveEmptyMinion = ge.RemoveMinion(AffectedArea, CurrentPlayerIndex);
+		assertFalse("Failed executing TheDragon event", RemoveEmptyMinion);
+		assertTrue("Failed executing TheDragon event", Success);
+	}
+    
+    //Roll the die three times and place one troll  minion in each area
+	@Test public void TestTrollEvent()
+	{
+		//almost always the same
+		GameEngine ge = new GameEngine();
+		ge.DetermineFirstPlayer();
+		int CurrentPlayerIndex = ge.GetCurrentPlayer();
+		
+		CityAreaCards Troll = new CityAreaCards("Troll", 1, true, CardType.CityAreaCards); 
+		
+		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
+		boolean Success = ge.PlayEvent(Troll, CurrentPlayerIndex);
+		
+        //count total trolls
+        int TotalTroll = ge.CountTrollsInArea();
+		assertTrue("Failed executing Troll event", (TotalTroll == 3));
+		assertTrue("Failed executing Troll event", Success);
+	}
 	@Test public void TestHubert()
 	{
 		//almost always the same
