@@ -1,7 +1,9 @@
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Arrays;
+import java.util.Collections;
 /**
  * @author Parinaz Barakhshan
  *
@@ -187,14 +189,21 @@ public class Area implements Serializable
 		 */
 		public void AddBuilding(Pieces b) 
 		{
-			if(!(this.IsBuilt))
+			if (this.HasTroubleMaker())
 			{
-			this.Building = b;
-			this.IsBuilt = true;
+				System.out.println("This area has a trouble marker, you cannot build a building");
 			}
 			else
 			{
-				System.out.println("Each Area can only hold one building.This area already has one");
+				if(this.IsBuilt)
+				{
+					System.out.println("Each Area can only hold one building.This area already has one");
+				}
+				else
+				{
+					this.Building = b;
+					this.IsBuilt = true;
+				}
 			}
 		}
 		
@@ -390,6 +399,61 @@ public class Area implements Serializable
 			
 			return ArrIntAdjArr;
 		}
+
+		public boolean AreaControllled(Colors color)
+		{
+			//if player have building then he controls area
+			if (this.Building.GetPieceColor() == color)
+			{
+				return true;
+			}
+			else if (this.ListDemons.size() > 0)
+			{
+				return false;
+			}
+			//Count minions
+			else
+			{
+				if (this.GetMinionCount(color) == 1)
+				{
+					if (this.GetMinionCount(Colors.None) == 1 && this.GetTrollCount() == 0)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					int countThis = this.GetMinionCount(color);
+					
+					int countRed = this.GetMinionCount(Colors.Red);
+					int countBlue = this.GetMinionCount(Colors.Blue);
+					int countYellow= this.GetMinionCount(Colors.Yellow);
+					int countGreen = this.GetMinionCount(Colors.Green);
+					
+					int [] ColorCount = {countRed, countRed, countYellow, countGreen};
+					
+					int maxVal = 0;
+					
+					for (int i : ColorCount)
+					{
+						if (i >= maxVal)
+						{
+							maxVal = i;
+						}
+					}
+					
+					return (countThis == maxVal) ;
+				}
+					
+				
+			}
+			
+		}
+
 }
 	
 	
