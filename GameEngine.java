@@ -957,8 +957,7 @@ public class GameEngine implements Serializable
                         		{
                             		if(i != player) 
                             		{
-                            			thisPlayer = this.ListPlayer.get(i);
-
+                           
                             			boolean giveMoney = true;
                             			String choice = "";
 
