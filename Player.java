@@ -13,7 +13,6 @@ public class Player implements Serializable {
 
 	
     //TEMPORARY
-    public List<Cards> CityAreaCards;
 	private Cards Personality;
 	public List<Cards> PlayerCards;
     public int HandSize;
@@ -47,7 +46,7 @@ public class Player implements Serializable {
 		ListMinions = _ListMinion;
 		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
-        CityAreaCards = new ArrayList<Cards>();
+		ListCityAreaCards = new ArrayList<Cards>();
         
 		Color = _Color;
 		

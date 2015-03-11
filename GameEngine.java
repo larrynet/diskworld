@@ -70,7 +70,7 @@ public class GameEngine implements Serializable
 	public void ActivateCityAreaEffect(int player)
     {
         //traverse city area list and activate all the effect only if there is no demon
-        for(int i=0; i<ListPlayer.get(player).CityAreaCards.size(); i++)
+        for(int i=0; i<ListPlayer.get(player).ListCityAreaCards.size(); i++)
         {
             //check if the area is occupied with a demon
             Area CityArea = GameBoard.ListArea.get(ListPlayer.get(player).ListCityAreaCards.get(i).GetID());
@@ -258,69 +258,72 @@ public class GameEngine implements Serializable
 		
         System.out.println("Player " + CurrentPlayerIndex + " decides to play " + CardPlayed.GetName());
         
-        
+        Scanner scan = new Scanner(System.in);
 		//Execute the symbol of the
 		for(int sIterator = 0; ActionStatus && (sIterator < lstSymbols.size()); sIterator++)
 		{
 			String currentSymbol = lstSymbols.get(sIterator);
 			
-			//Place a building
-			if(currentSymbol.compareToIgnoreCase("B") == 0)
+			System.out.println("Current symbol is " + currentSymbol);
+			String PlaySymbol = scan.next();
+			if(PlaySymbol.compareToIgnoreCase("yes") == 0)
 			{
-				ActionStatus = PutBuilding(CurrentPlayerIndex);
-			}
-			//Place a minion
-			else if(currentSymbol.compareToIgnoreCase("M") == 0)
-			{
-				ActionStatus = PutMinion(CurrentPlayerIndex);
-			}
-			//Assassination
-			else if(currentSymbol.compareToIgnoreCase("A") == 0)
-			{
-				ActionStatus = Assassinate(CurrentPlayerIndex);
-			}
-			//Remove one trouble marker
-			else if(currentSymbol.compareToIgnoreCase("RT") == 0)
-			{
-				ActionStatus = RemoveTrouble(CurrentPlayerIndex);
-			}
-			//Take money
-			else if(currentSymbol.contains("T("))
-			{
-				ActionStatus = PayPlayer(CurrentPlayerIndex, (int)currentSymbol.charAt(2));
-			}
-			//Random Event
-			else if(currentSymbol.compareToIgnoreCase("RE") == 0)
-			{
-				ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex);
-			}
-			//Play another card
-			else if(currentSymbol.compareToIgnoreCase("C") == 0)
-			{
-				@SuppressWarnings("resource")
-				Scanner scan = new Scanner(System.in);
-				
-				//Print Player Cards and Play next card
-				this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
-				System.out.println("What card do you want to play next ? (Enter index of card)");
-				
-				int newCard = scan.nextInt();
-				ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
-			}
-			//Interupt
-			else if(currentSymbol.compareToIgnoreCase("I") == 0)
-			{
-				System.out.println("Interrupt symbol has no effect. Oh well too late now :)");
-			}
-			//Scroll: Play action described in card
-			else if(currentSymbol.compareToIgnoreCase("S") == 0)
-			{
-				ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
-			}
-			//No such symbol
-			else
-			{
-                System.out.println("Symbol " + currentSymbol + " is invalid. ");
+				//Place a building
+				if(currentSymbol.compareToIgnoreCase("B") == 0)
+				{
+					ActionStatus = PutBuilding(CurrentPlayerIndex);
+				}
+				//Place a minion
+				else if(currentSymbol.compareToIgnoreCase("M") == 0)
+				{
+					ActionStatus = PutMinion(CurrentPlayerIndex);
+				}
+				//Assassination
+				else if(currentSymbol.compareToIgnoreCase("A") == 0)
+				{
+					ActionStatus = Assassinate(CurrentPlayerIndex);
+				}
+				//Remove one trouble marker
+				else if(currentSymbol.compareToIgnoreCase("RT") == 0)
+				{
+					ActionStatus = RemoveTrouble(CurrentPlayerIndex);
+				}
+				//Take money
+				else if(currentSymbol.contains("T("))
+				{
+					ActionStatus = PayPlayer(CurrentPlayerIndex, (int)currentSymbol.charAt(2));
+				}
+				//Random Event
+				else if(currentSymbol.compareToIgnoreCase("RE") == 0)
+				{
+					ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex);
+				}
+				//Play another card
+				else if(currentSymbol.compareToIgnoreCase("C") == 0)
+				{
+					
+					//Print Player Cards and Play next card
+					this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
+					System.out.println("What card do you want to play next ? (Enter index of card)");
+					
+					int newCard = scan.nextInt();
+					ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
+				}
+				//Interupt
+				else if(currentSymbol.compareToIgnoreCase("I") == 0)
+				{
+					System.out.println("Interrupt symbol has no effect. Oh well too late now :)");
+				}
+				//Scroll: Play action described in card
+				else if(currentSymbol.compareToIgnoreCase("S") == 0)
+				{
+					ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
+				}
+				//No such symbol
+				else
+				{
+	                System.out.println("Symbol " + currentSymbol + " is invalid. ");
+				}
 			}
 		}
 		if(ActionStatus) 
@@ -2551,6 +2554,7 @@ public class GameEngine implements Serializable
 		{
 			if (this.TotalPlayer==2)
 			{
+				
 				if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=7 )
 				{
 					 WiningCondition=true;
