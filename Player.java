@@ -63,30 +63,29 @@ public class Player implements Serializable {
 		BrownCards b = null;
 		List<String> lstSymbols = null;
 		
-		for(int i=0; i<PlayerCards.size(); i++)
+		
+		Cards _card = PlayerCards.get(PlayerNumber);
+		if (_card.GetCardType() == CardType.GreenCards)
 		{
-			Cards _card = PlayerCards.get(i);
-			if (_card.GetCardType() == CardType.GreenCards)
-			{
-				g = (GreenCards)_card;
-				lstSymbols = g.GetSymbol();
-			}
-			else if ((_card.GetCardType() == CardType.BrownCards))
-			{
-				b = (BrownCards)_card;
-				lstSymbols = b.GetSymbol();
-			}
-			for(int sIterator = 0; (sIterator < lstSymbols.size()); sIterator++)
-			{
-				String currentSymbol = lstSymbols.get(sIterator);
-				
-				if(currentSymbol.compareToIgnoreCase("I") == 0)
-				{
-					return true;
-				}
-				
-			}
+			g = (GreenCards)_card;
+			lstSymbols = g.GetSymbol();
 		}
+		else if ((_card.GetCardType() == CardType.BrownCards))
+		{
+			b = (BrownCards)_card;
+			lstSymbols = b.GetSymbol();
+		}
+		for(int sIterator = 0; (sIterator < lstSymbols.size()); sIterator++)
+		{
+			String currentSymbol = lstSymbols.get(sIterator);
+			
+			if(currentSymbol.compareToIgnoreCase("I") == 0)
+			{
+				return true;
+			}
+			
+		}
+		
 		return false;
 	}
 	public void RemoveInterruptCard()
