@@ -2790,7 +2790,8 @@ public class GameEngine implements Serializable
     	int TotalMinion = 0;
     	for(int i=0; i<GameBoard.ListArea.size(); i++)
     	{
-    		
+    		for(int p=0; p<TotalPlayer; p++)
+    			TotalMinion = GameBoard.ListArea.get(i).GetMinionCount(ListPlayer.get(p).GetColor());
     	}
     	return TotalMinion;
     }
