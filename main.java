@@ -43,7 +43,7 @@ public class main {
 			do
 			{
 				count --;
-				System.out.println("\nCurrent player turn is " + CurrentPlayerIndex +"+++++++++++++++++++++++++++++++++++++++");
+				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex+1)+"\n+++++++++++++++++++++++++++++++++++++++");
 				
 				//TODO -- Add encapsulation
 				//have draw cards if not full hand
@@ -62,11 +62,24 @@ public class main {
 				int choice = scan.nextInt();
 				if(choice == 1)
 				{
-					//System.out.println("Which card you want to see (1-5)?");
-					//int peekChoice = scan.nextInt();	
-					
 					//show card
                     ge.ShowCard(CurrentPlayerIndex);
+                    for(int i=0; i<ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size(); i++)
+                    {
+                    	if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i).GetCardType() == CardType.GreenCards)
+                    	{
+                    		GreenCards CurrentGreenCard = (GreenCards)ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i);
+                    		String Title = "Player " + CurrentPlayerIndex + " - Card Index " + i;
+                    		CurrentGreenCard.ShowImage(Title);
+                    	}
+                    	else if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i).GetCardType() == CardType.GreenCards)
+                    	{
+                    		BrownCards CurrentBrownCard = (BrownCards)ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i);
+                    		String Title = "Player " + CurrentPlayerIndex + " - Card Index " + i;
+                    		CurrentBrownCard.ShowImage(Title);
+                    	}
+                    	
+                    }
 				}
 				else
 				{

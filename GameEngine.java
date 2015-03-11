@@ -2766,8 +2766,8 @@ public class GameEngine implements Serializable
     public boolean NoMoreCard()
     {
     	Cards g = CardManager.GetCard(CardType.GreenCards);
-    	Cards b = CardManager.GetCard(CardType.BrownCards);
-    	return (g==null && b==null);
+    	//Cards b = CardManager.GetCard(CardType.BrownCards);
+    	return (g==null);
     }
     public boolean RemoveMinion(int area, int player)
     {

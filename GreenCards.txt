@@ -6,7 +6,7 @@ name=Mr Bent
 verb=loan; object=10$ bank; condition=pay back 12$ or lose 15 points endgame
 symbol=S,C
 
-name=The beggars' Guild
+name=The beggar's Guild
 verb=take; object=2 cards of another players;condition
 symbol=S,M
 
@@ -100,7 +100,7 @@ name=The thieves guild
 verb=take; object=2$ from all player;condition
 symbol=S,M
 
-name=The Seamstresses' Guild
+name=The Seamstresses Guild
 verb=give; object=1card of yours to a player;condition
 verb=get; object=2$ from the player;condition
 symbol=S,M
@@ -118,7 +118,7 @@ name=Hex
 verb=draw; object=3 cards;condition
 symbol=S,B
 
-name=HERE AND NOW
+name=Here'n'Now
 verb=roll; object=die;condition  
 verb=get; object=3$ from a player of choice; condition=number die>=7
 verb=remove from board; object=1minion;  condition=number die==1
@@ -128,7 +128,7 @@ name=Harry King
 verb=get; object=2$ times number of discarded card;condition
 symbol=M,S
 
-name=Horga's House of Ribs
+name=Harga's House of Ribs
 verb;object;condition
 symbol=T(3),M
 
