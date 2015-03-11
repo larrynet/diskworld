@@ -2836,24 +2836,24 @@ public class GameEngine implements Serializable
 	
     public void PlaceMinionInEachArea(int player)
     {
-        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        for(int i=1; i<=GameBoard.ListArea.size(); i++)
             GameBoard.PlaceMinion(i,ListPlayer.get(player));
     }
     
     public void PlaceBuildingInEachArea(int player)
     {
-        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        for(int i=1; i<=GameBoard.ListArea.size(); i++)
             GameBoard.PlaceBuilding(i,ListPlayer.get(player));
     }
     public void PlaceTrollInEachArea(int player)
     {
-        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        for(int i=1; i<=GameBoard.ListArea.size(); i++)
             GameBoard.PlaceTroll(i);
     }
     
     public void PlaceDemonsInEachArea(int player)
     {
-        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        for(int i=1; i<=GameBoard.ListArea.size(); i++)
             GameBoard.PlaceDemon(i);
     }
     public int GetBuildingCount()
