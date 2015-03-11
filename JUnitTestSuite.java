@@ -2862,16 +2862,57 @@ assertTrue("Failed executing card", Success);
 	{
 		
 		ManageCards cardManager = new ManageCards(1);
-		for (int i = 0 ; i < cardManager.Green_Cards.length; i++)
+		
+		for (Cards card : cardManager.Green_Cards)
 		{
-			if (cardManager.Green_Cards[i] != null)
-			{
-				System.out.println(cardManager.Green_Cards[i].GetName());
-			}
+			GreenCards CurrentGreenCard = (GreenCards)card;
+			
+			CurrentGreenCard.ShowImage("Test");
+			
 		}
-		
-		
-		
 	}
+	
+	@Test public void TestCityCardCreation()
+	{
+		
+		ManageCards cardManager = new ManageCards(1);
+		
+		for (Cards card : cardManager.CityArea_Cards)
+		{
+			CityAreaCards CurrentCityCard = (CityAreaCards)card;
+			
+			CurrentCityCard.ShowImage("Test");
+			
+		}
+	}
+	
+	@Test public void TestRandomEventsCreation()
+	{
+		
+		ManageCards cardManager = new ManageCards(1);
+		
+		for (Cards card : cardManager.Event_Card)
+		{
+			EventCards CurrentEventCard = (EventCards)card;
+			
+			CurrentEventCard.ShowImage("Test");
+			
+		}
+	}
+	
+	@Test public void TestPersonalityCreation()
+	{
+		
+		ManageCards cardManager = new ManageCards(1);
+		
+		for (Cards card : cardManager.Personality_Card)
+		{
+			PersonalityCards CurrentPersoCard = (PersonalityCards)card;
+			
+			CurrentPersoCard.ShowImage("Test");
+			
+		}
+	}
+
 
 }
