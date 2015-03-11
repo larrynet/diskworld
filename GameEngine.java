@@ -2745,11 +2745,10 @@ public class GameEngine implements Serializable
     	//Retrieve player object 
     	Player player = this.ListPlayer.get(playerIndex);
     	
-    	
-    	
     	//First calculate point from minions
     	for (Area area : this.GameBoard.ListArea)
     	{
+    		System.out.println("Total Minion Count (5$ for each): " + area.GetMinionCount(player.GetColor()));
     		totalPoints += 5 * area.GetMinionCount(player.GetColor());
     	}
     	
@@ -2758,6 +2757,8 @@ public class GameEngine implements Serializable
     	{
     		if (area.GetBuilding().GetPieceColor() == player.GetColor())
     		{
+    			System.out.println("Building owned by player in " + area.GetName()+". Area cost is " + area.GetAreaCost());
+        		
     			totalPoints += area.GetAreaCost();
     		}
     	}
@@ -2923,5 +2924,29 @@ public class GameEngine implements Serializable
     }
     public boolean RemoveTroubleMaker(int areaNumber) {return GameBoard.Removetrouble(areaNumber);}
     public int ReturnCurrentDieValue() { return CurrentDie;}
+    
+    public void DetermineWinner()
+    {
+    	int [] PointsPerPlayer = new int[TotalPlayer];
+    	int max=0;
+    	for(int i=0; i<TotalPlayer; i++)
+    	{
+    		System.out.println("Player " + i + " report\n==================================================\n");
+    		PointsPerPlayer[i] = GetPlayerPoints(i);
+    		if(PointsPerPlayer[i] > max)
+    		{
+    			max = PointsPerPlayer[i];
+    		}
+    	}
+    	
+    	for(int j=0; j<TotalPlayer; j++)
+    	{
+    		if(max == GetPlayerPoints(j))
+    		{
+    			System.out.println("\n\nCongratulation Player " + j + "!!! You have won the game. ");
+    			break;
+    		}
+    	}
+    }
 
 }
