@@ -993,7 +993,6 @@ public class GameEngine implements Serializable
                             }
                             else if(object.contains("times number of discarded card"))
                             {
-                            	
                             	//Harry King -- Shonky shop
                                 GameBoard.DeductFromBank(amount*DiscardCards.size());
                         		ListPlayer.get(player).AddToMoney(amount*DiscardCards.size());
@@ -2458,6 +2457,7 @@ public class GameEngine implements Serializable
 		int TotalMinionPerPlayer = 12;
 		ListPlayer = new ArrayList<Player>();
 		CardManager = new ManageCards(TotalPlayer);
+		DiscardCards = new ArrayList<Cards>();
 		GameBoard = new Board();
 		HasGameEnded = false;
 		
