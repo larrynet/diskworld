@@ -49,72 +49,76 @@ public String GetName ()
 		return this.Name;
 	}
 	
-	public int GetID()
-	{
-		return this.Id;
-	}
+public int GetID()
+{
+	return this.Id;
+}
+
+public CardType GetCardType()
+ {
+	 return this.Type;
+ }
+
+public void ShowImage(String _Title)
+{
 	
-	public CardType GetCardType()
-	 {
-		 return this.Type;
-	 }
-	
-	public void ShowImage(String _Title)
-	{
-		
-		//replace all space in Name
-		Name = Name.replace(" ", "");
-		String path = "src\\Cards\\GreenCards\\" + Name+".jpg";
-		System.out.println("Looking for file in " + path);
-        JFrame editorFrame = new JFrame(_Title);
+	//replace all space in Name
+	Name = Name.replace(" ", "");
+	String path = "/Users/gayhazan/Documents/workspace/LocDiskworld/src/Cards/GreenCards/" + Name+".jpg";
+	System.out.println("Looking for file in " + path);
+    JFrame editorFrame = new JFrame(_Title);
+    
+    ClassLoader classLoader = getClass().getClassLoader();
+	File file = new File(classLoader.getResource("Cards/GreenCards/" + Name + ".jpg").getFile());
 
-        editorFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    editorFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        BufferedImage image = null;
+    BufferedImage image = null;
 
-        try
+    try
 
-        {
-          image = ImageIO.read(new File(path));
+    {
+      image = ImageIO.read(file);
 
-        }
+    }
 
-        catch (Exception e)
-        {
-          e.printStackTrace();
-          System.exit(1);
-        }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+      System.exit(1);
+    }
 
-        BufferedImage bi = (BufferedImage)image;
-        Image Scaled = bi.getScaledInstance(300, 350, Image.SCALE_SMOOTH);
+    BufferedImage bi = (BufferedImage)image;
+    Image Scaled = bi.getScaledInstance(300, 350, Image.SCALE_SMOOTH);
+   
+    JLabel jLabel = new JLabel();
+    //jLabel.setIcon(imageIcon);
+    
        
-        JLabel jLabel = new JLabel();
-        //jLabel.setIcon(imageIcon);
         
-           
-            
-        jLabel.setIcon(new ImageIcon(Scaled));    
-        
-        
-        editorFrame.getContentPane().add(jLabel, BorderLayout.CENTER);
+    jLabel.setIcon(new ImageIcon(Scaled));    
+    
+    
+    editorFrame.getContentPane().add(jLabel, BorderLayout.CENTER);
 
 
 
 
-        editorFrame.pack();
+    editorFrame.pack();
 
-        editorFrame.setLocationRelativeTo(null);
+    editorFrame.setLocationRelativeTo(null);
 
-        editorFrame.setVisible(true);
+    editorFrame.setVisible(true);
 
-	}
-	public String toString() 
-	   {
-		 return  (this.toString());
-	   
-	  
-	   }
-	
+}
+
+public String toString() 
+   {
+	 return  (this.toString());
+   
+  
+   }
+
 
 
 }
