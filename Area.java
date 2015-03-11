@@ -403,7 +403,7 @@ public class Area implements Serializable
 		public boolean AreaControllled(Colors color)
 		{
 			//if player have building then he controls area
-			if (this.Building.GetPieceColor() == color)
+			if (this.IsBuilt && this.Building.GetPieceColor() == color)
 			{
 				return true;
 			}

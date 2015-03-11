@@ -2631,7 +2631,7 @@ public class GameEngine implements Serializable
 		return (TotalPlayer>0);
 	}
 	
-	/**
+/**
 	 * @return true if the current player meet its required winning conditons.
 	 */
 	public boolean IsWinner()
@@ -2641,35 +2641,49 @@ public class GameEngine implements Serializable
      	//Lord de Word Lord=1 , Selachii=2 , Lord Rust=5 should have certain number of city area under control
 		PersonalityCards CurrentPersonality = ListPlayer.get(CurrentPlayer).GetPlayerPersonality();
 		String CardName = CurrentPersonality.GetName();
-		if (CardName.contains("Word")||
-			CardName.contains("Selachii")||
-			CardName.contains("Rust"))
+	
+		if (CardName.contains("Word")|| CardName.contains("Selachii")|| CardName.contains("Rust"))
 		{
+			int control = 0;
+			
+			for (Area area : this.GameBoard.ListArea)
+			{
+				if (area.AreaControllled(ListPlayer.get(this.CurrentPlayer).GetColor())) 
+				{
+						control++;
+				}
+			}
+			
 			if (this.TotalPlayer==2)
 			{
+				//Does player control 7 areas
+			
 				
-				if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=7 )
+				if ( control >=7 )
 				{
 					 WiningCondition=true;
 				}	
 			}
+			
 			else if (this.TotalPlayer==3)
 			{
-				if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=5 )
+				if ( control >=5 )
 				{
 					
 					 WiningCondition=true;
 				}	
 			}
+			
 			else if (this.TotalPlayer==4)
 			{
-				if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=4 )
+				if ( control >=4 )
 				{
 					
 					 WiningCondition=true;
 				}	
 			}
 		}
+		
 		//Lord Vetinari should have certain number of minions to win the game
 		else if (CardName.contains("Vetinari"))
 		{

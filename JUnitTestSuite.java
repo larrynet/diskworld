@@ -95,7 +95,7 @@ public class JUnitTestSuite {
         ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(LordWorde);
         
         //Assign troubleMaker in every area
-        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+        ge.PlaceMinionInEachArea(CurrentPlayerIndex);
 		
         boolean Win = ge.IsWinner();
         
@@ -112,12 +112,13 @@ public class JUnitTestSuite {
         ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(LordRust);
         
         //Assign troubleMaker in every area
-        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+        ge.PlaceMinionInEachArea(CurrentPlayerIndex);
 		
         boolean Win = ge.IsWinner();
         
 		assertTrue("Winning Condition for Lord Rust not executed properly", Win);
 	}
+	
 	@Test public void TestLordSelachii()
 	{
 		GameEngine ge = new GameEngine();
@@ -128,12 +129,13 @@ public class JUnitTestSuite {
         ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(LordSelachii);
         
         //Assign troubleMaker in every area
-        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+        ge.PlaceMinionInEachArea(CurrentPlayerIndex);
 		
         boolean Win = ge.IsWinner();
         
 		assertTrue("Winning Condition for Lord Selachii not executed properly", Win);
 	}
+
 	@Test public void TestLordVetinari()
 	{
 		GameEngine ge = new GameEngine();
@@ -144,7 +146,7 @@ public class JUnitTestSuite {
         ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(LordVetinari);
         
         //Assign troubleMaker in every area
-        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+        ge.PlaceMinionInEachArea(CurrentPlayerIndex);
 		
         boolean Win = ge.IsWinner();
         
