@@ -458,6 +458,7 @@ public class Player implements Serializable {
 	public void GetLoan(int amount)
 	{
 		this.Loan = this.Loan + amount;
+		this.AddToMoney(amount);
 	}
 	
 	/**
@@ -467,6 +468,7 @@ public class Player implements Serializable {
 	public void PayLoan(int amount)
 	{
 		this.Loan = this.Loan  - amount;
+		this.DeductFromMoney(amount);
 	}
 	
 	/**
@@ -478,16 +480,6 @@ public class Player implements Serializable {
 		return this.Loan;
 	}
 	
-	/**
-	 * 
-	 * @return Total amount of money player has loan + bank
-	 */
-	public int TotalMoney()
-	{
-		int total = this.TotalLoan() + this.GetMoneyCount();
-		
-		return total; 
-	}
 	
 	/**
 	 * Add payback amount to player for loan cards
