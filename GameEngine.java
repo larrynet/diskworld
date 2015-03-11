@@ -323,6 +323,8 @@ public class GameEngine implements Serializable
                 System.out.println("Symbol " + currentSymbol + " is invalid. ");
 			}
 		}
+		if(ActionStatus) 
+			DiscardCards.add(CardPlayed);
 		
 		return ActionStatus;
 	}
@@ -991,6 +993,7 @@ public class GameEngine implements Serializable
                             }
                             else if(object.contains("times number of discarded card"))
                             {
+                            	
                             	//Harry King -- Shonky shop
                                 GameBoard.DeductFromBank(amount*DiscardCards.size());
                         		ListPlayer.get(player).AddToMoney(amount*DiscardCards.size());
