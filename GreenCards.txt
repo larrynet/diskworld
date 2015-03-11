@@ -109,7 +109,7 @@ name= Inigo Skimmer
 verb;object;condition
 symbol=A,T(2)
 
-name=History Monkes
+name=History Monks
 verb=shuffle; object=discard cards;condition
 verb=draw; object=4cards from discard cards;condition
 symbol=S,M
