@@ -186,7 +186,7 @@ name=Queen Molly
 verb=get; object=2cards from a player;condition
 symbol=M,S;
 
-name=The Pink PussyCat
+name=Pink Pussy Cat Club
 verb;object;condition
 symbol=T(3),C
 

@@ -264,7 +264,7 @@ public class GameEngine implements Serializable
 		{
 			String currentSymbol = lstSymbols.get(sIterator);
 			
-			System.out.println("Current symbol is " + currentSymbol);
+			System.out.println("Current symbol is " + currentSymbol+". Would you like to play it?");
 			String PlaySymbol = scan.next();
 			if(PlaySymbol.compareToIgnoreCase("yes") == 0)
 			{
