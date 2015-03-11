@@ -59,8 +59,58 @@ public class main {
 				//Show all the cards and let the person choose what he wants
 				System.out.println("1 - Peak at your card");
 				System.out.println("2 - Play card");
+				System.out.println("3 - Import State");
+				System.out.println("4 - Export state");
+				System.out.println("5 - Print Board");
+				System.out.println("6 - Quit the game");
 				int choice = scan.nextInt();
-				if(choice == 1)
+				
+				if(choice == 6)
+				{
+					Continue = false;
+				}
+				else if(choice == 3)
+				{
+					//IMPORT
+					System.out.println("Please enter state path: ");
+					String PathState = scan.next();
+					File TempFile = new File(PathState);
+					while(!TempFile.exists())
+					{
+						System.out.println("The file path entered does not exist. Please try to re-enter a valid file path.");
+						PathState=scan.next();
+						TempFile = new File(PathState);
+					}
+					StateManager sm = new StateManager();
+					ge = sm.ImportGameState(PathState);
+					if(ge != null)
+					{
+						ge.PrintState();	
+					}
+					else
+					{
+						System.out.println("Import state failed. ");
+					}
+				}
+				else if(choice == 4)
+				{
+					System.out.println("Please enter state path to export to (any file extension is fine): ");
+					String PathState = scan.next();
+					StateManager sm = new StateManager();
+					if(sm.ExportGameState(ge, PathState))
+					{
+						System.out.println("State successfully exported to " + PathState);
+					}
+					else
+					{
+						System.out.println("State failed to export");
+					}
+				}
+				else if(choice == 5)
+				{
+					ge.PrintState();
+				}
+				else if(choice == 1)
 				{
 					//show card
                     ge.ShowCard(CurrentPlayerIndex);
@@ -104,7 +154,7 @@ public class main {
 	                        
 	                        //increment turn
 	                        CurrentPlayerIndex = (CurrentPlayerIndex++)%NumPlayer;
-	                        
+	                        ge.SetCurrentPlayer(CurrentPlayerIndex);
 	                        	
 	                    }
 						else
@@ -123,8 +173,14 @@ public class main {
 						
 	                    if(ge.IsGameEnded())
 	                    {
+	                    	//RIOTS
 	                        System.out.println("The Game Engine signaled a game end event preemptively because certains cards force to end. ");
+	                        
 	                        Continue = false;
+	                    }
+	                    if(ge.NoMoreCard())
+	                    {
+	                    	System.out.println("No more cards. Calculating ");
 	                    }
 						if(count == 0)
 						{
