@@ -2538,36 +2538,40 @@ public class GameEngine implements Serializable
 	public boolean IsWinner()
 	{
 		boolean WiningCondition=false;
-	//Lord de Word Lord=1 , Salachiim=2 , Lord Rust=5 should have certain number of city area under control
 		
-		if (this.CurrentPlayer==1 || this.CurrentPlayer==4 || this.CurrentPlayer==5)
-		
+     	//Lord de Word Lord=1 , Selachii=2 , Lord Rust=5 should have certain number of city area under control
+		PersonalityCards CurrentPersonality = ListPlayer.get(CurrentPlayer).GetPlayerPersonality();
+		String CardName = CurrentPersonality.GetName();
+		if (CardName.contains("Word")||
+			CardName.contains("Selachii")||
+			CardName.contains("Rust"))
 		{
-		if (this.TotalPlayer==2)
-		{
-			if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=7 )
+			if (this.TotalPlayer==2)
 			{
-				
-				 WiningCondition=true;
-			}	
-		}
-		else if (this.TotalPlayer==3)
-		{
-			if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=5 )
+				if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=7 )
+				{
+					 WiningCondition=true;
+				}	
+			}
+			else if (this.TotalPlayer==3)
 			{
-				
-				 WiningCondition=true;
-			}	
-		}
-		else if (this.TotalPlayer==4)
-			if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=4 )
+				if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=5 )
+				{
+					
+					 WiningCondition=true;
+				}	
+			}
+			else if (this.TotalPlayer==4)
 			{
-				
-				 WiningCondition=true;
-			}	
+				if ( (ListPlayer.get(this.CurrentPlayer)).GetCityAreayCards().size()>=4 )
+				{
+					
+					 WiningCondition=true;
+				}	
+			}
 		}
 		//Lord Vetinari should have certain number of minions to win the game
-		else if (this.CurrentPlayer==3)
+		else if (CardName.contains("Vetinari"))
 		{
 			if (this.TotalPlayer==2)
 			{
@@ -2586,19 +2590,19 @@ public class GameEngine implements Serializable
 			}
 		}
 		//Dragon King of Arms  
-		else if (this.CurrentPlayer==6)
+		else if (CardName.contains("Arms"))
 		{
 			if (this.GameBoard.CountTroubleMarker()>=8 )
 				 WiningCondition=true;
 		}
 		//Commandor Vimes .If cards run out he whill be the winner
-		else if (this.CurrentPlayer==2)
-		{// GreenCard=48 +BrownCards =53 
+		else if (CardName.contains("Vimes"))
+		{
 			
 			WiningCondition=NoMoreCard();
 		}
 		//Chrysoprase
-		else if (this.CurrentPlayer==7)
+		else if (CardName.contains("Chrysoprase"))
 		{
 			if (ListPlayer.get(this.CurrentPlayer).GetMoneyCount()>=50 )//loan and building cost should be considered later
 				WiningCondition=true;

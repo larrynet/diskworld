@@ -127,10 +127,12 @@ public class Player implements Serializable {
 	 * 
 	 * @return Cards personality card object
 	 */
-	public Cards GetPlayerPersonality()
+	public PersonalityCards GetPlayerPersonality()
 	{
-		return this.Personality;
+		return (PersonalityCards) this.Personality;
 	}
+	
+	
 	/**
 	 * Show players hands
 	 * 

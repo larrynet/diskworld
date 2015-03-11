@@ -2,7 +2,7 @@
 name=Lord Vetinari
 name=Lord Selachii
 name=Lord Rust
-name=Lord de Word
+name=Lord de Worde
 name=Dragon King of Arms
 name=Chrysoprase
 name=Commander Vimes
