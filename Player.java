@@ -52,6 +52,8 @@ public class Player implements Serializable {
 		
 	}
 	
+	
+	public int GetPayBack() {return PayBack; }
 	//used for testing
 	public void SetPersonalityCard(PersonalityCards p)
 	{

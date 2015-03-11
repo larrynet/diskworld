@@ -2762,6 +2762,8 @@ public class GameEngine implements Serializable
     			totalPoints += area.GetAreaCost();
     		}
     	}
+    	System.out.println("Player Loan: " + ListPlayer.get(playerIndex).GetPayBack());
+    	ListPlayer.get(playerIndex).PayLoan(ListPlayer.get(playerIndex).GetPayBack());
     	
     	//Calculate Total Dollars
     	totalPoints += player.GetMoneyCount();
