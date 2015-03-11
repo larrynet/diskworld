@@ -331,7 +331,10 @@ public class GameEngine implements Serializable
 			}
 		}
 		if(ActionStatus) 
+		{
 			DiscardCards.add(CardPlayed);
+			ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
+		}
 		
 		return ActionStatus;
 	}
