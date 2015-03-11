@@ -1,6 +1,6 @@
 //City Area
-name=The Hyppo
-name=The Sours
+name=The Hippo
+name=The Scours
 name=Small Gods 
 name=Dragon's Landing
 name=Unreal Estate

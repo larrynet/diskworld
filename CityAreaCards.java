@@ -61,6 +61,9 @@ public class CityAreaCards implements Cards, Serializable
 		System.out.println("Looking for file in " + path);
         JFrame editorFrame = new JFrame(_Title);
 
+        ClassLoader classLoader = getClass().getClassLoader();
+    	File file = new File(classLoader.getResource("Cards/CityAreas/" + Name + ".jpg").getFile());
+    	
         editorFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         BufferedImage image = null;
@@ -69,7 +72,7 @@ public class CityAreaCards implements Cards, Serializable
         try
 
         {
-          image = ImageIO.read(new File(path));
+          image = ImageIO.read(file);
 
         }
 
