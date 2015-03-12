@@ -393,7 +393,7 @@ public class JUnitTestSuite {
 		int CurrentPlayerIndex = ge.GetCurrentPlayer();
 		
 		EventCards StupidJohnson = new EventCards("Bloody Stupid Johnson", 1, true, CardType.CityAreaCards); 
-        boolean Success = ge.PlayEvent(StupidJohnson, CurrentPlayerIndex);
+        boolean Success = ge.PlayEvent(StupidJohnson, CurrentPlayerIndex, true);
         int areaAffected = ge.GetBoardDie();
         
 		boolean RemoveStatus = ge.RemoveMinion( areaAffected, CurrentPlayerIndex);
@@ -412,7 +412,7 @@ public class JUnitTestSuite {
 		
 		CityAreaCards DemonsFromDungeonDimension = new CityAreaCards("Demons From The Dungeon Dimension", 1, true, CardType.CityAreaCards); 
 		
-		boolean Success = ge.PlayEvent(DemonsFromDungeonDimension, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(DemonsFromDungeonDimension, CurrentPlayerIndex, true);
 		
         //count if there is 4 demons
         int TotalDemons = ge.CountDemonsInArea();
@@ -434,7 +434,7 @@ public class JUnitTestSuite {
         //Used in testing only
         ge.PlaceBuildingInEachArea(CurrentPlayerIndex);
         
-		boolean Success = ge.PlayEvent(Earthquake, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(Earthquake, CurrentPlayerIndex, true);
 		
         int TotalBuilding = ge.GetBuildingCount();
         
@@ -455,7 +455,7 @@ public class JUnitTestSuite {
         ge.PlaceBuildingInEachArea(CurrentPlayerIndex);
         
 		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
-		boolean Success = ge.PlayEvent(Explosion, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(Explosion, CurrentPlayerIndex, true);
 		
 		int TotalBuilding = ge.GetBuildingCount();
         
@@ -473,7 +473,7 @@ public class JUnitTestSuite {
 		CityAreaCards Fire = new CityAreaCards("Fire", 1, true, CardType.CityAreaCards); 
 		
 		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
-		boolean Success = ge.PlayEvent(Fire, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(Fire, CurrentPlayerIndex, true);
 		int TotalBuilding = ge.GetBuildingCount();
 		assertTrue("Failed executing Fire event", (TotalBuilding<12));
 		assertTrue("Failed executing Fire event", Success);
@@ -499,7 +499,7 @@ public class JUnitTestSuite {
         boolean TryToRemoveEmptyArea = ge.RemoveMinion(ge.GetBoardDie(), CurrentPlayerIndex);
         
 		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
-		boolean Success = ge.PlayEvent(Flood, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(Flood, CurrentPlayerIndex, true);
 		int TotalMinionAfter = ge.GetTotalMinion();
         
         assertTrue("Failed executing Flood event", (TotalMinionBefore == TotalMinionAfter));
@@ -519,7 +519,7 @@ public class JUnitTestSuite {
         
 		CityAreaCards MysteriousMurders = new CityAreaCards("Mysterious Murders", 1, true, CardType.CityAreaCards); 
 		
-		boolean Success = ge.PlayEvent(MysteriousMurders, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(MysteriousMurders, CurrentPlayerIndex, true);
 		
         int TotalMinion = ge.GetTotalMinion();
         
@@ -539,7 +539,7 @@ public class JUnitTestSuite {
 		CityAreaCards Riots = new CityAreaCards("Riots", 1, true, CardType.CityAreaCards); 
 		
 		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
-		boolean Success = ge.PlayEvent(Riots, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(Riots, CurrentPlayerIndex, true);
 		boolean GameEnded = ge.IsGameEnded();
 		assertTrue("Failed executing Riots event", GameEnded);
 		assertTrue("Failed executing Riots event", Success);
@@ -562,7 +562,7 @@ public class JUnitTestSuite {
         
 		CityAreaCards Subsidence = new CityAreaCards("Subsidence", 1, true, CardType.CityAreaCards); 
 		
-		boolean Success = ge.PlayEvent(Subsidence, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(Subsidence, CurrentPlayerIndex, true);
         int afterAmount = ge.GetPlayerBalance(CurrentPlayerIndex);
         
 		boolean AmountCorrect = ((originalAmount-afterAmount)==6);
@@ -581,7 +581,7 @@ public class JUnitTestSuite {
         //place minion in every area
         
 		CityAreaCards TheDragon = new CityAreaCards("The Dragon", 1, true, CardType.CityAreaCards); 
-		boolean Success = ge.PlayEvent(TheDragon, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(TheDragon, CurrentPlayerIndex, true);
 		
         //get current die
         int AffectedArea = ge.GetBoardDie();
@@ -601,7 +601,7 @@ public class JUnitTestSuite {
 		CityAreaCards Troll = new CityAreaCards("Troll", 1, true, CardType.CityAreaCards); 
 		
 		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
-		boolean Success = ge.PlayEvent(Troll, CurrentPlayerIndex);
+		boolean Success = ge.PlayEvent(Troll, CurrentPlayerIndex, true);
 		
         //count total trolls
         int TotalTroll = ge.CountTrollsInArea();

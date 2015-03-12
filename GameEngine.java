@@ -301,7 +301,7 @@ public class GameEngine implements Serializable
 				//Random Event
 				else if(currentSymbol.compareToIgnoreCase("RE") == 0)
 				{
-					ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex);
+					ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex, false);
 				}
 				//Play another card
 				else if(currentSymbol.compareToIgnoreCase("C") == 0)
@@ -2009,10 +2009,12 @@ public class GameEngine implements Serializable
         return ActionStatus;
     }
 	
-    public boolean PlayEvent(Cards CardPlayed, int player)
+    public boolean PlayEvent(Cards CardPlayed, int player, boolean UseCardName)
 	{
     	Cards NewCardPlayed = CardManager.GetCard(CardType.EventCards);
     	String cardName = NewCardPlayed.GetName().toLowerCase();
+    	if(UseCardName)
+    		cardName = CardPlayed.GetName();
     	
 		boolean ActionSuccess = true;
 		System.out.println("Activating the event effect now");
