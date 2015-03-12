@@ -2690,19 +2690,28 @@ public class GameEngine implements Serializable
 		//Lord Vetinari should have certain number of minions to win the game
 		else if (CardName.contains("Vetinari"))
 		{
+			int TotalAreaCovered = 0;
+			for (Area area : this.GameBoard.ListArea)
+			{
+				if (area.GetMinionCount(ListPlayer.get(CurrentPlayer).GetColor()) > 0) 
+				{
+					TotalAreaCovered++;
+				}
+			}
 			if (this.TotalPlayer==2)
 			{
-				if (ListPlayer.get(this.CurrentPlayer).GetMinionCount()>=11)
+				
+				if (TotalAreaCovered>=11)
 					 WiningCondition=true;
 			}
 			else if (this.TotalPlayer==3)
 			{
-				if (ListPlayer.get(this.CurrentPlayer).GetMinionCount()>=10)
+				if (TotalAreaCovered>=10)
 					 WiningCondition=true;
 			}
 			else if (this.TotalPlayer==4)
 			{
-				if (ListPlayer.get(this.CurrentPlayer).GetMinionCount()>=9)
+				if (TotalAreaCovered>=9)
 					 WiningCondition=true;
 			}
 		}
@@ -2762,7 +2771,7 @@ public class GameEngine implements Serializable
     			totalPoints += area.GetAreaCost();
     		}
     	}
-    	System.out.println("Player Loan: " + ListPlayer.get(playerIndex).GetPayBack());
+    	System.out.println("");
     	ListPlayer.get(playerIndex).PayLoan(ListPlayer.get(playerIndex).GetPayBack());
     	
     	//Calculate Total Dollars

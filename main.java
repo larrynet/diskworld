@@ -136,7 +136,7 @@ public class main {
 					//check if someone won first
 					if(ge.IsWinner())
 					{
-						System.out.println("!!!! Congratulation. Player " + CurrentPlayerIndex + "won the game !!!! ");
+						System.out.println("!!!! Congratulation. Player " + (CurrentPlayerIndex+1) + " won the game !!!! ");
 						Continue = false;
 					}
 					else
