@@ -2014,7 +2014,7 @@ public class GameEngine implements Serializable
     	Cards NewCardPlayed = CardManager.GetCard(CardType.EventCards);
     	String cardName = NewCardPlayed.GetName().toLowerCase();
     	
-		boolean ActionSuccess = false;
+		boolean ActionSuccess = true;
 		System.out.println("Activating the event effect now");
         
         if(cardName.compareToIgnoreCase("The Dragon") == 0)
