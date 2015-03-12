@@ -191,16 +191,37 @@ public class ManageCards implements Serializable
 			}
 						
 			else if(CardType.GreenCards  ==Type  )    
-			{   this.ShuffleCards((Cards [])this.Green_Cards);
+			{   
+				this.ShuffleCards((Cards [])this.Green_Cards);
+				boolean availableGreen = false;
+				
+				//Do we have an available green card
 				for (int i=0;i<=this.Green_Cards.length-1;i++)
-					{
-					 if (this.Green_Cards[i].Status==true  )
+				{
+					if (this.Green_Cards[i].Status==true  )
 					 { 
-						 this.Green_Cards[i].Status=false;
-						 available=this.Green_Cards[i];
+						availableGreen = true;
 						 break;
-					 }	
+					 }
+				}
+				
+				
+				if (availableGreen)
+				{
+					for (int i=0;i<=this.Green_Cards.length-1;i++)
+					{
+						if (this.Green_Cards[i].Status==true  )
+						{ 
+							this.Green_Cards[i].Status=false;
+							available=this.Green_Cards[i];
+							break;
+						}
+
 					}
+				}
+				
+				available = null;
+				
 			}
 			else if(CardType.BrownCards  ==Type  )    
 			{this.ShuffleCards((Cards [])this.Brown_Cards);
@@ -230,10 +251,15 @@ public class ManageCards implements Serializable
 	 {
 		Random rgen = new Random();  // Random number generator
 		int TotalCard = _Cards.length;
+		
 		if(_Cards[0].GetCardType() == CardType.BrownCards)
+		{
 			TotalCard = TotalBrownCard;
+		}
 		else if(_Cards[0].GetCardType() == CardType.PersonalityCards)
+		{
 			TotalCard = TotalPersonalityCard;
+		}
 		
 		for (int i=0; i<TotalCard; i++)
 		{
