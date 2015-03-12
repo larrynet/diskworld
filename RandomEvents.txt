@@ -9,5 +9,5 @@ name=Mysterious Murders
 name=Demons From The Dungeon Dimension
 name=Subsidence
 name=Trolls
-name=Bloody Stupid Johnson  
+name=Bloody Stupid Johnson
 name=Earthquake

@@ -2011,10 +2011,13 @@ public class GameEngine implements Serializable
 	
     public boolean PlayEvent(Cards CardPlayed, int player)
 	{
+    	Cards NewCardPlayed = CardManager.GetCard(CardType.EventCards);
+    	String cardName = NewCardPlayed.GetName().toLowerCase();
+    	
 		boolean ActionSuccess = false;
 		System.out.println("Activating the event effect now");
         
-        if(CardPlayed.Name.compareToIgnoreCase("The Dragon") == 0)
+        if(cardName.compareToIgnoreCase("The Dragon") == 0)
         {
             System.out.println("Dragon Event \n===========================================");
             int AreaAffected = GameBoard.RollDie();
@@ -2030,7 +2033,7 @@ public class GameEngine implements Serializable
                 GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(i).GetColor());
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Flood") == 0)
+        else if(cardName.compareToIgnoreCase("Flood") == 0)
         {
             System.out.println("Floood Event \n===========================================");
             for(int FloodCount=0; FloodCount<2; FloodCount++)
@@ -2065,7 +2068,7 @@ public class GameEngine implements Serializable
                 }
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Fire") == 0)
+        else if(cardName.compareToIgnoreCase("Fire") == 0)
         {
             System.out.println("Fire Event \n===========================================");
             boolean ContinueRolling = true;
@@ -2091,7 +2094,7 @@ public class GameEngine implements Serializable
             }while(ContinueRolling);
             
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Fog") == 0)
+        else if(cardName.compareToIgnoreCase("Fog") == 0)
         {
             System.out.println("Fog Event \n===========================================");
             //Discard top five cards
@@ -2106,7 +2109,7 @@ public class GameEngine implements Serializable
                 DiscardCards.add(DiscardCard);
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Riots") == 0)
+        else if(cardName.compareToIgnoreCase("Riots") == 0)
         {
             System.out.println("Riots Event \n===========================================");
             //traverse Area to count
@@ -2117,7 +2120,7 @@ public class GameEngine implements Serializable
                 ActivateGameEnd();
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Explosion") == 0)
+        else if(cardName.compareToIgnoreCase("Explosion") == 0)
         {
             System.out.println("Explosion Event \n===========================================");
             int AreaAffected = GameBoard.RollDie();
@@ -2128,7 +2131,7 @@ public class GameEngine implements Serializable
                 GameBoard.RemoveBuilding(AreaAffected, ListPlayer.get(i));
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Earthquake") == 0)
+        else if(cardName.compareToIgnoreCase("Earthquake") == 0)
         {
             System.out.println("Earthquake Event \n===========================================");
             int AreaAffected0 = GameBoard.RollDie();
@@ -2142,7 +2145,7 @@ public class GameEngine implements Serializable
                 GameBoard.RemoveBuilding(AreaAffected1, ListPlayer.get(i));
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Mysterious Murders") == 0)
+        else if(cardName.compareToIgnoreCase("Mysterious Murders") == 0)
         {
         	Scanner scan = new Scanner(System.in);
             System.out.println("Mysterious Murdered Event \n===========================================");
@@ -2162,7 +2165,7 @@ public class GameEngine implements Serializable
                 GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(CurrentPlayerTurn).GetColor());
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Demons From The Dungeon Dimension") == 0)
+        else if(cardName.compareToIgnoreCase("Demons From The Dungeon Dimension") == 0)
         {
             System.out.println("Demons From The Dungeon Dimension \n===========================================");
             for(int i=0; i<4; i++)
@@ -2171,7 +2174,7 @@ public class GameEngine implements Serializable
                 GameBoard.ListArea.get(AreaAffected).AddDemons(new Pieces(PieceType.Demon, Colors.None));
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Subsidence") == 0)
+        else if(cardName.compareToIgnoreCase("Subsidence") == 0)
         {
         	Scanner scan = new Scanner(System.in);
             System.out.println("Subsidence Event \n===========================================");
@@ -2179,7 +2182,7 @@ public class GameEngine implements Serializable
             for(int i=0; i<TotalPlayer; i++)
             {
                 //TODO For each building in the board, pay 2$ or remove it
-            	for(int a=0; a<GameBoard.ListArea.size(); a++)
+            	for(int a=1; a<=GameBoard.ListArea.size(); a++)
             	{
             		if(GameBoard.ListArea.get(a).GetBuilding().GetPieceColor() == ListPlayer.get(i).GetColor())
             		{
@@ -2198,7 +2201,7 @@ public class GameEngine implements Serializable
             	}
             }
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Bloody Stupid Johnson") == 0)
+        else if(cardName.compareToIgnoreCase("Bloody Stupid Johnson") == 0)
         {
             System.out.println("Bloody Stupid Johson \n===========================================");
             int AreaAffected = GameBoard.RollDie();
@@ -2222,7 +2225,7 @@ public class GameEngine implements Serializable
             //remove 1 minion of that area
             GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(player).GetColor());
         }
-        else if(CardPlayed.Name.compareToIgnoreCase("Trolls") == 0)
+        else if(cardName.compareToIgnoreCase("Trolls") == 0)
         {
             System.out.println("Trolls \n===========================================");
             int AreaAffected = 0;
