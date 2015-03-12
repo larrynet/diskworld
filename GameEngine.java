@@ -804,6 +804,28 @@ public class GameEngine implements Serializable
                             }
             
                         }
+                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("look") ==0)
+                        {
+                        	List<Integer> ListOfPersonalityIndex = new ArrayList<Integer>();
+                        	
+                        	for(int i=0; i<CardManager.Personality_Card.length; i++)
+                        	{
+                        		if(CardManager.Personality_Card[i].Status)
+                        			ListOfPersonalityIndex.add(i);
+                        	}
+                        	Random randGenerator = new Random();
+                        	int noLookIndex = randGenerator.nextInt()%ListOfPersonalityIndex.size();
+                        	
+                        	for(int j=0; j<ListOfPersonalityIndex.size(); j++)
+                        	{
+                        		if(j!=noLookIndex)
+                        		{
+                        			PersonalityCards p = CardManager.Personality_Card[ListOfPersonalityIndex.get(j)];
+                        			p.ShowImage(p.GetName());
+                        		}
+                        	}
+                        	return true;
+                        }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("give") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
