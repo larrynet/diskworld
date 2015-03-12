@@ -34,21 +34,35 @@ public class GameEngine implements Serializable
 		TotalPlayer = 2; //initialize to the minimal player in default constructor
 		InitializeData();
 	}
+	
+	/**
+	 * Show cards current in player hand
+	 * @param player
+	 */
 	public void ShowCard(int player)
 	{
 		//show card
         for(int i=0; i<ListPlayer.get(player).PlayerCards.size(); i++)
         	System.out.println((i+1)+"- " + ListPlayer.get(player).PlayerCards.get(i).GetName());
 	}
+	
+	/**
+	 * Getter to see if game has ended
+	 * @return State of game
+	 */
 	public boolean IsGameEnded() 
 	{
 		return HasGameEnded;
 	}
 	
+	/**
+	 * Porcess to start game end procedure
+	 */
 	public void ActivateGameEnd()
 	{
 		HasGameEnded = true;
 	}
+	
 	/**
 	 * @param p - Init all internal structure with player p
 	 * Default constructor who will init all internal structure with player p
@@ -68,6 +82,11 @@ public class GameEngine implements Serializable
 		}
 	}
 	
+	
+	/**
+	 * Play city area effect card
+	 * @param player
+	 */
 	public void ActivateCityAreaEffect(int player)
     {
         //traverse city area list and activate all the effect only if there is no demon
@@ -236,6 +255,12 @@ public class GameEngine implements Serializable
 			return 0;
 	}
 	
+	/**
+	 * Play action cards
+	 * @param CurrentPlayerIndex
+	 * @param playChoice
+	 * @return
+	 */
 	public boolean PlayCard(int CurrentPlayerIndex, int playChoice)
 	{
 		GreenCards g = null;
@@ -355,6 +380,12 @@ public class GameEngine implements Serializable
 		return ActionStatus;
 	}
 
+	
+	/**
+	 * Exception card that have particular instructions
+	 * @param c
+	 * @return if card is exception
+	 */
 	private boolean BelongToException(Cards c)
     {
 		String CardName = c.GetName().toLowerCase();
@@ -368,6 +399,12 @@ public class GameEngine implements Serializable
         return (b1 || b2 || b3 || b4 || b5);
     }
 	
+	/**
+	 * Play the symbol effect on the card
+	 * @param CardPlayed
+	 * @param player
+	 * @return true once card is played
+	 */
     private boolean PlayEffect(Cards CardPlayed, int player)
     {
     	int IndexOfCardPlayed = 0;
@@ -2050,6 +2087,14 @@ public class GameEngine implements Serializable
         return ActionStatus;
     }
 	
+    
+    /**
+     * Play the event on of the cards
+     * @param CardPlayed
+     * @param player
+     * @param UseCardName
+     * @return true once card is played
+     */
     public boolean PlayEvent(Cards CardPlayed, int player, boolean UseCardName)
 	{
     	Cards NewCardPlayed = CardManager.GetCard(CardType.EventCards);
@@ -2287,6 +2332,12 @@ public class GameEngine implements Serializable
 		return ActionSuccess;
 	}
 	
+    
+    /**
+     * RemoveTrouble Marker function
+     * @param player
+     * @return 
+     */
 	private boolean RemoveTrouble(int player)
 	{
 		boolean ActionSuccess = false;
@@ -2297,6 +2348,11 @@ public class GameEngine implements Serializable
 		return ActionSuccess;
 	}
 	
+	/**
+	 * Assassinate symbol function
+	 * @param player
+	 * @return
+	 */
 	private boolean Assassinate(int player)
 	{
 		boolean ActionSuccess = false;
@@ -2351,6 +2407,11 @@ public class GameEngine implements Serializable
 		return ActionSuccess;
 	}
 	
+	/**
+	 * Place minion on board symbol
+	 * @param player
+	 * @return if action was successful
+	 */
 	private boolean PutMinion(int player)
 	{
 		boolean ActionSuccess = false;
@@ -2394,6 +2455,11 @@ public class GameEngine implements Serializable
 		return ActionSuccess;
 	}
 	
+	/**
+	 * Place building on board
+	 * @param player
+	 * @return If action was
+	 */
 	private boolean PutBuilding(int player)
 	{
 		boolean ActionSuccess = false;
@@ -2676,7 +2742,11 @@ public class GameEngine implements Serializable
 		//Initialize a random value to dice
 		GameBoard.RollDie();
 	}
-
+    
+	/**
+	 * Assign the player playing to the CurrentPlayer var
+	 * @param p
+	 */
 	public void SetCurrentPlayer(int p)
 	{
 		CurrentPlayer = p;
@@ -2706,7 +2776,7 @@ public class GameEngine implements Serializable
 		return (TotalPlayer>0);
 	}
 	
-/**
+	/**
 	 * @return true if the current player meet its required winning conditons.
 	 */
 	public boolean IsWinner()
@@ -2892,7 +2962,11 @@ public class GameEngine implements Serializable
     	player.PrintCardsIndex();
     }
 	
-    
+    /**
+     * Display a pring out of player financials
+     * @param Message
+     * @param player
+     */
     private void GetPlayerLoanBank(String Message, Player player)
     {
     	System.out.println(Message);
@@ -2901,6 +2975,11 @@ public class GameEngine implements Serializable
     	
     }
     
+    /**
+     * Display balance of player
+     * @param message
+     * @param player
+     */
     private void GetPlayerBalance(String message, Player player)
     {
     	System.out.println(message);
@@ -2908,38 +2987,62 @@ public class GameEngine implements Serializable
     }
     
     
-    /* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString()
-	{
-		return this.toString();
-	}
+    /**
+     * Assign die value to board 
+     * @param i
+     */
 	public void SetBoardDie (int i) {BoardDie = i;}
+	
+	/**
+	 * Retrieve Die value
+	 * @return
+	 */
 	public int GetBoardDie () {return BoardDie;}
 	
+	/**
+	 * Used for JUNIT testing - Place minion in each area
+	 * @param player
+	 */
     public void PlaceMinionInEachArea(int player)
     {
         for(int i=1; i<=GameBoard.ListArea.size(); i++)
             GameBoard.PlaceMinion(i,ListPlayer.get(player));
     }
     
+    /**
+     * Used for JUNIT testing - Place building in each area
+     * @param player
+     */
     public void PlaceBuildingInEachArea(int player)
     {
         for(int i=1; i<=GameBoard.ListArea.size(); i++)
             GameBoard.PlaceBuilding(i,ListPlayer.get(player));
     }
+
+    /**
+     * Used for JUNIT testing - Place troll in each area
+     * @param player
+     */
     public void PlaceTrollInEachArea(int player)
     {
         for(int i=1; i<=GameBoard.ListArea.size(); i++)
             GameBoard.PlaceTroll(i);
     }
     
+    /**
+     * Used for JUNIT testing - Place demon in each area
+     * @param player
+     */
     public void PlaceDemonsInEachArea(int player)
     {
         for(int i=1; i<=GameBoard.ListArea.size(); i++)
             GameBoard.PlaceDemon(i);
     }
+    
+    /**
+     * Retrieve the building count on board
+     * @return
+     */
     public int GetBuildingCount()
     {
     	int TotalBuilding = 0;
@@ -2950,6 +3053,11 @@ public class GameEngine implements Serializable
         }
         return TotalBuilding;
     }
+    
+    /**
+     * Retrieve demon count of board
+     * @return
+     */
 	public int CountDemonsInArea()
     {
         int TotalDemons = 0;
@@ -2959,7 +3067,12 @@ public class GameEngine implements Serializable
         }
         return TotalDemons;
     }
-    public int CountTrollsInArea()
+    
+	/**
+	 * Retrieve troll count of board
+	 * @return
+	 */
+	public int CountTrollsInArea()
     {
         int TotalTrolls= 0;
         for(int i=0; i<GameBoard.ListArea.size(); i++)
@@ -2969,20 +3082,39 @@ public class GameEngine implements Serializable
         return TotalTrolls;
     }
     
+	/**
+	 * Get the balance of current player
+	 * @param player
+	 * @return
+	 */
     public int GetPlayerBalance(int player)
     {
         return ListPlayer.get(player).GetMoneyCount();
     }
+    
+    /**
+     * Are any action cards left on the board
+     * @return
+     */
     public boolean NoMoreCard()
     {
     	Cards g = CardManager.GetCard(CardType.GreenCards);
     	//Cards b = CardManager.GetCard(CardType.BrownCards);
     	return (g==null);
     }
+    
+    /**
+     * Remove a minion from an area
+     * @param area
+     * @param player
+     * @return
+     */
     public boolean RemoveMinion(int area, int player)
     {
     	return GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
     }
+    
+    
     //only for testing
     public void EmptyCard()
     {
@@ -3011,6 +3143,10 @@ public class GameEngine implements Serializable
     
     public int ReturnCurrentDieValue() { return CurrentDie;}
     
+    
+    /**
+     * Determine the winner based on points
+     */
     public void DetermineWinner()
     {
     	int [] PointsPerPlayer = new int[TotalPlayer];
@@ -3034,5 +3170,14 @@ public class GameEngine implements Serializable
     		}
     	}
     }
+    
+    
+    /* (non-Javadoc)
+  	 * @see java.lang.Object#toString()
+  	 */
+  	public String toString()
+  	{
+  		return this.toString();
+  	}
 
 }
