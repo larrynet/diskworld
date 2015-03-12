@@ -928,38 +928,53 @@ public class GameEngine implements Serializable
                             {
                             	
                             	//The Ankh Morpork Sunshine Dragon Sanctuary
-                            	System.out.println("Enter player index to take card or 1$ from.");
-                                int playerIndex= scan.nextInt();
-                                String choice1 = "";
-                            	if(!ListPlayer.get(playerIndex).HasInterruptCard())
-                                {
-                                	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
-                                	choice1 = scan.next();
-                                	
-                                }
-                            	if(choice1.compareToIgnoreCase("no") == 0)
+                            	
+                            	this.GetPlayerBalance("Current Balance",ListPlayer.get(player));
+                            	
+                            	for (Player iterPlayer : this.ListPlayer)
                             	{
-	                                System.out.println("Give $ or card?");
-	                                String choice= scan.next();
-	                                if(choice.contains("$"))
-	                                {
-	                                	ListPlayer.get(player).AddToMoney(1);
-	                    				ListPlayer.get(playerIndex).DeductFromMoney(1);
-	                                }
-	                                else
-	                                {
-	                                	System.out.println("Enter card index to take.");
-	                                    int cardIndex0= scan.nextInt();
-	                                    Cards c1 = ListPlayer.get(playerIndex).GetCards().get(cardIndex0);
-	                                  
-	                                    ListPlayer.get(player).AddPlayerCard(c1);
-	                                    ListPlayer.get(playerIndex).RemovePlayerCard(cardIndex0);
-	                                 
-	                                }
-                            	}
-								else
-									ListPlayer.get(playerIndex).RemoveInterruptCard();
+                            		if (iterPlayer.GetColor() != ListPlayer.get(player).GetColor())
+                            		{
+                            			if(iterPlayer.HasInterruptCard())
+                            			{
+                            				System.out.println("Player " + iterPlayer.GetPlayerNumber() + "has an interrupt card. Player " + iterPlayer.GetPlayerNumber() + ", do you want to play it? (yes/no)");
+                            				String choice = scan.next();
+
+                            				if(choice.compareToIgnoreCase("yes") == 0)
+                            				{
+                            					iterPlayer.RemoveInterruptCard();
+                            					break;
+                            				}
+                            			}
+                            			else 
+                            			{
+                            				System.out.println("Player " + iterPlayer.GetPlayerNumber() + " you must give either 1$ (choice 1) or one of your cards (choice 2)");
+                            				int choice1= scan.nextInt();
+
+                            				if(choice1 == 1)
+                            				{
+                            					ListPlayer.get(player).AddToMoney(1);
+                            					iterPlayer.DeductFromMoney(1);
+                            				}
+                            				else if (choice1 == 2)
+                            				{
+                            					System.out.println("Enter card index to take.");
+                            					int cardIndex0= scan.nextInt();
+                            					Cards c1 = iterPlayer.GetCards().get(cardIndex0);
+
+                            					ListPlayer.get(player).AddPlayerCard(c1);
+                            					iterPlayer.RemovePlayerCard(cardIndex0);
+
+                            				}
+
+                            			}
+                            		}
+                                }
+                            	
+                            	this.GetPlayerBalance("New Balance",ListPlayer.get(player));
                                 
+                                return true;
+
                             }
                             else if(object.contains("$ from all"))
                             {
@@ -2947,6 +2962,7 @@ public class GameEngine implements Serializable
     	while(c != null);
     	
     }
+    
     public int GetTotalMinion()
     {
     	int TotalMinion = 0;
@@ -2957,7 +2973,9 @@ public class GameEngine implements Serializable
     	}
     	return TotalMinion;
     }
+    
     public boolean RemoveTroubleMaker(int areaNumber) {return GameBoard.Removetrouble(areaNumber);}
+    
     public int ReturnCurrentDieValue() { return CurrentDie;}
     
     public void DetermineWinner()
