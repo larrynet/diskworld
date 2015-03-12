@@ -63,6 +63,15 @@ public class JUnitTestSuite {
         ge.ListPlayer.get(CurrentPlayerIndex).SetPersonalityCard(CommanderVimes);
 		ge.EmptyCard();
 		
+		String PathState = "NoMoreCards";
+		
+		StateManager sm = new StateManager();
+		if(sm.ExportGameState(ge, PathState))
+		{
+			System.out.println("State successfully exported to " + PathState);
+		}
+		
+		
         boolean Win = ge.IsWinner();
         
 		assertTrue("Winning Condition for Commander Vimes not executed properly", Win);
