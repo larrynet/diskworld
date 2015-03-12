@@ -43,7 +43,7 @@ public class main {
 			do
 			{
 				count --;
-				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex+1)+"\n+++++++++++++++++++++++++++++++++++++++");
+				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex)+"\n+++++++++++++++++++++++++++++++++++++++");
 				
 				//TODO -- Add encapsulation
 				//have draw cards if not full hand
