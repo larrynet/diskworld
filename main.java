@@ -153,7 +153,8 @@ public class main {
 	                        System.out.println("Card played successfully");
 	                        
 	                        //increment turn
-	                        CurrentPlayerIndex = (CurrentPlayerIndex++)%NumPlayer;
+	                        CurrentPlayerIndex += 1;
+	                        CurrentPlayerIndex = CurrentPlayerIndex % NumPlayer;
 	                        ge.SetCurrentPlayer(CurrentPlayerIndex);
 	                        	
 	                    }
