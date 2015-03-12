@@ -155,12 +155,23 @@ public class main {
 	                      //have draw cards if not full hand
 	            			if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
 	            			{
+	            				Player currentPlayer = ge.ListPlayer.get(CurrentPlayerIndex);
+	            				
+	            				int NumberofCards = currentPlayer.HandSize - currentPlayer.PlayerCards.size();
+	            				
+	            				for (int i = 0; i < NumberofCards; i++)
+	            				{
+	            				
 	            				Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
+	            				
 	            				if(c == null)
+	            				{
 	            					c = ge.GetCardManager().GetCard(CardType.BrownCards);
+	            				}
 	            				
-	            				ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
+	            				currentPlayer.PlayerCards.add(c);
 	            				
+	            				}
 	            			}
 	            			
 	            			//Print new Player hand

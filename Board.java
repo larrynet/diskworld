@@ -282,7 +282,10 @@ public class Board implements Serializable {
 			int troubleCount = 0;
 			for (Area area : this.ListArea)
 			{
-				troubleCount += 1;
+				if (area.HasTroubleMaker())
+				{
+					troubleCount += 1;
+				}
 			}
 			
 			return troubleCount;

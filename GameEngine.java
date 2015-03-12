@@ -331,6 +331,8 @@ public class GameEngine implements Serializable
 				//Play another card
 				else if(currentSymbol.compareToIgnoreCase("C") == 0)
 				{
+					DiscardCards.add(CardPlayed);
+					ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
 					
 					//Print Player Cards and Play next card
 					this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
