@@ -429,24 +429,31 @@ public class Area implements Serializable
 				{
 					int countThis = this.GetMinionCount(color);
 					
-					int countRed = this.GetMinionCount(Colors.Red);
-					int countBlue = this.GetMinionCount(Colors.Blue);
-					int countYellow= this.GetMinionCount(Colors.Yellow);
-					int countGreen = this.GetMinionCount(Colors.Green);
-					
-					int [] ColorCount = {countRed, countRed, countYellow, countGreen};
-					
-					int maxVal = 0;
-					
-					for (int i : ColorCount)
+					if (countThis > 0)
 					{
-						if (i >= maxVal)
+						int countRed = this.GetMinionCount(Colors.Red);
+						int countBlue = this.GetMinionCount(Colors.Blue);
+						int countYellow= this.GetMinionCount(Colors.Yellow);
+						int countGreen = this.GetMinionCount(Colors.Green);
+						
+						int [] ColorCount = {countRed, countRed, countYellow, countGreen};
+						
+						int maxVal = 0;
+						
+						for (int i : ColorCount)
 						{
-							maxVal = i;
+							if (i >= maxVal)
+							{
+								maxVal = i;
+							}
 						}
+						
+						return (countThis == maxVal) ;
 					}
-					
-					return (countThis == maxVal) ;
+					else
+					{
+						return false;
+					}
 				}
 					
 				
