@@ -195,19 +195,6 @@ public class ManageCards implements Serializable
 				this.ShuffleCards((Cards [])this.Green_Cards);
 				boolean availableGreen = false;
 				
-				//Do we have an available green card
-				for (int i=0;i<=this.Green_Cards.length-1;i++)
-				{
-					if (this.Green_Cards[i].Status==true  )
-					 { 
-						availableGreen = true;
-						 break;
-					 }
-				}
-				
-				
-				if (availableGreen)
-				{
 					for (int i=0;i<=this.Green_Cards.length-1;i++)
 					{
 						if (this.Green_Cards[i].Status==true  )
@@ -218,9 +205,7 @@ public class ManageCards implements Serializable
 						}
 
 					}
-				}
 				
-				available = null;
 				
 			}
 			else if(CardType.BrownCards  ==Type  )    
