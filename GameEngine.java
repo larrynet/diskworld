@@ -2398,6 +2398,13 @@ public class GameEngine implements Serializable
         Scanner scan = new Scanner(System.in);
         int AreaNumber = scan.nextInt();
 		ActionSuccess =GameBoard.PlaceBuilding(AreaNumber,ListPlayer.get(player));
+		
+		if(ActionSuccess)
+		{
+			CardManager.CityArea_Cards[AreaNumber].Status = false;
+			ListPlayer.get(player).AddCityAreayCard(CardManager.CityArea_Cards[AreaNumber]);
+		}
+			
 		return ActionSuccess;
 	}
 	
