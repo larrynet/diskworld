@@ -279,7 +279,13 @@ public class Board implements Serializable {
 		
 		public int CountTroubleMarker()
 		{
-			return this.ListTroubleMakers.size();
+			int troubleCount = 0;
+			for (Area area : this.ListArea)
+			{
+				troubleCount += 1;
+			}
+			
+			return troubleCount;
 		}
 		
 		/**
@@ -365,5 +371,3 @@ public class Board implements Serializable {
         	return false;
         }
 }
-
-

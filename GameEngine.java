@@ -374,6 +374,7 @@ public class GameEngine implements Serializable
 			}
 			
 			this.GameBoard.PrintState();
+			
 			System.out.println("");
 		}
 		
@@ -2486,7 +2487,7 @@ public class GameEngine implements Serializable
 	 */
 	private boolean ValidPlayerIndex(int PlayerIndex)
 	{
-		return ((PlayerIndex <= 4) && (PlayerIndex >= 1));
+		return ((PlayerIndex <= 4) && (PlayerIndex >= 0));
 	}
 	
 	/**
@@ -2956,7 +2957,7 @@ public class GameEngine implements Serializable
      * @param message
      * @param player
      */
-    private void PrintHandState(String message, Player player)
+    public void PrintHandState(String message, Player player)
     {
     	System.out.println(message);
     	player.PrintCardsIndex();

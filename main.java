@@ -47,7 +47,7 @@ public class main {
 				
 				//TODO -- Add encapsulation
 				//have draw cards if not full hand
-				if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
+				/*if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
 				{
 					Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
 					if(c == null)
@@ -55,7 +55,7 @@ public class main {
 					
 					ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
 					
-				}
+				}*/
 				//Show all the cards and let the person choose what he wants
 				System.out.println("1 - Peak at your card");
 				System.out.println("2 - Play card");
@@ -152,10 +152,26 @@ public class main {
 	                    {
 	                        System.out.println("Card played successfully");
 	                        
+	                      //have draw cards if not full hand
+	            			if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
+	            			{
+	            				Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
+	            				if(c == null)
+	            					c = ge.GetCardManager().GetCard(CardType.BrownCards);
+	            				
+	            				ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
+	            				
+	            			}
+	            			
+	            			//Print new Player hand
+	            			ge.PrintHandState("Your Current Hand is: ", ge.ListPlayer.get(CurrentPlayerIndex));
+	                        
 	                        //increment turn
 	                        CurrentPlayerIndex += 1;
 	                        CurrentPlayerIndex = CurrentPlayerIndex % NumPlayer;
 	                        ge.SetCurrentPlayer(CurrentPlayerIndex);
+	                        
+	                        
 	                        	
 	                    }
 						else
@@ -196,6 +212,8 @@ public class main {
                 //update current turn
                 ge.SetCurrentPlayer(CurrentPlayerIndex);
 			} while (Continue);	
+			
+			
 		}
 		
 				
