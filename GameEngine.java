@@ -1722,8 +1722,10 @@ public class GameEngine implements Serializable
                             	 int Source = scan.nextInt();
                             	 System.out.println("Enter the area index to where you want to move minion-it should be adjacent");
                             	 int Destination = scan.nextInt();
-
-                            	 if(CardPlayed.GetName()=="The Duckman" || CardPlayed.GetName()=="Foul Ole Ron" ||CardPlayed.GetName()=="Canting Crew")
+                            	 
+                            	 String thisCardName = CardPlayed.GetName().toLowerCase();
+                            	 
+                            	 if(thisCardName.equalsIgnoreCase("The Duckman") || thisCardName.equalsIgnoreCase("Foul Ole Ron") ||thisCardName.equalsIgnoreCase("Canting Crew"))
                             	 {
                             		 //TODO Review with Parinaz
                             		 if (GameBoard.ListArea.get(Source).AreaAdjacency(Destination))
@@ -1736,7 +1738,7 @@ public class GameEngine implements Serializable
                             	 }
                             	 
                         		 //Rincewind
-                            	 else if(CardPlayed.GetName()=="Rincewind")
+                            	 else if(thisCardName.equalsIgnoreCase("Rincewind"))
                             	 {
                             		 // Scanner scan = new Scanner(System.in);
 
@@ -2441,7 +2443,7 @@ public class GameEngine implements Serializable
         }
         else 
         {
-        	for (int i : this.GameBoard.ListArea.get(AreaNumber).GetAdjAreas())
+        	for (int i : this.GameBoard.ListArea.get(AreaNumber-1).GetAdjAreas())
     		{
     			if (this.GameBoard.ListArea.get(i).GetMinionCount(thisPlayer.GetColor()) > 0)
             	{

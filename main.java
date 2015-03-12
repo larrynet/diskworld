@@ -24,6 +24,7 @@ public class main {
 			NumPlayer = scan.nextInt();
 		}
 		GameEngine ge = new GameEngine(NumPlayer);
+		ge.InitializeData();
 		
 		
 		

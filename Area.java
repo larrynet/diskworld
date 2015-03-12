@@ -193,7 +193,7 @@ public class Area implements Serializable
 			{
 				System.out.println("This area has a trouble marker, you cannot build a building");
 			}
-			else
+			else if (this.GetMinionCount(b.GetPieceColor()) > 0)
 			{
 				if(this.IsBuilt)
 				{
@@ -204,6 +204,10 @@ public class Area implements Serializable
 					this.Building = b;
 					this.IsBuilt = true;
 				}
+			}
+			else
+			{
+				System.out.println("you do not have a minion in the area, cannnot build building");
 			}
 		}
 		

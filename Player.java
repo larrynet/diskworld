@@ -295,9 +295,9 @@ public class Player implements Serializable {
 			System.out.println();
 		}
 		
-		System.out.println("PlayerCards");
-		System.out.println(this.PrintPlayerCards()[0]);
-		System.out.println(this.PrintPlayerCards()[1]);
+//		System.out.println("PlayerCards");
+//		System.out.println(this.PrintPlayerCards()[0]);
+//		System.out.println(this.PrintPlayerCards()[1]);
 
 	}
 	
