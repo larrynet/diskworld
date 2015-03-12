@@ -345,7 +345,11 @@ public class GameEngine implements Serializable
 				}
 				
 				this.ToDiscard = 0;
+							
 			}
+			
+			this.GameBoard.PrintState();
+			System.out.println("");
 		}
 		
 		return ActionStatus;

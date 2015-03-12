@@ -71,7 +71,7 @@ public void ShowImage(String _Title)
     ClassLoader classLoader = getClass().getClassLoader();
 	File file = new File(classLoader.getResource("Cards/GreenCards/" + Name + ".jpg").getFile());
 
-    editorFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	editorFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
     BufferedImage image = null;
 
