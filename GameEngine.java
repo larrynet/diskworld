@@ -25,6 +25,7 @@ public class GameEngine implements Serializable
 	private int CurrentDie;
 	private boolean HasGameEnded;
 	private int BoardDie;
+	private int ToDiscard;
 	/**
 	 * Default constructor who will init all internal structure with minimum supported player 
 	 */
@@ -332,8 +333,19 @@ public class GameEngine implements Serializable
 		}
 		if(ActionStatus) 
 		{
+			
 			DiscardCards.add(CardPlayed);
 			ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
+			
+			if (this.ToDiscard > 0)
+			{
+				for (int i = 0; i < this.ToDiscard; i++)
+				{
+					ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(i);
+				}
+				
+				this.ToDiscard = 0;
+			}
 		}
 		
 		return ActionStatus;
@@ -1077,8 +1089,15 @@ public class GameEngine implements Serializable
                             else if(object.contains("times number of discarded card"))
                             {
                             	//Harry King -- Shonky shop
-                                GameBoard.DeductFromBank(amount*DiscardCards.size());
-                        		ListPlayer.get(player).AddToMoney(amount*DiscardCards.size());
+                            	
+                            	System.out.println("Enter the number of cards you would like to discard: ");
+                            	int cardNumber = scan.nextInt();
+                            	this.ToDiscard = cardNumber;
+                            	
+                            	GameBoard.DeductFromBank(amount*cardNumber);
+                        		ListPlayer.get(player).AddToMoney(amount*cardNumber);
+                        		
+                        		return true;
                             }
                             else if(object.contains("for each troublemaker in board"))
                             {
