@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Scanner;
 import java.io.Serializable;
 import java.util.ArrayList;
 /**
@@ -56,7 +57,37 @@ public class Player implements Serializable {
 	{
 		ListCityAreaCards.get(index).DesactivateCityArea();;
 	}
-	
+	public void DesactivateSmallGod()
+	{
+		for(int i=0; i<ListCityAreaCards.size(); i++)
+		{
+			
+			CityAreaCards _cityArea = ListCityAreaCards.get(i);
+			if(_cityArea.GetName().compareToIgnoreCase("Small Gods") == 0)
+			{
+				this.DisableStatusCityArea(i);
+				break;
+			}
+		}
+		
+	}
+	public boolean CanPlaySmallGod()
+	{
+		for(int i=0; i<ListCityAreaCards.size(); i++)
+		{
+			
+			CityAreaCards _cityArea = ListCityAreaCards.get(i);
+			if(_cityArea.GetName().compareToIgnoreCase("Small Gods") == 0)
+			{
+				if(_cityArea.IsEffectActivate())
+					return false;
+				else
+					return true;
+				
+			}
+		}
+		return false;
+	}
 	public void EnableAllCityArea()
 	{
 		for(CityAreaCards _cityAreaCard: ListCityAreaCards)

@@ -496,23 +496,36 @@ public class GameEngine implements Serializable
                 else
                 {
                 	String choice = "";
-                	if(!ListPlayer.get(player).HasInterruptCard())
-                    {
-                    	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
-                    	choice = scan.next();
-                    	
-                    }
-                	if(choice.compareToIgnoreCase("no") == 0)
+                	if(ListPlayer.get(player).CanPlaySmallGod())
                 	{
-                    //pay 2$ from bank
-                    GameBoard.AddToBank(2);
-            		ListPlayer.get(player).DeductFromMoney(2);
+                		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                		choice = scan.next();
+                	}
+                	if(choice.compareToIgnoreCase("yes") == 0)
+                	{
+                		ListPlayer.get(player).DesactivateSmallGod();
                 	}
                 	else
                 	{
-                		//remove interrupt
-                		ListPlayer.get(player).RemoveInterruptCard();
+                		if(!ListPlayer.get(player).HasInterruptCard())
+                        {
+                        	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
+                        	choice = scan.next();
+                        	
+                        }
+                    	if(choice.compareToIgnoreCase("no") == 0)
+                    	{
+                        //pay 2$ from bank
+                        GameBoard.AddToBank(2);
+                		ListPlayer.get(player).DeductFromMoney(2);
+                    	}
+                    	else
+                    	{
+                    		//remove interrupt
+                    		ListPlayer.get(player).RemoveInterruptCard();
+                    	}
                 	}
+                	
                 }
             }
          // *************************** Fire Brigade ********************************
@@ -521,7 +534,18 @@ public class GameEngine implements Serializable
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
                 int PlayerIndex = scan.nextInt();
-                
+                String ActivateSmallGod = "";
+                if(ListPlayer.get(player).CanPlaySmallGod())
+            	{
+            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+            		ActivateSmallGod = scan.next();
+            	}
+            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+            	{
+            		ListPlayer.get(player).DesactivateSmallGod();
+            	}
+            	else
+            	{
                 if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                 {
                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -533,7 +557,7 @@ public class GameEngine implements Serializable
                 		return true;
                 	}
                 }
-                
+            	}
                 System.out.println("Player " + PlayerIndex + ": Do you want to give 5$. If not, he will remove one of your building");
                 String choice = scan.next();
                 if(choice.compareToIgnoreCase("yes")==0)
@@ -556,6 +580,18 @@ public class GameEngine implements Serializable
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
                 int PlayerIndex = scan.nextInt();
+                String ActivateSmallGod = "";
+                if(ListPlayer.get(player).CanPlaySmallGod())
+            	{
+            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+            		ActivateSmallGod = scan.next();
+            	}
+            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+            	{
+            		ListPlayer.get(player).DesactivateSmallGod();
+            	}
+            	else
+            	{
                 if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                 {
                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -566,7 +602,7 @@ public class GameEngine implements Serializable
                 		return true;
                 	}
                 }
-                
+            	}
                 System.out.println("Player " + PlayerIndex + ": Do you want to give 5$ ? If not, you will need to keep this card which will count toward your hand size. You cannot get rid of this card.(yes/no)");
                 String choice = scan.next();
                 if(choice.compareToIgnoreCase("yes")==0)
@@ -595,6 +631,18 @@ public class GameEngine implements Serializable
                     //remove minion
                     System.out.println("Enter the player index you want to remove minion.");
                     int PlayerIndex = scan.nextInt();
+                    String ActivateSmallGod = "";
+                    if(ListPlayer.get(player).CanPlaySmallGod())
+                	{
+                		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                		ActivateSmallGod = scan.next();
+                	}
+                	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                	{
+                		ListPlayer.get(player).DesactivateSmallGod();
+                	}
+                	else
+                	{
                     if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                     {
                     	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -605,6 +653,7 @@ public class GameEngine implements Serializable
                     		return true;
                     	}
                     }
+                	}
                     System.out.println("Enter area index to remove his minion:");
                     int area = scan.nextInt();
                     
@@ -613,6 +662,18 @@ public class GameEngine implements Serializable
                 else if(DieValue==1)
                 {
                 	String choice = "";
+                	String ActivateSmallGod = "";
+                    if(ListPlayer.get(player).CanPlaySmallGod())
+                	{
+                		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                		ActivateSmallGod = scan.next();
+                	}
+                	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                	{
+                		ListPlayer.get(player).DesactivateSmallGod();
+                	}
+                	else
+                	{
                 	if(!ListPlayer.get(player).HasInterruptCard())
                     {
                     	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
@@ -627,6 +688,7 @@ public class GameEngine implements Serializable
                 	}
 					else
 						ListPlayer.get(player).RemoveInterruptCard();
+                	}
                 }
             }
             else if(CardName.contains("here "))// HERE AND NOW
@@ -640,6 +702,18 @@ public class GameEngine implements Serializable
                     //take 3$ from a player
                     System.out.println("Enter the player index you want to get your money.");
                     int PlayerIndex = scan.nextInt();
+                    String ActivateSmallGod = "";
+                    if(ListPlayer.get(player).CanPlaySmallGod())
+                	{
+                		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                		ActivateSmallGod = scan.next();
+                	}
+                	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                	{
+                		ListPlayer.get(player).DesactivateSmallGod();
+                	}
+                	else
+                	{
                     if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                     {
                     	System.out.println("Player " + PlayerIndex + "has an interrupt card, does player " + PlayerIndex + " want to play it.");
@@ -650,6 +724,7 @@ public class GameEngine implements Serializable
                     		return true;
                     	}
                     }
+                	}
 					
                     ListPlayer.get(PlayerIndex).DeductFromMoney(3);
                     ListPlayer.get(player).AddToMoney(3);
@@ -659,7 +734,18 @@ public class GameEngine implements Serializable
                 else if(DieValue==1)
                 {
                 	String choice = "";
-                	
+                	String ActivateSmallGod = "";
+                    if(ListPlayer.get(player).CanPlaySmallGod())
+                	{
+                		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                		ActivateSmallGod = scan.next();
+                	}
+                	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                	{
+                		ListPlayer.get(player).DesactivateSmallGod();
+                	}
+                	else
+                	{
                 	if(ListPlayer.get(player).HasInterruptCard())
                     {
                     	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
@@ -672,6 +758,7 @@ public class GameEngine implements Serializable
                     	}
                     	
                     }
+                	}
                 	
                 		//remove your own minion
                 		System.out.println("Enter area index to remove your minion:");
@@ -713,6 +800,18 @@ public class GameEngine implements Serializable
                             	int PlayerIndex = scan.nextInt();
                             	
                             	String choice = "";
+                            	String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -730,6 +829,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            	}
                             }
                             else if(object.contains("another player and move 1 minion to any area"))
                             {
@@ -738,6 +838,18 @@ public class GameEngine implements Serializable
                             	int PlayerIndex = scan.nextInt();
                             	
                             	String choice = "";
+                            	String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -755,6 +867,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            	}
                             	
                             }
                             else if(object.contains(" another player and assassinate 1 minion"))
@@ -764,7 +877,18 @@ public class GameEngine implements Serializable
                             	System.out.println("Please enter Player index which you assasinate minion");
                             	int PlayerIndex = scan.nextInt();
                             	String choice = "";
-                            
+                            	String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -778,6 +902,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            	}
 									
                             	
                             	GameBoard.RemoveMinion(AreaIndex, ListPlayer.get(PlayerIndex).GetColor());
@@ -786,6 +911,18 @@ public class GameEngine implements Serializable
                             else if(object.contains("bank"))
                             {
                             	String choice = "";
+                            	String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(player).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
@@ -799,6 +936,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(player).RemoveInterruptCard();
+                            	}
                             }
                             else if(object.contains("building"))
                             {
@@ -808,6 +946,18 @@ public class GameEngine implements Serializable
                             	System.out.println("Please enter Player index which you wish to take over building");
                             	int PlayerIndex = scan.nextInt();
                             	String choice = "";
+                            	String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -824,6 +974,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(player).RemoveInterruptCard();
+                            	}
                             }
                             else if(object.contains("player"))
                             {
@@ -831,6 +982,18 @@ public class GameEngine implements Serializable
                             	if(object.contains("each"))
                             	{
                             		String choice = "";
+                            		String ActivateSmallGod = "";
+                                    if(ListPlayer.get(player).CanPlaySmallGod())
+                                	{
+                                		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                                		ActivateSmallGod = scan.next();
+                                	}
+                                	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                                	{
+                                		ListPlayer.get(player).DesactivateSmallGod();
+                                	}
+                                	else
+                                	{
                                 	if(!ListPlayer.get(player).HasInterruptCard())
                                     {
                                     	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
@@ -861,11 +1024,24 @@ public class GameEngine implements Serializable
                                 	}
 									else
 										ListPlayer.get(player).RemoveInterruptCard();
+                                	}
                             		
                             	}
                             	else //if(object.contains("another"))//pay to a specific player
                             	{
                             		String choice = "";
+                            		String ActivateSmallGod = "";
+                                    if(ListPlayer.get(player).CanPlaySmallGod())
+                                	{
+                                		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                                		ActivateSmallGod = scan.next();
+                                	}
+                                	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                                	{
+                                		ListPlayer.get(player).DesactivateSmallGod();
+                                	}
+                                	else
+                                	{
                                 	if(!ListPlayer.get(player).HasInterruptCard())
                                     {
                                     	System.out.println("Player " + player + "has an interrupt card. Do you want he wants to play it?");
@@ -883,6 +1059,7 @@ public class GameEngine implements Serializable
                                 	}
 									else
 										ListPlayer.get(player).RemoveInterruptCard();
+                                	}
                             	}
                             }
                             
@@ -947,6 +1124,18 @@ public class GameEngine implements Serializable
                                 int playerIndex= scan.nextInt();
                                 
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(ListPlayer.get(playerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
@@ -959,6 +1148,7 @@ public class GameEngine implements Serializable
                                 	}
                                 	
                                 }
+                            	}
                             	
                                 ListPlayer.get(playerIndex).AddPlayerCard(CardPlayed);
                                 ListPlayer.get(player).RemovePlayerCard(cardIndex);
@@ -973,6 +1163,18 @@ public class GameEngine implements Serializable
                                 int Src= scan.nextInt();
                                 
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(ListPlayer.get(Src).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + Src + "has an interrupt card. Player " + Src + ", do you want to play it? (yes/no)");
@@ -984,7 +1186,7 @@ public class GameEngine implements Serializable
                                 		return true;
                                 	}
                                 }
-                               
+                            	}
                             	System.out.println("Enter player index who will receive 3$");
                                 int Dst= scan.nextInt();
                                 
@@ -1006,6 +1208,18 @@ public class GameEngine implements Serializable
                             	System.out.println("Enter player index to take cards from.");
                                 int playerIndex= scan.nextInt();
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(playerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
@@ -1018,7 +1232,7 @@ public class GameEngine implements Serializable
                                 	}
                                 	
                                 }
-                            	
+                            	}
 								System.out.println("Enter card index0 to take.");
 								int cardIndex0= scan.nextInt();
 								
@@ -1046,6 +1260,18 @@ public class GameEngine implements Serializable
                             	{
                             		if (iterPlayer.GetColor() != ListPlayer.get(player).GetColor())
                             		{
+                            			String ActivateSmallGod = "";
+                                        if(ListPlayer.get(player).CanPlaySmallGod())
+                                    	{
+                                    		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                                    		ActivateSmallGod = scan.next();
+                                    	}
+                                    	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                                    	{
+                                    		ListPlayer.get(player).DesactivateSmallGod();
+                                    	}
+                                    	else
+                                    	{
                             			if(iterPlayer.HasInterruptCard())
                             			{
                             				System.out.println("Player " + iterPlayer.GetPlayerNumber() + "has an interrupt card. Player " + iterPlayer.GetPlayerNumber() + ", do you want to play it? (yes/no)");
@@ -1079,6 +1305,7 @@ public class GameEngine implements Serializable
                             				}
 
                             			}
+                                    	}
                             		}
                                 }
                             	
@@ -1101,7 +1328,18 @@ public class GameEngine implements Serializable
                            
                             			boolean giveMoney = true;
                             			String choice = "";
-
+                            			String ActivateSmallGod = "";
+                                        if(ListPlayer.get(player).CanPlaySmallGod())
+                                    	{
+                                    		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                                    		ActivateSmallGod = scan.next();
+                                    	}
+                                    	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                                    	{
+                                    		ListPlayer.get(player).DesactivateSmallGod();
+                                    	}
+                                    	else
+                                    	{
                             			if(ListPlayer.get(i).HasInterruptCard())
                             			{
                             				System.out.println("Player " + i + "has an interrupt card. Player " + i + ", do you want to play it? (yes/no)");
@@ -1114,7 +1352,7 @@ public class GameEngine implements Serializable
                             				}
 
                             			}
-
+                                    	}
                             			if (giveMoney && ListPlayer.get(i).GetMoneyCount() >= 2)
                             			{
                             				ListPlayer.get(player).AddToMoney(amount);
@@ -1142,7 +1380,18 @@ public class GameEngine implements Serializable
                             			
                             			boolean giveMoney = true;
                             			String choice = "";
-
+                            			String ActivateSmallGod = "";
+                                        if(ListPlayer.get(player).CanPlaySmallGod())
+                                    	{
+                                    		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                                    		ActivateSmallGod = scan.next();
+                                    	}
+                                    	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                                    	{
+                                    		ListPlayer.get(player).DesactivateSmallGod();
+                                    	}
+                                    	else
+                                    	{
                             			if(ListPlayer.get(i).HasInterruptCard())
                             			{
                             				System.out.println("Player " + i + "has an interrupt card. Player " + i + ", do you want to play it? (yes/no)");
@@ -1155,6 +1404,7 @@ public class GameEngine implements Serializable
                             				}
 
                             			}
+                                    	}
                             			
                             			if (giveMoney && ListPlayer.get(i).GetMoneyCount() >= 2)
                             			{
@@ -1295,6 +1545,18 @@ public class GameEngine implements Serializable
 
                                 int PlayerIndex = scan.nextInt();
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -1319,6 +1581,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            	}
                             }
                             else if(object.contains("cards from a player"))
                             {
@@ -1326,6 +1589,18 @@ public class GameEngine implements Serializable
                                 System.out.println("Select a player to get cards from. ");
                                 int PlayerIndex = scan.nextInt();
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -1338,6 +1613,7 @@ public class GameEngine implements Serializable
                                 	}
                                 	
                                 }
+                            	}
                             	
 								System.out.println("Player " + PlayerIndex + ": Enter card index 0 you are willing to give up:");
 								int CardIndex0 = scan.nextInt();
@@ -1389,6 +1665,18 @@ public class GameEngine implements Serializable
                             if(object.contains("up to 3 cards and fill hands"))
                             {
                             	String choice = "";
+                            	String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(ListPlayer.get(player).HasInterruptCard())
                                 {
                             		System.out.println("Player " + player + "has an interrupt card. Player " + player + ", do you want to play it? (yes/no)");
@@ -1400,6 +1688,7 @@ public class GameEngine implements Serializable
                                 		return true;
                                 	}
                                 }
+                            	}
                             	
                             	//alchemist guild                   	
                                 System.out.println("Enter number of cards you want to discard (1-3)");
@@ -1428,6 +1717,18 @@ public class GameEngine implements Serializable
                                 int PlayerIndex = scan.nextInt();
                                 
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -1446,10 +1747,23 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            	}
                             }
                             else if(object.contains("card"))
                             {
                             	String choice = "";
+                            	String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(ListPlayer.get(player).HasInterruptCard())
                                 {
                             		System.out.println("Player " + player + "has an interrupt card. Player " + player + ", do you want to play it? (yes/no)");
@@ -1461,6 +1775,7 @@ public class GameEngine implements Serializable
                                 		return true;
                                 	}
                                 }
+                            	}
                             	
                             	///modo
                             	//The Mob
@@ -1493,6 +1808,18 @@ public class GameEngine implements Serializable
                                     if(i!=player)
                                     {
                                     	String choice = "";
+                                    	String ActivateSmallGod = "";
+                                        if(ListPlayer.get(player).CanPlaySmallGod())
+                                    	{
+                                    		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                                    		ActivateSmallGod = scan.next();
+                                    	}
+                                    	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                                    	{
+                                    		ListPlayer.get(player).DesactivateSmallGod();
+                                    	}
+                                    	else
+                                    	{
                                     	if(!ListPlayer.get(i).HasInterruptCard())
                                         {
                                         	System.out.println("Player " + i + "has an interrupt card. Do you want he wants to play it?");
@@ -1506,6 +1833,7 @@ public class GameEngine implements Serializable
                                     	}
 										else
 											ListPlayer.get(i).RemoveInterruptCard();
+                                    	}
                                     }
                                 }
                             }
@@ -1518,6 +1846,18 @@ public class GameEngine implements Serializable
                                 System.out.println("Enter Player index to remove minion from for area "+RollDieValue0 +" : ");
                                 int PlayerIndex0 = scan.nextInt();
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex0).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex0 + "has an interrupt card. Do you want he wants to play it?");
@@ -1530,11 +1870,23 @@ public class GameEngine implements Serializable
                             	}
                             	else
 									ListPlayer.get(PlayerIndex0).RemoveInterruptCard();
-									
+                            	}
                                 System.out.println("Enter Player index to remove minion from for area "+RollDieValue1 +" : ");
                                 int PlayerIndex1 = scan.nextInt();
                  
                                 String choice1 = "";
+                              
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex1).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex1 + "has an interrupt card. Do you want he wants to play it?");
@@ -1545,6 +1897,7 @@ public class GameEngine implements Serializable
                             		GameBoard.RemoveMinion(RollDieValue1, ListPlayer.get(PlayerIndex1).GetColor());                           
                             	}else
 									ListPlayer.get(PlayerIndex1).RemoveInterruptCard();
+                            	}
                             
                             }
                         }
@@ -1626,6 +1979,18 @@ public class GameEngine implements Serializable
         	                    System.out.println("Enter the player index you want to move his minion.");
         	                    int PlayerIndex = scan.nextInt();
         	                    String choice = "";
+        	                    String ActivateSmallGod = "";
+        	                    if(ListPlayer.get(player).CanPlaySmallGod())
+        	                	{
+        	                		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+        	                		ActivateSmallGod = scan.next();
+        	                	}
+        	                	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+        	                	{
+        	                		ListPlayer.get(player).DesactivateSmallGod();
+        	                	}
+        	                	else
+        	                	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -1649,7 +2014,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
-								
+        	                	}
                             }
                             //The Chair of Indefinite Studies
                             else if(object.contains("cards"))
@@ -1659,6 +2024,18 @@ public class GameEngine implements Serializable
                             	System.out.println("Enter the player index you want to change your hand with");
                                 int PlayerIndex = scan.nextInt();
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -1673,6 +2050,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            	}
                             }
                         
                         }
@@ -1688,6 +2066,18 @@ public class GameEngine implements Serializable
                                 System.out.println("Enter the player index you want to assassinate his minion.");
                                 int PlayerIndex = scan.nextInt();
                                 String choice = "";
+                                String ActivateSmallGod = "";
+                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	{
+                            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		ActivateSmallGod = scan.next();
+                            	}
+                            	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	{
+                            		ListPlayer.get(player).DesactivateSmallGod();
+                            	}
+                            	else
+                            	{
                             	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                 {
                                 	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -1702,6 +2092,7 @@ public class GameEngine implements Serializable
                             	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            	}
                             }
                         	
                         }
@@ -1775,7 +2166,18 @@ public class GameEngine implements Serializable
                             	 } while (PlayerIndex == player && !hasMinion);
                             	 
                             	 String choice = "";
-                            	 
+                            	 String ActivateSmallGod = "";
+                                 if(ListPlayer.get(player).CanPlaySmallGod())
+                             	{
+                             		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                             		ActivateSmallGod = scan.next();
+                             	}
+                             	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                             	{
+                             		ListPlayer.get(player).DesactivateSmallGod();
+                             	}
+                             	else
+                             	{
                             	 if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                             	 {
                             		 System.out.println("Player " + PlayerIndex + "has an interrupt card. Does player " + PlayerIndex + "want to play the interupt?");
@@ -1787,7 +2189,7 @@ public class GameEngine implements Serializable
                             		 }
 
                             	 }
-                            	 
+                             	}
                             	 //Move minion only if area contains a minion for the player
                             	 do
                             	 {
@@ -1871,6 +2273,18 @@ public class GameEngine implements Serializable
                                  System.out.println("Enter the player index you want to move his building ");
                                  int PlayerIndex = scan.nextInt();
                                  String choice = "";
+                                 String ActivateSmallGod = "";
+                                 if(ListPlayer.get(player).CanPlaySmallGod())
+                             	{
+                             		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                             		ActivateSmallGod = scan.next();
+                             	}
+                             	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                             	{
+                             		ListPlayer.get(player).DesactivateSmallGod();
+                             	}
+                             	else
+                             	{
                              	if(!ListPlayer.get(PlayerIndex).HasInterruptCard())
                                  {
                                  	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
@@ -1882,6 +2296,7 @@ public class GameEngine implements Serializable
                              	}
 								else
 									ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                             	}
                         	}
                             //The Auditors
                             else if (object.contains("player order") && CardPlayed.GetName()=="The Auditors"  )
@@ -1893,6 +2308,18 @@ public class GameEngine implements Serializable
                             	 		if (thisPlayer !=_CurrentPlayer)
                             	 		{
                             	 			String choice = "";
+                            	 			String ActivateSmallGod = "";
+                                            if(ListPlayer.get(player).CanPlaySmallGod())
+                                        	{
+                                        		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                                        		ActivateSmallGod = scan.next();
+                                        	}
+                                        	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                                        	{
+                                        		ListPlayer.get(player).DesactivateSmallGod();
+                                        	}
+                                        	else
+                                        	{
                                         	if(!thisPlayer.HasInterruptCard())
                                             {
                                             	System.out.println("Player " + thisPlayer.GetPlayerNumber() + "has an interrupt card. Do you want he wants to play it?");
@@ -1906,6 +2333,7 @@ public class GameEngine implements Serializable
                                         	}
 											else
 												thisPlayer.RemoveInterruptCard();
+                                        	}
                             	 		}
                             	 
                             	 	}
@@ -2076,6 +2504,18 @@ public class GameEngine implements Serializable
                             int playerIndex= scan.nextInt();
                             
                             String choice = "";
+                            String ActivateSmallGod = "";
+                            if(ListPlayer.get(player).CanPlaySmallGod())
+                        	{
+                        		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                        		ActivateSmallGod = scan.next();
+                        	}
+                        	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                        	{
+                        		ListPlayer.get(player).DesactivateSmallGod();
+                        	}
+                        	else
+                        	{
                         	if(!ListPlayer.get(playerIndex).HasInterruptCard())
                             {
                             	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
@@ -2105,6 +2545,7 @@ public class GameEngine implements Serializable
                         	}
 							else
 								ListPlayer.get(playerIndex).RemoveInterruptCard();
+                        	}
                         }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("putminion") ==0)
                         {
@@ -3547,5 +3988,6 @@ public class GameEngine implements Serializable
   	{
   		return this.toString();
   	}
+  	
 
 }
