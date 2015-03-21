@@ -2891,12 +2891,36 @@ public class GameEngine implements Serializable
 	private boolean RemoveTrouble(int player)
 	{
 		boolean ActionSuccess = false;
-		System.out.println("Please enter the Area index you want to remove the troublemaker.");
-        Scanner scan = new Scanner(System.in);
-        int AreaNumber = scan.nextInt();
-        ActionSuccess = this.GameBoard.Removetrouble(AreaNumber);
-		return ActionSuccess;
+		boolean NoTroubleArea = true;
+		int AreaNumber;
+		
+		//Does board have troublemaker
+		if (this.GameBoard.BoardHasTrouble())
+		{
+			
+			do
+			{
+				System.out.println("Please enter the Area index you want to remove the troublemaker.");
+		        Scanner scan = new Scanner(System.in);
+		        AreaNumber = scan.nextInt();
+		        
+		        NoTroubleArea = !this.GameBoard.AreaHasTrouble(AreaNumber);
+		        
+			}while(NoTroubleArea);
+			
+		    ActionSuccess = this.GameBoard.Removetrouble(AreaNumber);
+	        
+		}
+		else
+		{
+			this.Print("Board does not have any Trouble Makers");
+			ActionSuccess = true;
+		}
+		
+		
+			return ActionSuccess;
 	}
+	
 	
 	/**
 	 * Assassinate symbol function
