@@ -23,7 +23,7 @@ public class CityAreaCards implements Cards, Serializable
 	private int Id;
 	boolean Status;
 	private CardType Type;
-	
+	private boolean isEffectActivated; 
 	
 	public CityAreaCards (String _Name, int _Id, boolean _Status, CardType _Type)
 	{
@@ -31,9 +31,19 @@ public class CityAreaCards implements Cards, Serializable
 		Id = _Id;
 		Status = _Status;
 		Type = _Type;
+		isEffectActivated = false;
 
 	}
 
+	public void DesactivateCityArea()
+	{
+		isEffectActivated = false;
+	}
+	
+	public void ActivateCityArea()
+	{
+		isEffectActivated = true;
+	}
 	public String GetName ()
 	{
 		return this.Name;

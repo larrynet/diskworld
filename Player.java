@@ -24,7 +24,8 @@ public class Player implements Serializable {
 	private Colors Color;
 	private List<Pieces> ListMinions;
 	private List<Pieces> ListBuildings;
-	public List<Cards> ListCityAreaCards;
+	public List<CityAreaCards> ListCityAreaCards;
+	
 	
 	public int GetPlayerNumber()
 	{return PlayerNumber;}
@@ -46,12 +47,23 @@ public class Player implements Serializable {
 		ListMinions = _ListMinion;
 		ListBuildings = _ListBuilding;
 		PlayerCards = _PlayerCards;
-		ListCityAreaCards = new ArrayList<Cards>();
+		ListCityAreaCards = new ArrayList<CityAreaCards>();
         
 		Color = _Color;
-		
 	}
 	
+	public void DisableStatusCityArea(int index)
+	{
+		ListCityAreaCards.get(index).DesactivateCityArea();;
+	}
+	
+	public void EnableAllCityArea()
+	{
+		for(CityAreaCards _cityAreaCard: ListCityAreaCards)
+		{
+			_cityAreaCard.ActivateCityArea();
+		}
+	}
 	
 	public int GetPayBack() {return PayBack; }
 	//used for testing
@@ -175,7 +187,7 @@ public class Player implements Serializable {
 	/**
 	 * @param CityAreaCard
 	 */
-	public void AddCityAreayCard(Cards CityAreaCard)
+	public void AddCityAreayCard(CityAreaCards CityAreaCard)
 	{
 		this.ListCityAreaCards.add(CityAreaCard);
 	}
@@ -380,7 +392,7 @@ public class Player implements Serializable {
 	 * 
 	 * @return
 	 */
-	public List<Cards> GetCityAreayCards()
+	public List<CityAreaCards> GetCityAreayCards()
 	{
 		return this.ListCityAreaCards;
 	}
