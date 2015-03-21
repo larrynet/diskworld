@@ -231,7 +231,7 @@ public class JUnitTestSuite {
 		int CurrentPlayerIndex = ge.GetCurrentPlayer();
 		
         
-		EventCards IsleOfGod = new EventCards("Isle of Gods", 1, true, CardType.CityAreaCards); 
+		CityAreaCards IsleOfGod = new CityAreaCards("Isle of Gods", 1, true, CardType.CityAreaCards); 
 		ge.ListPlayer.get(CurrentPlayerIndex).AddCityAreayCard(IsleOfGod);
 		
         //put a troublemaker
