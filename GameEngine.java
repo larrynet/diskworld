@@ -2,9 +2,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  * GameEngine is the class which the user will interact. It will call the other class according to user decisions inputted from the console or UI (later build). 
@@ -26,6 +38,8 @@ public class GameEngine implements Serializable
 	private boolean HasGameEnded;
 	private int BoardDie;
 	private int ToDiscard;
+	
+	 
 	/**
 	 * Default constructor who will init all internal structure with minimum supported player 
 	 */
@@ -331,8 +345,6 @@ public class GameEngine implements Serializable
 				//Play another card
 				else if(currentSymbol.compareToIgnoreCase("C") == 0)
 				{
-					DiscardCards.add(CardPlayed);
-					ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
 					
 					//Print Player Cards and Play next card
 					this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
@@ -376,7 +388,6 @@ public class GameEngine implements Serializable
 			}
 			
 			this.GameBoard.PrintState();
-			
 			System.out.println("");
 		}
 		
@@ -1722,10 +1733,8 @@ public class GameEngine implements Serializable
                             	 int Source = scan.nextInt();
                             	 System.out.println("Enter the area index to where you want to move minion-it should be adjacent");
                             	 int Destination = scan.nextInt();
-                            	 
-                            	 String thisCardName = CardPlayed.GetName().toLowerCase();
-                            	 
-                            	 if(thisCardName.equalsIgnoreCase("The Duckman") || thisCardName.equalsIgnoreCase("Foul Ole Ron") ||thisCardName.equalsIgnoreCase("Canting Crew"))
+
+                            	 if(CardPlayed.GetName()=="The Duckman" || CardPlayed.GetName()=="Foul Ole Ron" ||CardPlayed.GetName()=="Canting Crew")
                             	 {
                             		 //TODO Review with Parinaz
                             		 if (GameBoard.ListArea.get(Source).AreaAdjacency(Destination))
@@ -1738,7 +1747,7 @@ public class GameEngine implements Serializable
                             	 }
                             	 
                         		 //Rincewind
-                            	 else if(thisCardName.equalsIgnoreCase("Rincewind"))
+                            	 else if(CardPlayed.GetName()=="Rincewind")
                             	 {
                             		 // Scanner scan = new Scanner(System.in);
 
@@ -2443,7 +2452,7 @@ public class GameEngine implements Serializable
         }
         else 
         {
-        	for (int i : this.GameBoard.ListArea.get(AreaNumber-1).GetAdjAreas())
+        	for (int i : this.GameBoard.ListArea.get(AreaNumber).GetAdjAreas())
     		{
     			if (this.GameBoard.ListArea.get(i).GetMinionCount(thisPlayer.GetColor()) > 0)
             	{
@@ -2491,7 +2500,7 @@ public class GameEngine implements Serializable
 	 */
 	private boolean ValidPlayerIndex(int PlayerIndex)
 	{
-		return ((PlayerIndex <= 4) && (PlayerIndex >= 0));
+		return ((PlayerIndex <= 4) && (PlayerIndex >= 1));
 	}
 	
 	/**
@@ -3127,7 +3136,7 @@ public class GameEngine implements Serializable
     	do
     	{
     		c = CardManager.GetCard(CardType.GreenCards);
-    		//if(c == null) CardManager.GetCard(CardType.BrownCards);
+    		if(c == null) CardManager.GetCard(CardType.BrownCards);
     	}
     	while(c != null);
     	
@@ -3184,5 +3193,224 @@ public class GameEngine implements Serializable
   	{
   		return this.toString();
   	}
+  	
+  	/**
+  	 * This function will show the current state of the board which includes the minions, demons, building, trolls and troublemaker
+  	 */
+  	public void ShowBoardState() 
+  	{
+  		//coordinate to draw components
+  		final int DollySisterMapX = 535;
+  		final int DollySisterMapY = 195;
+  		final int UnrealEstateMapX = 440;
+  		final int UnrealEstateMapY = 340;
+  		final int DragonLandingMapX = 650;
+  		final int DragonLandingMapY = 355;
+  		final int SmallGodsMapX = 665;
+  		final int SmallGodsMapY = 550;
+  		final int TheScoursMapX = 510;
+  		final int TheScoursMapY = 610;
+  		final int TheHippoMapY = 690;
+  		final int TheHippoMapX = 690;
+  		final int TheShadesMapX = 440;
+  		final int TheShadesMapY = 755;
+  		final int DimWellMapX = 195;
+  		final int DimWellMapY = 770;
+  		final int LongwallMapX = 115;
+  		final int LongwallMapY = 570;
+  		final int SevenSleeperMapX = 215;
+  		final int SevenSleeperMapY = 440;
+  		final int NapHillMapX = 190;
+  		final int NapHillMapY = 250;
+  		final int IsleOfGodMapX = 400;
+  		final int IsleOfGodMapY = 510;
+  		BufferedImage image = null;
+	    Image ScaledMap = null;
+	    BufferedImage biScaledImage = null;
+	    
+	    //load the image from file
+  		ClassLoader classLoader = getClass().getClassLoader();
+  		File file = new File(classLoader.getResource("diskworld_map.png").getFile());
+	    
+	    try
+		{
+			image = ImageIO.read(file);
+		}
+	    catch (Exception e)    {e.printStackTrace();}
 
+	    if(image != null)
+	    {
+	    	BufferedImage bi = (BufferedImage)image;
+	    	ScaledMap = bi.getScaledInstance(900, 1080, Image.SCALE_SMOOTH);
+	    	
+	    	biScaledImage = toBufferedImage(ScaledMap);
+	    	Graphics2D  myGraphObj = biScaledImage.createGraphics();
+	    	
+	    	//traverse each area to draw elements
+	    	for(int eachArea = 0; eachArea < GameBoard.ListArea.size(); eachArea++)
+	    	{
+	    		String CurrentArea = GameBoard.ListArea.get(eachArea).GetName();
+	    		int StartX = 0;
+	    		int StartY = 0;
+	    		
+	    		if(CurrentArea.compareTo("Dolly Sisters") == 0)
+	    		{
+	    			StartX = DollySisterMapX;
+	    			StartY = DollySisterMapY;
+	    		}
+	    		else if(CurrentArea.compareTo("Unreal Estate") == 0)
+	    		{
+	    			StartX = UnrealEstateMapX;
+	    			StartY = UnrealEstateMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("Dragon's Landing") == 0)
+	    		{
+	    			StartX = DragonLandingMapX;
+	    			StartY = DragonLandingMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("Small Gods") == 0)
+	    		{
+	    			StartX = SmallGodsMapX;
+	    			StartY = SmallGodsMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("The Scours") == 0)
+	    		{
+	    			StartX = TheScoursMapX;
+	    			StartY = TheScoursMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("The Hippo") == 0)
+	    		{
+	    			StartX = TheHippoMapX;
+	    			StartY = TheHippoMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("The Shades") == 0)
+	    		{
+	    			StartX = TheShadesMapX;
+	    			StartY = TheShadesMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("Dimwell") == 0)
+	    		{
+	    			StartX = DimWellMapX;
+	    			StartY = DimWellMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("Longwall") == 0)
+	    		{
+	    			StartX = LongwallMapX;
+	    			StartY = LongwallMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("Isle of Gods") == 0)
+	    		{
+	    			StartX = IsleOfGodMapX;
+	    			StartY = IsleOfGodMapY;
+	    		} 
+	    		else if(CurrentArea.compareTo("Seven Sleepers") == 0)
+	    		{
+	    			StartX=SevenSleeperMapX;
+	    			StartY=SevenSleeperMapY;
+	    		} 
+	    		else //if(CurrentArea.compareTo("Nap Hill") == 0)
+	    		{
+	    			StartX = NapHillMapX;
+	    			StartY = NapHillMapY;
+	    		} 
+	    		
+	    		//draw trolls and demons
+	    		Boolean HasTroubleMaker = GameBoard.ListArea.get(eachArea).HasTroubleMaker();
+	    		Boolean HasTrolls       = (GameBoard.ListArea.get(eachArea).GetTrollCount() > 0);
+	    		Boolean HasDemons       = (GameBoard.ListArea.get(eachArea).GetDemonCount() > 0);
+	    		
+	    		if(HasTroubleMaker)
+	    		{
+	    			myGraphObj.setColor(Color.BLACK);
+	    			char [] TroubleMaker = {'T'};
+	    			myGraphObj.setFont(new Font("TimesRoman", Font.BOLD, 15)); 
+	    			myGraphObj.drawChars(TroubleMaker, 0, 1, StartX, StartY-42);
+	    		}
+	    		
+	    		if(HasTrolls)
+	    		{
+	    			myGraphObj.setColor(Color.BLACK);
+	    			myGraphObj.fillOval(StartX, StartY-35, 10,10);
+	    		}
+	    		
+	    		if(HasDemons)
+	    		{
+	    			myGraphObj.setColor(Color.BLACK);
+	    			char [] TroubleMaker = {'D'};
+	    			myGraphObj.setFont(new Font("TimesRoman", Font.BOLD, 15)); 
+	    			myGraphObj.drawChars(TroubleMaker, 0, 1, StartX, StartY-55);
+	    		}
+	    		
+	    		int CoordBuildingX = StartX;
+    			int CoordBuildingY = StartY - 20;
+    			
+    			//draw minions for each player
+	    		for(int eachPlayer=0; eachPlayer<TotalPlayer; eachPlayer++)
+		    	{
+	    			Colors PlayerColor = ListPlayer.get(eachPlayer).GetColor();
+	    			if(PlayerColor == Colors.Red)
+	    				myGraphObj.setColor(Color.RED);
+	    			else if(PlayerColor == Colors.Green)
+	    				myGraphObj.setColor(Color.GREEN);
+	    			else if(PlayerColor == Colors.Blue)
+	    				myGraphObj.setColor(Color.BLUE);
+	    			else if(PlayerColor == Colors.Yellow)
+	    				myGraphObj.setColor(Color.YELLOW);
+	    			else
+	    				System.out.println("Invalid player colors!!!");
+	    			
+	    			//draw building of each player
+	    			Boolean HasBuilding = GameBoard.ListArea.get(eachArea).HasBuilding();
+	    			if(HasBuilding && (GameBoard.ListArea.get(eachArea).GetBuilding().GetPieceColor() == PlayerColor))
+	    			{
+	    				myGraphObj.fillRect(CoordBuildingX, CoordBuildingY, 10, 10);
+	    				CoordBuildingX += 15;
+	    				
+	    			}
+	    				
+	    			int PointX  = StartX;
+	    			for(int eachMinion=0; eachMinion < GameBoard.ListArea.get(eachArea).GetMinionCount(PlayerColor); eachMinion++)
+	    			{
+	    				//myGraphObj.(PointX, StartY, 5, 5);
+	    				myGraphObj.drawOval(PointX, StartY, 5,5);
+	    				PointX += 10;
+	    				
+	    			}
+	    			StartY += 10;
+		    	}
+	    		
+	    	}
+
+
+	    }
+
+	    //set the right property and show in screen
+		JLabel jLabel = new JLabel();
+
+		jLabel.setIcon(new ImageIcon(biScaledImage));
+		JFrame editorFrame = new JFrame("Diskworld Current Status");
+		editorFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		editorFrame.getContentPane().add(jLabel, BorderLayout.CENTER);
+		editorFrame.pack();
+		editorFrame.setLocationRelativeTo(null);
+		editorFrame.setVisible(true);
+  	}
+  	private BufferedImage toBufferedImage(Image img)
+  	{
+  	    if (img instanceof BufferedImage)
+  	    {
+  	        return (BufferedImage) img;
+  	    }
+
+  	    // Create a buffered image with transparency
+  	    BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+  	    // Draw the image on to the buffered image
+  	    Graphics2D bGr = bimage.createGraphics();
+  	    bGr.drawImage(img, 0, 0, null);
+  	    bGr.dispose();
+
+  	    // Return the buffered image
+  	    return bimage;
+  	}
 }

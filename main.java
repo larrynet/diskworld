@@ -24,9 +24,16 @@ public class main {
 			NumPlayer = scan.nextInt();
 		}
 		GameEngine ge = new GameEngine(NumPlayer);
-		ge.InitializeData();
 		
+		//put some random crap
+		ge.PlaceTroll(3);
+		ge.PlaceDemon(3);
 		
+		ge.RemoveTroubleMaker(7);
+		ge.PlaceBuilding(7, 1);
+		ge.ShowBoardState();
+		System.out.println("Test");
+		/*
 		
 		if(!ge.IsGameInitialize())
 		{
@@ -44,11 +51,11 @@ public class main {
 			do
 			{
 				count --;
-				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex)+"\n+++++++++++++++++++++++++++++++++++++++");
+				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex+1)+"\n+++++++++++++++++++++++++++++++++++++++");
 				
 				//TODO -- Add encapsulation
 				//have draw cards if not full hand
-				/*if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
+				if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
 				{
 					Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
 					if(c == null)
@@ -56,7 +63,7 @@ public class main {
 					
 					ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
 					
-				}*/
+				}
 				//Show all the cards and let the person choose what he wants
 				System.out.println("1 - Peak at your card");
 				System.out.println("2 - Play card");
@@ -153,37 +160,10 @@ public class main {
 	                    {
 	                        System.out.println("Card played successfully");
 	                        
-	                      //have draw cards if not full hand
-	            			if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
-	            			{
-	            				Player currentPlayer = ge.ListPlayer.get(CurrentPlayerIndex);
-	            				
-	            				int NumberofCards = currentPlayer.HandSize - currentPlayer.PlayerCards.size();
-	            				
-	            				for (int i = 0; i < NumberofCards; i++)
-	            				{
-	            				
-	            				Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
-	            				
-	            				if(c == null)
-	            				{
-	            					c = ge.GetCardManager().GetCard(CardType.BrownCards);
-	            				}
-	            				
-	            				currentPlayer.PlayerCards.add(c);
-	            				
-	            				}
-	            			}
-	            			
-	            			//Print new Player hand
-	            			ge.PrintHandState("Your Current Hand is: ", ge.ListPlayer.get(CurrentPlayerIndex));
-	                        
 	                        //increment turn
 	                        CurrentPlayerIndex += 1;
 	                        CurrentPlayerIndex = CurrentPlayerIndex % NumPlayer;
 	                        ge.SetCurrentPlayer(CurrentPlayerIndex);
-	                        
-	                        
 	                        	
 	                    }
 						else
@@ -224,11 +204,9 @@ public class main {
                 //update current turn
                 ge.SetCurrentPlayer(CurrentPlayerIndex);
 			} while (Continue);	
-			
-			
 		}
 		
-				
+				*/
     scan.close();
 	}
 
