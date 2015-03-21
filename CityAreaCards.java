@@ -34,15 +34,18 @@ public class CityAreaCards implements Cards, Serializable
 		isEffectActivated = false;
 
 	}
-
+	public boolean IsEffectActivate()
+	{
+		return isEffectActivated;
+	}
 	public void DesactivateCityArea()
 	{
-		isEffectActivated = false;
+		isEffectActivated = true;
 	}
 	
 	public void ActivateCityArea()
 	{
-		isEffectActivated = true;
+		isEffectActivated = false;
 	}
 	public String GetName ()
 	{

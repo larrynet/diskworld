@@ -33,7 +33,7 @@ public class main {
 		ge.PlaceBuilding(7, 1);
 		ge.ShowBoardState();
 		System.out.println("Test");
-		/*
+		
 		
 		if(!ge.IsGameInitialize())
 		{
@@ -149,9 +149,15 @@ public class main {
 					}
 					else
 					{
-						//activating the area effect
-	                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
-	                    
+						System.out.println("Would you like to activate city area cards player " + (CurrentPlayerIndex+1));
+						String ActivateArea = scan.next();
+						if(ActivateArea.compareToIgnoreCase("yes") == 0)
+						{
+							//activating the area effect
+		                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+		                    
+						}
+						
 						System.out.println("Which card you want to play?");
 						int playChoice = scan.nextInt();
 						boolean CardPlayed = ge.PlayCard(CurrentPlayerIndex, playChoice);
@@ -161,9 +167,10 @@ public class main {
 	                        System.out.println("Card played successfully");
 	                        
 	                        //increment turn
+	                        ge.ReactivateCityAreaEffectForPlayer(CurrentPlayerIndex);
 	                        CurrentPlayerIndex += 1;
 	                        CurrentPlayerIndex = CurrentPlayerIndex % NumPlayer;
-	                        ge.SetCurrentPlayer(CurrentPlayerIndex);
+	                        ge.SetCurrentPlayer(CurrentPlayerIndex);                        
 	                        	
 	                    }
 						else
@@ -206,7 +213,7 @@ public class main {
 			} while (Continue);	
 		}
 		
-				*/
+				
     scan.close();
 	}
 
