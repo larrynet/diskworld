@@ -18,8 +18,4 @@ public interface Cards
 	public String GetName();
 	public int GetID();
 	public CardType GetCardType();
-	
-	
-	
-
 }

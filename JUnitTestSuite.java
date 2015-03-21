@@ -33,6 +33,7 @@ public class JUnitTestSuite {
 		assertTrue("Failed while import state", ImportSuccess);
 		assertTrue("Failed while export state", ExportSuccess);
 	}
+	
 	//Test personality
 	@Test public void TestChrysoprase()
 	{

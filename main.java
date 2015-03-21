@@ -25,12 +25,6 @@ public class main {
 		}
 		GameEngine ge = new GameEngine(NumPlayer);
 		
-		//put some random crap
-		ge.PlaceTroll(3);
-		ge.PlaceDemon(3);
-		
-		ge.RemoveTroubleMaker(7);
-		ge.PlaceBuilding(7, 1);
 		ge.ShowBoardState();
 		System.out.println("Test");
 		
@@ -53,7 +47,6 @@ public class main {
 				count --;
 				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex+1)+"\n+++++++++++++++++++++++++++++++++++++++");
 				
-				//TODO -- Add encapsulation
 				//have draw cards if not full hand
 				if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
 				{
@@ -64,6 +57,14 @@ public class main {
 					ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
 					
 				}
+				//check if someone won first
+				if(ge.IsWinner())
+				{
+					System.out.println("!!!! Congratulation. Player " + (CurrentPlayerIndex+1) + " won the game !!!! ");
+					Continue = false;
+					break;
+				}
+				
 				//Show all the cards and let the person choose what he wants
 				System.out.println("1 - Peak at your card");
 				System.out.println("2 - Play card");
@@ -139,23 +140,19 @@ public class main {
                     	
                     }
 				}
-				else
+				else // play card
 				{
-					//check if someone won first
-					if(ge.IsWinner())
-					{
-						System.out.println("!!!! Congratulation. Player " + (CurrentPlayerIndex+1) + " won the game !!!! ");
-						Continue = false;
-					}
-					else
-					{
-						System.out.println("Would you like to activate city area cards player " + (CurrentPlayerIndex+1));
-						String ActivateArea = scan.next();
-						if(ActivateArea.compareToIgnoreCase("yes") == 0)
+				
+						if(ge.DoesPlayerHasCityArea(CurrentPlayerIndex))
 						{
-							//activating the area effect
-		                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
-		                    
+							System.out.println("Would you like to activate city area cards player " + (CurrentPlayerIndex+1));
+							String ActivateArea = scan.next();
+							if(ActivateArea.compareToIgnoreCase("yes") == 0)
+							{
+								//activating the area effect
+			                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+			                    
+							}
 						}
 						
 						System.out.println("Which card you want to play?");
@@ -203,7 +200,7 @@ public class main {
 							System.out.println("PROBLEM. INFINITE LOOP DETECTED ");
 							Continue = false;
 						}
-					}
+					
                     
 				}
 				 

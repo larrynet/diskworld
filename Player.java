@@ -133,6 +133,13 @@ public class Player implements Serializable {
 		
 		return false;
 	}
+	/**
+	 * @return if player has any city area cards
+	 */
+	public boolean HasCityArea()
+	{
+		return(ListCityAreaCards.size() > 0);
+	}
 	public void RemoveInterruptCard()
 	{
 		int Index = 0;

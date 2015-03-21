@@ -3464,6 +3464,14 @@ public class GameEngine implements Serializable
 		return WiningCondition;
 	}
 	
+	/**
+	 * @param player to inquire to see if there is any city area cards 
+	 * @return true if he does have
+	 */
+	public boolean DoesPlayerHasCityArea(int player)
+	{
+		return ListPlayer.get(player).HasCityArea();
+	}
 	
 	/**
 	 * Calculate points for  a player
