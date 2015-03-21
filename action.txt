@@ -2,6 +2,7 @@
 //name, verb, object, condition, actionnumber, symbol/prices
 //Symbol: A:Assassination, RT:Remove Trouble, T(3):Take 3$,S:Scroll,RE:Random Event,
  //C: another Card, I:Interupt, M:Minion, B:Building
+ 
 
 //Green cards
 name=Mr Boggis
@@ -97,7 +98,7 @@ verb=draw; object=4cards from discard cards; symbol=S,M;
 name=Hex
 verb=draw; object=3 cards; symbol=S,B; 
 
-name=HERE ‘N’ NOW
+name=HERE ï¿½Nï¿½ NOW
 verb=roll; object=1 die;  symbol=S,C; actionnumber=1;
 verb=get; object=3$ from a player of choice; condition=number die>=7; actionnumber=2;
 verb=remove from board; object=1minion;  condition=number die==1; actionnumber=2;
@@ -105,7 +106,7 @@ verb=remove from board; object=1minion;  condition=number die==1; actionnumber=2
 name=Harry King 
 verb=get; object=2$ times number of discarded card;  symbol=M,S;
 
-name=Horga’s House of Ribs
+name=Horgaï¿½s House of Ribs
  symbol=T(3),M;
 
 name=Mr Gryle
@@ -230,7 +231,7 @@ verb=; object=;  symbol=;
 name=Small Gods 
 verb=; object=;  symbol=;  
 
-name=Dragon’s Landing
+name=Dragonï¿½s Landing
 verb=; object=;  symbol=; 
 
 name=Unreal Estate
