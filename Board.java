@@ -351,6 +351,30 @@ public class Board implements Serializable {
 		}
 		
 		/**
+		 * 
+		 * @return
+		 */
+		public boolean BoardHasTrouble()
+		{
+			boolean HasTrouble = false;
+			
+			for (Area area : this.ListArea)
+			{
+				if (area.HasTroubleMaker())
+				{
+					HasTrouble = true;
+				}
+			}
+			
+			return HasTrouble;
+		}
+		
+		public boolean AreaHasTrouble(int AreaNumber)
+		{
+			return this.ListArea.get(AreaNumber-1).HasTroubleMaker();
+		}
+		
+		/**
 		 * Remove a troll for an area
 		 * @param areaNumber
 		 */
