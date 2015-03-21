@@ -293,7 +293,7 @@ public class Board implements Serializable {
 			{
 				return false;
 			}
-			else if (this.ListArea.get(AreaIndex - 1).GetMinionCount(Colors.None) < 0)
+			else if (this.ListArea.get(AreaIndex - 1).GetMinionCount(Colors.None) > 0)
 			{
 				return false;
 			}
