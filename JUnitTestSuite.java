@@ -448,13 +448,18 @@ public class JUnitTestSuite {
         //put a building in each area and count afterward
 		CityAreaCards Earthquake = new CityAreaCards("Earthquake", 1, true, CardType.CityAreaCards); 
 		
-        //Used in testing only
-        ge.PlaceBuildingInEachArea(CurrentPlayerIndex);
-        
+        //Used in testing only - should be 12
+		ge.RemoveAllTroubleMaker();
+		ge.PlaceMinionInEachArea(CurrentPlayerIndex);
+		ge.PlaceBuildingInEachArea(CurrentPlayerIndex);
+		
+		//should show true on all arae
+		ge.PrintState();
+		int TotalBuildingBefore = ge.GetBuildingCount();
 		boolean Success = ge.PlayEvent(Earthquake, CurrentPlayerIndex, true);
 		
         int TotalBuilding = ge.GetBuildingCount();
-        
+        ge.PrintState();
 		assertTrue("Failed executing Earthquake event", (TotalBuilding==10));
 	}
     
