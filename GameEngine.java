@@ -109,10 +109,21 @@ public class GameEngine implements Serializable
         for(int i=0; i<ListPlayer.get(player).ListCityAreaCards.size(); i++)
         {
         	//play city area only if it is desactivated
-        	if(!ListPlayer.get(player).ListCityAreaCards.get(i).IsEffectActivate() == false)
+        	if(!ListPlayer.get(player).ListCityAreaCards.get(i).IsEffectActivate())
         	{
         		//check if the area is occupied with a demon
-                Area CityArea = GameBoard.ListArea.get(ListPlayer.get(player).ListCityAreaCards.get(i).GetID());
+        		String CityAreaName = ListPlayer.get(player).ListCityAreaCards.get(i).GetName();
+                Area CityArea = null;
+                
+                for(Area eachArea : GameBoard.ListArea)
+                {
+                	if(eachArea.GetName().compareTo(CityAreaName) == 0)
+                	{
+                		CityArea = eachArea;
+                		break;
+                	}
+                	
+                }
                 		
                 boolean HasDemon = (CityArea.GetDemonCount()>0);
                 Scanner scan = new Scanner(System.in);
@@ -208,13 +219,15 @@ public class GameEngine implements Serializable
                     }
                     else if(CityArea.Name.compareToIgnoreCase("Dimwell") == 0)
                     {
+                    	//5 7 8 9
                     	System.out.println("Do you want to play the effect of <Dimwell> (pay 3$ to place minion in Dimwell or adjacent area) (yes or no)?");
                         String answer = scan.next();
                         if(answer.compareToIgnoreCase("yes") == 0)
                         {
-                        	System.out.println("Enter the area index where you want to put minion. Dimwell index is 8, Longwall index is 9 and the Shades index is 7.");
+                        	System.out.println("Enter the area index where you want to put minion. Dimwell index is 8, Longwall index is 9, The Scours index is 5 and the Shades index is 7.");
                         	int Area = scan.nextInt();
                         	GameBoard.PlaceMinion(Area, ListPlayer.get(player));
+                        	ListPlayer.get(player).DeductFromMoney(3);
                         	ListPlayer.get(player).DisableStatusCityArea(i);
                         }
                     }

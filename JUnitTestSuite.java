@@ -198,7 +198,7 @@ public class JUnitTestSuite {
         //TODO try to remove all dimwell area and all adjacent area...one of them must be true
         boolean RemoveSuccess = ge.RemoveMinion(8, CurrentPlayerIndex);
         
-		assertFalse("Failed executing Dm well city area", RemoveSuccess);
+        assertTrue("Failed executing Dm well city area", RemoveSuccess);
         assertTrue("Failed executing Dm well city area", ((TotalAmountBefore-TotalAmountAfter)==3));
     }
     
