@@ -5,7 +5,6 @@ import java.util.Scanner;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -17,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 
 /**
  * GameEngine is the class which the user will interact. It will call the other class according to user decisions inputted from the console or UI (later build). 
@@ -38,8 +38,6 @@ public class GameEngine implements Serializable
 	private boolean HasGameEnded;
 	private int BoardDie;
 	private int ToDiscard;
-	
-	 
 	/**
 	 * Default constructor who will init all internal structure with minimum supported player 
 	 */
@@ -109,7 +107,7 @@ public class GameEngine implements Serializable
             //check if the area is occupied with a demon
             Area CityArea = GameBoard.ListArea.get(ListPlayer.get(player).ListCityAreaCards.get(i).GetID());
             		
-            boolean HasDemon = (CityArea.ListDemons.size()>0);
+            boolean HasDemon = (CityArea.GetDemonCount()>0);
             Scanner scan = new Scanner(System.in);
             if(!HasDemon)
             {
@@ -345,6 +343,8 @@ public class GameEngine implements Serializable
 				//Play another card
 				else if(currentSymbol.compareToIgnoreCase("C") == 0)
 				{
+					DiscardCards.add(CardPlayed);
+					ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
 					
 					//Print Player Cards and Play next card
 					this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
@@ -388,6 +388,7 @@ public class GameEngine implements Serializable
 			}
 			
 			this.GameBoard.PrintState();
+			
 			System.out.println("");
 		}
 		
@@ -1171,7 +1172,9 @@ public class GameEngine implements Serializable
                                 for(int a=0; a<GameBoard.ListArea.size(); a++)
                                 {
                                     if(GameBoard.ListArea.get(a).Name.contains("in Isle of Gods"))
-                                        TotalMinionInArea = GameBoard.ListArea.get(a).ListMinions.size();
+                                    {
+                                        TotalMinionInArea = GameBoard.CountPlayerMinionsArea(Colors.None, a);
+                                    }
                                 }
                                 GameBoard.DeductFromBank(amount*TotalMinionInArea);
                         		ListPlayer.get(player).AddToMoney(amount*TotalMinionInArea);
@@ -1247,7 +1250,7 @@ public class GameEngine implements Serializable
                                 for(int a=0; a<GameBoard.ListArea.size(); a++)
                                 {
                                     if(GameBoard.ListArea.get(a).HasTroubleMaker())
-                                        TotalMinionInArea += GameBoard.ListArea.get(a).ListMinions.size();
+                                        TotalMinionInArea += GameBoard.CountPlayerMinionsArea(Colors.None,a);
                                 }
                                 GameBoard.DeductFromBank(amount*TotalMinionInArea);
                         		ListPlayer.get(player).AddToMoney(amount*TotalMinionInArea);
@@ -1709,13 +1712,37 @@ public class GameEngine implements Serializable
                         	String object = currentEffect.Object.get(verbCount);
                              int amount = Character.getNumericValue(object.charAt(0));
                              
+                             
                              //The Duckman -//Foul Ole Ron--//Canting Crew
                              if(object.contains("minion"))
                              {                          	
-                            	 System.out.println("Choose the index of the player that want to move a minion?");
-                            	 int PlayerIndex = scan.nextInt();
+                            	 int PlayerIndex ;
+                            	 boolean hasMinion = false;
+                            	 boolean sourceHasNoMinion = true;
+                            	 int Source;
+                            	 int Destination;
+                            	 
+                            	 //Make sure player chooses anyone but himself
+                            	 do
+                            	 {
+	                            	 
+                            		 System.out.println("Choose the index of the player (other than yourself) that you want to move a minion?");
+                            		 System.out.println("The player you select needs to have at least 1 minion on the board");
+	                            	 PlayerIndex = scan.nextInt();
+	                            	 
+	                            	 //Get Color of player
+	                            	 Colors PlayerColor = this.ListPlayer.get(PlayerIndex).GetColor();
+	                            	 
+	                            	 //Does player have a minion on the board
+	                            	 if (this.GameBoard.CountPlayerMinions(PlayerColor) > 0)
+	                            	 {
+	                            		 hasMinion  = true;
+	                            	 }
+	                            	 
+                            	 } while (PlayerIndex == player && !hasMinion);
+                            	 
                             	 String choice = "";
-
+                            	 
                             	 if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                             	 {
                             		 System.out.println("Player " + PlayerIndex + "has an interrupt card. Does player " + PlayerIndex + "want to play the interupt?");
@@ -1727,27 +1754,47 @@ public class GameEngine implements Serializable
                             		 }
 
                             	 }
-
                             	 
-                            	 System.out.println("Enter the area index from where you want to move minion");
-                            	 int Source = scan.nextInt();
-                            	 System.out.println("Enter the area index to where you want to move minion-it should be adjacent");
-                            	 int Destination = scan.nextInt();
-
-                            	 if(CardPlayed.GetName()=="The Duckman" || CardPlayed.GetName()=="Foul Ole Ron" ||CardPlayed.GetName()=="Canting Crew")
+                            	 //Move minion only if area contains a minion for the player
+                            	 do
                             	 {
-                            		 //TODO Review with Parinaz
-                            		 if (GameBoard.ListArea.get(Source).AreaAdjacency(Destination))
-                            		 {
-                            			 GameBoard.RemoveMinion(Source,ListPlayer.get(PlayerIndex).GetColor()) ;
-                            			 GameBoard.PlaceMinion(Destination, ListPlayer.get(PlayerIndex));
-                            		 }
+                            		 
+	                            	 System.out.println("Enter the area index from where you want to move minion");
+	                            	 Source = scan.nextInt();
+	                            	 
+	                            	//Get Color of player
+	                            	 Colors PlayerColor = this.ListPlayer.get(PlayerIndex).GetColor();
+	                            	 
+	                            	 if (this.GameBoard.CountPlayerMinionsArea(PlayerColor, Source) > 0)
+	                            	 {
+	                            		 sourceHasNoMinion = false;
+	                            	 }
+                            	 }
+                            	 while (sourceHasNoMinion);
+                            	 
+                            	 
+                            	 do
+                            	 {
+	                            	 System.out.println("Enter the area index to where you want to move minion-it should be adjacent");
+	                            	 Destination = scan.nextInt();
+                            	 }while(!GameBoard.ListArea.get(Source).AreaAdjacency(Destination));
+                            	 
+                            	 String thisCardName = CardPlayed.GetName().toLowerCase();
+                            	 
+                            	 if(thisCardName.equalsIgnoreCase("The Duckman") || thisCardName.equalsIgnoreCase("Foul Ole Ron") ||thisCardName.equalsIgnoreCase("Canting Crew"))
+                            	 {
+                            		 
+                            		 //Source and destination are adjacent
+                            		 
+                        			 GameBoard.RemoveMinion(Source,ListPlayer.get(PlayerIndex).GetColor()) ;
+                        			 GameBoard.PlaceMinion(Destination, ListPlayer.get(PlayerIndex));
+                        			 
                             		 
                             		 return true;
                             	 }
                             	 
                         		 //Rincewind
-                            	 else if(CardPlayed.GetName()=="Rincewind")
+                            	 else if(thisCardName.equalsIgnoreCase("Rincewind"))
                             	 {
                             		 // Scanner scan = new Scanner(System.in);
 
@@ -2371,19 +2418,57 @@ public class GameEngine implements Serializable
 	{
 		boolean ActionSuccess = false;
         boolean Continue = true;
+        boolean EmptyArea = true;
         int AreaNumber;
+        boolean NoPiece = false;
         Scanner scan = new Scanner(System.in);
+        
+        
         do
         {
-            System.out.println("You are about to remove one minion or troll or demon. Please enter the Area index you want to do that. ");
             
-            AreaNumber = scan.nextInt();
+        	
+        	do
+        	{
+        		System.out.println("You are about to remove one minion or troll or demon. Please enter the Area index you want to do that. ");
+        		System.out.println("******Area cannot be empty *****");
             
+        		AreaNumber = scan.nextInt();
+        		
+        	}while(this.GameBoard.EmptyArea(AreaNumber));
+        	
             //Show Current Area Info
            this.PrintAreaState(AreaNumber);
             
-            System.out.println("Do you want to remove a troll, demon or minion?");
-            String choice  = scan.next();
+           String choice = "";
+           
+           do
+           {
+        	   System.out.println("Do you want to remove a troll, demon or minion?");
+        	   choice  = scan.next();
+        	   String message = "";
+        	   
+        	   if (choice.equalsIgnoreCase("minion") && this.GameBoard.CountPlayerMinionsArea(Colors.None, AreaNumber) > 0)
+        	   {
+        		   NoPiece = false;
+        		   message = "Area has no minions";
+        	   }
+        	   else if (choice.equalsIgnoreCase("demon") && this.GameBoard.AreaDemonCount(AreaNumber) > 0)
+        	   {
+        		   NoPiece = false;
+        		   message = "Area has no demons";
+        	   }
+        	   else if (choice.equalsIgnoreCase("troll") && this.GameBoard.AreatrollCount(AreaNumber) > 0)
+        	   {
+        		   NoPiece = false;
+        		   message = "Area has no trolls";
+        	   }
+        		
+        	   
+        	   this.Print(message);
+        	  
+           }while (NoPiece);
+           
             if(choice.compareToIgnoreCase("demon") == 0)
             {
             	//To activate later
@@ -2400,11 +2485,20 @@ public class GameEngine implements Serializable
             }
             else if(choice.compareToIgnoreCase("minion") == 0)
             {
-                System.out.println("Please enter the player you want to remove the index from: ");
-                System.out.println(this.ShowPlayerIndexAndColor());
+            	int PlayerIndex;
+            	
+                do
+                {
+                	
+	            	System.out.println("Please enter the player you want to remove the index from:");
+	            	System.out.println("You cannot assassinate your own minion.");
+	            	
+	                System.out.println(this.ShowPlayerIndexAndColor());
+	                
+	                PlayerIndex  = scan.nextInt();
                 
-                int PlayerIndex  = scan.nextInt();
-                
+                }while (PlayerIndex == player);
+                	
                 //To activate later
                 ActionSuccess = this.GameBoard.RemoveMinion( AreaNumber, this.ListPlayer.get(PlayerIndex).GetColor());
                 Continue = !ActionSuccess;
@@ -2452,7 +2546,7 @@ public class GameEngine implements Serializable
         }
         else 
         {
-        	for (int i : this.GameBoard.ListArea.get(AreaNumber).GetAdjAreas())
+        	for (int i : this.GameBoard.ListArea.get(AreaNumber-1).GetAdjAreas())
     		{
     			if (this.GameBoard.ListArea.get(i).GetMinionCount(thisPlayer.GetColor()) > 0)
             	{
@@ -2500,7 +2594,7 @@ public class GameEngine implements Serializable
 	 */
 	private boolean ValidPlayerIndex(int PlayerIndex)
 	{
-		return ((PlayerIndex <= 4) && (PlayerIndex >= 1));
+		return ((PlayerIndex <= 4) && (PlayerIndex >= 0));
 	}
 	
 	/**
@@ -2874,7 +2968,7 @@ public class GameEngine implements Serializable
 		//Dragon King of Arms  
 		else if (CardName.contains("Arms"))
 		{
-			if (this.GameBoard.CountTroubleMarker()>=8 )
+			if (this.GameBoard.CountTroubleMaker()>=8 )
 				 WiningCondition=true;
 		}
 		//Commandor Vimes .If cards run out he whill be the winner
@@ -3136,7 +3230,7 @@ public class GameEngine implements Serializable
     	do
     	{
     		c = CardManager.GetCard(CardType.GreenCards);
-    		if(c == null) CardManager.GetCard(CardType.BrownCards);
+    		//if(c == null) CardManager.GetCard(CardType.BrownCards);
     	}
     	while(c != null);
     	
@@ -3186,15 +3280,12 @@ public class GameEngine implements Serializable
     }
     
     
-    /* (non-Javadoc)
-  	 * @see java.lang.Object#toString()
-  	 */
-  	public String toString()
-  	{
-  		return this.toString();
-  	}
-  	
-  	/**
+    private void Print(String message)
+    {
+    	System.out.println(message);
+    }
+    
+    /**
   	 * This function will show the current state of the board which includes the minions, demons, building, trolls and troublemaker
   	 */
   	public void ShowBoardState() 
@@ -3395,6 +3486,7 @@ public class GameEngine implements Serializable
 		editorFrame.setLocationRelativeTo(null);
 		editorFrame.setVisible(true);
   	}
+  	
   	private BufferedImage toBufferedImage(Image img)
   	{
   	    if (img instanceof BufferedImage)
@@ -3413,4 +3505,14 @@ public class GameEngine implements Serializable
   	    // Return the buffered image
   	    return bimage;
   	}
+  	
+  	
+    /* (non-Javadoc)
+  	 * @see java.lang.Object#toString()
+  	 */
+  	public String toString()
+  	{
+  		return this.toString();
+  	}
+
 }
