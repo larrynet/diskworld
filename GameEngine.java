@@ -3010,40 +3010,42 @@ public class GameEngine implements Serializable
 	private boolean PutMinion(int player)
 	{
 		boolean ActionSuccess = false;
+		int AreaNumber;
+		boolean CanNotPut = true;
 		
-		this.GameBoard.PrintState();
-		
-        System.out.println("Please enter the Area index you want to put your minion. Keep in mind that you must place minion in either an area that you already have a minion in or an adjacent area. ");
-                        
-        Scanner scan = new Scanner(System.in);
-        
-        int AreaNumber = scan.nextInt();
-        
-                
-        //Get player object
+		 //Get player object
         Player thisPlayer = this.ListPlayer.get(player);
 		
-        //Minion count of player in area
-        int PlayerMinionCountinArea = this.GameBoard.ListArea.get(AreaNumber-1).GetMinionCount(thisPlayer.GetColor());
+		
+		this.GameBoard.PrintState();
+		this.ShowBoardState();
+		
+		do 
+		{
+			this.Print("");
+			this.Print("Please enter the Area index you want to put your minion. Keep in mind that you must place minion in either an area that you already have a minion in or an adjacent area. ");
+			Scanner scan = new Scanner(System.in);
         
-        //Player have minion in this area
-        if (PlayerMinionCountinArea > 0)
-        {
-        	ActionSuccess = GameBoard.PlaceMinion(AreaNumber,ListPlayer.get(player));
-        }
-        else 
-        {
-        	for (int i : this.GameBoard.ListArea.get(AreaNumber-1).GetAdjAreas())
-    		{
-    			if (this.GameBoard.ListArea.get(i).GetMinionCount(thisPlayer.GetColor()) > 0)
-            	{
-    				if (!ActionSuccess)
-    				{
-    					ActionSuccess = GameBoard.PlaceMinion(AreaNumber,ListPlayer.get(player));
-    				}
-            	}
-    		}
-        }
+			 AreaNumber = scan.nextInt();
+			 
+			 if (this.GameBoard.CountPlayerMinionsArea(thisPlayer.GetColor(), AreaNumber) > 0)
+			 {
+				 CanNotPut = false;
+			 }
+			 else
+			 {
+				 for (int i : this.GameBoard.ListArea.get(AreaNumber-1).GetAdjAreas())
+	    		{
+	    			if (this.GameBoard.ListArea.get(i).GetMinionCount(thisPlayer.GetColor()) > 0)
+	            	{
+	    				CanNotPut = false;
+	            	}
+	    		}
+			 }
+			 
+		}while (CanNotPut);
+        
+		ActionSuccess = GameBoard.PlaceMinion(AreaNumber,ListPlayer.get(player));
         
         this.PrintAreaState(AreaNumber);
         
