@@ -4029,7 +4029,13 @@ public class GameEngine implements Serializable
   	    return bimage;
   	}
   	
-  	
+  	public void RemoveAllTroubleMaker()
+  	{
+  		for(int i=0; i<12; i++)
+  		{
+  			GameBoard.Removetrouble(i);
+  		}
+  	}
     /* (non-Javadoc)
   	 * @see java.lang.Object#toString()
   	 */
