@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 /**
  * @author Parinaz Barakhshan
- *
+ * @version 2.0
  */
 
 public class Area implements Serializable
@@ -20,9 +20,9 @@ public class Area implements Serializable
 		private boolean IsTrouble; //in case two minions are in the area
 		public String CityAreaCardName;
 		private Pieces TroubleMakers;
-		public  List<Pieces> ListDemons;
+		private  List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
-		public List<Pieces> ListMinions;
+		private List<Pieces> ListMinions;
 		//public List<Pieces> ListBuilding;
 		//public Pieces Building;
 		private Pieces Building;
@@ -375,14 +375,19 @@ public class Area implements Serializable
 		}
 			
 		}
-			 
+		
+		/**
+		 * Return a boolean to confirm the adjency of an area
+		 * @param area2
+		 * @return
+		 */
 		public boolean AreaAdjacency(int  area2)
 		{
 			String [] adjAreas = this.AdjArea.split(",");
 			
 			for (String s : adjAreas)
 			{
-				if (s == Integer.toString(area2))
+				if (Integer.parseInt(s) == area2)
 				{
 					return true;
 				}

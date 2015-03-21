@@ -277,23 +277,82 @@ public class Board implements Serializable {
 			ListArea.get(AreaNumber-1).Assassinate(p);
 		}
 		
-		public int CountTroubleMarker()
+		/**
+		 * Return Empty status of current area
+		 * @param AreaIndex
+		 * @return
+		 */
+		public boolean EmptyArea(int AreaIndex)
 		{
-			int troubleCount = 0;
-			for (Area area : this.ListArea)
+			//Does area have any items
+			if (this.ListArea.get(AreaIndex - 1).GetTrollCount() > 0)
 			{
-				if (area.HasTroubleMaker())
-				{
-					troubleCount += 1;
-				}
+				return false;
+			}
+			else if (this.ListArea.get(AreaIndex - 1).GetDemonCount() > 0)
+			{
+				return false;
+			}
+			else if (this.ListArea.get(AreaIndex - 1).GetMinionCount(Colors.None) < 0)
+			{
+				return false;
 			}
 			
-			return troubleCount;
+			return true;
 		}
 		
 		/**
-		 * 
-		 * @param AreNumber
+		 * Does area have demons
+		 * @param AreaIndex
+		 * @return
+		 */
+		public int AreaDemonCount(int AreaIndex)
+		{
+			
+			return this.ListArea.get(AreaIndex - 1).GetDemonCount();
+			
+		}
+		
+		/**
+		 * Does Area have trolls
+		 * @param AreaIndex
+		 * @return
+		 */
+		public int AreatrollCount(int AreaIndex)
+		{
+		
+			return this.ListArea.get(AreaIndex -1).GetTrollCount();
+		
+		}
+		
+		/**
+		 * Return the count of minions for a player
+		 */
+		public int CountPlayerMinionsArea(Colors Color, int Areaindex)
+		{
+			return this.ListArea.get(Areaindex - 1).GetMinionCount(Color);
+		}
+		
+		/**
+		 * Minion count for a specific player
+		 * @param Color
+		 * @return Count of minion for a player
+		 */
+		public int CountPlayerMinions(Colors Color)
+		{
+			int minionCount = 0;
+			
+			for (Area area : this.ListArea)
+			{
+				minionCount += area.GetMinionCount(Color);
+			}
+			
+			return minionCount;
+		}
+		
+		/**
+		 * Remove a troll for an area
+		 * @param areaNumber
 		 */
 		public boolean RemoveTroll(int areaNumber)
 		{
