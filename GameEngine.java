@@ -271,7 +271,7 @@ public class GameEngine implements Serializable
                         String answer = scan.next();
                         if(answer.compareToIgnoreCase("yes") == 0)
                         {
-                        	System.out.println("Enter the area index where you want to put minion. The Shades index is 7, Dimwell index is 8 and The Hippo index is 6.");
+                        	System.out.println("Enter the area index where you want to put minion. The Shades index is 7, The Scours index is 6, Dimwell index is 8 and The Hippo index is 6.");
                         	int Area = scan.nextInt();
                         	GameBoard.PlaceTroubleMarker(Area);
                         	ListPlayer.get(player).DisableStatusCityArea(i);
@@ -2849,10 +2849,12 @@ public class GameEngine implements Serializable
                 {
                 	//boolean 
                 	//
-                    if(ListPlayer.get(i).ListCityAreaCards.get(c).GetName().compareToIgnoreCase(GameBoard.ListArea.get(AreaAffected).CityAreaCardName) == 0)
+                    if(ListPlayer.get(i).ListCityAreaCards.get(c).GetName().compareToIgnoreCase(GameBoard.ListArea.get(AreaAffected).GetName()) == 0)
                     {
                         //TODO
-                        ListPlayer.get(i).ListCityAreaCards.remove(c);
+                    	System.out.println("City area card " + GameBoard.ListArea.get(AreaAffected).GetName() + " is no longer in play. Discarding it.");
+                    	DiscardCards.add(ListPlayer.get(i).ListCityAreaCards.get(c));
+                    	ListPlayer.get(i).ListCityAreaCards.remove(c);
                         GameBoard.RemoveMinion(c, ListPlayer.get(i).GetColor());
                     }
                 }
