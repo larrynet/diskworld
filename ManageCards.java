@@ -42,8 +42,6 @@ public class ManageCards implements Serializable
 	{
 		
 		    CreateGreenCards();
-		    //TODO - eventually
-		    //CreateBrownCards();
 		    CreatePersoCards();
 		    CreateCityCards();
 		    RandomEventCards();
@@ -51,6 +49,31 @@ public class ManageCards implements Serializable
 		
 	}
 	
+	public CityAreaCards SearchCityArea(String Name)
+	{
+		for(int i=0; i<CityArea_Cards.length; i++)
+		{
+			if(CityArea_Cards[i].GetName().contains(Name))
+			{
+				CityArea_Cards[i].Status = false;
+				return CityArea_Cards[i];
+			}
+		}
+		return null;
+	}
+	public GreenCards SearchCards(String Name)
+	{
+		for(int i=0; i<Green_Cards.length; i++)
+		{
+			String CardName = Green_Cards[i].GetName().toLowerCase(); 
+			if(CardName.compareToIgnoreCase(Name.toLowerCase()) == 0 || CardName.contains(Name))
+			{
+				Green_Cards[i].Status = false;
+				return Green_Cards[i];
+			}
+		}
+		return null;
+	}
 	/**
 	 * GetState is used to show the current state of Cards
 	 * Used to test the value of cards in built 1 of project.
@@ -278,8 +301,8 @@ public class ManageCards implements Serializable
 	  {
 	    
 		 BufferedReader br = new BufferedReader(new FileReader(file));
-	     while ((thisLine = br.readLine()) != null) {
-	    	 
+		 
+	     while ((thisLine = br.readLine()) != null) {	    	 
 	    	//If not comment then read
 	    	 if (thisLine.contains("name"))
 	    	 {

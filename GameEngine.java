@@ -55,6 +55,7 @@ public class GameEngine implements Serializable
 	{
 		//show card
         for(int i=0; i<ListPlayer.get(player).PlayerCards.size(); i++)
+        	if(ListPlayer.get(player).PlayerCards.get(i) != null)
         	System.out.println((i+1)+"- " + ListPlayer.get(player).PlayerCards.get(i).GetName());
 	}
 	
@@ -4043,6 +4044,214 @@ public class GameEngine implements Serializable
   	{
   		return this.toString();
   	}
+  	
+  	/**
+  	 * Initialize the game to state for build 3
+  	 */
+  	public void InitializeBuild3()
+  	{
+  		TotalPlayer = 4;
+		
+		//reinitialize everything
+		ListPlayer = new ArrayList<Player>();
+		DiscardCards = new ArrayList<Cards>();
+		GameBoard = new Board();
+		HasGameEnded = false;
+		
+      	//initialize personality
+		PersonalityCards Vetinari = new PersonalityCards("Lord Vetinari", 1, true, CardType.PersonalityCards);
+  	    PersonalityCards Chrysoprase= new PersonalityCards("Chrysoprase", 1, true, CardType.PersonalityCards);
+  	    PersonalityCards Arms= new PersonalityCards("Dragon King of Arms", 1, true, CardType.PersonalityCards);
+  	    PersonalityCards Worde = new PersonalityCards("Lord Worde", 1, true, CardType.PersonalityCards);
+  	    
+  	    //Dolly Sister
+  	    Area DollySisterArea = GameBoard.ListArea.get(0);
+  	    DollySisterArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    DollySisterArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow)); 
+  	    DollySisterArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green));
+  	    DollySisterArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue));
+  	    DollySisterArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
+  	    
+  	    //Unreal Estate
+  	    Area UnrealEstateArea = GameBoard.ListArea.get(1);
+  	    UnrealEstateArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    
+  	    //Dragon Landing
+  	    Area DragonLandingArea = GameBoard.ListArea.get(2);
+  	    DragonLandingArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    DragonLandingArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    
+  	    //SmallGods - empty
+  	    
+  	    //The Scours
+  	    Area TheScoursArea = GameBoard.ListArea.get(4);
+  	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow));
+  	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue));
+  	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue));
+  	    TheScoursArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
+  	    TheScoursArea.AddBuilding(new Pieces(PieceType.Building, Colors.Yellow));
+  	    TheScoursArea.AddDemons(new Pieces(PieceType.Demon, Colors.None));
+  	    
+  	    //The Hippo
+  	    Area TheHippoArea = GameBoard.ListArea.get(5);
+  	    TheHippoArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    TheHippoArea.AddBuilding(new Pieces(PieceType.Building, Colors.Blue));
+  	    TheHippoArea.AddTrolls(new Pieces(PieceType.Troll, Colors.None));
+  	    
+  	    //The Shades
+  	    Area TheShadesArea = GameBoard.ListArea.get(6);
+  	    TheShadesArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow)); 
+  	    TheShadesArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  		TheShadesArea.AddBuilding(new Pieces(PieceType.Building, Colors.Yellow));
+      	TheShadesArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
+  	    
+  	    //DimWell
+  	    Area DimWellArea = GameBoard.ListArea.get(7);
+  	    DimWellArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red)); 
+  	    DimWellArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green)); 
+  	    DimWellArea.AddBuilding(new Pieces(PieceType.Building, Colors.Red));
+  	    
+  	    //LongWall
+  	    Area LongWallArea = GameBoard.ListArea.get(8);
+  	    LongWallArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    LongWallArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green)); 
+  	    LongWallArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    LongWallArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
+  	    
+  	    //Isles of Gods
+  	    Area IsleOfGods = GameBoard.ListArea.get(9);
+  	    IsleOfGods.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    
+  	    //Seven Sleepers
+  	    Area SevenSleepersArea = GameBoard.ListArea.get(10);
+  	    SevenSleepersArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    SevenSleepersArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow)); 
+  	    SevenSleepersArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green));
+  	    SevenSleepersArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
+  	    SevenSleepersArea.AddBuilding(new Pieces(PieceType.Building, Colors.Yellow));
+  	    
+  	    //Nap Hill
+  	    Area NappHillArea = GameBoard.ListArea.get(11);
+  	    NappHillArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    NappHillArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    NappHillArea.AddTrolls(new Pieces(PieceType.Troll, Colors.None));
+  	    
+  	    //initialize player city area and bank
+  	    CardManager = new ManageCards(4);
+  	    ListPlayer.clear();
+  	    
+		//set of cards for player 0
+  	    List<Cards> PlayerHand0 = new ArrayList<Cards>(); 
+  	    PlayerHand0.add(CardManager.SearchCards("captain carrot"));
+  	    PlayerHand0.add(CardManager.SearchCards("Fresh Start Club"));
+  	    PlayerHand0.add(CardManager.SearchCards("Mr Pin & Mr  Tulip"));
+  	    PlayerHand0.add(CardManager.SearchCards("Shonky Shop"));
+  	    PlayerHand0.add(CardManager.SearchCards("The Peeled Nuts"));
+  	    PlayerHand0.add(CardManager.SearchCards("The Thieves Guild"));
+  	    
+  	    List<Cards> PlayerHand1 = new ArrayList<Cards>();
+	    PlayerHand1.add(CardManager.SearchCards(" Inigo Skimmer"));
+	    PlayerHand1.add(CardManager.SearchCards("Modo"));
+	    PlayerHand1.add(CardManager.SearchCards("Queen Molly"));
+	    PlayerHand1.add(CardManager.SearchCards("The Duckman"));
+	    PlayerHand1.add(CardManager.SearchCards("The Dysk"));
+	    
+	    List<Cards> PlayerHand2 = new ArrayList<Cards>(); 
+  	    PlayerHand2.add(CardManager.SearchCards("Dr Cruces"));
+  	    PlayerHand2.add(CardManager.SearchCards("Foul Ole Ron"));
+  	    PlayerHand2.add(CardManager.SearchCards("Mr Boggis"));
+  	    PlayerHand2.add(CardManager.SearchCards("Mrs Cake"));
+  	    PlayerHand2.add(CardManager.SearchCards("Sergeant Angua"));
+
+  	    List<Cards> PlayerHand3 = new ArrayList<Cards>(); 
+	    PlayerHand3.add(CardManager.SearchCards("Gaspode"));
+	    PlayerHand3.add(CardManager.SearchCards("Mr Gryle"));
+	    PlayerHand3.add(CardManager.SearchCards("Rincewind"));
+	    PlayerHand3.add(CardManager.SearchCards("Sacharissa Cripslock"));
+	    PlayerHand3.add(CardManager.SearchCards("The Opera House"));
+	    PlayerHand3.add(CardManager.SearchCards("Zorgo the Retro-phrenologist"));
+	    
+	    Colors PlayerColor = Colors.values()[ListPlayer.size()+1];
+	    
+	    List<Pieces> ListMinions = new ArrayList<Pieces>();
+        List<Pieces> ListBuildings = new ArrayList<Pieces>();
+  	    int PlayerMinionTotal = 4;
+  	    int PlayerBuildingTotal = 5;
+  	    int PlayerBank = 15;
+        for(int MinionCount = 0; MinionCount < PlayerMinionTotal; ++MinionCount)
+      	   ListMinions.add(new Pieces(PieceType.Minion, PlayerColor));
+      	
+        for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
+        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
+        
+        //Add player 0
+        Player p0 = new Player(0, Vetinari, PlayerColor, PlayerHand0, ListMinions, ListBuildings);
+        p0.AddToMoney(PlayerBank-10);
+        p0.AddCityAreayCard(CardManager.SearchCityArea("Dimwell"));
+	    ListPlayer.add(p0);
+	    	    
+	    //player 1
+	    ListMinions.clear();
+	    ListBuildings.clear();
+	    PlayerColor = Colors.values()[ListPlayer.size()+1];
+	    PlayerMinionTotal = 8;
+  	    PlayerBuildingTotal = 3;
+  	    PlayerBank = 22;
+  	    
+        for(int MinionCount = 0; MinionCount < PlayerMinionTotal; ++MinionCount)
+      	   ListMinions.add(new Pieces(PieceType.Minion, PlayerColor));
+      	
+        for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
+        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
+        
+        Player p1 = new Player(1, Chrysoprase, PlayerColor, PlayerHand1, ListMinions, ListBuildings);
+        p1.AddToMoney(PlayerBank-10);
+        p1.AddCityAreayCard(CardManager.SearchCityArea("The Scours"));
+        p1.AddCityAreayCard(CardManager.SearchCityArea("The Shades"));
+        p1.AddCityAreayCard(CardManager.SearchCityArea("Seven Sleepers"));
+	    ListPlayer.add(p1);
+	    
+	    //player 2
+	    ListMinions.clear();
+	    ListBuildings.clear();
+	    PlayerColor = Colors.values()[ListPlayer.size()+1];
+	    PlayerMinionTotal = 8;
+  	    PlayerBuildingTotal = 6;
+  	    PlayerBank = 17;
+  	    
+        for(int MinionCount = 0; MinionCount < PlayerMinionTotal; ++MinionCount)
+      	   ListMinions.add(new Pieces(PieceType.Minion, PlayerColor));
+      	
+        for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
+        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
+        
+        Player p2 = new Player(2, Arms, PlayerColor, PlayerHand2, ListMinions, ListBuildings);
+        p2.AddToMoney(PlayerBank-10);
+	    ListPlayer.add(p2);
+	    
+	    //Player 3
+	    ListMinions.clear();
+	    ListBuildings.clear();
+	    PlayerColor = Colors.values()[ListPlayer.size()+1];
+	    PlayerMinionTotal = 3;
+  	    PlayerBuildingTotal = 5;
+  	    PlayerBank = 18;
+  	    
+        for(int MinionCount = 0; MinionCount < PlayerMinionTotal; ++MinionCount)
+      	   ListMinions.add(new Pieces(PieceType.Minion, PlayerColor));
+      	
+        for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
+        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
+        
+        Player p3 = new Player(3, Chrysoprase, PlayerColor, PlayerHand3, ListMinions, ListBuildings);
+        p3.AddToMoney(PlayerBank-10);
+        p3.AddCityAreayCard(CardManager.SearchCityArea("The Hippo"));
+	    ListPlayer.add(p3);
+	    
+  	    GameBoard.SetBalance(48);
+  	}
+  	    
   	
 
 }

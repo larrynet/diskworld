@@ -25,9 +25,7 @@ public class main {
 		}
 		GameEngine ge = new GameEngine(NumPlayer);
 		
-		ge.ShowBoardState();
-		System.out.println("Test");
-		
+		ge.ShowBoardState();		
 		
 		if(!ge.IsGameInitialize())
 		{
@@ -71,12 +69,28 @@ public class main {
 				System.out.println("3 - Import State");
 				System.out.println("4 - Export state");
 				System.out.println("5 - Print Board");
-				System.out.println("6 - Quit the game");
+				System.out.println("6 - Load Game state of build 3");
+				System.out.println("7 - Quit the game");
 				int choice = scan.nextInt();
 				
 				if(choice == 6)
 				{
+					ge.InitializeBuild3();
+					ge.PrintState();
+					ge.ShowBoardState();
+					
+					ge.ShowCard(0);
+					System.out.println("\n");
+					ge.ShowCard(1);
+					System.out.println("\n");
+					ge.ShowCard(2);
+					System.out.println("\n");
+					ge.ShowCard(3);
+				}
+				else if(choice == 6)
+				{
 					Continue = false;
+					break;
 				}
 				else if(choice == 3)
 				{
@@ -212,6 +226,7 @@ public class main {
 		
 				
     scan.close();
+    System.out.println("Game Over! Please try again.");
 	}
 
 	

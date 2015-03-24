@@ -453,7 +453,7 @@ public class Player implements Serializable {
 		StringBuilder strCityAreaCards = new StringBuilder();
 		 for (Cards CityAreaCard : this.ListCityAreaCards)
 		 {
-			 strCityAreaCards.append(CityAreaCard.Name);
+			 strCityAreaCards.append(CityAreaCard.GetName());
 			 strCityAreaCards.append(",");
 			 
 		 }

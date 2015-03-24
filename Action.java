@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Action {
+public class Action implements Serializable {
 	public int NumberOfAction=0;
 	public List<String> Verb;
 	public List<String> Object;
@@ -11,7 +12,7 @@ public class Action {
 	public String Relation;
 	public boolean KeepTillEnd;
 	
-	public Action(int n, List<String> v, List<String> o, List<String> c,String relation, boolean keep) 
+	public Action(int n, List<String> v, List<String> o, List<String> c,String relation, boolean keep)  
 	{
 		NumberOfAction = n;
 		Verb = v;
@@ -22,6 +23,13 @@ public class Action {
 		KeepTillEnd = keep;
 	}
 	
+	/* (non-Javadoc)
+  	 * @see java.lang.Object#toString()
+  	 */
+  	public String toString()
+  	{
+  		return this.toString();
+  	}
 
 	public static Action ParseString(String action)
 	{

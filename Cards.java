@@ -6,7 +6,7 @@ import java.util.Random;
  * @author Niloufar
  *
  */
-public interface Cards 
+public interface Cards
 {
 	
 	 String Name = "";
