@@ -64,16 +64,24 @@ public class main {
 				}
 				
 				//Show all the cards and let the person choose what he wants
-				System.out.println("1 - Peak at your card");
+				System.out.println("1 - Peek at your card");
 				System.out.println("2 - Play card");
 				System.out.println("3 - Import State");
 				System.out.println("4 - Export state");
 				System.out.println("5 - Print Board");
 				System.out.println("6 - Load Game state of build 3");
+				System.out.println("8 - Keep current state but change player turn for testing");
 				System.out.println("7 - Quit the game");
 				int choice = scan.nextInt();
 				
-				if(choice == 6)
+				if(choice == 8)
+				{
+					System.out.println("Please enter current player turn (1-4");
+					int currentTurn = scan.nextInt();
+					ge.SetPlayerTurn(currentTurn);
+					CurrentPlayerIndex = ge.GetCurrentPlayer();
+				}	
+				else if(choice == 6)
 				{
 					ge.InitializeBuild3();
 					ge.PrintState();
