@@ -4061,6 +4061,7 @@ public class GameEngine implements Serializable
   	 */
   	public void InitializeBuild3()
   	{
+  		
   		TotalPlayer = 4;
 		
 		//reinitialize everything
@@ -4101,27 +4102,27 @@ public class GameEngine implements Serializable
   	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue));
   	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue));
   	    TheScoursArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
-  	    TheScoursArea.AddBuilding(new Pieces(PieceType.Building, Colors.Yellow));
+  	    TheScoursArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Yellow));
   	    TheScoursArea.AddDemons(new Pieces(PieceType.Demon, Colors.None));
   	    
   	    //The Hippo
   	    Area TheHippoArea = GameBoard.ListArea.get(5);
   	    TheHippoArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
-  	    TheHippoArea.AddBuilding(new Pieces(PieceType.Building, Colors.Blue));
+  	    TheHippoArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Blue));
   	    TheHippoArea.AddTrolls(new Pieces(PieceType.Troll, Colors.None));
   	    
   	    //The Shades
   	    Area TheShadesArea = GameBoard.ListArea.get(6);
   	    TheShadesArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow)); 
   	    TheShadesArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
-  		TheShadesArea.AddBuilding(new Pieces(PieceType.Building, Colors.Yellow));
+  		TheShadesArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Yellow));
       	TheShadesArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    //DimWell
   	    Area DimWellArea = GameBoard.ListArea.get(7);
   	    DimWellArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red)); 
   	    DimWellArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green)); 
-  	    DimWellArea.AddBuilding(new Pieces(PieceType.Building, Colors.Red));
+  	    DimWellArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Red));
   	    
   	    //LongWall
   	    Area LongWallArea = GameBoard.ListArea.get(8);
@@ -4140,7 +4141,7 @@ public class GameEngine implements Serializable
   	    SevenSleepersArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow)); 
   	    SevenSleepersArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green));
   	    SevenSleepersArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
-  	    SevenSleepersArea.AddBuilding(new Pieces(PieceType.Building, Colors.Yellow));
+  	    SevenSleepersArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Yellow));
   	    
   	    //Nap Hill
   	    Area NappHillArea = GameBoard.ListArea.get(11);

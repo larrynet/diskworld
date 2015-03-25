@@ -8,9 +8,9 @@
 public enum Colors {
 	None,
 	Red,  
+	Yellow,  
 	Green,  
 	Blue,  
-	Yellow,  
 	Orange, 
 	Brown, 
 	Black

@@ -211,6 +211,15 @@ public class Area implements Serializable
 			}
 		}
 		
+		/**
+		 * Used to initialize board
+		 * @param b
+		 */
+		public void AddBuildingInitial(Pieces b)
+		{
+			this.Building = b;
+			this.IsBuilt = true;
+		}
 		
 		/**
 		 * @param p Piece of type Demon
