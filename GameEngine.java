@@ -48,6 +48,14 @@ public class GameEngine implements Serializable
 	}
 	
 	/**
+	 * @param set current player turn to t
+	 */
+	public void SetPlayerTurn(int t) 
+	{
+		CurrentPlayer = t;
+	}
+	
+	/**
 	 * Show cards current in player hand
 	 * @param player
 	 */
