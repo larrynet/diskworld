@@ -4284,6 +4284,18 @@ public class GameEngine implements Serializable
   	    GameBoard.SetBalance(48);
   	}
   	    
-  	
+  	public String GetPlayerColor(int p)
+  	{
+  		if(ListPlayer.get(p).GetColor() == Colors.Red)
+  			return "Red";
+  		else if(ListPlayer.get(p).GetColor() == Colors.Blue)
+  			return "Blue";
+  		else if(ListPlayer.get(p).GetColor() == Colors.Green)
+  			return "Green";
+  		else if(ListPlayer.get(p).GetColor() == Colors.Yellow)
+  			return "Yellow";
+  		else
+  			return "None";
+  	}
 
 }

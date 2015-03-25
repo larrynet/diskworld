@@ -43,7 +43,7 @@ public class main {
 			do
 			{
 				count --;
-				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex+1)+"\n+++++++++++++++++++++++++++++++++++++++");
+				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex+1)+" (Color: " + ge.GetPlayerColor(CurrentPlayerIndex)+")\n+++++++++++++++++++++++++++++++++++++++");
 				
 				//have draw cards if not full hand
 				if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
@@ -76,9 +76,9 @@ public class main {
 				int choice = 6;
 				if(choice == 8)
 				{
-					System.out.println("Please enter current player turn (1-4");
+					System.out.println("Please enter current player turn (1-4)");
 					int currentTurn = scan.nextInt();
-					ge.SetPlayerTurn(currentTurn);
+					ge.SetPlayerTurn(currentTurn-1);
 					CurrentPlayerIndex = ge.GetCurrentPlayer();
 				}	
 				else if(choice == 6)
