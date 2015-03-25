@@ -87,12 +87,13 @@ public class main {
 					ge.PrintState();
 					ge.ShowBoardState();
 					
+					System.out.println("Player 1 cards:\n");
 					ge.ShowCard(0);
-					System.out.println("\n");
+					System.out.println("Player 2 cards:\n");
 					ge.ShowCard(1);
-					System.out.println("\n");
+					System.out.println("Player 3 cards:\n");
 					ge.ShowCard(2);
-					System.out.println("\n");
+					System.out.println("Player 4 cards:\n");
 					ge.ShowCard(3);
 				}
 				else if(choice == 6)
