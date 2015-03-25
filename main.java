@@ -72,8 +72,8 @@ public class main {
 				System.out.println("6 - Load Game state of build 3");
 				System.out.println("8 - Keep current state but change player turn for testing");
 				System.out.println("7 - Quit the game");
-				int choice = scan.nextInt();
-				
+				//int choice = scan.nextInt();
+				int choice = 6;
 				if(choice == 8)
 				{
 					System.out.println("Please enter current player turn (1-4");
