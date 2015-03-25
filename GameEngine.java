@@ -3658,8 +3658,20 @@ public class GameEngine implements Serializable
      */
     public void PlaceBuildingInEachArea(int player)
     {
-        for(int i=1; i<=GameBoard.ListArea.size(); i++)
-            GameBoard.PlaceBuilding(i,ListPlayer.get(player));
+    	for (int j = 0; j <= 1; j++)
+    	{	
+    		int x = 1;
+    		
+    		if (j > 0)
+    		{
+    			x = 7;
+    		}
+    		
+	        for(int i = x ;i<=GameBoard.ListArea.size(); i++)
+	        {
+	            GameBoard.PlaceBuilding(i,ListPlayer.get(player+j));
+	        }
+    	}
     }
 
     /**
