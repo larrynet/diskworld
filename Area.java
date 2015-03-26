@@ -358,31 +358,31 @@ public class Area implements Serializable
 		 */
 		public void PrintState() //to print for demo
 		{
-			 System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, IsBuilt,this.GetDemonCount(),this.GetTrollCount());
+			 System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, this.BuildingColor(),this.GetDemonCount(),this.GetTrollCount());
             
 		}
 		
 		public void Assassinate(Pieces p)
-		{if (IsTrouble)
 		{
-		IsTrouble=false;
-		RemoveTroubleMaker();
-		
-		switch(p.GetPieceType())
-		{
-			case Minion:
-				RemoveMinions(p.GetPieceColor());
-				break;
-			case Demon:
-				RemoveDemons();
-				break;
-			case Troll:
-				RemoveTrolls();
-				break;
-		}
-					
-		}
-			
+			if (IsTrouble)
+			{
+				IsTrouble=false;
+				RemoveTroubleMaker();
+
+				switch(p.GetPieceType())
+				{
+				case Minion:
+					RemoveMinions(p.GetPieceColor());
+					break;
+				case Demon:
+					RemoveDemons();
+					break;
+				case Troll:
+					RemoveTrolls();
+					break;
+				}
+
+			}
 		}
 		
 		/**
@@ -478,7 +478,18 @@ public class Area implements Serializable
 			}
 			
 		}
-
+		
+		private Colors BuildingColor()
+		{
+			if (this.IsBuilt)
+			{
+			return this.Building.GetPieceColor();
+			}
+			else
+			{
+				return Colors.None;
+			}
+		}
 }
 	
 	

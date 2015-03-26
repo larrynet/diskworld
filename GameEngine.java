@@ -2118,6 +2118,9 @@ public class GameEngine implements Serializable
                             }
                         	
                         }
+                        
+                        // ------------------------------- BEGIN SHUFFLE ------------------------------
+                        
                         else if (currentEffect.Verb.get(verbCount).compareToIgnoreCase("shuffle") == 0)
                         {
                         	//History Monks
@@ -2148,17 +2151,27 @@ public class GameEngine implements Serializable
                         	
                         	return true;
                         }
+                        
+                        // ------------------------------ END SHUFFLE -----------------------------
+                        
+                        // ------------------------------ BEGIN ROLL ------------------------------
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("roll") ==0)
                         {
                         	System.out.println("Should never come here because all verbs with roll are exceptions");
                         
                         }
+                        // ---------------------- END ROLL ---------------------------------------
+                        
+                        // ---------------------- BEGIN MOVE -------------------------------------
+                        
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("move") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
                              int amount = Character.getNumericValue(object.charAt(0));
                              
                              String thisCardName = CardPlayed.GetName().toLowerCase();
+                             
+                             // ====================== begin rincewind ===========================
                              
                              if(thisCardName.equalsIgnoreCase("Rincewind"))
                         	 {
@@ -2189,6 +2202,8 @@ public class GameEngine implements Serializable
                         		
                         	 }
                              
+                             // ================================ end  rincewind ======================================
+                             
                              //The Duckman -//Foul Ole Ron--//Canting Crew
                              else if(object.contains("minion"))
                              {                          	
@@ -2198,7 +2213,7 @@ public class GameEngine implements Serializable
                             	 int Source;
                             	 int Destination;
                             	 
-                            	 //Make sure player chooses anyone but himself
+                            	 //Make sure player chooses anyone but himself and area has minion
                             	 do
                             	 {
 	                            	 
@@ -2219,29 +2234,33 @@ public class GameEngine implements Serializable
                             	 
                             	 String choice = "";
                             	 String ActivateSmallGod = "";
-                                 if(ListPlayer.get(player).CanPlaySmallGod())
-                             	{
-                             		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
-                             		ActivateSmallGod = scan.next();
-                             	}
-                             	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
-                             	{
-                             		ListPlayer.get(player).DesactivateSmallGod();
-                             	}
-                             	else
-                             	{
-                            	 if(ListPlayer.get(PlayerIndex).HasInterruptCard())
+                            	 
+                            	 if(ListPlayer.get(player).CanPlaySmallGod())
                             	 {
-                            		 System.out.println("Player " + PlayerIndex + "has an interrupt card. Does player " + PlayerIndex + "want to play the interupt?");
-                            		 choice = scan.next();
-                            		 if(choice.compareToIgnoreCase("yes") == 0)
-                            		 {
-                            			 ListPlayer.get(PlayerIndex).RemoveInterruptCard();
-                            			 return true;
-                            		 }
-
+                            		 this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+                            		 ActivateSmallGod = scan.next();
                             	 }
-                             	}
+                                 
+                            	 if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
+                            	 {
+                            		 ListPlayer.get(player).DesactivateSmallGod();
+                            	 }
+
+                            	 else
+                            	 {
+                            		 if(ListPlayer.get(PlayerIndex).HasInterruptCard())
+                            		 {
+                            			 System.out.println("Player " + PlayerIndex + "has an interrupt card. Does player " + PlayerIndex + "want to play the interupt?");
+                            			 choice = scan.next();
+                            			 if(choice.compareToIgnoreCase("yes") == 0)
+                            			 {
+                            				 ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            				 return true;
+                            			 }
+
+                            		 }
+                            	 }
+                             	
                             	 //Move minion only if area contains a minion for the player
                             	 do
                             	 {
@@ -2259,11 +2278,12 @@ public class GameEngine implements Serializable
                             	 }
                             	 while (sourceHasNoMinion);
                             	 
-                            	 
+                            	 //Will continue asking until user enters adjacent area.
                             	 do
                             	 {
 	                            	 System.out.println("Enter the area index to where you want to move minion-it should be adjacent");
 	                            	 Destination = scan.nextInt();
+	                            	 
                             	 }while(!GameBoard.ListArea.get(Source).AreaAdjacency(Destination));
                             	 
                             	 thisCardName = CardPlayed.GetName().toLowerCase();
@@ -2325,6 +2345,10 @@ public class GameEngine implements Serializable
                              }
                                      
                         }
+                        // ------------------------ END MOVE -----------------------------------------
+                        
+                        // ------------------------ BEGIN REMOVE -------------------------------------
+                        
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
@@ -2403,88 +2427,9 @@ public class GameEngine implements Serializable
                             }
                             
                         }
+                        
+                        // -------------------------- END REMOVE ---------------------------------------
                 	
-                		// ***************** END PARINAZ SECTION *******************************
-                	
-                        // ***************** NILOUFAR SECTION **********************************
-                      
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("place") ==0)
-                        {
-                        	String object = currentEffect.Object.get(verbCount);
-                            int amount = (int)object.charAt(0);
-                            
-                        	// In "dorfi", "Adora Bell Dearheart" Place is the second verb????
-                            //move one minion your own minion from an area to another area
-                            
-                          //Deep Dwarves ,Mr Shine
-                        	if (object.contains("1 minion in any area" ))
-                			{
-        			        		//place a minion in any area withount puting trouble marker
-        			        		if(PutMinion(CurrentPlayer))
-        			        			System.out.println("Minion placed successfully.");
-        			        		else
-        			        			System.out.println("Place minion failed");
-        			        		
-                			}
-                        	//Willikins
-                        	else if (object.contains("1 minion in area with building in"  ))
-                        	{
-                        		System.out.println("Please select an area to put a Minion In. Please enter an area that has a building in it."); 
-                        		                 	 
-                        		 int AreaNumber=scan.nextInt(); 
-                        		 boolean IsMinionIn=true; 
-                        	
-                    			 while( IsMinionIn && ! (GameBoard.ListArea.get(AreaNumber).HasBuilding() ) ) 
-                    			 { 
-                    		 
-                    				 System.out.println("Your Area number you choose has no building.Please enter an area that has a building"); 
-                    				 AreaNumber=scan.nextInt(); 
-                    			 } 
-                    		 
-                    			 IsMinionIn=PutMinion(CurrentPlayer); 
-                        	
-                        	 
-
-                        	}
-                        	//Archchancellor Ridcully
-                        	else if (object.contains("1 or 2 minion in or adjacent to Unreal Estate"  ))
-                        	{
-                        		System.out.println("Please how many building you want to place ? please enter 1 or 2"); 
-
-                        		 int NumberofMinion = scan.nextInt(); 
-                        		 
-                        		 //put one or two minion in any Area 
-                        		 if (NumberofMinion==1) 
-                        		 { 
-                        			 boolean IsMinionIn=PutMinion(CurrentPlayer); 
-                        		 } 
-                        		 else 
-                        			 for (int i=0;i<2;i++) 
-                        			 { 
-                        				 boolean IsMinionIn=PutMinion(CurrentPlayer); 
-                        		 	  } 
-                        		 	//TODO there is no method to check the adjacent areas !!!! 
-                        		                		     
-
-
-                        	}
-                        	//The Senior Wrangler
-                        	else if (object.contains("1 minion in or adjacent to Unreal Estate"  ))
-                        	{
-                        		//TODO
-                        	}
-                        	//The Smoking Gnu
-                        	else if (object.contains("1 minion containing in area trouble marker" ))
-                        	{
-                        		//TODO
-                        	}
-                        	//Doctor Hix
-                        	else if (object.contains("trouble marker in any area" ))
-                        	{
-                        		//TODO
-                        	}
-                        		
-                        }
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("play") ==0)
                         {
                         	String object = currentEffect.Object.get(verbCount);
@@ -2552,23 +2497,23 @@ public class GameEngine implements Serializable
                             	
                         }
                 	       	
-                        // ********************** GAY SECTION *************************************
-
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("end") ==0)
                         {
                         	//RIOT CARD : Games end of there are more then eight trouble markers
                         	System.out.println("You should not come here");
                         	
                         }
+                        // ------------------------ BEGIN SELECT -----------------------------------
+                        
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("select") ==0)
                         {
                         	//Queen Molly
                         	System.out.println("Select one player:");
-                            int playerIndex= scan.nextInt();
-                            
-                            String choice = "";
-                            String ActivateSmallGod = "";
-                            if(ListPlayer.get(player).CanPlaySmallGod())
+                        	int playerIndex= scan.nextInt();
+
+                        	String choice = "";
+                        	String ActivateSmallGod = "";
+                        	if(ListPlayer.get(player).CanPlaySmallGod())
                         	{
                         		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
                         		ActivateSmallGod = scan.next();
@@ -2579,37 +2524,40 @@ public class GameEngine implements Serializable
                         	}
                         	else
                         	{
-                        	if(!ListPlayer.get(playerIndex).HasInterruptCard())
-                            {
-                            	System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
-                            	choice = scan.next();
-                            }
-                        	if(choice.compareToIgnoreCase("no") == 0)
-                        	{
-								System.out.println("Player " + playerIndex + " give player " + player + " two cards of your choice by specifying the card number");
-								ListPlayer.get(playerIndex).PrintCardsIndex();
-								
-								System.out.println("First Card:");
-								int FirstCard= scan.nextInt();
-								
-								System.out.println("Second Card:");
-								int SecondCard = scan.nextInt();
-							
-								
-								Cards c1 = ListPlayer.get(playerIndex).GetCards().get(FirstCard);
-								Cards c2 = ListPlayer.get(playerIndex).GetCards().get(SecondCard);
-							  
-								ListPlayer.get(player).AddPlayerCard(c1);
-								ListPlayer.get(player).AddPlayerCard(c2);
-								
-								ListPlayer.get(playerIndex).RemovePlayerCard(FirstCard);
-								ListPlayer.get(playerIndex).RemovePlayerCard(SecondCard);
-                           
-                        	}
-							else
-								ListPlayer.get(playerIndex).RemoveInterruptCard();
+                        		if(!ListPlayer.get(playerIndex).HasInterruptCard())
+                        		{
+                        			System.out.println("Player " + playerIndex + "has an interrupt card. Player " + playerIndex + ", do you want to play it? (yes/no)");
+                        			choice = scan.next();
+                        		}
+                        		if(choice.compareToIgnoreCase("no") == 0)
+                        		{
+                        			System.out.println("Player " + playerIndex + " give player " + player + " two cards of your choice by specifying the card number");
+                        			ListPlayer.get(playerIndex).PrintCardsIndex();
+
+                        			System.out.println("First Card:");
+                        			int FirstCard= scan.nextInt();
+
+                        			System.out.println("Second Card:");
+                        			int SecondCard = scan.nextInt();
+
+
+                        			Cards c1 = ListPlayer.get(playerIndex).GetCards().get(FirstCard);
+                        			Cards c2 = ListPlayer.get(playerIndex).GetCards().get(SecondCard);
+
+                        			ListPlayer.get(player).AddPlayerCard(c1);
+                        			ListPlayer.get(player).AddPlayerCard(c2);
+
+                        			ListPlayer.get(playerIndex).RemovePlayerCard(FirstCard);
+                        			ListPlayer.get(playerIndex).RemovePlayerCard(SecondCard);
+
+                        		}
+                        		else
+                        			ListPlayer.get(playerIndex).RemoveInterruptCard();
                         	}
                         }
+                        
+                        // ------------------------- END SELECT -----------------------------
+                        
                         else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("putminion") ==0)
                         {
                         	Player currentPlayer = ListPlayer.get(player);
