@@ -3515,7 +3515,10 @@ public class GameEngine implements Serializable
 		//Chrysoprase
 		else if (CardName.contains("Chrysoprase"))
 		{
-			if (ListPlayer.get(this.CurrentPlayer).GetMoneyCount()>=50 )//loan and building cost should be considered later
+			int CurrentPlayerValue = GetPlayerPoints(CurrentPlayer);
+			this.Print("Current player " + CurrentPlayer + " Points: " + CurrentPlayerValue);
+			if(CurrentPlayerValue >= 50)
+			//if (ListPlayer.get(this.CurrentPlayer).GetMoneyCount()>=50 )//loan and building cost should be considered later
 				WiningCondition=true;
 		}
 	
@@ -3557,11 +3560,15 @@ public class GameEngine implements Serializable
     	////Calucalute Points from buildings
     	for (Area area : this.GameBoard.ListArea)
     	{
-    		if (area.GetBuilding().GetPieceColor() == player.GetColor())
+    		if(area != null)
     		{
-    			System.out.println("Building owned by player in " + area.GetName()+". Area cost is " + area.GetAreaCost());
-        		
-    			totalPoints += area.GetAreaCost();
+    			Pieces b = area.GetBuilding();
+	    		if ( b != null && (b.GetPieceColor() == player.GetColor()))
+	    		{
+	    			System.out.println("Building owned by player in " + area.GetName()+". Area cost is " + area.GetAreaCost());
+	        		
+	    			totalPoints += area.GetAreaCost();
+	    		}
     		}
     	}
     	System.out.println("");
@@ -4276,7 +4283,7 @@ public class GameEngine implements Serializable
         for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
         	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
         
-        Player p3 = new Player(3, Chrysoprase, PlayerColor, PlayerHand3, ListMinions, ListBuildings);
+        Player p3 = new Player(3, Worde, PlayerColor, PlayerHand3, ListMinions, ListBuildings);
         p3.AddToMoney(PlayerBank-10);
         p3.AddCityAreayCard(CardManager.SearchCityArea("The Hippo"));
 	    ListPlayer.add(p3);

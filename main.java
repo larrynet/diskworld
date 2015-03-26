@@ -72,8 +72,8 @@ public class main {
 				System.out.println("6 - Load Game state of build 3");
 				System.out.println("8 - Keep current state but change player turn for testing");
 				System.out.println("7 - Quit the game");
-				//int choice = scan.nextInt();
-				int choice = 6;
+				int choice = scan.nextInt();
+			
 				if(choice == 8)
 				{
 					System.out.println("Please enter current player turn (1-4)");
@@ -141,6 +141,7 @@ public class main {
 				else if(choice == 5)
 				{
 					ge.PrintState();
+					ge.ShowBoardState();
 				}
 				else if(choice == 1)
 				{
@@ -211,12 +212,13 @@ public class main {
 	                    {
 	                    	//RIOTS
 	                        System.out.println("The Game Engine signaled a game end event preemptively because certains cards force to end. ");
-	                        
+	                        ge.DetermineWinner();
 	                        Continue = false;
 	                    }
 	                    if(ge.NoMoreCard())
 	                    {
 	                    	System.out.println("No more cards. Calculating ");
+	                    	ge.DetermineWinner();
 	                    }
 						if(count == 0)
 						{
