@@ -3263,7 +3263,7 @@ public class GameEngine implements Serializable
 	 */
 	public void DetermineFirstPlayer()
 	{
-		int LastDieValue = 0;
+		/*int LastDieValue = 0;
 		int NewDieValue = 0;
 		for (int i = 0; i < this.ListPlayer.size(); i++)
 		{
@@ -3279,7 +3279,8 @@ public class GameEngine implements Serializable
 				LastDieValue = NewDieValue;
 			}
 			
-		}
+		}*/
+		CurrentPlayer = 0;
 	}
 	
 	/**
@@ -3516,7 +3517,7 @@ public class GameEngine implements Serializable
 		else if (CardName.contains("Chrysoprase"))
 		{
 			int CurrentPlayerValue = GetPlayerPoints(CurrentPlayer);
-			this.Print("Current player " + CurrentPlayer + " Points: " + CurrentPlayerValue);
+			this.Print("Current player " + CurrentPlayer + " Points: " + CurrentPlayerValue+1);
 			if(CurrentPlayerValue >= 50)
 			//if (ListPlayer.get(this.CurrentPlayer).GetMoneyCount()>=50 )//loan and building cost should be considered later
 				WiningCondition=true;
@@ -4025,7 +4026,7 @@ public class GameEngine implements Serializable
 	    			for(int eachMinion=0; eachMinion < GameBoard.ListArea.get(eachArea).GetMinionCount(PlayerColor); eachMinion++)
 	    			{
 	    				//myGraphObj.(PointX, StartY, 5, 5);
-	    				myGraphObj.drawOval(PointX, StartY, 5,5);
+	    				myGraphObj.fillOval(PointX, StartY, 5,5);
 	    				PointX += 10;
 	    				
 	    			}
