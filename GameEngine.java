@@ -3517,7 +3517,7 @@ public class GameEngine implements Serializable
 		else if (CardName.contains("Chrysoprase"))
 		{
 			int CurrentPlayerValue = GetPlayerPoints(CurrentPlayer);
-			this.Print("Current player " + CurrentPlayer + " Points: " + CurrentPlayerValue+1);
+			this.Print("Current player " + CurrentPlayer+1 + " Points: " + CurrentPlayerValue);
 			if(CurrentPlayerValue >= 50)
 			//if (ListPlayer.get(this.CurrentPlayer).GetMoneyCount()>=50 )//loan and building cost should be considered later
 				WiningCondition=true;
@@ -4289,6 +4289,12 @@ public class GameEngine implements Serializable
         p3.AddCityAreayCard(CardManager.SearchCityArea("The Hippo"));
 	    ListPlayer.add(p3);
 	    
+	    //disable 
+	    CardManager.Personality_Card[1].Status = false;
+	    CardManager.Personality_Card[2].Status = false;
+	    CardManager.Personality_Card[3].Status = false;
+	    CardManager.Personality_Card[6].Status = false;
+	    	
   	    GameBoard.SetBalance(48);
   	}
   	    
