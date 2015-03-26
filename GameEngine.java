@@ -2158,9 +2158,39 @@ public class GameEngine implements Serializable
                         	String object = currentEffect.Object.get(verbCount);
                              int amount = Character.getNumericValue(object.charAt(0));
                              
+                             String thisCardName = CardPlayed.GetName().toLowerCase();
+                             
+                             if(thisCardName.equalsIgnoreCase("Rincewind"))
+                        	 {
+                        		 int source;
+                        		 int destination;
+                        		 Colors playerColor = this.ListPlayer.get(player).GetColor();
+                        		 
+                        		 // Scanner scan = new Scanner(System.in);
+                                 do
+                                 {
+                            		 System.out.println("Enter area index from where you want to move minion-it should have troubleMarker");
+                            		 source = scan.nextInt();
+                                 }while(!this.GameBoard.AreaHasTrouble(source) && !(this.GameBoard.CountPlayerMinionsArea(playerColor, source) > 0));
+                        		 
+                                 do
+                                 {
+                            		 System.out.println("Enter area index to where you want to move minion-it should be adjacent");
+                            		 destination = scan.nextInt();
+                            		 
+                                 }while (!this.GameBoard.AreaAdjacency(source, destination));
+
+                        		
+                        		
+                        			 GameBoard.RemoveMinion(source,ListPlayer.get(CurrentPlayer).GetColor()) ;
+                        			 GameBoard.PlaceMinion(destination, ListPlayer.get(CurrentPlayer)); 
+                        			 
+                        			 return true;
+                        		
+                        	 }
                              
                              //The Duckman -//Foul Ole Ron--//Canting Crew
-                             if(object.contains("minion"))
+                             else if(object.contains("minion"))
                              {                          	
                             	 int PlayerIndex ;
                             	 boolean hasMinion = false;
@@ -2236,7 +2266,7 @@ public class GameEngine implements Serializable
 	                            	 Destination = scan.nextInt();
                             	 }while(!GameBoard.ListArea.get(Source).AreaAdjacency(Destination));
                             	 
-                            	 String thisCardName = CardPlayed.GetName().toLowerCase();
+                            	 thisCardName = CardPlayed.GetName().toLowerCase();
                             	 
                             	 if(thisCardName.equalsIgnoreCase("The Duckman") || thisCardName.equalsIgnoreCase("Foul Ole Ron") ||thisCardName.equalsIgnoreCase("Canting Crew"))
                             	 {
