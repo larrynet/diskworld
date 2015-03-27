@@ -172,17 +172,7 @@ public class main {
 				else // play card
 				{
 				
-						if(ge.DoesPlayerHasCityArea(CurrentPlayerIndex))
-						{
-							System.out.println("Would you like to activate city area cards player " + (CurrentPlayerIndex+1));
-							String ActivateArea = scan.next();
-							if(ActivateArea.compareToIgnoreCase("yes") == 0)
-							{
-								//activating the area effect
-			                    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
-			                    
-							}
-						}
+					    ge.ActivateCityAreaEffect(CurrentPlayerIndex);
 						
 						System.out.println("Which card you want to play?");
 						int playChoice = scan.nextInt();
