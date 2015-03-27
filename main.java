@@ -70,11 +70,16 @@ public class main {
 				System.out.println("4 - Export state");
 				System.out.println("5 - Print Board");
 				System.out.println("6 - Load Game state of build 3");
-				System.out.println("8 - Keep current state but change player turn for testing");
 				System.out.println("7 - Quit the game");
+				System.out.println("8 - Keep current state but change player turn for testing");
+				System.out.println("9 - Try to play City Area Card");
 				int choice = scan.nextInt();
 			
-				if(choice == 8)
+				if(choice == 9)
+				{
+					ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+				}
+				else if(choice == 8)
 				{
 					System.out.println("Please enter current player turn (1-4)");
 					int currentTurn = scan.nextInt();
@@ -219,6 +224,7 @@ public class main {
 	                    {
 	                    	System.out.println("No more cards. Calculating ");
 	                    	ge.DetermineWinner();
+	                    	Continue = false;
 	                    }
 						if(count == 0)
 						{

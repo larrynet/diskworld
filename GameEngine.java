@@ -107,195 +107,209 @@ public class GameEngine implements Serializable
 		}
 	}
 	
-	
 	/**
 	 * Play city area effect card
 	 * @param player
 	 */
 	public void ActivateCityAreaEffect(int player)
     {
-        //traverse city area list and activate all the effect only if there is no demon
-        for(int i=0; i<ListPlayer.get(player).ListCityAreaCards.size(); i++)
-        {
-        	//play city area only if it is desactivated
-        	if(!ListPlayer.get(player).ListCityAreaCards.get(i).IsEffectActivate())
-        	{
-        		//check if the area is occupied with a demon
-        		String CityAreaName = ListPlayer.get(player).ListCityAreaCards.get(i).GetName();
-                Area CityArea = null;
-                
-                for(Area eachArea : GameBoard.ListArea)
-                {
-                	if(eachArea.GetName().compareTo(CityAreaName) == 0)
-                	{
-                		CityArea = eachArea;
-                		break;
-                	}
-                	
-                }
-                		
-                boolean HasDemon = (CityArea.GetDemonCount()>0);
-                Scanner scan = new Scanner(System.in);
-                if(!HasDemon)
-                {
-                    if(CityArea.Name.compareToIgnoreCase("The Scours") == 0)
-                    {
-                        System.out.println("Do you want to play the effect of <The Scours> (exchange a card for 2$) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                            System.out.println("Enter card index to discard");
-                            int cIndex = scan.nextInt();
-                            ListPlayer.get(player).PlayerCards.remove(cIndex);
-                            ListPlayer.get(player).AddToMoney(2);
-                            GameBoard.DeductFromBank(2);
-                            ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("Small Gods") == 0)
-                    {
-                        //defense effect
-                    	System.out.println("Player has the Small Gods city area cards but it has no effect per turn");
-                    }
-                    else if(CityArea.Name.contains("Landing"))
-                    {
-                        System.out.println("Do you want to play the effect of <Dragon's Landing> (get 2$ from bank) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                            ListPlayer.get(player).AddToMoney(2);
-                            GameBoard.DeductFromBank(2);
-                            ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("Unreal Estate") == 0)
-                    {
-                    	System.out.println("Do you want to play the effect of <Unreal Estate> (Discard a card and fetch one) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                        	System.out.println("Enter card index to discard");
-                            int cIndex = scan.nextInt();
-                            ListPlayer.get(player).PlayerCards.remove(cIndex);
-                            
-                            //fetch a card
-                            Cards c = CardManager.GetCard(CardType.GreenCards);
-                            if(c == null)
-                            	 c = CardManager.GetCard(CardType.BrownCards);
-                            ListPlayer.get(player).PlayerCards.add(c);
-                            ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("Seven Sleepers") == 0)
-                    {
-                         System.out.println("Do you want to play the effect of <Seven Sleepers> (get 3$ from bank) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                            ListPlayer.get(player).AddToMoney(3);
-                            GameBoard.DeductFromBank(3);
-                            ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("Isle of Gods") == 0)
-                    {
-                    	System.out.println("Do you want to play the effect of <Isle of Gods> (Pay 2$ to remove a troublemaker) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                        	System.out.println("Enter area index to remove troublemaker");
-                            int Area = scan.nextInt();
-                     
-                            ListPlayer.get(player).DeductFromMoney(2);
-                            GameBoard.AddToBank(2);
-                            
-                            //remove troublemaker
-                            GameBoard.Removetrouble(Area);
-                            ListPlayer.get(player).DisableStatusCityArea(i);
-                            
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("Longwall") == 0)
-                    {
-                        System.out.println("Do you want to play the effect of <Longwall> (get 1$ from bank) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                            ListPlayer.get(player).AddToMoney(1);
-                            GameBoard.DeductFromBank(1);
-                            ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("Dimwell") == 0)
-                    {
-                    	//5 7 8 9
-                    	System.out.println("Do you want to play the effect of <Dimwell> (pay 3$ to place minion in Dimwell or adjacent area) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                        	System.out.println("Enter the area index where you want to put minion. Dimwell index is 8, Longwall index is 9, The Scours index is 5 and the Shades index is 7.");
-                        	int Area = scan.nextInt();
-                        	GameBoard.PlaceMinion(Area, ListPlayer.get(player));
-                        	ListPlayer.get(player).DeductFromMoney(3);
-                        	ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("The Hippo") == 0)
-                    {
-                    	System.out.println("Do you want to play the effect of <The Hippo> (get 2$ from bank) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                            ListPlayer.get(player).AddToMoney(2);
-                            GameBoard.DeductFromBank(2);
-                            ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("Nap Hill") == 0)
-                    {
-                    	System.out.println("Do you want to play the effect of <Nap Hill> (get 1$ from bank) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                            ListPlayer.get(player).AddToMoney(1);
-                            GameBoard.DeductFromBank(1);
-                            ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("Dolly Sisters") == 0)
-                    {
-                    	System.out.println("Do you want to play the effect of <Dolly Sisters> (pay 3$ to place minion in Dolly Sisters or adjacent area) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                        	System.out.println("Enter the area index where you want to put minion. Dolly Sisters index is 1, Unreal Estate index is 2 and Nap Hill index is 12.");
-                        	int Area = scan.nextInt();
-                        	GameBoard.PlaceMinion(Area, ListPlayer.get(player));
-                        	ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                    else if(CityArea.Name.compareToIgnoreCase("The Shades") == 0)
-                    {
-                    	System.out.println("Do you want to play the effect of <The Shades> (Place troublemaker in The Shades or adjacent area) (yes or no)?");
-                        String answer = scan.next();
-                        if(answer.compareToIgnoreCase("yes") == 0)
-                        {
-                        	System.out.println("Enter the area index where you want to put minion. The Shades index is 7, The Scours index is 6, Dimwell index is 8 and The Hippo index is 6.");
-                        	int Area = scan.nextInt();
-                        	GameBoard.PlaceTroubleMarker(Area);
-                        	ListPlayer.get(player).DisableStatusCityArea(i);
-                        }
-                    }
-                }
-                else //has demon 
-                	this.Print("Area has demon in it. Can't play current CityArea cards");
-        	}
-        	else
-        	{
-        		this.Print("City Area Card " + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " has already been played");
-        	}
-            
-        }
+		Scanner scan = new Scanner(System.in);
+		if(DoesPlayerHasCityArea(player))
+		{
+			System.out.println("Player " + player + " city area card available to play: ");
+			
+			//traverse city area list and activate all the effect only if there is no demon
+	        for(int i=0; i<ListPlayer.get(player).ListCityAreaCards.size(); i++)
+	        {
+	        	//play city area only if it is desactivated
+	        	if(!ListPlayer.get(player).ListCityAreaCards.get(i).IsEffectActivate())
+	        	{
+	        		System.out.println("City Area card" + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " is available. Would you like to play it?");
+	        		String WantPlayCard = scan.next();
+	        		if(WantPlayCard.compareToIgnoreCase("yes") == 0)
+	        		{
+
+		        		//check if the area is occupied with a demon
+		        		String CityAreaName = ListPlayer.get(player).ListCityAreaCards.get(i).GetName();
+		                Area CityArea = null;
+		                
+		                for(Area eachArea : GameBoard.ListArea)
+		                {
+		                	if(eachArea.GetName().compareTo(CityAreaName) == 0)
+		                	{
+		                		CityArea = eachArea;
+		                		break;
+		                	}
+		                	
+		                }
+		                		
+		                boolean HasDemon = (CityArea.GetDemonCount()>0);
+		                
+		                if(!HasDemon)
+		                {
+		                    if(CityArea.Name.compareToIgnoreCase("The Scours") == 0)
+		                    {
+		                        System.out.println("Do you want to play the effect of <The Scours> (exchange a card for 2$) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                            System.out.println("Enter card index to discard");
+		                            int cIndex = scan.nextInt();
+		                            ListPlayer.get(player).PlayerCards.remove(cIndex);
+		                            ListPlayer.get(player).AddToMoney(2);
+		                            GameBoard.DeductFromBank(2);
+		                            ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("Small Gods") == 0)
+		                    {
+		                        //defense effect
+		                    	System.out.println("Player has the Small Gods city area cards but it has no effect per turn");
+		                    }
+		                    else if(CityArea.Name.contains("Landing"))
+		                    {
+		                        System.out.println("Do you want to play the effect of <Dragon's Landing> (get 2$ from bank) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                            ListPlayer.get(player).AddToMoney(2);
+		                            GameBoard.DeductFromBank(2);
+		                            ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("Unreal Estate") == 0)
+		                    {
+		                    	System.out.println("Do you want to play the effect of <Unreal Estate> (Discard a card and fetch one) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                        	System.out.println("Enter card index to discard");
+		                            int cIndex = scan.nextInt();
+		                            ListPlayer.get(player).PlayerCards.remove(cIndex);
+		                            
+		                            //fetch a card
+		                            Cards c = CardManager.GetCard(CardType.GreenCards);
+		                            if(c == null)
+		                            	 c = CardManager.GetCard(CardType.BrownCards);
+		                            ListPlayer.get(player).PlayerCards.add(c);
+		                            ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("Seven Sleepers") == 0)
+		                    {
+		                         System.out.println("Do you want to play the effect of <Seven Sleepers> (get 3$ from bank) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                            ListPlayer.get(player).AddToMoney(3);
+		                            GameBoard.DeductFromBank(3);
+		                            ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("Isle of Gods") == 0)
+		                    {
+		                    	System.out.println("Do you want to play the effect of <Isle of Gods> (Pay 2$ to remove a troublemaker) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                        	System.out.println("Enter area index to remove troublemaker");
+		                            int Area = scan.nextInt();
+		                     
+		                            ListPlayer.get(player).DeductFromMoney(2);
+		                            GameBoard.AddToBank(2);
+		                            
+		                            //remove troublemaker
+		                            GameBoard.Removetrouble(Area);
+		                            ListPlayer.get(player).DisableStatusCityArea(i);
+		                            
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("Longwall") == 0)
+		                    {
+		                        System.out.println("Do you want to play the effect of <Longwall> (get 1$ from bank) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                            ListPlayer.get(player).AddToMoney(1);
+		                            GameBoard.DeductFromBank(1);
+		                            ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("Dimwell") == 0)
+		                    {
+		                    	//5 7 8 9
+		                    	System.out.println("Do you want to play the effect of <Dimwell> (pay 3$ to place minion in Dimwell or adjacent area) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                        	System.out.println("Enter the area index where you want to put minion. Dimwell index is 8, Longwall index is 9, The Scours index is 5 and the Shades index is 7.");
+		                        	int Area = scan.nextInt();
+		                        	GameBoard.PlaceMinion(Area, ListPlayer.get(player));
+		                        	ListPlayer.get(player).DeductFromMoney(3);
+		                        	ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("The Hippo") == 0)
+		                    {
+		                    	System.out.println("Do you want to play the effect of <The Hippo> (get 2$ from bank) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                            ListPlayer.get(player).AddToMoney(2);
+		                            GameBoard.DeductFromBank(2);
+		                            ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("Nap Hill") == 0)
+		                    {
+		                    	System.out.println("Do you want to play the effect of <Nap Hill> (get 1$ from bank) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                            ListPlayer.get(player).AddToMoney(1);
+		                            GameBoard.DeductFromBank(1);
+		                            ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("Dolly Sisters") == 0)
+		                    {
+		                    	System.out.println("Do you want to play the effect of <Dolly Sisters> (pay 3$ to place minion in Dolly Sisters or adjacent area) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                        	System.out.println("Enter the area index where you want to put minion. Dolly Sisters index is 1, Unreal Estate index is 2 and Nap Hill index is 12.");
+		                        	int Area = scan.nextInt();
+		                        	GameBoard.PlaceMinion(Area, ListPlayer.get(player));
+		                        	ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                    else if(CityArea.Name.compareToIgnoreCase("The Shades") == 0)
+		                    {
+		                    	System.out.println("Do you want to play the effect of <The Shades> (Place troublemaker in The Shades or adjacent area) (yes or no)?");
+		                        String answer = scan.next();
+		                        if(answer.compareToIgnoreCase("yes") == 0)
+		                        {
+		                        	System.out.println("Enter the area index where you want to put minion. The Shades index is 7, The Scours index is 6, Dimwell index is 8 and The Hippo index is 6.");
+		                        	int Area = scan.nextInt();
+		                        	GameBoard.PlaceTroubleMarker(Area);
+		                        	ListPlayer.get(player).DisableStatusCityArea(i);
+		                        }
+		                    }
+		                }
+		                else //has demon 
+		                	this.Print("Area has demon in it. Can't play current CityArea cards");
+	        		}
+	        		
+	        	}
+	        	else
+	        	{
+	        		this.Print("City Area Card " + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " has already been played");
+	        	}
+	            
+	        }
+		}
+		else
+			System.out.println("Player " + player + " does NOT have a city area card available to play");
         
     }
     
@@ -504,6 +518,10 @@ public class GameEngine implements Serializable
   
         if(BelongToException(CardPlayed))
         {
+
+            //activating the area effect
+            ActivateCityAreaEffect(player);
+    		
         	// *************************** CMOT Dibbler ********************************
             if(CardName.equalsIgnoreCase("CMOT Dibbler"))
             {
@@ -798,14 +816,15 @@ public class GameEngine implements Serializable
         	//traverse each action
         	for(int actionCount=0; actionCount<lstCardActions.size(); actionCount++)
         	{
+        		ActivateCityAreaEffect(player);
         		//ask user to see if he wants to play city area
-        		System.out.println("Before we continue, would you like to activate city area cards player " + (player+1));
+        		/*System.out.println("Before we continue, would you like to activate city area cards player " + (player+1));
 				String ActivateArea = scan.next();
 				if(ActivateArea.compareToIgnoreCase("yes") == 0)
 				{
 					//activating the area effect
                     ActivateCityAreaEffect(player);
-				}
+				}*/
         		currentEffect = lstCardActions.get(actionCount);
         		//traverse the verb
                 for(int verbCount=0; verbCount<currentEffect.Verb.size(); verbCount++)
@@ -2622,6 +2641,9 @@ public class GameEngine implements Serializable
             
             
                 } //end-for
+				//NOCOMMIT
+				//activating the area effect
+                ActivateCityAreaEffect(player);
         	}
         	
         } //else for normal verb
