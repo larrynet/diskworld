@@ -4238,38 +4238,47 @@ public class GameEngine implements Serializable
 	    
 	    Colors PlayerColor = Colors.values()[ListPlayer.size()+1];
 	    
-	    List<Pieces> ListMinions = new ArrayList<Pieces>();
-        List<Pieces> ListBuildings = new ArrayList<Pieces>();
+	    List<Pieces> ListMinions0 = new ArrayList<Pieces>();
+        List<Pieces> ListBuildings0 = new ArrayList<Pieces>();
+        
+        List<Pieces> ListMinions1 = new ArrayList<Pieces>();
+        List<Pieces> ListBuildings1 = new ArrayList<Pieces>();
+        
+        List<Pieces> ListMinions2 = new ArrayList<Pieces>();
+        List<Pieces> ListBuildings2 = new ArrayList<Pieces>();
+        
+        List<Pieces> ListMinions3 = new ArrayList<Pieces>();
+        List<Pieces> ListBuildings3 = new ArrayList<Pieces>();
+        
+        
   	    int PlayerMinionTotal = 4;
   	    int PlayerBuildingTotal = 5;
   	    int PlayerBank = 15;
         for(int MinionCount = 0; MinionCount < PlayerMinionTotal; ++MinionCount)
-      	   ListMinions.add(new Pieces(PieceType.Minion, PlayerColor));
+      	   ListMinions0.add(new Pieces(PieceType.Minion, PlayerColor));
       	
         for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
-        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
+        	ListBuildings0.add(new Pieces(PieceType.Building, PlayerColor));
         
         //Add player 0
-        Player p0 = new Player(0, Vetinari, PlayerColor, PlayerHand0, ListMinions, ListBuildings);
+        Player p0 = new Player(0, Vetinari, PlayerColor, PlayerHand0, ListMinions0, ListBuildings0);
         p0.AddToMoney(PlayerBank-10);
         p0.AddCityAreayCard(CardManager.SearchCityArea("Dimwell"));
 	    ListPlayer.add(p0);
 	    	    
 	    //player 1
-	    ListMinions.clear();
-	    ListBuildings.clear();
 	    PlayerColor = Colors.values()[ListPlayer.size()+1];
 	    PlayerMinionTotal = 8;
   	    PlayerBuildingTotal = 3;
   	    PlayerBank = 22;
   	    
         for(int MinionCount = 0; MinionCount < PlayerMinionTotal; ++MinionCount)
-      	   ListMinions.add(new Pieces(PieceType.Minion, PlayerColor));
+      	   ListMinions1.add(new Pieces(PieceType.Minion, PlayerColor));
       	
         for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
-        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
+        	ListBuildings1.add(new Pieces(PieceType.Building, PlayerColor));
         
-        Player p1 = new Player(1, Chrysoprase, PlayerColor, PlayerHand1, ListMinions, ListBuildings);
+        Player p1 = new Player(1, Chrysoprase, PlayerColor, PlayerHand1, ListMinions1, ListBuildings1);
         p1.AddToMoney(PlayerBank-10);
         p1.AddCityAreayCard(CardManager.SearchCityArea("The Scours"));
         p1.AddCityAreayCard(CardManager.SearchCityArea("The Shades"));
@@ -4277,38 +4286,34 @@ public class GameEngine implements Serializable
 	    ListPlayer.add(p1);
 	    
 	    //player 2
-	    ListMinions.clear();
-	    ListBuildings.clear();
 	    PlayerColor = Colors.values()[ListPlayer.size()+1];
 	    PlayerMinionTotal = 8;
   	    PlayerBuildingTotal = 6;
   	    PlayerBank = 17;
   	    
         for(int MinionCount = 0; MinionCount < PlayerMinionTotal; ++MinionCount)
-      	   ListMinions.add(new Pieces(PieceType.Minion, PlayerColor));
+      	   ListMinions2.add(new Pieces(PieceType.Minion, PlayerColor));
       	
         for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
-        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
+        	ListBuildings2.add(new Pieces(PieceType.Building, PlayerColor));
         
-        Player p2 = new Player(2, Arms, PlayerColor, PlayerHand2, ListMinions, ListBuildings);
+        Player p2 = new Player(2, Arms, PlayerColor, PlayerHand2, ListMinions2, ListBuildings2);
         p2.AddToMoney(PlayerBank-10);
 	    ListPlayer.add(p2);
 	    
 	    //Player 3
-	    ListMinions.clear();
-	    ListBuildings.clear();
 	    PlayerColor = Colors.values()[ListPlayer.size()+1];
 	    PlayerMinionTotal = 3;
   	    PlayerBuildingTotal = 5;
   	    PlayerBank = 18;
   	    
         for(int MinionCount = 0; MinionCount < PlayerMinionTotal; ++MinionCount)
-      	   ListMinions.add(new Pieces(PieceType.Minion, PlayerColor));
+      	   ListMinions3.add(new Pieces(PieceType.Minion, PlayerColor));
       	
         for(int BuildingCount = 0; BuildingCount < PlayerBuildingTotal; ++BuildingCount)
-        	ListBuildings.add(new Pieces(PieceType.Building, PlayerColor));
+        	ListBuildings3.add(new Pieces(PieceType.Building, PlayerColor));
         
-        Player p3 = new Player(3, Worde, PlayerColor, PlayerHand3, ListMinions, ListBuildings);
+        Player p3 = new Player(3, Worde, PlayerColor, PlayerHand3, ListMinions3, ListBuildings3);
         p3.AddToMoney(PlayerBank-10);
         p3.AddCityAreayCard(CardManager.SearchCityArea("The Hippo"));
 	    ListPlayer.add(p3);
