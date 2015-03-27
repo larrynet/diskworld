@@ -420,15 +420,16 @@ public class Area implements Serializable
 
 		public boolean AreaControllled(Colors color)
 		{
-			//if player have building then he controls area
-			if (this.IsBuilt && this.Building.GetPieceColor() == color)
-			{
-				return true;
-			}
-			else if (this.ListDemons.size() > 0)
+			//An area with a demon cannot be controlled
+			if (this.ListDemons.size() > 0)
 			{
 				return false;
 			}
+			else if (this.IsBuilt && this.Building.GetPieceColor() == color)
+			{
+				return true;
+			}
+
 			//Count minions
 			else
 			{
@@ -446,18 +447,18 @@ public class Area implements Serializable
 				else
 				{
 					int countThis = this.GetMinionCount(color);
-					
+
 					if (countThis > 0)
 					{
 						int countRed = this.GetMinionCount(Colors.Red);
 						int countBlue = this.GetMinionCount(Colors.Blue);
 						int countYellow= this.GetMinionCount(Colors.Yellow);
 						int countGreen = this.GetMinionCount(Colors.Green);
-						
+
 						int [] ColorCount = {countRed, countRed, countYellow, countGreen};
-						
+
 						int maxVal = 0;
-						
+
 						for (int i : ColorCount)
 						{
 							if (i >= maxVal)
@@ -465,7 +466,7 @@ public class Area implements Serializable
 								maxVal = i;
 							}
 						}
-						
+
 						return (countThis == maxVal) ;
 					}
 					else
@@ -473,8 +474,8 @@ public class Area implements Serializable
 						return false;
 					}
 				}
-					
-				
+
+
 			}
 			
 		}
