@@ -479,7 +479,7 @@ public class Area implements Serializable
 			
 		}
 		
-		private Colors BuildingColor()
+		public Colors BuildingColor()
 		{
 			if (this.IsBuilt)
 			{
