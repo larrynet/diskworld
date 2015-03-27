@@ -167,7 +167,7 @@ verb=get; object=1$ times number of discarded card;condition
 symbol=S,B
 
 name=Sacharissa Cripslock
-verb=get; object=1$ for each trouble maker on board;condition
+verb=get; object=1$ for each troublemaker in board
 symbol=S,M
 
 name=Rosie Palm

@@ -108,28 +108,31 @@ public class Player implements Serializable {
 		BrownCards b = null;
 		List<String> lstSymbols = null;
 		
-		
-		Cards _card = PlayerCards.get(PlayerNumber);
-		if (_card.GetCardType() == CardType.GreenCards)
+		for(int c=0; c<PlayerCards.size(); c++)
 		{
-			g = (GreenCards)_card;
-			lstSymbols = g.GetSymbol();
-		}
-		else if ((_card.GetCardType() == CardType.BrownCards))
-		{
-			b = (BrownCards)_card;
-			lstSymbols = b.GetSymbol();
-		}
-		for(int sIterator = 0; (sIterator < lstSymbols.size()); sIterator++)
-		{
-			String currentSymbol = lstSymbols.get(sIterator);
-			
-			if(currentSymbol.compareToIgnoreCase("I") == 0)
+			Cards _card = PlayerCards.get(c);
+			if (_card.GetCardType() == CardType.GreenCards)
 			{
-				return true;
+				g = (GreenCards)_card;
+				lstSymbols = g.GetSymbol();
 			}
-			
+			else if ((_card.GetCardType() == CardType.BrownCards))
+			{
+				b = (BrownCards)_card;
+				lstSymbols = b.GetSymbol();
+			}
+			for(int sIterator = 0; (sIterator < lstSymbols.size()); sIterator++)
+			{
+				String currentSymbol = lstSymbols.get(sIterator);
+				
+				if(currentSymbol.compareToIgnoreCase("I") == 0)
+				{
+					return true;
+				}
+				
+			}
 		}
+		
 		
 		return false;
 	}

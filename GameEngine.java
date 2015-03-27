@@ -1529,6 +1529,7 @@ public class GameEngine implements Serializable
                                     if(GameBoard.ListArea.get(a).HasTroubleMaker())
                                         TotalTroubleMaker++;
                                 }
+                                System.out.println("There is " + TotalTroubleMaker + " troublemaker in the field. PLayer will earn " + amount*TotalTroubleMaker + " dollars. THat same amount will be deducted from the bank.");
                                 GameBoard.DeductFromBank(amount*TotalTroubleMaker);
                         		ListPlayer.get(player).AddToMoney(amount*TotalTroubleMaker);
                         		return true;
