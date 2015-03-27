@@ -3516,7 +3516,7 @@ public class GameEngine implements Serializable
 		//Chrysoprase
 		else if (CardName.contains("Chrysoprase"))
 		{
-			int CurrentPlayerValue = GetPlayerPoints(CurrentPlayer);
+			int CurrentPlayerValue = GetPlayerMoney(CurrentPlayer);
 			this.Print("Current player " + CurrentPlayer+1 + " Points: " + CurrentPlayerValue);
 			if(CurrentPlayerValue >= 50)
 			//if (ListPlayer.get(this.CurrentPlayer).GetMoneyCount()>=50 )//loan and building cost should be considered later
@@ -3645,6 +3645,29 @@ public class GameEngine implements Serializable
     	System.out.println(player.GetMoneyCount());
     }
     
+    
+    /**
+     * Get Player total money . Bank - Loan + Building
+     */
+    private int GetPlayerMoney(int PlayerIndex)
+    {
+    	int moneyCount = 0;
+    	Player thisPlayer = this.ListPlayer.get(PlayerIndex);
+    	Colors thisColor = thisPlayer.GetColor();
+    	
+    	moneyCount = thisPlayer.GetMoneyCount() - thisPlayer.TotalLoan();
+    	
+    	for (Area area : this.GameBoard.ListArea)
+    	{
+    		if (area.GetIsBuilt() && area.BuildingColor() == thisColor)
+    		{
+    			moneyCount += area.GetAreaCost();
+    		}
+    	}
+    	
+    	return moneyCount;
+    	
+    }
     
     /**
      * Assign die value to board 
