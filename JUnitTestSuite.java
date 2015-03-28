@@ -558,7 +558,9 @@ public class JUnitTestSuite {
 		ge.DetermineFirstPlayer();
 		int CurrentPlayerIndex = ge.GetCurrentPlayer();
 		
-        ge.PlaceTrollInEachArea(CurrentPlayerIndex);
+		for(int i=1; i<9; i++)
+			ge.PlaceTroubleMarker(i);
+        
 		CityAreaCards Riots = new CityAreaCards("Riots", 1, true, CardType.CityAreaCards); 
 		
 		//ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.remove(4);
@@ -577,10 +579,7 @@ public class JUnitTestSuite {
 		int CurrentPlayerIndex = ge.GetCurrentPlayer();
 		
         //put 2 buildings for player 0
-        ge.PlaceMinion(1, CurrentPlayerIndex);
-        ge.PlaceMinion(2, CurrentPlayerIndex);
-        ge.PlaceMinion(3, CurrentPlayerIndex);
-        
+        ge.PlaceBuildingInEachArea(0);
         int originalAmount = ge.GetPlayerBalance(CurrentPlayerIndex);
         
 		CityAreaCards Subsidence = new CityAreaCards("Subsidence", 1, true, CardType.CityAreaCards); 

@@ -2870,11 +2870,11 @@ public class GameEngine implements Serializable
             for(int i=0; i<TotalPlayer; i++)
             {
                 //TODO For each building in the board, pay 2$ or remove it
-            	for(int a=1; a<=GameBoard.ListArea.size(); a++)
+            	for(int a=0; a<GameBoard.ListArea.size(); a++)
             	{
             		if(GameBoard.ListArea.get(a).GetBuilding().GetPieceColor() == ListPlayer.get(i).GetColor())
             		{
-            			System.out.println("Building owned by player " + i + " is found. Would you like to pay 2$ to keep it? (yes/no)");
+            			System.out.println("Building owned by player " + (i+1) + " is found. Would you like to pay 2$ to keep it? (yes/no)");
             			String choice = scan.next();
             			if(choice.compareToIgnoreCase("yes") == 0)
             			{
