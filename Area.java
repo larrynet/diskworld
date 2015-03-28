@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 /**
  * @author Parinaz Barakhshan
- * @version 2.1
+ * @version 2.0
  */
 
 public class Area implements Serializable
@@ -201,6 +201,12 @@ public class Area implements Serializable
 				this.IsTrouble =true;				
 			
 		}
+		
+		public void AddMinionsInit(Pieces p) 
+		{	
+			ListMinions.add(p);
+		}
+		
 		
 		/**
 		 * @param p Piece of type minion
