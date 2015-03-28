@@ -2730,36 +2730,45 @@ public class GameEngine implements Serializable
                 CurrentDie = AreaAffected;
 
                 int [] NoAdjacentToRiver = {3, 6 };
+                
                 if(AreaAffected!=3 && AreaAffected!= 6)
                 {
                 	for(int EachPlayer= CurrentPlayer; EachPlayer<(CurrentPlayer+4); EachPlayer++)
-                    {
-                        if(EachPlayer > 4) EachPlayer=EachPlayer%4;
-                        //NOCOMMIT
-                        int[] ListAdjacentArea = GameBoard.ListArea.get(AreaAffected-1).GetAdjAreas();
-                        boolean userChoice= false;
-                        Scanner scan = new Scanner(System.in);
-                        while(!userChoice)
-                        {   
-                            for(int i=0; i<ListAdjacentArea.length; i++)
-                            {
+                	{
+                		if(EachPlayer > 4) EachPlayer=EachPlayer%4;
+                		//NOCOMMIT
 
-                        		System.out.println("Area " + ListAdjacentArea[i] + "is adjacent to " + AreaAffected + ". Would you like to move your minion there?");
-                                String chooseMove = scan.next();
-                                if(chooseMove.compareToIgnoreCase("yes") == 0)
-                                {
-                                	
-                                    GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(EachPlayer).GetColor());
-                                    GameBoard.PlaceMinion(AreaAffected, ListPlayer.get(EachPlayer));
-                                    userChoice = true;
-                                    break;
-                                }
-                                
-                            }
-                        }
-                        
-                        
-                    }
+                		if (this.GameBoard.CountPlayerMinions(this.ListPlayer.get(EachPlayer).GetColor()) > 0)
+                		{
+
+                			int[] ListAdjacentArea = GameBoard.ListArea.get(AreaAffected-1).GetAdjAreas();
+
+                			boolean userChoice= false;
+
+                			Scanner scan = new Scanner(System.in);
+
+                			while(!userChoice)
+                			{   
+                				for(int i=0; i<ListAdjacentArea.length; i++)
+                				{
+
+                					System.out.println("Area " + ListAdjacentArea[i] + "is adjacent to " + AreaAffected + ". Would you like to move your minion there?");
+                					String chooseMove = scan.next();
+                					if(chooseMove.compareToIgnoreCase("yes") == 0)
+                					{
+
+                						GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(EachPlayer).GetColor());
+                						GameBoard.PlaceMinion(AreaAffected, ListPlayer.get(EachPlayer));
+                						userChoice = true;
+                						break;
+                					}
+
+                				}
+                			}
+                		} //END IFF
+
+
+                	}
                 }
                 
             }
@@ -2791,8 +2800,10 @@ public class GameEngine implements Serializable
                 {
                     ContinueRolling = true;
                     for(int i=0; i<TotalPlayer; i++)
+                    {
                         GameBoard.RemoveBuilding(AffectedArea-1, ListPlayer.get(i));
-                        
+                        Print("Removed building in" + "Area affected " + AffectedArea + " - " + GameBoard.ListArea.get(AffectedArea-1).GetName());
+                    }  
                     PrevArea = AffectedArea;
                 } 
                 else
