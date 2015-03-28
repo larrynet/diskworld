@@ -220,14 +220,16 @@ public class GameEngine implements Serializable
 		                        String answer = scan.next();
 		                        if(answer.compareToIgnoreCase("yes") == 0)
 		                        {
-		                        	System.out.println("Enter area index to remove troublemaker");
-		                            int Area = scan.nextInt();
+		                        	RemoveTrouble(player);
+		                        	
+		                        	//System.out.println("Enter area index to remove troublemaker");
+		                            //int Area = scan.nextInt();
 		                     
 		                            ListPlayer.get(player).DeductFromMoney(2);
 		                            GameBoard.AddToBank(2);
 		                            
 		                            //remove troublemaker
-		                            GameBoard.Removetrouble(Area);
+		                            //GameBoard.Removetrouble(Area);
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                            
 		                        }
@@ -2948,6 +2950,9 @@ public class GameEngine implements Serializable
 		if (this.GameBoard.BoardHasTrouble())
 		{
 			
+			//Print board Status
+			this.GameBoard.PrintState();
+			
 			do
 			{
 				System.out.println("Please enter the Area index you want to remove the troublemaker.");
@@ -2959,6 +2964,8 @@ public class GameEngine implements Serializable
 			}while(NoTroubleArea);
 			
 		    ActionSuccess = this.GameBoard.Removetrouble(AreaNumber);
+		    
+		    this.PrintAreaState(AreaNumber);
 	        
 		}
 		else
