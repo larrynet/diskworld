@@ -3207,8 +3207,17 @@ public class GameEngine implements Serializable
 		
 		if(ActionSuccess)
 		{
-			CardManager.CityArea_Cards[AreaNumber-1].Status = false;
-			ListPlayer.get(player).AddCityAreayCard(CardManager.CityArea_Cards[AreaNumber-1]);
+			//search for the right city area cards
+			for(int i=0; i<CardManager.CityArea_Cards.length; i++)
+			{
+				if(CardManager.CityArea_Cards[i].GetName().compareTo(GameBoard.ListArea.get(AreaNumber-1).GetName()) == 0)
+				{
+					CardManager.CityArea_Cards[i].Status = false;
+					ListPlayer.get(player).AddCityAreayCard(CardManager.CityArea_Cards[i]);	
+				}
+					
+			}
+			
 		}
 			
 		return ActionSuccess;

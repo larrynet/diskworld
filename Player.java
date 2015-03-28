@@ -336,7 +336,7 @@ public class Player implements Serializable {
 	 */
 	public void GetPlayerState()
 	{
-		System.out.println("Player " + this.PlayerNumber + "'s current invetory");
+		System.out.println("Player " + (this.PlayerNumber+1) + "'s current invetory");
 		System.out.println(this.GetMinionCount() + " minions, " + this.GetBuildingCount() + " buildings " + this.GetMoneyCount() + " Ankh-Morpork dollars");
 		System.out.println();
 		
