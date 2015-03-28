@@ -155,6 +155,24 @@ public class Board implements Serializable {
 	/**
 	 * @param AreaNumber
 	 * @param player
+	 * @return
+	 */
+	public boolean PlaceBuildingInitial(int AreaNumber,Player player)
+	{
+		if(player.GetBuildingCount()!=0)
+		{
+			ListArea.get(AreaNumber-1).AddBuildingInitial(player.PlaceBuilding());
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	/**
+	 * @param AreaNumber
+	 * @param player
 	 */
 	public void RemoveBuilding(int AreaNumber, Player player)
 	{

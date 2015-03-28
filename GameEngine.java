@@ -2798,8 +2798,8 @@ public class GameEngine implements Serializable
             System.out.println("Removing building in Area " + AreaAffected1 + ".");
             for(int i=0; i<TotalPlayer; i++)
             {
-                GameBoard.RemoveBuilding(AreaAffected0, ListPlayer.get(i));
-                GameBoard.RemoveBuilding(AreaAffected1, ListPlayer.get(i));
+                GameBoard.RemoveBuilding(AreaAffected0-1, ListPlayer.get(i));
+                GameBoard.RemoveBuilding(AreaAffected1-1, ListPlayer.get(i));
             }
         }
         else if(cardName.compareToIgnoreCase("Mysterious Murders") == 0)
@@ -3709,7 +3709,8 @@ public class GameEngine implements Serializable
     		
 	        for(int i = x ;i<=GameBoard.ListArea.size(); i++)
 	        {
-	            GameBoard.PlaceBuilding(i,ListPlayer.get(player+j));
+	            //GameBoard.PlaceBuilding(i,ListPlayer.get(player+j));
+	        	GameBoard.PlaceBuildingInitial(i,ListPlayer.get(player+j));
 	        }
     	}
     }

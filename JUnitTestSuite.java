@@ -449,8 +449,9 @@ public class JUnitTestSuite {
 		CityAreaCards Earthquake = new CityAreaCards("Earthquake", 1, true, CardType.CityAreaCards); 
 		
         //Used in testing only - should be 12
-		ge.RemoveAllTroubleMaker();
-		ge.PlaceMinionInEachArea(CurrentPlayerIndex);
+		
+		//ge.PlaceMinionInEachArea(CurrentPlayerIndex);
+		//ge.RemoveAllTroubleMaker();
 		ge.PlaceBuildingInEachArea(CurrentPlayerIndex);
 		
 		//should show true on all arae
@@ -481,7 +482,7 @@ public class JUnitTestSuite {
 		
 		int TotalBuilding = ge.GetBuildingCount();
         
-		assertTrue("Failed executing Earthquake event", (TotalBuilding==11));
+		assertTrue("Failed executing Explosion event", (TotalBuilding==11));
 	}
     
     //Roll the die to see where it started and continue rolling to see where it spreads
