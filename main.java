@@ -94,11 +94,11 @@ public class main {
 					
 					System.out.println("Player 1 cards:\n");
 					ge.ShowCard(0);
-					System.out.println("Player 2 cards:\n");
+					System.out.println("\nPlayer 2 cards:\n");
 					ge.ShowCard(1);
-					System.out.println("Player 3 cards:\n");
+					System.out.println("\nPlayer 3 cards:\n");
 					ge.ShowCard(2);
-					System.out.println("Player 4 cards:\n");
+					System.out.println("\nPlayer 4 cards:\n");
 					ge.ShowCard(3);
 				}
 				else if(choice == 6)
