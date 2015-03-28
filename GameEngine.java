@@ -121,8 +121,16 @@ public class GameEngine implements Serializable
 			//traverse city area list and activate all the effect only if there is no demon
 	        for(int i=0; i<ListPlayer.get(player).ListCityAreaCards.size(); i++)
 	        {
+	        	boolean NoDemon = false;
+	        	for(Area _area: GameBoard.ListArea)
+	        	{
+	        		if(_area.GetName().compareToIgnoreCase(ListPlayer.get(player).ListCityAreaCards.get(i).GetName()) == 0)
+	        		{
+	        			NoDemon = (_area.GetDemonCount()==0);
+	        		}
+	        	}
 	        	//play city area only if it is desactivated
-	        	if(!ListPlayer.get(player).ListCityAreaCards.get(i).IsEffectActivate())
+	        	if(!ListPlayer.get(player).ListCityAreaCards.get(i).IsEffectActivate() && NoDemon)
 	        	{
 	        		System.out.println("City Area card" + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " is available. Would you like to play it?");
 	        		String WantPlayCard = scan.next();
@@ -362,72 +370,77 @@ public class GameEngine implements Serializable
 		for(int sIterator = 0; ActionStatus && (sIterator < lstSymbols.size()); sIterator++)
 		{
 			String currentSymbol = lstSymbols.get(sIterator);
-			
-			System.out.println("Current symbol is " + currentSymbol+". Would you like to play it?");
-			String PlaySymbol = scan.next();
-			if(PlaySymbol.compareToIgnoreCase("yes") == 0)
+			//if Random Event, we have to play right away without asking
+			if(currentSymbol.compareToIgnoreCase("RE") == 0)
 			{
-				//Place a building
-				if(currentSymbol.compareToIgnoreCase("B") == 0)
+				ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex, false);
+				
+			}
+			else
+			{
+
+				System.out.println("Current symbol is " + currentSymbol+". Would you like to play it?");
+				String PlaySymbol = scan.next();
+				
+				if(PlaySymbol.compareToIgnoreCase("yes") == 0)
 				{
-					ActionStatus = PutBuilding(CurrentPlayerIndex);
-				}
-				//Place a minion
-				else if(currentSymbol.compareToIgnoreCase("M") == 0)
-				{
-					ActionStatus = PutMinion(CurrentPlayerIndex);
-				}
-				//Assassination
-				else if(currentSymbol.compareToIgnoreCase("A") == 0)
-				{
-					ActionStatus = Assassinate(CurrentPlayerIndex);
-				}
-				//Remove one trouble marker
-				else if(currentSymbol.compareToIgnoreCase("RT") == 0)
-				{
-					ActionStatus = RemoveTrouble(CurrentPlayerIndex);
-				}
-				//Take money
-				else if(currentSymbol.contains("T("))
-				{
-					this.GetPlayerBalance("Current Balance", this.ListPlayer.get(CurrentPlayerIndex));
-					
-					ActionStatus = PayPlayer(CurrentPlayerIndex, Character.getNumericValue(currentSymbol.charAt(2)));
-					
-					this.GetPlayerBalance("New Balance", this.ListPlayer.get(CurrentPlayerIndex));
-				}
-				//Random Event
-				else if(currentSymbol.compareToIgnoreCase("RE") == 0)
-				{
-					ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex, false);
-				}
-				//Play another card
-				else if(currentSymbol.compareToIgnoreCase("C") == 0)
-				{
-					DiscardCards.add(CardPlayed);
-					ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
-					
-					//Print Player Cards and Play next card
-					this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
-					System.out.println("What card do you want to play next ? (Enter index of card)");
-					
-					int newCard = scan.nextInt();
-					ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
-				}
-				//Interupt
-				else if(currentSymbol.compareToIgnoreCase("I") == 0)
-				{
-					System.out.println("Interrupt symbol has no effect. Oh well too late now :)");
-				}
-				//Scroll: Play action described in card
-				else if(currentSymbol.compareToIgnoreCase("S") == 0)
-				{
-					ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
-				}
-				//No such symbol
-				else
-				{
-	                System.out.println("Symbol " + currentSymbol + " is invalid. ");
+					//Place a building
+					if(currentSymbol.compareToIgnoreCase("B") == 0)
+					{
+						ActionStatus = PutBuilding(CurrentPlayerIndex);
+					}
+					//Place a minion
+					else if(currentSymbol.compareToIgnoreCase("M") == 0)
+					{
+						ActionStatus = PutMinion(CurrentPlayerIndex);
+					}
+					//Assassination
+					else if(currentSymbol.compareToIgnoreCase("A") == 0)
+					{
+						ActionStatus = Assassinate(CurrentPlayerIndex);
+					}
+					//Remove one trouble marker
+					else if(currentSymbol.compareToIgnoreCase("RT") == 0)
+					{
+						ActionStatus = RemoveTrouble(CurrentPlayerIndex);
+					}
+					//Take money
+					else if(currentSymbol.contains("T("))
+					{
+						this.GetPlayerBalance("Current Balance", this.ListPlayer.get(CurrentPlayerIndex));
+						
+						ActionStatus = PayPlayer(CurrentPlayerIndex, Character.getNumericValue(currentSymbol.charAt(2)));
+						
+						this.GetPlayerBalance("New Balance", this.ListPlayer.get(CurrentPlayerIndex));
+					}
+					//Play another card
+					else if(currentSymbol.compareToIgnoreCase("C") == 0)
+					{
+						DiscardCards.add(CardPlayed);
+						ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
+						
+						//Print Player Cards and Play next card
+						this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
+						System.out.println("What card do you want to play next ? (Enter index of card)");
+						
+						int newCard = scan.nextInt();
+						ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
+					}
+					//Interupt
+					else if(currentSymbol.compareToIgnoreCase("I") == 0)
+					{
+						System.out.println("Interrupt symbol has no effect. Oh well too late now :)");
+					}
+					//Scroll: Play action described in card
+					else if(currentSymbol.compareToIgnoreCase("S") == 0)
+					{
+						ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
+					}
+					//No such symbol
+					else
+					{
+		                System.out.println("Symbol " + currentSymbol + " is invalid. ");
+					}
 				}
 			}
 		}
@@ -4172,6 +4185,8 @@ public class GameEngine implements Serializable
   	    Area DragonLandingArea = GameBoard.ListArea.get(2);
   	    DragonLandingArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
   	    DragonLandingArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    DragonLandingArea.AddMinions(new Pieces(PieceType.TroubleMarker, Colors.None));
+  	    
   	    
   	    //SmallGods - empty
   	    

@@ -157,7 +157,7 @@ public class main {
                     	if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i).GetCardType() == CardType.GreenCards)
                     	{
                     		GreenCards CurrentGreenCard = (GreenCards)ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i);
-                    		String Title = "Player " + CurrentPlayerIndex + " - Card Index " + i;
+                    		String Title = "Player " + (CurrentPlayerIndex+1) + " - Card Index " + i;
                     		CurrentGreenCard.ShowImage(Title);
                     	}
                     	else if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i).GetCardType() == CardType.GreenCards)
