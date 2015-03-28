@@ -121,7 +121,7 @@ public class GameEngine implements Serializable
 			//traverse city area list and activate all the effect only if there is no demon
 	        for(int i=0; i<ListPlayer.get(player).ListCityAreaCards.size(); i++)
 	        {
-	        	boolean NoDemon = false;
+	        	boolean NoDemon = true;
 	        	for(Area _area: GameBoard.ListArea)
 	        	{
 	        		if(_area.GetName().compareToIgnoreCase(ListPlayer.get(player).ListCityAreaCards.get(i).GetName()) == 0)
@@ -311,7 +311,10 @@ public class GameEngine implements Serializable
 	        	}
 	        	else
 	        	{
-	        		this.Print("City Area Card " + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " has already been played");
+	        		if(!NoDemon)
+	        			this.Print("Area " + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " has a demon in it. City Area effect is neglected");
+	        		else
+	        			this.Print("City Area Card " + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " has already been played");
 	        	}
 	            
 	        }

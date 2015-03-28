@@ -205,7 +205,7 @@ public class Area implements Serializable
 		 */
 		public void AddMinions(Pieces p) 
 		{
-			if ((GetMinionCount(Colors.None)+(GetDemonCount())+(GetTrollCount()))>1 )
+			if ((GetMinionCount(Colors.None)+(GetDemonCount())+(GetTrollCount()))>0 )
 			{
 			  AddTroubleMaker(p);	
 			}
@@ -272,7 +272,7 @@ public class Area implements Serializable
 		public boolean RemoveTrolls() 
 		{  
 			//should I remove TroubleMarker?check if troublemarker is set then I unset it?
-			if(ListTrolls.size()>1)
+			if(ListTrolls.size()>0)
 			{
 				ListTrolls.remove(ListTrolls.size()-1);
 				
