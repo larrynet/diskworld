@@ -2982,17 +2982,17 @@ public class GameEngine implements Serializable
         	   choice  = scan.next();
         	   String message = "";
         	   
-        	   if (choice.equalsIgnoreCase("minion") && this.GameBoard.CountPlayerMinionsArea(Colors.None, AreaNumber) > 0)
+        	   if (choice.equalsIgnoreCase("minion") && this.GameBoard.CountPlayerMinionsArea(Colors.None, AreaNumber) == 0)
         	   {
         		   NoPiece = false;
         		   message = "Area has no minions";
         	   }
-        	   else if (choice.equalsIgnoreCase("demon") && this.GameBoard.AreaDemonCount(AreaNumber) > 0)
+        	   else if (choice.equalsIgnoreCase("demon") && this.GameBoard.AreaDemonCount(AreaNumber) == 0)
         	   {
         		   NoPiece = false;
         		   message = "Area has no demons";
         	   }
-        	   else if (choice.equalsIgnoreCase("troll") && this.GameBoard.AreatrollCount(AreaNumber) > 0)
+        	   else if (choice.equalsIgnoreCase("troll") && this.GameBoard.AreatrollCount(AreaNumber) == 0)
         	   {
         		   NoPiece = false;
         		   message = "Area has no trolls";
@@ -3518,7 +3518,7 @@ public class GameEngine implements Serializable
 		else if (CardName.contains("Chrysoprase"))
 		{
 			int CurrentPlayerValue = GetPlayerMoney(CurrentPlayer);
-			this.Print("Current player " + CurrentPlayer+1 + " Points: " + CurrentPlayerValue);
+			this.Print("Current player " + (CurrentPlayer + 1) + " Cash: " + CurrentPlayerValue);
 			if(CurrentPlayerValue >= 50)
 			//if (ListPlayer.get(this.CurrentPlayer).GetMoneyCount()>=50 )//loan and building cost should be considered later
 				WiningCondition=true;
@@ -3660,7 +3660,7 @@ public class GameEngine implements Serializable
     	
     	for (Area area : this.GameBoard.ListArea)
     	{
-    		if (area.GetIsBuilt() && area.BuildingColor() == thisColor)
+    		if (area.GetIsBuilt() && area.BuildingColor() == thisColor && area.GetDemonCount() == 0)
     		{
     			moneyCount += area.GetAreaCost();
     		}

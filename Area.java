@@ -227,7 +227,7 @@ public class Area implements Serializable
 		public boolean RemoveDemons() 
 		{  
 			//should I remove TroubleMarker?check if troublemarker is set then I unset it?
-			if(ListDemons.size()>1)
+			if(ListDemons.size()>0)
 		    {
 				ListDemons.remove(ListDemons.size()-1);
 				
