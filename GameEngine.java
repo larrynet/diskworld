@@ -3027,95 +3027,107 @@ public class GameEngine implements Serializable
         Scanner scan = new Scanner(System.in);
         
         
-        do
+        if (this.GameBoard.BoardHasTrouble())
         {
-            
+        	//Print State of board
+        	this.GameBoard.PrintState();
         	
         	do
         	{
-        		System.out.println("You are about to remove one minion or troll or demon. Please enter the Area index you want to do that. ");
-        		System.out.println("******Area cannot be empty *****");
-            
-        		AreaNumber = scan.nextInt();
-        		
-        	}while(this.GameBoard.EmptyArea(AreaNumber));
-        	
-            //Show Current Area Info
-           this.PrintAreaState(AreaNumber);
-            
-           String choice = "";
-           
-           do
-           {
-        	   System.out.println("Do you want to remove a troll, demon or minion?");
-        	   choice  = scan.next();
-        	   String message = "";
-        	   
-        	   if (choice.equalsIgnoreCase("minion") && this.GameBoard.CountPlayerMinionsArea(Colors.None, AreaNumber) == 0)
-        	   {
-        		   NoPiece = false;
-        		   message = "Area has no minions";
-        	   }
-        	   else if (choice.equalsIgnoreCase("demon") && this.GameBoard.AreaDemonCount(AreaNumber) == 0)
-        	   {
-        		   NoPiece = false;
-        		   message = "Area has no demons";
-        	   }
-        	   else if (choice.equalsIgnoreCase("troll") && this.GameBoard.AreatrollCount(AreaNumber) == 0)
-        	   {
-        		   NoPiece = false;
-        		   message = "Area has no trolls";
-        	   }
-        		
-        	   
-        	   this.Print(message);
-        	  
-           }while (NoPiece);
-           
-            if(choice.compareToIgnoreCase("demon") == 0)
-            {
-            	//To activate later
-                ActionSuccess = this.GameBoard.RemoveDemon( AreaNumber);
-                
-                Continue = !ActionSuccess;
-	
-            }
-            else if(choice.compareToIgnoreCase("troll") == 0)
-            {
-            	//to activate later
-                ActionSuccess = this.GameBoard.RemoveTroll( AreaNumber);
-                Continue = !ActionSuccess;
-            }
-            else if(choice.compareToIgnoreCase("minion") == 0)
-            {
-            	int PlayerIndex;
-            	
-                do
-                {
-                	
-	            	System.out.println("Please enter the player you want to remove the index from:");
-	            	System.out.println("You cannot assassinate your own minion.");
-	            	
-	                System.out.println(this.ShowPlayerIndexAndColor());
-	                
-	                PlayerIndex  = scan.nextInt();
-                
-                }while (PlayerIndex == player);
-                	
-                //To activate later
-                ActionSuccess = this.GameBoard.RemoveMinion( AreaNumber, this.ListPlayer.get(PlayerIndex).GetColor());
-                Continue = !ActionSuccess;
-            }
-            else
-            {
-                System.out.println("Invalid choice:  " + choice+". Please try again. ");
-            }
-        } while(Continue);
-		
-        //Show Current Area Info
-        this.PrintAreaState(AreaNumber);
-        
-		return ActionSuccess;
+
+
+        		do
+        		{
+        			System.out.println("You are about to remove one minion or troll or demon. Please enter the Area index you want to do that. ");
+        			System.out.println("******Area cannot be empty - Area has to have a trouble marker *****");
+
+        			AreaNumber = scan.nextInt();
+
+        		}while(this.GameBoard.EmptyArea(AreaNumber) || !this.GameBoard.AreaHasTrouble(AreaNumber));
+
+
+        		//Show Current Area Info
+        		this.PrintAreaState(AreaNumber);
+
+        		String choice = "";
+
+        		do
+        		{
+        			System.out.println("Do you want to remove a troll, demon or minion?");
+        			choice  = scan.next();
+        			String message = "";
+
+        			if (choice.equalsIgnoreCase("minion") && this.GameBoard.CountPlayerMinionsArea(Colors.None, AreaNumber) == 0)
+        			{
+        				NoPiece = false;
+        				message = "Area has no minions";
+        			}
+        			else if (choice.equalsIgnoreCase("demon") && this.GameBoard.AreaDemonCount(AreaNumber) == 0)
+        			{
+        				NoPiece = false;
+        				message = "Area has no demons";
+        			}
+        			else if (choice.equalsIgnoreCase("troll") && this.GameBoard.AreatrollCount(AreaNumber) == 0)
+        			{
+        				NoPiece = false;
+        				message = "Area has no trolls";
+        			}
+
+
+        			this.Print(message);
+
+        		}while (NoPiece);
+
+        		if(choice.compareToIgnoreCase("demon") == 0)
+        		{
+        			//To activate later
+        			ActionSuccess = this.GameBoard.RemoveDemon( AreaNumber);
+
+        			Continue = !ActionSuccess;
+
+        		}
+        		else if(choice.compareToIgnoreCase("troll") == 0)
+        		{
+        			//to activate later
+        			ActionSuccess = this.GameBoard.RemoveTroll( AreaNumber);
+        			Continue = !ActionSuccess;
+        		}
+        		else if(choice.compareToIgnoreCase("minion") == 0)
+        		{
+        			int PlayerIndex;
+
+        			do
+        			{
+
+        				System.out.println("Please enter the player you want to remove the index from:");
+        				System.out.println("You cannot assassinate your own minion.");
+
+        				System.out.println(this.ShowPlayerIndexAndColor());
+
+        				PlayerIndex  = scan.nextInt();
+
+        			}while (PlayerIndex - 1 == player);
+
+        			//To activate later
+        			ActionSuccess = this.GameBoard.RemoveMinion( AreaNumber, this.ListPlayer.get(PlayerIndex-1).GetColor());
+        			Continue = !ActionSuccess;
+        		}
+        		else
+        		{
+        			System.out.println("Invalid choice:  " + choice+". Please try again. ");
+        		}
+        	} while(Continue);
+
+        	//Show Current Area Info
+        	this.PrintAreaState(AreaNumber);
+        }
+        else 
+        {
+        	this.Print("Board has not trouble markers, No assassinations for you");
+
+        	ActionSuccess = true;
+        }
+        return ActionSuccess;
 	}
 	
 	/**
@@ -3672,11 +3684,11 @@ public class GameEngine implements Serializable
      */
     private String ShowPlayerIndexAndColor()
     {
-    	StringBuilder AllPlayers = new StringBuilder();
+StringBuilder AllPlayers = new StringBuilder();
     	
     	for(Player player : this.ListPlayer)
     	{
-    		AllPlayers.append("Player " + player.GetPlayerNumber() + ":" + player.GetColor() + ";");
+    		AllPlayers.append("Player " + (player.GetPlayerNumber() + 1)+ ":" + player.GetColor() + ";");
     	}
     	
     	AllPlayers.deleteCharAt(AllPlayers.length()-1);
