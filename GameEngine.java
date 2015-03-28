@@ -116,7 +116,7 @@ public class GameEngine implements Serializable
 		Scanner scan = new Scanner(System.in);
 		if(DoesPlayerHasCityArea(player))
 		{
-			System.out.println("Player " + player + " city area card available to play: ");
+			System.out.println("Player " + (player+1) + " city area card available to play: ");
 			
 			//traverse city area list and activate all the effect only if there is no demon
 	        for(int i=0; i<ListPlayer.get(player).ListCityAreaCards.size(); i++)
@@ -135,7 +135,7 @@ public class GameEngine implements Serializable
 		                
 		                for(Area eachArea : GameBoard.ListArea)
 		                {
-		                	if(eachArea.GetName().compareTo(CityAreaName) == 0)
+		                	if(eachArea.GetName().contains(CityAreaName))
 		                	{
 		                		CityArea = eachArea;
 		                		break;
@@ -309,7 +309,7 @@ public class GameEngine implements Serializable
 	        }
 		}
 		else
-			System.out.println("Player " + player + " does NOT have a city area card available to play");
+			System.out.println("Player " + (player+1) + " does NOT have a city area card available to play");
         
     }
     
@@ -355,7 +355,7 @@ public class GameEngine implements Serializable
 			lstSymbols = b.GetSymbol();
 		}
 		
-        System.out.println("Player " + CurrentPlayerIndex + " decides to play " + CardPlayed.GetName());
+        System.out.println("Player " + (CurrentPlayerIndex+1) + " decides to play " + CardPlayed.GetName());
         
         Scanner scan = new Scanner(System.in);
 		//Execute the symbol of the
@@ -2006,14 +2006,27 @@ public class GameEngine implements Serializable
                             	
                             	//I get a personlaity card and set player personality card
                             	//get old card
-                            	Cards p = ListPlayer.get(player).GetPlayerPersonality();
+                            	Cards OriginalPersonality = ListPlayer.get(player).GetPlayerPersonality();
                             	ListPlayer.get(player).SetPlayerPersonality(CardManager.GetCard(CardType.PersonalityCards));
                             	for(int i=0; i<CardManager.Personality_Card.length; i++)
                             	{
-                            		if(CardManager.Personality_Card[i].GetName().compareToIgnoreCase(p.GetName()) == 0)
-                            			CardManager.Personality_Card[i].Status = true;
+                            		if(CardManager.Personality_Card[i].Status)
+                            		{
+                            			//exchange with current one
+                            			CardManager.Personality_Card[i].Status = false;
+                            			ListPlayer.get(player).SetPersonalityCard(CardManager.Personality_Card[i]);
+                            			break;
+                            		}
+                            		//if(CardManager.Personality_Card[i].GetName().compareToIgnoreCase(p.GetName()) == 0)
+                            		//	CardManager.Personality_Card[i].Status = true;
                             	}
-          
+                            	
+                            	for(int j=0; j<CardManager.Personality_Card.length; j++)
+                            	{
+                            		if(OriginalPersonality.GetName().compareToIgnoreCase(CardManager.Personality_Card[j].GetName()) == 0)
+                            			CardManager.Personality_Card[j].Status = true;
+                            	}
+                            	return true;
                             }//The Bursar
                             else if(object.contains("minion"))
         	                    {
@@ -3115,8 +3128,8 @@ public class GameEngine implements Serializable
 		
 		if(ActionSuccess)
 		{
-			CardManager.CityArea_Cards[AreaNumber].Status = false;
-			ListPlayer.get(player).AddCityAreayCard(CardManager.CityArea_Cards[AreaNumber]);
+			CardManager.CityArea_Cards[AreaNumber-1].Status = false;
+			ListPlayer.get(player).AddCityAreayCard(CardManager.CityArea_Cards[AreaNumber-1]);
 		}
 			
 		return ActionSuccess;
@@ -3468,7 +3481,7 @@ public class GameEngine implements Serializable
 			{
 				if ( control >=4 )
 				{
-					
+					Print("Player controls at least 4 areas.");
 					 WiningCondition=true;
 				}	
 			}
@@ -3480,7 +3493,7 @@ public class GameEngine implements Serializable
 			int TotalAreaCovered = 0;
 			for (Area area : this.GameBoard.ListArea)
 			{
-				if (area.GetMinionCount(ListPlayer.get(CurrentPlayer).GetColor()) > 0) 
+				if (area.GetMinionPoint(ListPlayer.get(CurrentPlayer).GetColor()) > 0) 
 				{
 					TotalAreaCovered++;
 				}
@@ -3499,29 +3512,39 @@ public class GameEngine implements Serializable
 			else if (this.TotalPlayer==4)
 			{
 				if (TotalAreaCovered>=9)
+				{
+					Print("Player has minion in at least 9 areas.");
 					 WiningCondition=true;
+				}
 			}
 		}
 		//Dragon King of Arms  
 		else if (CardName.contains("Arms"))
 		{
 			if (this.GameBoard.CountTroubleMaker()>=8 )
+			{
+				Print("Game has at least 8 troublemarkers in board.");
 				 WiningCondition=true;
+			}
 		}
 		//Commandor Vimes .If cards run out he whill be the winner
 		else if (CardName.contains("Vimes"))
 		{
 			
 			WiningCondition=NoMoreCard();
+			if(WiningCondition) 
+				Print("Deck has no more cards");
 		}
 		//Chrysoprase
 		else if (CardName.contains("Chrysoprase"))
 		{
 			int CurrentPlayerValue = GetPlayerMoney(CurrentPlayer);
-			this.Print("Current player " + (CurrentPlayer + 1) + " Cash: " + CurrentPlayerValue);
+			
 			if(CurrentPlayerValue >= 50)
-			//if (ListPlayer.get(this.CurrentPlayer).GetMoneyCount()>=50 )//loan and building cost should be considered later
+			{
+				this.Print("Current player " + (CurrentPlayer + 1) + " Cash: " + CurrentPlayerValue);
 				WiningCondition=true;
+			}
 		}
 	
 		
@@ -3555,14 +3578,18 @@ public class GameEngine implements Serializable
     	//First calculate point from minions
     	for (Area area : this.GameBoard.ListArea)
     	{
-    		System.out.println("Total Minion Count (5$ for each): " + area.GetMinionCount(player.GetColor()));
-    		totalPoints += 5 * area.GetMinionCount(player.GetColor());
+    		if(area.GetDemonCount() == 0)
+    		{
+    			System.out.println("Total Minion Count (5$ for each): " + area.GetMinionCount(player.GetColor()));
+        		
+        		totalPoints += 5 * area.GetMinionCount(player.GetColor());	
+    		}
     	}
     	
-    	////Calucalute Points from buildings
+    	////Calculate Points from buildings
     	for (Area area : this.GameBoard.ListArea)
     	{
-    		if(area != null)
+    		if(area != null && (area.GetDemonCount() == 0))
     		{
     			Pieces b = area.GetBuilding();
 	    		if ( b != null && (b.GetPieceColor() == player.GetColor()))

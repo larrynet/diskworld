@@ -1,13 +1,13 @@
 //City Area
 name=The Hippo
 name=The Scours
-name=Small Gods 
+name=Small Gods
 name=Dragon's Landing
 name=Unreal Estate
 name=Dolly Sisters
 name=Nap Hill
 name=Seven Sleepers
-name=Isle of Gods 
+name=Isle of Gods
 name=Longwall
-name=Dimwell 
-name=The Shades 
+name=Dimwell
+name=The Shades

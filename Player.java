@@ -196,7 +196,7 @@ public class Player implements Serializable {
 		for(int i=0; i<PlayerCards.size(); i++)
 		{
 			GreenCards g = (GreenCards)PlayerCards.get(i); 
-			g.ShowImage("Player" + PlayerNumber  + " (Card Index " + (i+1) + ")  - " + g.GetName());
+			g.ShowImage("Player" + (PlayerNumber+1)  + " (Card Index " + (i+1) + ")  - " + g.GetName());
 		}
 	}
 	

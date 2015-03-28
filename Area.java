@@ -145,7 +145,36 @@ public class Area implements Serializable
 			
 		}
 		
-		
+		/**
+		 * pass color as None so that you get the number of all minions in area
+		 * @param Color Enum of type Color
+		 * @return the number of minions of the requested color
+		 */
+		public int GetMinionPoint(Colors Color)
+		{
+			int MinionCount = 0;
+			
+			if(this.GetDemonCount() >0)
+				return 0;
+			
+			if (Color == Colors.None)
+			{
+				return this.ListMinions.size();
+			}
+			else
+			{
+				for (Pieces minion : this.ListMinions){
+					
+					if (minion.GetPieceColor() == Color)
+					{
+						MinionCount ++;
+					}
+				}
+				
+				return MinionCount;
+			}
+			
+		}
 		/**
 		 * @param p Piece of type Demon
 		 */
