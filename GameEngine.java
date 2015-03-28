@@ -2791,8 +2791,7 @@ public class GameEngine implements Serializable
             for(int i=0; i<5; i++)
             {
                 DiscardCard = CardManager.GetCard(CardType.GreenCards);
-                if(DiscardCard == null)
-                    DiscardCard = CardManager.GetCard(CardType.BrownCards);
+                System.out.println("Card " + DiscardCard.GetName() + " has been discarded");
 
                 DiscardCards.add(DiscardCard);
             }
@@ -2859,7 +2858,13 @@ public class GameEngine implements Serializable
             for(int i=0; i<4; i++)
             {
                 int AreaAffected = GameBoard.RollDie();
-                GameBoard.ListArea.get(AreaAffected).AddDemons(new Pieces(PieceType.Demon, Colors.None));
+                System.out.println("Area affected " + AreaAffected);
+                if(!GameBoard.ListArea.get(AreaAffected-1).GetIsTrouble())
+                {
+                	System.out.println("Area does not have a troublemaker yet. Adding one");
+                	GameBoard.ListArea.get(AreaAffected-1).AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
+                }
+                GameBoard.ListArea.get(AreaAffected-1).AddDemons(new Pieces(PieceType.Demon, Colors.None));
             }
         }
         else if(cardName.compareToIgnoreCase("Subsidence") == 0)
@@ -2894,17 +2899,16 @@ public class GameEngine implements Serializable
             System.out.println("Bloody Stupid Johson \n===========================================");
             int AreaAffected = GameBoard.RollDie();
             CurrentDie = AreaAffected;
+            System.out.println("Current area affected is " + AreaAffected + " - " + GameBoard.ListArea.get(AreaAffected-1).GetName());
             //disable effect of City Area of that card by discarding the card
             for(int i=0; i<TotalPlayer; i++)
             {
                 for(int c=0; c<ListPlayer.get(i).ListCityAreaCards.size(); c++)
                 {
                 	//boolean 
-                	//
-                    if(ListPlayer.get(i).ListCityAreaCards.get(c).GetName().compareToIgnoreCase(GameBoard.ListArea.get(AreaAffected).GetName()) == 0)
+                    if(ListPlayer.get(i).ListCityAreaCards.get(c).GetName().compareToIgnoreCase(GameBoard.ListArea.get(AreaAffected-1).GetName()) == 0)
                     {
-                        //TODO
-                    	System.out.println("City area card " + GameBoard.ListArea.get(AreaAffected).GetName() + " is no longer in play. Discarding it.");
+                    	System.out.println("City area card " + GameBoard.ListArea.get(AreaAffected-1).GetName() + " is no longer in play. Discarding it.");
                     	DiscardCards.add(ListPlayer.get(i).ListCityAreaCards.get(c));
                     	ListPlayer.get(i).ListCityAreaCards.remove(c);
                         GameBoard.RemoveMinion(c, ListPlayer.get(i).GetColor());
@@ -2923,7 +2927,16 @@ public class GameEngine implements Serializable
             for(int i=0; i<3; i++)
             {
                 AreaAffected = GameBoard.RollDie();
-                GameBoard.ListArea.get(AreaAffected).AddDemons(new Pieces(PieceType.Demon,Colors.None));
+                
+                //test if current area has a minion, if they do, we add a troublemaker as per rule
+                if(GameBoard.ListArea.get(AreaAffected-1).GetMinionCount(Colors.None) > 0)
+                {
+                	System.out.println("Area " + AreaAffected + " has at least one minion. Adding a TroubleMarker on area.");
+                	GameBoard.ListArea.get(AreaAffected-1).AddTroubleMaker(new Pieces(PieceType.TroubleMarker,Colors.None));
+                }
+                
+                System.out.println("Adding Troll in Area " + AreaAffected + " - " + GameBoard.ListArea.get(AreaAffected-1).GetName());
+                GameBoard.ListArea.get(AreaAffected-1).AddTrolls(new Pieces(PieceType.Troll,Colors.None));
             }
         }
         else
@@ -4195,7 +4208,7 @@ public class GameEngine implements Serializable
   	    Area DragonLandingArea = GameBoard.ListArea.get(2);
   	    DragonLandingArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
   	    DragonLandingArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
-  	    DragonLandingArea.AddMinions(new Pieces(PieceType.TroubleMarker, Colors.None));
+  	    DragonLandingArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    
   	    //SmallGods - empty

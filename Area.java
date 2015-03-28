@@ -196,8 +196,10 @@ public class Area implements Serializable
 		 */
 		public void AddTroubleMaker(Pieces p) 
 		{
-			this.TroubleMakers= p;
-			this.IsTrouble =true;
+
+				this.TroubleMakers= p;
+				this.IsTrouble =true;				
+			
 		}
 		
 		/**
