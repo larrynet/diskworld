@@ -420,61 +420,53 @@ public class Area implements Serializable
 
 		public boolean AreaControllled(Colors color)
 		{
+			
+			boolean controlled = true;
+			
 			//An area with a demon cannot be controlled
 			if (this.ListDemons.size() > 0)
 			{
 				return false;
 			}
-			else if (this.IsBuilt && this.Building.GetPieceColor() == color)
-			{
-				return true;
-			}
-
-			//Count minions
+			//Count all pieces
 			else
 			{
-				if (this.GetMinionCount(color) == 1)
+				
+				int CountPieces = 0;
+				int CountOther = 0;
+				
+				if (this.IsBuilt && this.BuildingColor() == color)
 				{
-					if (this.GetMinionCount(Colors.None) == 1 && this.GetTrollCount() == 0)
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
+					CountPieces += 1;
 				}
-				else
+				
+				CountPieces += this.GetMinionCount(color);
+				
+				List<Colors> lstColors = new ArrayList<Colors>();
+				lstColors.add(Colors.Red);
+				lstColors.add(Colors.Blue); 
+				lstColors.add(Colors.Yellow); 
+				lstColors.add(Colors.Green);
+
+				for (Colors thisColor : lstColors)
 				{
-					int countThis = this.GetMinionCount(color);
-
-					if (countThis > 0)
+					if (thisColor != color )
 					{
-						int countRed = this.GetMinionCount(Colors.Red);
-						int countBlue = this.GetMinionCount(Colors.Blue);
-						int countYellow= this.GetMinionCount(Colors.Yellow);
-						int countGreen = this.GetMinionCount(Colors.Green);
-
-						int [] ColorCount = {countRed, countRed, countYellow, countGreen};
-
-						int maxVal = 0;
-
-						for (int i : ColorCount)
+						if (this.IsBuilt && this.BuildingColor() == thisColor)
 						{
-							if (i >= maxVal)
-							{
-								maxVal = i;
-							}
+							CountOther += 1;
 						}
 
-						return (countThis == maxVal) ;
+						CountOther += this.GetMinionCount(thisColor);
 					}
-					else
+					
+					if (CountOther >= CountPieces)
 					{
-						return false;
+						controlled = false;
 					}
 				}
-
+				
+				return controlled;
 
 			}
 			
