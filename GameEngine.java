@@ -4237,20 +4237,20 @@ StringBuilder AllPlayers = new StringBuilder();
   	    
   	    //Dolly Sister
   	    Area DollySisterArea = GameBoard.ListArea.get(0);
-  	    DollySisterArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
-  	    DollySisterArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow)); 
-  	    DollySisterArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green));
-  	    DollySisterArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue));
+  	    DollySisterArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
+  	    DollySisterArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Yellow)); 
+  	    DollySisterArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Green));
+  	    DollySisterArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue));
   	    DollySisterArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    //Unreal Estate
   	    Area UnrealEstateArea = GameBoard.ListArea.get(1);
-  	    UnrealEstateArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    UnrealEstateArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    
   	    //Dragon Landing
   	    Area DragonLandingArea = GameBoard.ListArea.get(2);
-  	    DragonLandingArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
-  	    DragonLandingArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    DragonLandingArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
+  	    DragonLandingArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    DragonLandingArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    
@@ -4258,56 +4258,56 @@ StringBuilder AllPlayers = new StringBuilder();
   	    
   	    //The Scours
   	    Area TheScoursArea = GameBoard.ListArea.get(4);
-  	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow));
-  	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
-  	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue));
-  	    TheScoursArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue));
+  	    TheScoursArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Yellow));
+  	    TheScoursArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    TheScoursArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue));
+  	    TheScoursArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue));
   	    TheScoursArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    TheScoursArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Yellow));
   	    TheScoursArea.AddDemons(new Pieces(PieceType.Demon, Colors.None));
   	    
   	    //The Hippo
   	    Area TheHippoArea = GameBoard.ListArea.get(5);
-  	    TheHippoArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    TheHippoArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   	    TheHippoArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Blue));
   	    TheHippoArea.AddTrolls(new Pieces(PieceType.Troll, Colors.None));
   	    
   	    //The Shades
   	    Area TheShadesArea = GameBoard.ListArea.get(6);
-  	    TheShadesArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow)); 
-  	    TheShadesArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    TheShadesArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Yellow)); 
+  	    TheShadesArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   		TheShadesArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Yellow));
       	TheShadesArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    //DimWell
   	    Area DimWellArea = GameBoard.ListArea.get(7);
-  	    DimWellArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red)); 
-  	    DimWellArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green)); 
+  	    DimWellArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red)); 
+  	    DimWellArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Green)); 
   	    DimWellArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Red));
   	    
   	    //LongWall
   	    Area LongWallArea = GameBoard.ListArea.get(8);
-  	    LongWallArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
-  	    LongWallArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green)); 
-  	    LongWallArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    LongWallArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    LongWallArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Green)); 
+  	    LongWallArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   	    LongWallArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    //Isles of Gods
   	    Area IsleOfGods = GameBoard.ListArea.get(9);
-  	    IsleOfGods.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
+  	    IsleOfGods.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    
   	    //Seven Sleepers
   	    Area SevenSleepersArea = GameBoard.ListArea.get(10);
-  	    SevenSleepersArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
-  	    SevenSleepersArea.AddMinions(new Pieces(PieceType.Minion, Colors.Yellow)); 
-  	    SevenSleepersArea.AddMinions(new Pieces(PieceType.Minion, Colors.Green));
+  	    SevenSleepersArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
+  	    SevenSleepersArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Yellow)); 
+  	    SevenSleepersArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Green));
   	    SevenSleepersArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    SevenSleepersArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Yellow));
   	    
   	    //Nap Hill
   	    Area NappHillArea = GameBoard.ListArea.get(11);
-  	    NappHillArea.AddMinions(new Pieces(PieceType.Minion, Colors.Red));
-  	    NappHillArea.AddMinions(new Pieces(PieceType.Minion, Colors.Blue)); 
+  	    NappHillArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
+  	    NappHillArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   	    NappHillArea.AddTrolls(new Pieces(PieceType.Troll, Colors.None));
   	    
   	    //initialize player city area and bank
