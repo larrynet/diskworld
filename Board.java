@@ -286,7 +286,7 @@ public class Board implements Serializable {
 		public boolean AreaAdjacency(int Area1, int Area2)
 		{
 			//since the array starts from array index 0
-			return this.ListArea.get(Area1--).AreaAdjacency(Area2--);
+			return this.ListArea.get((Area1-1)).AreaAdjacency((Area2-1));
 			
 		}
 		
