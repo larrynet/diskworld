@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 /**
  * @author Parinaz Barakhshan
- * @version 2.0
+ * @version 2.1
  */
 
 public class Area implements Serializable
