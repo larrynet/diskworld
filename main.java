@@ -46,15 +46,15 @@ public class main {
 				System.out.println("\nCurrent player turn is " + (CurrentPlayerIndex+1)+" (Color: " + ge.GetPlayerColor(CurrentPlayerIndex)+")\n+++++++++++++++++++++++++++++++++++++++");
 				
 				//have draw cards if not full hand
-				if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
-				{
-					Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
-					if(c == null)
-						c = ge.GetCardManager().GetCard(CardType.BrownCards);
-					
-					ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
-					
-				}
+//				if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
+//				{
+//					Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
+//					if(c == null)
+//						c = ge.GetCardManager().GetCard(CardType.BrownCards);
+//					
+//					ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
+//					
+//				}
 				//check if someone won first
 				if(ge.IsWinner())
 				{
@@ -184,6 +184,14 @@ public class main {
 	                        
 	                        //increment turn
 	                        ge.ReactivateCityAreaEffectForPlayer(CurrentPlayerIndex);
+	                        
+	                        if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
+	        				{
+	        					Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
+	        					ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
+	        					
+	        				}
+	                        
 	                        CurrentPlayerIndex += 1;
 	                        CurrentPlayerIndex = CurrentPlayerIndex % NumPlayer;
 	                        ge.SetCurrentPlayer(CurrentPlayerIndex);                        
@@ -203,6 +211,14 @@ public class main {
 	                            {
 	                            	//increment turn
 	    	                        ge.ReactivateCityAreaEffectForPlayer(CurrentPlayerIndex);
+	    	                        
+	    	                        if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.size() < ge.ListPlayer.get(CurrentPlayerIndex).HandSize)
+	    	        				{
+	    	        					Cards c = ge.GetCardManager().GetCard(CardType.GreenCards);
+	    	        					ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.add(c);
+	    	        					
+	    	        				}
+	    	                        
 	    	                        CurrentPlayerIndex += 1;
 	    	                        CurrentPlayerIndex = CurrentPlayerIndex % NumPlayer;
 	                            }

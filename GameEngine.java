@@ -64,7 +64,7 @@ public class GameEngine implements Serializable
 		//show card
         for(int i=0; i<ListPlayer.get(player).PlayerCards.size(); i++)
         	if(ListPlayer.get(player).PlayerCards.get(i) != null)
-        	System.out.println((i+1)+"- " + ListPlayer.get(player).PlayerCards.get(i).GetName());
+        	System.out.println((i)+"- " + ListPlayer.get(player).PlayerCards.get(i).GetName());
 	}
 	
 	/**
@@ -597,7 +597,7 @@ public class GameEngine implements Serializable
                 }
             }
          // *************************** Fire Brigade ********************************
-            else if(CardName.equalsIgnoreCase("the Fire Brigade"))
+            else if(CardName.equalsIgnoreCase("the fire brigade"))
             {
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
@@ -1656,45 +1656,56 @@ public class GameEngine implements Serializable
                             else if(object.contains("cards from a player"))
                             {
                             	//Queen molly (selected player)
-                                System.out.println("Select a player to get cards from. ");
-                                int PlayerIndex = scan.nextInt();
-                                String choice = "";
-                                String ActivateSmallGod = "";
-                                if(ListPlayer.get(player).CanPlaySmallGod())
+                            	System.out.println("Select a player to get cards from. ");
+
+                            	int PlayerIndex = scan.nextInt() - 1;
+
+                            	String choice = "";
+
+                            	String ActivateSmallGod = "";
+
+                            	if(ListPlayer.get(player).CanPlaySmallGod())
                             	{
                             		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
                             		ActivateSmallGod = scan.next();
                             	}
+                            	
                             	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
                             	{
                             		ListPlayer.get(player).DesactivateSmallGod();
                             	}
                             	else
                             	{
-                            	if(ListPlayer.get(PlayerIndex).HasInterruptCard())
-                                {
-                                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
-                                	choice = scan.next();
-                                	
-                                	if(choice.compareToIgnoreCase("yes") == 0)
-                                	{
-                                		ListPlayer.get(PlayerIndex).RemoveInterruptCard();
-                                		return true;
-                                	}
-                                	
-                                }
+                            		if(ListPlayer.get(PlayerIndex).HasInterruptCard())
+                            		{
+                            			System.out.println("Player " + (PlayerIndex + 1) + " has an interrupt card. Player " + (PlayerIndex + 1)+ ", do you want to play it? (yes/no)");
+                            			choice = scan.next();
+
+                            			if(choice.compareToIgnoreCase("yes") == 0)
+                            			{
+                            				ListPlayer.get(PlayerIndex).RemoveInterruptCard();
+                            				return true;
+                            			}
+
+                            		}
                             	}
                             	
-								System.out.println("Player " + PlayerIndex + ": Enter card index 0 you are willing to give up:");
+                            	this.ShowCard(PlayerIndex);
+                            	
+								System.out.println("Player " + (PlayerIndex + 1) + ": Enter first card you are willing to give up:");
 								int CardIndex0 = scan.nextInt();
 								
-								System.out.println("Player " + PlayerIndex + ": Enter card index 1 you are willing to give up:");
+								System.out.println("Player " + (PlayerIndex + 1) +  ": Enter second card you are willing to give up:");
 								int CardIndex1 = scan.nextInt();
 								
 								ListPlayer.get(player).PlayerCards.add(ListPlayer.get(PlayerIndex).PlayerCards.get(CardIndex0));
 								ListPlayer.get(player).PlayerCards.add(ListPlayer.get(PlayerIndex).PlayerCards.get(CardIndex1));
 								ListPlayer.get(PlayerIndex).PlayerCards.remove(CardIndex0);
 								ListPlayer.get(PlayerIndex).PlayerCards.remove(CardIndex1);
+								
+								this.Print("Player " + (player + 1) +  " New hand");
+								
+								this.ShowCard(player);
 								
 								return true;
 								
