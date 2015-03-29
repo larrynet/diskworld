@@ -636,9 +636,11 @@ public class GameEngine implements Serializable
                 }
                 else
                 {
-                    System.out.println("Enter area index to remove the minion:");
+                	this.GameBoard.PrintState();
+                	this.Print("");
+                    System.out.println("Enter area index to remove the building:");
                     int area = scan.nextInt();
-                    GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
+                    GameBoard.RemoveBuilding(area-1, ListPlayer.get(PlayerIndex));
                     return true;
                 }
             }
