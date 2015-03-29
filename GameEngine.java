@@ -369,9 +369,18 @@ public class GameEngine implements Serializable
 		}
 		
         System.out.println("Player " + (CurrentPlayerIndex+1) + " decides to play " + CardPlayed.GetName());
-        
         Scanner scan = new Scanner(System.in);
-		//Execute the symbol of the
+        
+        //No Symbol
+        if (lstSymbols == null && CardPlayed.GetName().contains("Nuts"))
+        {
+        	ActionStatus = true;
+        }
+        else
+        	
+        
+        {
+        //Execute the symbol of the
 		for(int sIterator = 0; ActionStatus && (sIterator < lstSymbols.size()); sIterator++)
 		{
 			String currentSymbol = lstSymbols.get(sIterator);
@@ -449,6 +458,7 @@ public class GameEngine implements Serializable
 				}
 			}
 		}
+	}
 		if(ActionStatus) 
 		{
 			

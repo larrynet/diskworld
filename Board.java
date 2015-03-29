@@ -144,9 +144,7 @@ public class Board implements Serializable {
 	{
 		if(player.GetBuildingCount()!=0)
 		{
-			ListArea.get(AreaNumber-1).AddBuilding(player.PlaceBuilding());
-			
-			return true;
+			return ListArea.get(AreaNumber-1).AddBuilding(player.PlaceBuilding());
 		}
 		
 		return false;
