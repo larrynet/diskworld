@@ -3209,6 +3209,9 @@ public class GameEngine implements Serializable
 	private boolean PutBuilding(int player)
 	{
 		boolean ActionSuccess = false;
+		this.GameBoard.PrintState();
+		this.Print("");
+		
         System.out.println("Please enter the Area index you want to put your building. Keep in mind that you cannot build in an area that already contains either a building or troublemaker. ");
         
         Scanner scan = new Scanner(System.in);
