@@ -649,7 +649,7 @@ public class GameEngine implements Serializable
             {
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
-                int PlayerIndex = scan.nextInt();
+                int PlayerIndex = scan.nextInt() - 1;
                 String ActivateSmallGod = "";
                 if(ListPlayer.get(player).CanPlaySmallGod())
             	{
@@ -700,7 +700,7 @@ public class GameEngine implements Serializable
                 {
                     //remove minion
                     System.out.println("Enter the player index you want to remove minion.");
-                    int PlayerIndex = scan.nextInt();
+                    int PlayerIndex = scan.nextInt() - 1;
                     String ActivateSmallGod = "";
                     if(ListPlayer.get(player).CanPlaySmallGod())
                 	{
@@ -771,7 +771,7 @@ public class GameEngine implements Serializable
                 {
                     //take 3$ from a player
                     System.out.println("Enter the player index you want to get your money.");
-                    int PlayerIndex = scan.nextInt();
+                    int PlayerIndex = scan.nextInt() - 1;
                     String ActivateSmallGod = "";
                     if(ListPlayer.get(player).CanPlaySmallGod())
                 	{
@@ -868,7 +868,7 @@ public class GameEngine implements Serializable
                             {
                             	//cosmos lavish
                             	System.out.println("Please enter Player index which you wish to remove minion");
-                            	int PlayerIndex = scan.nextInt();
+                            	int PlayerIndex = scan.nextInt() - 1;
                             	
                             	String choice = "";
                             	String ActivateSmallGod = "";
@@ -906,7 +906,7 @@ public class GameEngine implements Serializable
                             {
                             	//Hobsons's Livery Stable
                             	System.out.println("Please enter Player index which you move minion");
-                            	int PlayerIndex = scan.nextInt();
+                            	int PlayerIndex = scan.nextInt() - 1;
                             	
                             	String choice = "";
                             	String ActivateSmallGod = "";
@@ -946,7 +946,7 @@ public class GameEngine implements Serializable
                             	int AreaIndex = 0;
                             	//Burleigh & Stronginth
                             	System.out.println("Please enter Player index which you assasinate minion");
-                            	int PlayerIndex = scan.nextInt();
+                            	int PlayerIndex = scan.nextInt() - 1;
                             	String choice = "";
                             	String ActivateSmallGod = "";
                                 if(ListPlayer.get(player).CanPlaySmallGod())
@@ -1015,7 +1015,7 @@ public class GameEngine implements Serializable
                             	System.out.println("Please enter Area index which you wish to take over building. (Area must have troublemaker)");
                             	int AreaIndex = scan.nextInt();
                             	System.out.println("Please enter Player index which you wish to take over building");
-                            	int PlayerIndex = scan.nextInt();
+                            	int PlayerIndex = scan.nextInt() - 1;
                             	String choice = "";
                             	String ActivateSmallGod = "";
                                 if(ListPlayer.get(player).CanPlaySmallGod())
@@ -1192,7 +1192,7 @@ public class GameEngine implements Serializable
                                 int cardIndex= scan.nextInt();
                                 
                                 System.out.println("Enter another player index who you will exchange card for 2$");
-                                int playerIndex= scan.nextInt();
+                                int playerIndex= scan.nextInt() - 1;
                                 
                                 String choice = "";
                                 String ActivateSmallGod = "";
@@ -1277,7 +1277,7 @@ public class GameEngine implements Serializable
                             	
 
                             	System.out.println("Enter player index to take cards from.");
-                                int playerIndex= scan.nextInt();
+                                int playerIndex= scan.nextInt() - 1;
                                 String choice = "";
                                 String ActivateSmallGod = "";
                                 if(ListPlayer.get(player).CanPlaySmallGod())
@@ -1588,7 +1588,7 @@ public class GameEngine implements Serializable
                             	
                             	//Nobby Nobbs
                                 System.out.println("Enter player to get money from.");
-                                int PlayerIndex = scan.nextInt();
+                                int PlayerIndex = scan.nextInt() - 1;
                                 
                                 ListPlayer.get(player).AddToMoney(amount);
                         		ListPlayer.get(PlayerIndex).DeductFromMoney(amount);
@@ -1615,7 +1615,7 @@ public class GameEngine implements Serializable
                             	//stanley pick two cards randomly and randomly select 1
                                 System.out.println("Select a player to get cards from. ");
 
-                                int PlayerIndex = scan.nextInt();
+                                int PlayerIndex = scan.nextInt() - 1;
                                 String choice = "";
                                 String ActivateSmallGod = "";
                                 if(ListPlayer.get(player).CanPlaySmallGod())
@@ -1797,7 +1797,7 @@ public class GameEngine implements Serializable
                             {
                             	//Cable Street Particular
                                 System.out.println("Enter player index you want to peek and discard");
-                                int PlayerIndex = scan.nextInt();
+                                int PlayerIndex = scan.nextInt() - 1;
                                 
                                 String choice = "";
                                 String ActivateSmallGod = "";
@@ -1927,7 +1927,7 @@ public class GameEngine implements Serializable
                                 int RollDieValue1 = GameBoard.RollDie();
                                 
                                 System.out.println("Enter Player index to remove minion from for area "+RollDieValue0 +" : ");
-                                int PlayerIndex0 = scan.nextInt();
+                                int PlayerIndex0 = scan.nextInt() - 1;
                                 String choice = "";
                                 String ActivateSmallGod = "";
                                 if(ListPlayer.get(player).CanPlaySmallGod())
@@ -1955,7 +1955,7 @@ public class GameEngine implements Serializable
 									ListPlayer.get(PlayerIndex0).RemoveInterruptCard();
                             	}
                                 System.out.println("Enter Player index to remove minion from for area "+RollDieValue1 +" : ");
-                                int PlayerIndex1 = scan.nextInt();
+                                int PlayerIndex1 = scan.nextInt() - 1;
                  
                                 String choice1 = "";
                               
@@ -2073,7 +2073,7 @@ public class GameEngine implements Serializable
         	                    {
         	                	
         	                    System.out.println("Enter the player index you want to move his minion.");
-        	                    int PlayerIndex = scan.nextInt();
+        	                    int PlayerIndex = scan.nextInt() - 1;
         	                    String choice = "";
         	                    String ActivateSmallGod = "";
         	                    if(ListPlayer.get(player).CanPlaySmallGod())
@@ -2100,7 +2100,7 @@ public class GameEngine implements Serializable
 									GameBoard.RemoveMinion(area, ListPlayer.get(PlayerIndex).GetColor());
 									
 									System.out.println("Enter the player index you want to move his minion.");
-									int PlayerIndex2 = scan.nextInt();
+									int PlayerIndex2 = scan.nextInt() - 1;
 									System.out.println("Enter area index to which you want to move his minion:");
 									int area2 = scan.nextInt();
 									
@@ -2118,7 +2118,7 @@ public class GameEngine implements Serializable
                             	List<Cards> hand=new ArrayList<Cards>();
                        
                             	System.out.println("Enter the player index you want to change your hand with");
-                                int PlayerIndex = scan.nextInt();
+                                int PlayerIndex = scan.nextInt() - 1;
                                 String choice = "";
                                 String ActivateSmallGod = "";
                                 if(ListPlayer.get(player).CanPlaySmallGod())
@@ -2160,7 +2160,7 @@ public class GameEngine implements Serializable
                             if(object.contains("minion"))
                             {
                                 System.out.println("Enter the player index you want to assassinate his minion.");
-                                int PlayerIndex = scan.nextInt();
+                                int PlayerIndex = scan.nextInt() - 1;
                                 String choice = "";
                                 String ActivateSmallGod = "";
                                 if(ListPlayer.get(player).CanPlaySmallGod())
@@ -2293,7 +2293,7 @@ public class GameEngine implements Serializable
 	                            	 
                             		 System.out.println("Choose the index of the player (other than yourself) that you want to move a minion?");
                             		 System.out.println("The player you select needs to have at least 1 minion on the board");
-	                            	 PlayerIndex = scan.nextInt();
+	                            	 PlayerIndex = scan.nextInt() - 1;
 	                            	 
 	                            	 //Get Color of player
 	                            	 Colors PlayerColor = this.ListPlayer.get(PlayerIndex).GetColor();
@@ -2432,7 +2432,7 @@ public class GameEngine implements Serializable
                         	{
                              	//unreal state is area number 2
                                  System.out.println("Enter the player index you want to move his building ");
-                                 int PlayerIndex = scan.nextInt();
+                                 int PlayerIndex = scan.nextInt() - 1;
                                  String choice = "";
                                  String ActivateSmallGod = "";
                                  if(ListPlayer.get(player).CanPlaySmallGod())
@@ -2583,7 +2583,7 @@ public class GameEngine implements Serializable
                         {
                         	//Queen Molly
                         	System.out.println("Select one player:");
-                        	int playerIndex= scan.nextInt();
+                        	int playerIndex= scan.nextInt() - 1;
 
                         	String choice = "";
                         	String ActivateSmallGod = "";
@@ -2900,7 +2900,7 @@ public class GameEngine implements Serializable
                 
                 // TODO:remove a minion in that area of their choice
                 System.out.println("Enter player index on which to remove the minion");
-                int PlayerIndex = scan.nextInt();
+                int PlayerIndex = scan.nextInt() - 1;
                 GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(PlayerIndex).GetColor());
             }
         }
