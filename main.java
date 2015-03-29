@@ -198,6 +198,14 @@ public class main {
 	                            System.out.println("Card failed to play. You will need to try again. Which card you want to play (1-5)?");
 	                            playChoice = scan.nextInt();
 	                            PlayUntilSuccess = ge.PlayCard(CurrentPlayerIndex, playChoice);
+	                            
+	                            if (PlayUntilSuccess)
+	                            {
+	                            	//increment turn
+	    	                        ge.ReactivateCityAreaEffectForPlayer(CurrentPlayerIndex);
+	    	                        CurrentPlayerIndex += 1;
+	    	                        CurrentPlayerIndex = CurrentPlayerIndex % NumPlayer;
+	                            }
 	                        }
 	                        
 	                    }
