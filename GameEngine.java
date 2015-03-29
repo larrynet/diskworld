@@ -601,11 +601,11 @@ public class GameEngine implements Serializable
             {
                 //Choose a player and have him pay 5$. If not, remove a building
                 System.out.println("Enter the player index you want to get your money.");
-                int PlayerIndex = scan.nextInt();
+                int PlayerIndex = scan.nextInt() - 1;
                 String ActivateSmallGod = "";
                 if(ListPlayer.get(player).CanPlaySmallGod())
             	{
-            		this.Print("Player " + player + " has the city Area card Small Gods available. Would you like to play it?");
+            		this.Print("Player " + (player + 1) + " has the city Area card Small Gods available. Would you like to play it?");
             		ActivateSmallGod = scan.next();
             	}
             	if(ActivateSmallGod.compareToIgnoreCase("yes") == 0)
@@ -616,7 +616,7 @@ public class GameEngine implements Serializable
             	{
                 if(ListPlayer.get(PlayerIndex).HasInterruptCard())
                 {
-                	System.out.println("Player " + PlayerIndex + "has an interrupt card. Player " + PlayerIndex + ", do you want to play it? (yes/no)");
+                	System.out.println("Player " + (PlayerIndex + 1) + " has an interrupt card. Player " + (PlayerIndex + 1) + ", do you want to play it? (yes/no)");
                 	String choice = scan.next();
                 	
                 	if(choice.compareToIgnoreCase("yes") == 0)
@@ -626,7 +626,7 @@ public class GameEngine implements Serializable
                 	}
                 }
             	}
-                System.out.println("Player " + PlayerIndex + ": Do you want to give 5$. If not, he will remove one of your building");
+                System.out.println("Player " + (PlayerIndex + 1) + ": Do you want to give 5$. If not, he will remove one of your building");
                 String choice = scan.next();
                 if(choice.compareToIgnoreCase("yes")==0)
                 {
