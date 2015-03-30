@@ -859,11 +859,11 @@ public class GameEngine implements Serializable
 				}*/
         		currentEffect = lstCardActions.get(actionCount);
         		//traverse the verb
-                for(int verbCount=0; verbCount<currentEffect.Verb.size(); verbCount++)
+                for(int verbCount=0; verbCount<currentEffect.GetVerbList().size(); verbCount++)
                 {
-                        if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("pay") ==0)
+                        if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("pay") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = (int)object.charAt(0);
                             
                             if(object.contains("another player and have them remove 1 minion with troublemaker"))
@@ -1143,7 +1143,7 @@ public class GameEngine implements Serializable
                             }
             
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("look") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("look") ==0)
                         {
                         	List<Integer> ListOfPersonalityIndex = new ArrayList<Integer>();
                         	
@@ -1165,9 +1165,9 @@ public class GameEngine implements Serializable
                         	}
                         	return true;
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("give") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("give") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("cards"))
@@ -1268,9 +1268,9 @@ public class GameEngine implements Serializable
                                 
                             }
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("take") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("take") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("cards"))
@@ -1493,12 +1493,12 @@ public class GameEngine implements Serializable
                             }
                             
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("interrupt") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("interrupt") ==0)
                         {
                         	//todo - later (Brown card)
                         	//have to findout how to play Doctor Mossy Lawn
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("loan") ==0)
                         {
                     		this.GetPlayerLoanBank("Current Finances: ", ListPlayer.get(player));
                         	
@@ -1515,9 +1515,9 @@ public class GameEngine implements Serializable
                         	
                         	return true;
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("get") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("get") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("minion in the Isle of Gods"))
@@ -1742,9 +1742,9 @@ public class GameEngine implements Serializable
                             }
                             
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("discard") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("discard") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("up to 3 cards and fill hands"))
@@ -1881,9 +1881,9 @@ public class GameEngine implements Serializable
                             	
                             } 
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("remove") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = (int)object.charAt(0);
                             if(object.contains("minion in player order"))
                             {
@@ -1990,9 +1990,9 @@ public class GameEngine implements Serializable
                         
                         // ***************** PARINAZ SECTION ***********************************
                         
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("draw") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("draw") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = Character.getNumericValue(object.charAt(0));
                             
                             if(object.contains("discard"))
@@ -2038,9 +2038,9 @@ public class GameEngine implements Serializable
                              	return true;
                             }
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("exchange") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("exchange") ==0)
                         {  
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             
                         	
                         	//Zorgo the Retro-phrenologist
@@ -2152,9 +2152,9 @@ public class GameEngine implements Serializable
                             }
                         
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("assassinate") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("assassinate") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = (int)object.charAt(0);
                             
                         	
@@ -2197,7 +2197,7 @@ public class GameEngine implements Serializable
                         
                         // ------------------------------- BEGIN SHUFFLE ------------------------------
                         
-                        else if (currentEffect.Verb.get(verbCount).compareToIgnoreCase("shuffle") == 0)
+                        else if (currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("shuffle") == 0)
                         {
                         	//History Monks
                         	//Shuffle Discarded Cards
@@ -2231,7 +2231,7 @@ public class GameEngine implements Serializable
                         // ------------------------------ END SHUFFLE -----------------------------
                         
                         // ------------------------------ BEGIN ROLL ------------------------------
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("roll") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("roll") ==0)
                         {
                         	System.out.println("Should never come here because all verbs with roll are exceptions");
                         
@@ -2240,9 +2240,9 @@ public class GameEngine implements Serializable
                         
                         // ---------------------- BEGIN MOVE -------------------------------------
                         
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("move") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("move") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                              int amount = Character.getNumericValue(object.charAt(0));
                              
                              String thisCardName = CardPlayed.GetName().toLowerCase();
@@ -2425,9 +2425,9 @@ public class GameEngine implements Serializable
                         
                         // ------------------------ BEGIN REMOVE -------------------------------------
                         
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("remove") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("remove") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = (int)object.charAt(0);
                           
                             if (object.contains("minion") && CardPlayed.GetName()=="The Dean"  )
@@ -2506,9 +2506,9 @@ public class GameEngine implements Serializable
                         
                         // -------------------------- END REMOVE ---------------------------------------
                 	
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("play") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("play") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = (int)object.charAt(0);
                             //Pondor Stibbons ,Drumknott
                             
@@ -2531,9 +2531,9 @@ public class GameEngine implements Serializable
                             }
                         }
                         
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("replace") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("replace") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = (int)object.charAt(0);
                             
                             //Sybil Vimes
@@ -2555,9 +2555,9 @@ public class GameEngine implements Serializable
                             }
                             	
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("stop") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("stop") ==0)
                         {
-                        	String object = currentEffect.Object.get(verbCount);
+                        	String object = currentEffect.GetObjectList().get(verbCount);
                             int amount = (int)object.charAt(0);
                             //Gaspode
                             
@@ -2573,7 +2573,7 @@ public class GameEngine implements Serializable
                             	
                         }
                 	       	
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("end") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("end") ==0)
                         {
                         	//RIOT CARD : Games end of there are more then eight trouble markers
                         	System.out.println("You should not come here");
@@ -2581,7 +2581,7 @@ public class GameEngine implements Serializable
                         }
                         // ------------------------ BEGIN SELECT -----------------------------------
                         
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("select") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("select") ==0)
                         {
                         	//Queen Molly
                         	System.out.println("Select one player:");
@@ -2634,7 +2634,7 @@ public class GameEngine implements Serializable
                         
                         // ------------------------- END SELECT -----------------------------
                         
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("putminion") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("putminion") ==0)
                         {
                         	Player currentPlayer = ListPlayer.get(player);
                         	
@@ -2673,7 +2673,7 @@ public class GameEngine implements Serializable
                         		System.out.println("You do not have a minion that was removed");
                         	}
                         }
-                        else if(currentEffect.Verb.get(verbCount).compareToIgnoreCase("loan") ==0)
+                        else if(currentEffect.GetVerbList().get(verbCount).compareToIgnoreCase("loan") ==0)
                         {
                         	this.GetPlayerLoanBank("Current Finances: ", ListPlayer.get(player));
                         	
@@ -2692,7 +2692,7 @@ public class GameEngine implements Serializable
                         }
                         else
                         {
-                            System.out.println("!!!!!!! Unknown verb found !!!!!!!! : " + currentEffect.Verb.get(verbCount));
+                            System.out.println("!!!!!!! Unknown verb found !!!!!!!! : " + currentEffect.GetVerbList().get(verbCount));
                         }
                 
             
@@ -3042,7 +3042,7 @@ public class GameEngine implements Serializable
      * @param player to 
      * @return 
      */
-	private boolean RemoveTrouble()
+	public boolean RemoveTrouble()
 	{
 		boolean ActionSuccess = false;
 		boolean NoTroubleArea = true;

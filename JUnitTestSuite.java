@@ -243,7 +243,7 @@ public class JUnitTestSuite {
 		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
 		
 		//check if area is empty afterward
-		boolean RemoveEmptyArea = ge.RemoveTroubleMaker(1);
+		boolean RemoveEmptyArea = ge.RemoveTrouble();
         int TotalAmountAfter = ge.ListPlayer.get(CurrentPlayerIndex).GetMoneyCount();
         
         assertFalse("Failed executing IsleOfGod city area", RemoveEmptyArea);
@@ -375,7 +375,7 @@ public class JUnitTestSuite {
 		ge.ActivateCityAreaEffect(CurrentPlayerIndex);
         
         //TODO try to remove all the shades area and all adjacent area...one of them must be true
-        boolean RemoveSuccess = ge.RemoveTroubleMaker(7);
+        boolean RemoveSuccess = ge.RemoveTrouble();
         
 		assertTrue("Failed executing The Shades city area", RemoveSuccess);
     }
