@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Vector;
 
-
 /**
  * 
  * 
@@ -21,34 +20,35 @@ import java.util.Vector;
 
 public class ManageCards implements Serializable
 {
-	
-   //  ManageCards Attributes 
+	//  ManageCards Attributes 
 	private int TotalBrownCard = 53;
 	private int TotalPersonalityCard = 7;
 	public PersonalityCards[] Personality_Card=new PersonalityCards[7];
 	public EventCards []Event_Card =new EventCards[12];
 	public CityAreaCards []CityArea_Cards =new CityAreaCards[12];
 	public GreenCards[] Green_Cards=new GreenCards[49];
-	private BrownCards[] Brown_Cards=new BrownCards[53];
-	
-	
-	
-	//ManageCards Constructor
+	public BrownCards[] Brown_Cards=new BrownCards[53];
 
 	/**
+	 * ManageCards Constructor
+	 * 
 	 * @param TotalPlayer indicates the number of player playing the game. 
 	 */
 	public ManageCards(int TotalPlayer)
 	{
-		
-		    CreateGreenCards();
-		    CreatePersoCards();
-		    CreateCityCards();
-		    RandomEventCards();
-		
-		
+		CreateGreenCards();
+		CreatePersoCards();
+		CreateCityCards();
+		RandomEventCards();
+		//Function not used for this build
+		//CreateBrownCards();
 	}
-	
+
+	/**
+	 * Search for the city area cards with the given name
+	 * @param Name
+	 * @return reference of the card
+	 */
 	public CityAreaCards SearchCityArea(String Name)
 	{
 		for(int i=0; i<CityArea_Cards.length; i++)
@@ -61,6 +61,13 @@ public class ManageCards implements Serializable
 		}
 		return null;
 	}
+	
+	/**
+	 * Search for the green cards with the given name
+	 * 
+	 * @param Name
+	 * @return
+	 */
 	public GreenCards SearchCards(String Name)
 	{
 		for(int i=0; i<Green_Cards.length; i++)
@@ -92,73 +99,73 @@ public class ManageCards implements Serializable
 			else
 				System.out.print("  Unavailable  ,");
 		}
-		
+
 		System.out.println("");
-		
-		
+
+
 		System.out.print("Event Cards : ");
 		for (int i=0;i< this.Event_Card.length-1  ;i++ )
 		{
 			System.out.print( this.Event_Card[i].GetName());
-		
-		 if (this.Event_Card[i].Status)
-		   {
-			System.out.print("  Available  ,");
-		   
-		   }
-		else
-			System.out.print("  Unavailable , ");
-		
+
+			if (this.Event_Card[i].Status)
+			{
+				System.out.print("  Available  ,");
+
+			}
+			else
+				System.out.print("  Unavailable , ");
+
 		}
 		System.out.println("");
 		System.out.print("City Area Cards :");
 		for (int i=0;i<this.CityArea_Cards.length-1  ;i++ )
 		{
 			System.out.print(this.CityArea_Cards[i].GetName());
-		 if (this.CityArea_Cards[i].Status)
-		   {
-			System.out.print("  Available  ,");
-		   
-		   }
-		else
-			System.out.print("  Unavailable , ");
-		
+			if (this.CityArea_Cards[i].Status)
+			{
+				System.out.print("  Available  ,");
+
+			}
+			else
+				System.out.print("  Unavailable , ");
+
 		}
 		System.out.println("");
 		System.out.print("Board Cards Green : ");
 		for (int i=0;i<this.Green_Cards  .length-1  ;i++ )
 		{
 			System.out.print(this.Green_Cards[i].GetName() );
-		 if (this.Green_Cards[i].Status)
-		   {
-			System.out.print("  Available , ");
-		    
-		   }
-		else
-			System.out.print("  Unavailable , ");
-		
+			if (this.Green_Cards[i].Status)
+			{
+				System.out.print("  Available , ");
+
+			}
+			else
+				System.out.print("  Unavailable , ");
+
 		}
 		System.out.println(" ");
-		
+
 		System.out.print("Boards Card Brown : ");
-				
+
 		for (int i=0;i<TotalBrownCard  ;i++ )
 		{
-			  System.out.print(this.Brown_Cards[i].GetName());
-		 if (this.Brown_Cards[i].Status)
-		   {
-			System.out.print("  Available  ,");
-		 
-		   }
-		else
-			System.out.print("  Unavailable  ,");
+			System.out.print(this.Brown_Cards[i].GetName());
+			if (this.Brown_Cards[i].Status)
+			{
+				System.out.print("  Available  ,");
+
+			}
+			else
+				System.out.print("  Unavailable  ,");
 		}
-		
+
 		System.out.println();
-					
-		}
-		
-	
+
+	}
+
+
 	/**
 	 * 
 	 * Method GetCard will be call from GameEngin to Draw cards to player during the game.
@@ -167,87 +174,87 @@ public class ManageCards implements Serializable
 	 * @return return type is an object of type cards
 	 */
 	public Cards GetCard( CardType Type)
-		{
-			
-		Cards available =null;
-		
-			if(CardType.PersonalityCards==Type  ) 
-				
-			{  
-				this.ShuffleCards((Cards [])  this.Personality_Card);
-				for (int i=0;i<TotalPersonalityCard;i++)
-				{
-			
-				 if (this.Personality_Card[i].Status==true  )
-				 { 
-				    this.Personality_Card[i].Status=false;
-				    available= (Cards) this.Personality_Card[i];
-					 break;
-				 } 
-				}
-			}
-			else if(CardType.EventCards==Type  )    
-			{   this.ShuffleCards( (Cards [])this.Event_Card);
-				for (int i=0;i<=this.Event_Card.length-1;i++)
-				{		 
-				 if (this.Event_Card[i].Status==true  )
-				  {
-					 this.Event_Card[i].Status=false;
-					 available= (Cards) this.Event_Card[i];
-					 break;
-		          }
-				}
-			}
-				
-			else if(CardType.CityAreaCards  ==Type  )    
-			{   this.ShuffleCards((Cards [])this.CityArea_Cards);
-				for (int i=0;i<=this.CityArea_Cards.length-1;i++)
-					{
-					 if (this.CityArea_Cards[i].Status==true  )
-					  {
-						this.CityArea_Cards[i].Status=false;
-						 available=(Cards) this.CityArea_Cards[i];
-						 break;
-					 
-					  }
-					}
-			}
-						
-			else if(CardType.GreenCards  ==Type  )    
-			{   
-				this.ShuffleCards((Cards [])this.Green_Cards);
-				boolean availableGreen = false;
-				
-					for (int i=0;i<=this.Green_Cards.length-1;i++)
-					{
-						if (this.Green_Cards[i].Status==true  )
-						{ 
-							this.Green_Cards[i].Status=false;
-							available=this.Green_Cards[i];
-							break;
-						}
+	{
 
-					}
-				
-				
+		Cards available =null;
+
+		if(CardType.PersonalityCards==Type  ) 
+
+		{  
+			this.ShuffleCards((Cards [])  this.Personality_Card);
+			for (int i=0;i<TotalPersonalityCard;i++)
+			{
+
+				if (this.Personality_Card[i].Status==true  )
+				{ 
+					this.Personality_Card[i].Status=false;
+					available= (Cards) this.Personality_Card[i];
+					break;
+				} 
 			}
-			else if(CardType.BrownCards  ==Type  )    
-			{this.ShuffleCards((Cards [])this.Brown_Cards);
-				for (int i=0;i<TotalBrownCard;i++)
-					{
-						
-					if (this.Brown_Cards[i].Status==true  )
-					{
-					 this.Brown_Cards[i].Status=false;
-					 available= (Cards) this.Brown_Cards[i];
-					 break;
-					 }
-				}
-			}
-			else available=null;
-	return available;
-			
 		}
+		else if(CardType.EventCards==Type  )    
+		{   this.ShuffleCards( (Cards [])this.Event_Card);
+		for (int i=0;i<=this.Event_Card.length-1;i++)
+		{		 
+			if (this.Event_Card[i].Status==true  )
+			{
+				this.Event_Card[i].Status=false;
+				available= (Cards) this.Event_Card[i];
+				break;
+			}
+		}
+		}
+
+		else if(CardType.CityAreaCards  ==Type  )    
+		{   this.ShuffleCards((Cards [])this.CityArea_Cards);
+		for (int i=0;i<=this.CityArea_Cards.length-1;i++)
+		{
+			if (this.CityArea_Cards[i].Status==true  )
+			{
+				this.CityArea_Cards[i].Status=false;
+				available=(Cards) this.CityArea_Cards[i];
+				break;
+
+			}
+		}
+		}
+
+		else if(CardType.GreenCards  ==Type  )    
+		{   
+			this.ShuffleCards((Cards [])this.Green_Cards);
+			boolean availableGreen = false;
+
+			for (int i=0;i<=this.Green_Cards.length-1;i++)
+			{
+				if (this.Green_Cards[i].Status==true  )
+				{ 
+					this.Green_Cards[i].Status=false;
+					available=this.Green_Cards[i];
+					break;
+				}
+
+			}
+
+
+		}
+		else if(CardType.BrownCards  ==Type  )    
+		{this.ShuffleCards((Cards [])this.Brown_Cards);
+		for (int i=0;i<TotalBrownCard;i++)
+		{
+
+			if (this.Brown_Cards[i].Status==true  )
+			{
+				this.Brown_Cards[i].Status=false;
+				available= (Cards) this.Brown_Cards[i];
+				break;
+			}
+		}
+		}
+		else available=null;
+		return available;
+
+	}
 
 	/**
 	 * Shuffle method was written shuffle the cards before giving them to players.
@@ -256,10 +263,10 @@ public class ManageCards implements Serializable
 	 * @return  An array of cards will be return
 	 */
 	public  Cards[] ShuffleCards(Cards[] _Cards)
-	 {
+	{
 		Random rgen = new Random();  // Random number generator
 		int TotalCard = _Cards.length;
-		
+
 		if(_Cards[0].GetCardType() == CardType.BrownCards)
 		{
 			TotalCard = TotalBrownCard;
@@ -268,248 +275,265 @@ public class ManageCards implements Serializable
 		{
 			TotalCard = TotalPersonalityCard;
 		}
-		
+
 		for (int i=0; i<TotalCard; i++)
 		{
-		    int randomPosition = rgen.nextInt(TotalCard);
-		    Cards temp = _Cards[i];
-		    _Cards[i] = _Cards[randomPosition];
-		    _Cards[randomPosition] = temp;
+			int randomPosition = rgen.nextInt(TotalCard);
+			Cards temp = _Cards[i];
+			_Cards[i] = _Cards[randomPosition];
+			_Cards[randomPosition] = temp;
 		}
-	
+
 		return _Cards;
 	}
 
 
-@Override
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
 	public String toString() 
-{
-	return (this.toString());
+	{
+		return (this.toString());
 
-}
+	}
 
+	/**
+	 * Function to create all the green cards
+	 */
 	private void CreateGreenCards()
-{
-	String  thisLine = null;
-	int iterator =  48;
-	int j = 1;
-	
-	ClassLoader classLoader = getClass().getClassLoader();
-	File file = new File(classLoader.getResource("GreenCards.txt").getFile());
-	 
-	  try
-	  {
-	    
-		 BufferedReader br = new BufferedReader(new FileReader(file));
-		 
-	     while ((thisLine = br.readLine()) != null) {	    	 
-	    	//If not comment then read
-	    	 if (thisLine.contains("name"))
-	    	 {
-	    		 String cardName = thisLine.split("=")[1];
-	    		 
-	    		 this.Green_Cards[iterator] = new GreenCards( cardName, 401 + j, true,CardType.GreenCards);
-	    		 
-	    		 j++;
-	    		 iterator--;
-	    		
-	    	 }
-	    	 else if (thisLine.contains("verb"))
-	    	 {
-	    		 Action newAction = Action.ParseString(thisLine);
-	    		 this.Green_Cards[iterator+1].AddAction(newAction);
-	    	 }
-	    	 else if (thisLine.contains("symbol"))
-	    	 {
-	    		 String [] symbols = thisLine.split("=")[1].split(",");
-	    		 
-	    		 for (String s : symbols)
-	    		 {
-	    			 this.Green_Cards[iterator+1].AddSymbols(s);
-	    		 }
-	    	 }
-	    	 
+	{
+		String  thisLine = null;
+		int iterator =  48;
+		int j = 1;
 
-	     }
-	     
-	     br.close();
-	  }
-	  catch(Exception e)
-	  {
-	     e.printStackTrace();
-	  }		  
-}
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource("GreenCards.txt").getFile());
 
-	private void CreateBrownCards()
-{
-	String  thisLine = null;
-	ClassLoader classLoader = getClass().getClassLoader();
-	File file = new File(classLoader.getResource("BrownCards.txt").getFile());
-	  try{
-	     // open input stream test.txt for reading purpose.
-	     BufferedReader br = new BufferedReader(new FileReader(file));
-	     
-	     int iterator =  53;
-    	 int j = 1;
-    	 
-	     while ((thisLine = br.readLine()) != null) {
-	    	
-	    	
-	    	//If not comment then read
-	    	 if (!thisLine.contains("name"))
-	    	 {
-	    		 String cardName = thisLine.split("=")[1];
-	    		 
-	    		 this.Brown_Cards[iterator] = new BrownCards( cardName, 401 + j, true,CardType.BrownCards);
-	    		 
-	    		 j++;
-	    		 iterator--;
-	    		
-	    	 }
-	    	 else if (!thisLine.contains("verb"))
-	    	 {
-	    		 Action newAction = Action.ParseString(thisLine);
-	    		 this.Brown_Cards[iterator+1].AddAction(newAction);
-	    	 }
-	    	 else if (!thisLine.contains("symbol"))
-	    	 {
-	    		 String [] symbols = thisLine.split("=")[1].split(",");
-	    		 
-	    		 for (String s : symbols)
-	    		 {
-	    			 this.Brown_Cards[iterator+1].AddSymbols(s);
-	    		 }
-	    	 }
-	    	 
+		try
+		{
 
-	     }       
-	  }catch(Exception e){
-	     e.printStackTrace();
-	  }		  
-}
+			BufferedReader br = new BufferedReader(new FileReader(file));
 
+			while ((thisLine = br.readLine()) != null) {	    	 
+				//If not comment then read
+				if (thisLine.contains("name"))
+				{
+					String cardName = thisLine.split("=")[1];
+
+					this.Green_Cards[iterator] = new GreenCards( cardName, 401 + j, true,CardType.GreenCards);
+
+					j++;
+					iterator--;
+
+				}
+				else if (thisLine.contains("verb"))
+				{
+					Action newAction = Action.ParseString(thisLine);
+					this.Green_Cards[iterator+1].AddAction(newAction);
+				}
+				else if (thisLine.contains("symbol"))
+				{
+					String [] symbols = thisLine.split("=")[1].split(",");
+
+					for (String s : symbols)
+					{
+						this.Green_Cards[iterator+1].AddSymbols(s);
+					}
+				}
+
+
+			}
+
+			br.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}		  
+	}
+
+	/*
+	 * Function not in use at the moment but can still activate if we decide to activate brown cards
+	 * private void CreateBrownCards()
+	{
+		String  thisLine = null;
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource("BrownCards.txt").getFile());
+		try{
+			// open input stream test.txt for reading purpose.
+			BufferedReader br = new BufferedReader(new FileReader(file));
+
+			int iterator =  53;
+			int j = 1;
+
+			while ((thisLine = br.readLine()) != null) {
+
+
+				//If not comment then read
+				if (!thisLine.contains("name"))
+				{
+					String cardName = thisLine.split("=")[1];
+
+					this.Brown_Cards[iterator] = new BrownCards( cardName, 401 + j, true,CardType.BrownCards);
+
+					j++;
+					iterator--;
+
+				}
+				else if (!thisLine.contains("verb"))
+				{
+					Action newAction = Action.ParseString(thisLine);
+					this.Brown_Cards[iterator+1].AddAction(newAction);
+				}
+				else if (!thisLine.contains("symbol"))
+				{
+					String [] symbols = thisLine.split("=")[1].split(",");
+
+					for (String s : symbols)
+					{
+						this.Brown_Cards[iterator+1].AddSymbols(s);
+					}
+				}
+
+
+			}       
+		}catch(Exception e){
+			e.printStackTrace();
+		}		  
+	}*/
+
+	/**
+	 * Function will create all the personality cards
+	 */
 	private void CreatePersoCards()
 	{
 		String  thisLine = null;
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("PersonalityCards.txt").getFile());
-		
-		  try{
-		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader(file));
-		    
-		     int iterator =  6;
-	    	 int j = 1;
-	    	 
-		     while ((thisLine = br.readLine()) != null) {
-		    	
-		    	 
-		    	//If not comment then read
-		    	 if (thisLine.contains("name"))
-		    	 {
-		    		 String cardName = thisLine.split("=")[1];
-		    		 
-		    		 this.Personality_Card[iterator] = new PersonalityCards( cardName, 401 + j, true,CardType.PersonalityCards);
-		    		 
-		    		 j++;
-		    		 iterator--;
-		    		
-		    	 
-		    	 }
-		     }    
-		     
-		     br.close();
-		  }
-		  catch(Exception e)
-		  {
-		     e.printStackTrace();
-		  }		  
+
+		try{
+			// open input stream test.txt for reading purpose.
+			BufferedReader br = new BufferedReader(new FileReader(file));
+
+			int iterator =  6;
+			int j = 1;
+
+			while ((thisLine = br.readLine()) != null) {
+
+
+				//If not comment then read
+				if (thisLine.contains("name"))
+				{
+					String cardName = thisLine.split("=")[1];
+
+					this.Personality_Card[iterator] = new PersonalityCards( cardName, 401 + j, true,CardType.PersonalityCards);
+
+					j++;
+					iterator--;
+
+
+				}
+			}    
+
+			br.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}		  
 	}
 
+	/**
+	 * Function will crate all the city area cards
+	 */
 	private void CreateCityCards()
 	{
 		String  thisLine = null;
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("CityArea.txt").getFile());
-		
-		  try{
-		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader(file));
-		    
-		     int iterator =  11;
-	    	 int j = 1;
-	    	 
-		     while ((thisLine = br.readLine()) != null) {
-		    	
-		    	 
-		    	//If not comment then read
-		    	 if (thisLine.contains("name"))
-		    	 {
-		    		 String cardName = thisLine.split("=")[1];
-		    		 
-		    		 this.CityArea_Cards[iterator] = new CityAreaCards( cardName, 401 + j, true,CardType.CityAreaCards);
-		    		 
-		    		 j++;
-		    		 iterator--;
-		    		
-		    	 
-		    	 }
-		     }    
-		     
-		     br.close();
-		  }
-		  catch(Exception e)
-		  {
-		     e.printStackTrace();
-		  }		  
+
+		try{
+			// open input stream test.txt for reading purpose.
+			BufferedReader br = new BufferedReader(new FileReader(file));
+
+			int iterator =  11;
+			int j = 1;
+
+			while ((thisLine = br.readLine()) != null) {
+
+
+				//If not comment then read
+				if (thisLine.contains("name"))
+				{
+					String cardName = thisLine.split("=")[1];
+
+					this.CityArea_Cards[iterator] = new CityAreaCards( cardName, 401 + j, true,CardType.CityAreaCards);
+
+					j++;
+					iterator--;
+
+
+				}
+			}    
+
+			br.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}		  
 	}
 
+	/**
+	 * Function will create all the random event cars
+	 */
 	private void RandomEventCards()
 	{
 		String  thisLine = null;
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("RandomEvents.txt").getFile());
-		
-		  try{
-		     // open input stream test.txt for reading purpose.
-		     BufferedReader br = new BufferedReader(new FileReader(file));
-		    
-		     int iterator =  11;
-	    	 int j = 1;
-	    	 
-		     while ((thisLine = br.readLine()) != null) {
-		    	
-		    	 
-		    	//If not comment then read
-		    	 if (thisLine.contains("name"))
-		    	 {
-		    		 String cardName = thisLine.split("=")[1];
-		    		 
-		    		 this.Event_Card[iterator] = new EventCards( cardName, 401 + j, true,CardType.EventCards);
-		    		 
-		    		 j++;
-		    		 iterator--;
-		    		
-		    	 
-		    	 }
-		     }    
-		     
-		     br.close();
-		  }
-		  catch(Exception e)
-		  {
-		     e.printStackTrace();
-		  }		  
+
+		try{
+			// open input stream test.txt for reading purpose.
+			BufferedReader br = new BufferedReader(new FileReader(file));
+
+			int iterator =  11;
+			int j = 1;
+
+			while ((thisLine = br.readLine()) != null) {
+
+
+				//If not comment then read
+				if (thisLine.contains("name"))
+				{
+					String cardName = thisLine.split("=")[1];
+
+					this.Event_Card[iterator] = new EventCards( cardName, 401 + j, true,CardType.EventCards);
+
+					j++;
+					iterator--;
+
+
+				}
+			}    
+
+			br.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}		  
 	}
 
 
 }
 
-		
-		
-	
 
 
 
-	
+
+
+
+
 

@@ -3,17 +3,20 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
 /**
+ * Class to control state of the game
+ * 
  * @author Lawrence
  * @version 1.0
  *
  */
 public class StateManager 
 {
+	/**
+	 * default constructor
+	 */
 	public StateManager() 
 	{}
-	
 	
 	/**
 	 * Function will go through the filepath and load its datastructure. 
