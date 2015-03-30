@@ -328,7 +328,7 @@ public class GameEngine implements Serializable
 		{
 			System.out.println("Player " + (player+1) + " does NOT have a city area card available to play");
 		}
-		scan.close();
+		//scan.close();
     }
     
     
@@ -3062,7 +3062,7 @@ public class GameEngine implements Serializable
 				AreaNumber = scan.nextInt();
 
 				NoTroubleArea = !this.GameBoard.AreaHasTrouble(AreaNumber);
-				scan.close();
+				//scan.close();
 			}while(NoTroubleArea);
 
 			ActionSuccess = this.GameBoard.Removetrouble(AreaNumber);
@@ -3195,7 +3195,7 @@ public class GameEngine implements Serializable
 
         	ActionSuccess = true;
         }
-        scan.close();
+        //scan.close();
         return ActionSuccess;
 	}
 	
@@ -3239,7 +3239,7 @@ public class GameEngine implements Serializable
 	            	}
 	    		}
 			 }
-			 scan.close();
+			 //scan.close();
 		}while (CanNotPut);
         
 		ActionSuccess = GameBoard.PlaceMinion(AreaNumber,ListPlayer.get(player));
