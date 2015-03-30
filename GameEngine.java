@@ -166,7 +166,7 @@ public class GameEngine implements Serializable
 		                
 		                if(!HasDemon)
 		                {
-		                    if(CityArea.Name.compareToIgnoreCase("The Scours") == 0)
+		                    if(CityArea.GetName().compareToIgnoreCase("The Scours") == 0)
 		                    {
 		                        System.out.println("Do you want to play the effect of <The Scours> (exchange a card for 2$) (yes or no)?");
 		                        String answer = scan.next();
@@ -180,12 +180,12 @@ public class GameEngine implements Serializable
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("Small Gods") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("Small Gods") == 0)
 		                    {
 		                        //defense effect
 		                    	System.out.println("Player has the Small Gods city area cards but it has no effect per turn");
 		                    }
-		                    else if(CityArea.Name.contains("Landing"))
+		                    else if(CityArea.GetName().contains("Landing"))
 		                    {
 		                        System.out.println("Do you want to play the effect of <Dragon's Landing> (get 2$ from bank) (yes or no)?");
 		                        String answer = scan.next();
@@ -196,7 +196,7 @@ public class GameEngine implements Serializable
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("Unreal Estate") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("Unreal Estate") == 0)
 		                    {
 		                    	System.out.println("Do you want to play the effect of <Unreal Estate> (Discard a card and fetch one) (yes or no)?");
 		                        String answer = scan.next();
@@ -214,7 +214,7 @@ public class GameEngine implements Serializable
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("Seven Sleepers") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("Seven Sleepers") == 0)
 		                    {
 		                         System.out.println("Do you want to play the effect of <Seven Sleepers> (get 3$ from bank) (yes or no)?");
 		                        String answer = scan.next();
@@ -225,7 +225,7 @@ public class GameEngine implements Serializable
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("Isle of Gods") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("Isle of Gods") == 0)
 		                    {
 		                    	System.out.println("Do you want to play the effect of <Isle of Gods> (Pay 2$ to remove a troublemaker) (yes or no)?");
 		                        String answer = scan.next();
@@ -237,7 +237,7 @@ public class GameEngine implements Serializable
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("Longwall") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("Longwall") == 0)
 		                    {
 		                        System.out.println("Do you want to play the effect of <Longwall> (get 1$ from bank) (yes or no)?");
 		                        String answer = scan.next();
@@ -248,7 +248,7 @@ public class GameEngine implements Serializable
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("Dimwell") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("Dimwell") == 0)
 		                    {
 		                    	//5 7 8 9
 		                    	System.out.println("Do you want to play the effect of <Dimwell> (pay 3$ to place minion in Dimwell or adjacent area) (yes or no)?");
@@ -262,7 +262,7 @@ public class GameEngine implements Serializable
 		                        	ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("The Hippo") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("The Hippo") == 0)
 		                    {
 		                    	System.out.println("Do you want to play the effect of <The Hippo> (get 2$ from bank) (yes or no)?");
 		                        String answer = scan.next();
@@ -273,7 +273,7 @@ public class GameEngine implements Serializable
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("Nap Hill") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("Nap Hill") == 0)
 		                    {
 		                    	System.out.println("Do you want to play the effect of <Nap Hill> (get 1$ from bank) (yes or no)?");
 		                        String answer = scan.next();
@@ -284,7 +284,7 @@ public class GameEngine implements Serializable
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("Dolly Sisters") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("Dolly Sisters") == 0)
 		                    {
 		                    	System.out.println("Do you want to play the effect of <Dolly Sisters> (pay 3$ to place minion in Dolly Sisters or adjacent area) (yes or no)?");
 		                        String answer = scan.next();
@@ -296,7 +296,7 @@ public class GameEngine implements Serializable
 		                        	ListPlayer.get(player).DisableStatusCityArea(i);
 		                        }
 		                    }
-		                    else if(CityArea.Name.compareToIgnoreCase("The Shades") == 0)
+		                    else if(CityArea.GetName().compareToIgnoreCase("The Shades") == 0)
 		                    {
 		                    	System.out.println("Do you want to play the effect of <The Shades> (Place troublemaker in The Shades or adjacent area) (yes or no)?");
 		                        String answer = scan.next();
@@ -1527,7 +1527,7 @@ public class GameEngine implements Serializable
                             	//count minion in Isle of Gods
                                 for(int a=0; a<GameBoard.ListArea.size(); a++)
                                 {
-                                    if(GameBoard.ListArea.get(a).Name.contains("in Isle of Gods"))
+                                    if(GameBoard.ListArea.get(a).GetName().contains("in Isle of Gods"))
                                     {
                                         TotalMinionInArea = GameBoard.CountPlayerMinionsArea(Colors.None, a);
                                     }

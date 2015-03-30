@@ -11,25 +11,26 @@ import java.util.Collections;
 
 public class Area implements Serializable
 {
-		public String Name;
-		private int BuildingCost;
+		private String Name;
 		private int Number;
-
-		//public  boolean IsEmpty;
+		private int BuildingCost;
 		private boolean IsBuilt; //in case a building is built in the area
 		private boolean IsTrouble; //in case two minions are in the area
-		public String CityAreaCardName;
 		private Pieces TroubleMakers;
 		private  List<Pieces> ListDemons;
 		private List<Pieces> ListTrolls;
 		private List<Pieces> ListMinions;
-		//public List<Pieces> ListBuilding;
-		//public Pieces Building;
 		private Pieces Building;
 		private String AdjArea; 
 				
-		public Pieces GetBuilding() {return Building; }
+		public Pieces GetBuilding() 
+		{
+			return Building; 
+		}
 		
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		public String toString() 
 		{
 			return this.toString();
@@ -202,6 +203,9 @@ public class Area implements Serializable
 			
 		}
 		
+		/**
+		 * @param p Minion Piece to add in area 
+		 */
 		public void AddMinionsInit(Pieces p) 
 		{	
 			ListMinions.add(p);
@@ -403,6 +407,9 @@ public class Area implements Serializable
             
 		}
 		
+		/**
+		 * @param p - Pieces to assassinate in current Area
+		 */
 		public void Assassinate(Pieces p)
 		{
 			if (IsTrouble)
@@ -446,6 +453,10 @@ public class Area implements Serializable
 			return false;
 		}
 		
+		/**
+		 * Function will return the list of adjacent area 
+		 * @return list of area index
+		 */
 		public int[] GetAdjAreas(){
 			
 			String [] ArrAdjArr = this.AdjArea.split(",");
@@ -459,6 +470,12 @@ public class Area implements Serializable
 			return ArrIntAdjArr;
 		}
 
+		/**
+		 * Define if Area is controlled by the given colors
+		 * 
+		 * @param color
+		 * @return
+		 */
 		public boolean AreaControllled(Colors color)
 		{
 			
@@ -513,6 +530,10 @@ public class Area implements Serializable
 			
 		}
 		
+		/**
+		 * Return the current building color in area
+		 * @return Building colors
+		 */
 		public Colors BuildingColor()
 		{
 			if (this.IsBuilt)
