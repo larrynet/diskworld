@@ -640,7 +640,7 @@ public class GameEngine implements Serializable
                 	this.Print("");
                     System.out.println("Enter area index to remove the building:");
                     int area = scan.nextInt();
-                    GameBoard.RemoveBuilding(area-1, ListPlayer.get(PlayerIndex));
+                    RemoveBuldingInBoard(area-1, ListPlayer.get(PlayerIndex));
                     return true;
                 }
             }
@@ -2709,8 +2709,41 @@ public class GameEngine implements Serializable
             
         return ActionStatus;
     }
-	
     
+    /**
+     * Function will remove building and change the status of thee CardManager. 
+     * It will also discard the CityArea from player 
+     * 
+     * @param AreaNumber
+     * @param player
+     */
+    public void RemoveBuldingInBoard(int AreaNumber, Player player)
+    {
+    	Area currentArea = GameBoard.ListArea.get(AreaNumber);
+		
+		boolean RemoveSuccess = GameBoard.RemoveBuilding(AreaNumber, player);
+		if(RemoveSuccess)
+		{
+			//remove city area cards from player hand and put it back to deck
+			for(CityAreaCards _PlayerArea : player.ListCityAreaCards)
+			{
+				if(_PlayerArea.GetName().compareToIgnoreCase(currentArea.GetName())== 0)
+				{
+					player.ListCityAreaCards.remove(_PlayerArea);
+					break;
+				}
+			}
+			//remove city area cards from player hand and put it back to deck
+			for(int i=0; i<CardManager.CityArea_Cards.length; i++)
+			{
+				if(CardManager.CityArea_Cards[i].GetName().compareToIgnoreCase(currentArea.GetName())== 0)
+				{
+					CardManager.CityArea_Cards[i].Status = true;
+					break;
+				}
+			}
+		}
+    }
     /**
      * Play the event on of the cards
      * @param CardPlayed
@@ -2737,7 +2770,7 @@ public class GameEngine implements Serializable
             System.out.println("Area " + AreaAffected + " will be affected by the fire. Removing all minions/trouble marker/building in it");
             for(int i=0; i<TotalPlayer; i++)
             {
-                GameBoard.RemoveBuilding(AreaAffected-1, ListPlayer.get(i));
+                RemoveBuldingInBoard(AreaAffected-1, ListPlayer.get(i));
                 GameBoard.RemoveTroll(AreaAffected);
                 GameBoard.Removetrouble(AreaAffected);
                 GameBoard.RemoveDemon(AreaAffected);
@@ -2824,7 +2857,7 @@ public class GameEngine implements Serializable
                     ContinueRolling = true;
                     for(int i=0; i<TotalPlayer; i++)
                     {
-                        GameBoard.RemoveBuilding(AffectedArea-1, ListPlayer.get(i));
+                        RemoveBuldingInBoard(AffectedArea-1, ListPlayer.get(i));
                         Print("Removed building in" + "Area affected " + AffectedArea + " - " + GameBoard.ListArea.get(AffectedArea-1).GetName());
                     }  
                     PrevArea = AffectedArea;
@@ -2867,7 +2900,7 @@ public class GameEngine implements Serializable
             System.out.println("Removing building for all player in Area " + AreaAffected + " - " + GameBoard.ListArea.get(AreaAffected-1).GetName());
             for(int i=0; i<TotalPlayer; i++)
             {
-                GameBoard.RemoveBuilding(AreaAffected-1, ListPlayer.get(i));
+                RemoveBuldingInBoard(AreaAffected-1, ListPlayer.get(i));
             }
         }
         else if(cardName.compareToIgnoreCase("Earthquake") == 0)
@@ -2880,8 +2913,8 @@ public class GameEngine implements Serializable
             System.out.println("Removing building in Area " + AreaAffected1 + ".");
             for(int i=0; i<TotalPlayer; i++)
             {
-                GameBoard.RemoveBuilding(AreaAffected0-1, ListPlayer.get(i));
-                GameBoard.RemoveBuilding(AreaAffected1-1, ListPlayer.get(i));
+                RemoveBuldingInBoard(AreaAffected0-1, ListPlayer.get(i));
+                RemoveBuldingInBoard(AreaAffected1-1, ListPlayer.get(i));
             }
         }
         else if(cardName.compareToIgnoreCase("Mysterious Murders") == 0)
@@ -2942,7 +2975,7 @@ public class GameEngine implements Serializable
             			else
             			{
             				System.out.println("Removing building in Area " + (a+1)+ " - " + GameBoard.ListArea.get(a).GetName());
-            				GameBoard.RemoveBuilding(a, ListPlayer.get(i));
+            				RemoveBuldingInBoard(a, ListPlayer.get(i));
             			}
             		}
             	}

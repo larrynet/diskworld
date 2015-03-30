@@ -171,12 +171,15 @@ public class Board implements Serializable {
 	/**
 	 * @param AreaNumber
 	 * @param player
+	 * @param _areaCard
+	 * @return
 	 */
-	public void RemoveBuilding(int AreaNumber, Player player)
+	public boolean RemoveBuilding(int AreaNumber, Player player)
 	{
 		Area currentArea = this.ListArea.get(AreaNumber);
 		
-		currentArea.RemoveBuilding();
+		boolean RemoveSuccess = currentArea.RemoveBuilding();
+		return RemoveSuccess;
 	}
 	
 	/**
