@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -28,6 +27,8 @@ import javax.swing.JLabel;
  
 public class GameEngine implements Serializable
 {
+
+	private static final long serialVersionUID = 1L;
 	public List<Player> ListPlayer;
 	private ManageCards CardManager;
 	private Board GameBoard;
@@ -57,14 +58,17 @@ public class GameEngine implements Serializable
 	
 	/**
 	 * Show cards current in player hand
+	 * 
 	 * @param player
 	 */
 	public void ShowCard(int player)
 	{
-		//show card
+		//traverse each player and print the current hand they have
         for(int i=0; i<ListPlayer.get(player).PlayerCards.size(); i++)
+        {
         	if(ListPlayer.get(player).PlayerCards.get(i) != null)
-        	System.out.println((i)+"- " + ListPlayer.get(player).PlayerCards.get(i).GetName());
+        		System.out.println((i)+"- " + ListPlayer.get(player).PlayerCards.get(i).GetName());
+        }
 	}
 	
 	/**
@@ -77,21 +81,27 @@ public class GameEngine implements Serializable
 	}
 	
 	/**
-	 * Porcess to start game end procedure
+	 * Signal the game that the end is ending.
 	 */
 	public void ActivateGameEnd()
 	{
 		HasGameEnded = true;
 	}
 	
+	/**
+	 * Function will reset the status of cityArea Cards in his hand
+	 * 
+	 * @param p - Index of player
+	 */
 	public void ReactivateCityAreaEffectForPlayer(int p)
 	{
 		ListPlayer.get(p).EnableAllCityArea();
 	}
+	
 	/**
-	 * @param p - Init all internal structure with player p
 	 * Default constructor who will init all internal structure with player p
 	 * 
+	 * @param p - Init all internal structure with player p
 	 */
 	public GameEngine(int p) 
 	{
@@ -114,6 +124,7 @@ public class GameEngine implements Serializable
 	public void ActivateCityAreaEffect(int player)
     {
 		Scanner scan = new Scanner(System.in);
+		
 		if(DoesPlayerHasCityArea(player))
 		{
 			System.out.println("Player " + (player+1) + " city area card available to play: ");
@@ -220,18 +231,10 @@ public class GameEngine implements Serializable
 		                        String answer = scan.next();
 		                        if(answer.compareToIgnoreCase("yes") == 0)
 		                        {
-		                        	RemoveTrouble(player);
-		                        	
-		                        	//System.out.println("Enter area index to remove troublemaker");
-		                            //int Area = scan.nextInt();
-		                     
+		                        	RemoveTrouble();
 		                            ListPlayer.get(player).DeductFromMoney(2);
 		                            GameBoard.AddToBank(2);
-		                            
-		                            //remove troublemaker
-		                            //GameBoard.Removetrouble(Area);
 		                            ListPlayer.get(player).DisableStatusCityArea(i);
-		                            
 		                        }
 		                    }
 		                    else if(CityArea.Name.compareToIgnoreCase("Longwall") == 0)
@@ -322,8 +325,10 @@ public class GameEngine implements Serializable
 	        }
 		}
 		else
+		{
 			System.out.println("Player " + (player+1) + " does NOT have a city area card available to play");
-        
+		}
+		scan.close();
     }
     
     
@@ -352,11 +357,11 @@ public class GameEngine implements Serializable
 		GreenCards g = null;
 		BrownCards b = null;
 		List<String> lstSymbols = null;
-				
+
 		//fetch card of playchoice
 		Cards CardPlayed = (GreenCards)ListPlayer.get(CurrentPlayerIndex).GetCards().get(playChoice);
 		boolean ActionStatus = true;
-		
+
 		if (CardPlayed.GetCardType() == CardType.GreenCards)
 		{
 			g = (GreenCards)CardPlayed;
@@ -367,127 +372,124 @@ public class GameEngine implements Serializable
 			b = (BrownCards)CardPlayed;
 			lstSymbols = b.GetSymbol();
 		}
-		
-        System.out.println("Player " + (CurrentPlayerIndex+1) + " decides to play " + CardPlayed.GetName());
-        Scanner scan = new Scanner(System.in);
-        
-        //No Symbol
-        if (lstSymbols == null && CardPlayed.GetName().contains("Nuts"))
-        {
-        	ActionStatus = true;
-        }
-        else
-        	
-        
-        {
-        //Execute the symbol of the
-		for(int sIterator = 0; ActionStatus && (sIterator < lstSymbols.size()); sIterator++)
-		{
-			String currentSymbol = lstSymbols.get(sIterator);
-			//if Random Event, we have to play right away without asking
-			if(currentSymbol.compareToIgnoreCase("RE") == 0)
-			{
-				ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex, false);
-				
-			}
-			else
-			{
 
-				System.out.println("Current symbol is " + currentSymbol+". Would you like to play it?");
-				String PlaySymbol = scan.next();
-				
-				if(PlaySymbol.compareToIgnoreCase("yes") == 0)
+		System.out.println("Player " + (CurrentPlayerIndex+1) + " decides to play " + CardPlayed.GetName());
+		Scanner scan = new Scanner(System.in);
+
+		//No Symbol
+		if (lstSymbols == null && CardPlayed.GetName().contains("Nuts"))
+		{
+			ActionStatus = true;
+		}
+		else
+		{
+			//Execute the symbol of card
+			for(int sIterator = 0; ActionStatus && (sIterator < lstSymbols.size()); sIterator++)
+			{
+				String currentSymbol = lstSymbols.get(sIterator);
+				//if Random Event, we have to play right away without asking
+				if(currentSymbol.compareToIgnoreCase("RE") == 0)
 				{
-					//Place a building
-					if(currentSymbol.compareToIgnoreCase("B") == 0)
+					ActionStatus = PlayEvent(CardPlayed, CurrentPlayerIndex, false);
+
+				}
+				else
+				{
+					System.out.println("Current symbol is " + currentSymbol+". Would you like to play it?");
+					String PlaySymbol = scan.next();
+
+					if(PlaySymbol.compareToIgnoreCase("yes") == 0)
 					{
-						ActionStatus = PutBuilding(CurrentPlayerIndex);
-					}
-					//Place a minion
-					else if(currentSymbol.compareToIgnoreCase("M") == 0)
-					{
-						ActionStatus = PutMinion(CurrentPlayerIndex);
-					}
-					//Assassination
-					else if(currentSymbol.compareToIgnoreCase("A") == 0)
-					{
-						ActionStatus = Assassinate(CurrentPlayerIndex);
-					}
-					//Remove one trouble marker
-					else if(currentSymbol.compareToIgnoreCase("RT") == 0)
-					{
-						ActionStatus = RemoveTrouble(CurrentPlayerIndex);
-					}
-					//Take money
-					else if(currentSymbol.contains("T("))
-					{
-						this.GetPlayerBalance("Current Balance", this.ListPlayer.get(CurrentPlayerIndex));
-						
-						ActionStatus = PayPlayer(CurrentPlayerIndex, Character.getNumericValue(currentSymbol.charAt(2)));
-						
-						this.GetPlayerBalance("New Balance", this.ListPlayer.get(CurrentPlayerIndex));
-					}
-					//Play another card
-					else if(currentSymbol.compareToIgnoreCase("C") == 0)
-					{
-						DiscardCards.add(CardPlayed);
-						ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
-						
-						//Print Player Cards and Play next card
-						this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
-						System.out.println("What card do you want to play next ? (Enter index of card)");
-						
-						int newCard = scan.nextInt();
-						ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
-					}
-					//Interupt
-					else if(currentSymbol.compareToIgnoreCase("I") == 0)
-					{
-						System.out.println("Interrupt symbol has no effect. Oh well too late now :)");
-					}
-					//Scroll: Play action described in card
-					else if(currentSymbol.compareToIgnoreCase("S") == 0)
-					{
-						ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
-					}
-					//No such symbol
-					else
-					{
-		                System.out.println("Symbol " + currentSymbol + " is invalid. ");
+						//Place a building
+						if(currentSymbol.compareToIgnoreCase("B") == 0)
+						{
+							ActionStatus = PutBuilding(CurrentPlayerIndex);
+						}
+						//Place a minion
+						else if(currentSymbol.compareToIgnoreCase("M") == 0)
+						{
+							ActionStatus = PutMinion(CurrentPlayerIndex);
+						}
+						//Assassination
+						else if(currentSymbol.compareToIgnoreCase("A") == 0)
+						{
+							ActionStatus = Assassinate(CurrentPlayerIndex);
+						}
+						//Remove one trouble marker
+						else if(currentSymbol.compareToIgnoreCase("RT") == 0)
+						{
+							ActionStatus = RemoveTrouble();
+						}
+						//Take money
+						else if(currentSymbol.contains("T("))
+						{
+							this.GetPlayerBalance("Current Balance", this.ListPlayer.get(CurrentPlayerIndex));
+
+							ActionStatus = PayPlayer(CurrentPlayerIndex, Character.getNumericValue(currentSymbol.charAt(2)));
+
+							this.GetPlayerBalance("New Balance", this.ListPlayer.get(CurrentPlayerIndex));
+						}
+						//Play another card
+						else if(currentSymbol.compareToIgnoreCase("C") == 0)
+						{
+							DiscardCards.add(CardPlayed);
+							ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
+
+							//Print Player Cards and Play next card
+							this.ListPlayer.get(CurrentPlayerIndex).PrintCardsIndex();
+							System.out.println("What card do you want to play next ? (Enter index of card)");
+
+							int newCard = scan.nextInt();
+							ActionStatus = PlayCard(CurrentPlayerIndex, newCard);
+						}
+						//Interupt
+						else if(currentSymbol.compareToIgnoreCase("I") == 0)
+						{
+							System.out.println("Interrupt symbol has no effect. Oh well too late now :)");
+						}
+						//Scroll: Play action described in card
+						else if(currentSymbol.compareToIgnoreCase("S") == 0)
+						{
+							ActionStatus = PlayEffect(CardPlayed, CurrentPlayerIndex);
+						}
+						//No such symbol
+						else
+						{
+							System.out.println("Symbol " + currentSymbol + " is invalid. ");
+						}
 					}
 				}
 			}
 		}
-	}
 		if(ActionStatus) 
 		{
-			
+
 			DiscardCards.add(CardPlayed);
 			ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(playChoice);
-			
+
 			if (this.ToDiscard > 0)
 			{
 				for (int i = 0; i < this.ToDiscard; i++)
 				{
 					ListPlayer.get(CurrentPlayerIndex).RemovePlayerCard(i);
 				}
-				
+
 				this.ToDiscard = 0;
-							
+
 			}
-			
+
 			this.GameBoard.PrintState();
-			
+
 			System.out.println("");
 		}
-		
+
 		return ActionStatus;
 	}
 
-	
+
 	/**
 	 * Exception card that have particular instructions
-	 * @param c
+	 * @param c to verify
 	 * @return if card is exception
 	 */
 	private boolean BelongToException(Cards c)
@@ -2744,6 +2746,7 @@ public class GameEngine implements Serializable
 			}
 		}
     }
+    
     /**
      * Play the event on of the cards
      * @param CardPlayed
@@ -2784,9 +2787,8 @@ public class GameEngine implements Serializable
             {
                 int AreaAffected = GameBoard.RollDie();
                 CurrentDie = AreaAffected;
-
-                int [] NoAdjacentToRiver = {3, 6 };
                 
+                //If area doesn't belong to the ones not connected to a river
                 if(AreaAffected!=3 && AreaAffected!= 6)
                 {
                 	for(int EachPlayer= CurrentPlayer; EachPlayer<(CurrentPlayer+4); EachPlayer++)
@@ -3037,45 +3039,45 @@ public class GameEngine implements Serializable
     
     /**
      * RemoveTrouble Marker function
-     * @param player
+     * @param player to 
      * @return 
      */
-	private boolean RemoveTrouble(int player)
+	private boolean RemoveTrouble()
 	{
 		boolean ActionSuccess = false;
 		boolean NoTroubleArea = true;
 		int AreaNumber;
-		
+
 		//Does board have troublemaker
 		if (this.GameBoard.BoardHasTrouble())
 		{
-			
+
 			//Print board Status
 			this.GameBoard.PrintState();
-			
+
 			do
 			{
 				System.out.println("Please enter the Area index you want to remove the troublemaker.");
-		        Scanner scan = new Scanner(System.in);
-		        AreaNumber = scan.nextInt();
-		        
-		        NoTroubleArea = !this.GameBoard.AreaHasTrouble(AreaNumber);
-		        
+				Scanner scan = new Scanner(System.in);
+				AreaNumber = scan.nextInt();
+
+				NoTroubleArea = !this.GameBoard.AreaHasTrouble(AreaNumber);
+				scan.close();
 			}while(NoTroubleArea);
-			
-		    ActionSuccess = this.GameBoard.Removetrouble(AreaNumber);
-		    
-		    this.PrintAreaState(AreaNumber);
-	        
+
+			ActionSuccess = this.GameBoard.Removetrouble(AreaNumber);
+
+			this.PrintAreaState(AreaNumber);
+
 		}
 		else
 		{
 			this.Print("Board does not have any Trouble Makers");
 			ActionSuccess = true;
 		}
-		
-		
-			return ActionSuccess;
+
+
+		return ActionSuccess;
 	}
 	
 	
@@ -3088,7 +3090,6 @@ public class GameEngine implements Serializable
 	{
 		boolean ActionSuccess = false;
         boolean Continue = true;
-        boolean EmptyArea = true;
         int AreaNumber;
         boolean NoPiece = false;
         Scanner scan = new Scanner(System.in);
@@ -3194,6 +3195,7 @@ public class GameEngine implements Serializable
 
         	ActionSuccess = true;
         }
+        scan.close();
         return ActionSuccess;
 	}
 	
@@ -3237,7 +3239,7 @@ public class GameEngine implements Serializable
 	            	}
 	    		}
 			 }
-			 
+			 scan.close();
 		}while (CanNotPut);
         
 		ActionSuccess = GameBoard.PlaceMinion(AreaNumber,ListPlayer.get(player));
@@ -3424,6 +3426,7 @@ public class GameEngine implements Serializable
 	 */
 	public void DetermineFirstPlayer()
 	{
+		//OLD-Code to randomly select a player. Will not be used in this build because we will always start with player 1
 		/*int LastDieValue = 0;
 		int NewDieValue = 0;
 		for (int i = 0; i < this.ListPlayer.size(); i++)
@@ -3984,8 +3987,9 @@ StringBuilder AllPlayers = new StringBuilder();
     	return GameBoard.RemoveMinion(area, ListPlayer.get(player).GetColor());
     }
     
-    
-    //only for testing
+    /**
+     * Function to empty the current deck of green cards. It is only used for testing purpose 
+     */
     public void EmptyCard()
     {
     	Cards c;
@@ -3998,6 +4002,11 @@ StringBuilder AllPlayers = new StringBuilder();
     	
     }
     
+    /**
+     * Function that will the total minion in board
+     * 
+     * @return total 
+     */
     public int GetTotalMinion()
     {
     	int TotalMinion = 0;
@@ -4009,9 +4018,14 @@ StringBuilder AllPlayers = new StringBuilder();
     	return TotalMinion;
     }
     
-    public boolean RemoveTroubleMaker(int areaNumber) {return GameBoard.Removetrouble(areaNumber);}
-    
-    public int ReturnCurrentDieValue() { return CurrentDie;}
+    /**
+     * Return current die value. 
+     * @return die value
+     */
+    public int ReturnCurrentDieValue() 
+    { 
+    	return CurrentDie;
+    }
     
     
     /**
@@ -4249,6 +4263,11 @@ StringBuilder AllPlayers = new StringBuilder();
 		editorFrame.setVisible(true);
   	}
   	
+  	/**
+  	 * Function to convert an Image to a BufferedImage
+  	 * @param img
+  	 * @return
+  	 */
   	private BufferedImage toBufferedImage(Image img)
   	{
   	    if (img instanceof BufferedImage)
@@ -4268,6 +4287,9 @@ StringBuilder AllPlayers = new StringBuilder();
   	    return bimage;
   	}
   	
+  	/**
+  	 * Function will remove all troublemarker in boards
+  	 */
   	public void RemoveAllTroubleMaker()
   	{
   		for(int i=0; i<12; i++)
@@ -4504,6 +4526,12 @@ StringBuilder AllPlayers = new StringBuilder();
   	    GameBoard.SetBalance(48);
   	}
   	    
+  	/**
+  	 * Function will return player color
+  	 * 
+  	 * @param p
+  	 * @return
+  	 */
   	public String GetPlayerColor(int p)
   	{
   		if(ListPlayer.get(p).GetColor() == Colors.Red)
