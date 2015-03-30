@@ -133,7 +133,7 @@ public class GameEngine implements Serializable
 	        for(int i=0; i<ListPlayer.get(player).ListCityAreaCards.size(); i++)
 	        {
 	        	boolean NoDemon = true;
-	        	for(Area _area: GameBoard.ListArea)
+	        	for(Area _area: GameBoard.GetListArea())
 	        	{
 	        		if(_area.GetName().compareToIgnoreCase(ListPlayer.get(player).ListCityAreaCards.get(i).GetName()) == 0)
 	        		{
@@ -152,7 +152,7 @@ public class GameEngine implements Serializable
 		        		String CityAreaName = ListPlayer.get(player).ListCityAreaCards.get(i).GetName();
 		                Area CityArea = null;
 		                
-		                for(Area eachArea : GameBoard.ListArea)
+		                for(Area eachArea : GameBoard.GetListArea())
 		                {
 		                	if(eachArea.GetName().contains(CityAreaName))
 		                	{
@@ -1525,9 +1525,9 @@ public class GameEngine implements Serializable
                                 int TotalMinionInArea = 0;
                             	//The dysk & the opera house
                             	//count minion in Isle of Gods
-                                for(int a=0; a<GameBoard.ListArea.size(); a++)
+                                for(int a=0; a<GameBoard.GetListArea().size(); a++)
                                 {
-                                    if(GameBoard.ListArea.get(a).GetName().contains("in Isle of Gods"))
+                                    if(GameBoard.GetListArea().get(a).GetName().contains("in Isle of Gods"))
                                     {
                                         TotalMinionInArea = GameBoard.CountPlayerMinionsArea(Colors.None, a);
                                     }
@@ -1556,9 +1556,9 @@ public class GameEngine implements Serializable
                                 ////Sacharissa Cripslock
                                 int TotalTroubleMaker = 0;
                             	
-                                for(int a=0; a<GameBoard.ListArea.size(); a++)
+                                for(int a=0; a<GameBoard.GetListArea().size(); a++)
                                 {
-                                    if(GameBoard.ListArea.get(a).HasTroubleMaker())
+                                    if(GameBoard.GetListArea().get(a).HasTroubleMaker())
                                         TotalTroubleMaker++;
                                 }
                                 System.out.println("There is " + TotalTroubleMaker + " troublemaker in the field. PLayer will earn " + amount*TotalTroubleMaker + " dollars. THat same amount will be deducted from the bank.");
@@ -1572,9 +1572,9 @@ public class GameEngine implements Serializable
                                 //The Post office
                             	//Willian de worde
                                 int TotalBuilding =0;
-                            	for(int a=0; a<GameBoard.ListArea.size(); a++)
+                            	for(int a=0; a<GameBoard.GetListArea().size(); a++)
                             	{
-                            		if(ListPlayer.get(player).GetColor() == GameBoard.ListArea.get(a).GetBuilding().GetPieceColor())
+                            		if(ListPlayer.get(player).GetColor() == GameBoard.GetListArea().get(a).GetBuilding().GetPieceColor())
                             		{
                             			TotalBuilding++;
                             		}
@@ -1604,9 +1604,9 @@ public class GameEngine implements Serializable
                                  int TotalMinionInArea = 0;
                             	//The dysk & the opera house
                             	//count minion in Isle of Gods
-                                for(int a=0; a<GameBoard.ListArea.size(); a++)
+                                for(int a=0; a<GameBoard.GetListArea().size(); a++)
                                 {
-                                    if(GameBoard.ListArea.get(a).HasTroubleMaker())
+                                    if(GameBoard.GetListArea().get(a).HasTroubleMaker())
                                         TotalMinionInArea += GameBoard.CountPlayerMinionsArea(Colors.None,a);
                                 }
                                 GameBoard.DeductFromBank(amount*TotalMinionInArea);
@@ -2010,9 +2010,9 @@ public class GameEngine implements Serializable
                             else if(object.contains("building"))
                             {
                             	int NumBuilding =0;
-                            	for(int a=0; a<GameBoard.ListArea.size(); a++)
+                            	for(int a=0; a<GameBoard.GetListArea().size(); a++)
                             	{
-                            		if(ListPlayer.get(player).GetColor() == GameBoard.ListArea.get(a).GetBuilding().GetPieceColor())
+                            		if(ListPlayer.get(player).GetColor() == GameBoard.GetListArea().get(a).GetBuilding().GetPieceColor())
                             		{
                             			NumBuilding++;
                             		}
@@ -2360,7 +2360,7 @@ public class GameEngine implements Serializable
 	                            	 System.out.println("Enter the area index to where you want to move minion-it should be adjacent");
 	                            	 Destination = scan.nextInt();
 	                            	 
-                            	 }while(!GameBoard.ListArea.get(Source).AreaAdjacency(Destination));
+                            	 }while(!GameBoard.GetListArea().get(Source).AreaAdjacency(Destination));
                             	 
                             	 thisCardName = CardPlayed.GetName().toLowerCase();
                             	 
@@ -2398,7 +2398,7 @@ public class GameEngine implements Serializable
                                      }while (!this.GameBoard.AreaAdjacency(source, destination));
 
                             		
-                            		 if(GameBoard.GetArea(source).HasTroubleMaker() && GameBoard.ListArea.get(source).AreaAdjacency(destination))
+                            		 if(GameBoard.GetArea(source).HasTroubleMaker() && GameBoard.GetListArea().get(source).AreaAdjacency(destination))
                             		 {
                             			 GameBoard.RemoveMinion(source,ListPlayer.get(CurrentPlayer).GetColor()) ;
                             			 GameBoard.PlaceMinion(destination, ListPlayer.get(CurrentPlayer)); 
@@ -2721,7 +2721,7 @@ public class GameEngine implements Serializable
      */
     public void RemoveBuldingInBoard(int AreaNumber, Player player)
     {
-    	Area currentArea = GameBoard.ListArea.get(AreaNumber);
+    	Area currentArea = GameBoard.GetListArea().get(AreaNumber);
 		
 		boolean RemoveSuccess = GameBoard.RemoveBuilding(AreaNumber, player);
 		if(RemoveSuccess)
@@ -2799,7 +2799,7 @@ public class GameEngine implements Serializable
                 		if (this.GameBoard.CountPlayerMinions(this.ListPlayer.get(EachPlayer).GetColor()) > 0)
                 		{
 
-                			int[] ListAdjacentArea = GameBoard.ListArea.get(AreaAffected-1).GetAdjAreas();
+                			int[] ListAdjacentArea = GameBoard.GetListArea().get(AreaAffected-1).GetAdjAreas();
 
                 			boolean userChoice= false;
 
@@ -2840,9 +2840,9 @@ public class GameEngine implements Serializable
             do
             {
                 AffectedArea = GameBoard.RollDie();
-                System.out.println("Area affected " + AffectedArea + " - " + GameBoard.ListArea.get(AffectedArea-1).GetName());
+                System.out.println("Area affected " + AffectedArea + " - " + GameBoard.GetListArea().get(AffectedArea-1).GetName());
                 
-                boolean HasBuilding = GameBoard.ListArea.get(AffectedArea-1).HasBuilding();
+                boolean HasBuilding = GameBoard.GetListArea().get(AffectedArea-1).HasBuilding();
                 boolean RollIsAdjacent = false;
                 if(PrevArea ==-1)
                 {
@@ -2851,7 +2851,7 @@ public class GameEngine implements Serializable
                 }
                 else
                 {
-                	RollIsAdjacent = GameBoard.AreaAdjacency(PrevArea, AffectedArea);//.ListArea.get(PrevArea-1).AreaAdjacency(AffectedArea-1);
+                	RollIsAdjacent = GameBoard.AreaAdjacency(PrevArea, AffectedArea);//.GetListArea().get(PrevArea-1).AreaAdjacency(AffectedArea-1);
                 }
                 
                 if(RollIsAdjacent && HasBuilding)
@@ -2860,7 +2860,7 @@ public class GameEngine implements Serializable
                     for(int i=0; i<TotalPlayer; i++)
                     {
                         RemoveBuldingInBoard(AffectedArea-1, ListPlayer.get(i));
-                        Print("Removed building in" + "Area affected " + AffectedArea + " - " + GameBoard.ListArea.get(AffectedArea-1).GetName());
+                        Print("Removed building in" + "Area affected " + AffectedArea + " - " + GameBoard.GetListArea().get(AffectedArea-1).GetName());
                     }  
                     PrevArea = AffectedArea;
                 } 
@@ -2899,7 +2899,7 @@ public class GameEngine implements Serializable
             System.out.println("Explosion Event \n===========================================");
             int AreaAffected = GameBoard.RollDie();
             
-            System.out.println("Removing building for all player in Area " + AreaAffected + " - " + GameBoard.ListArea.get(AreaAffected-1).GetName());
+            System.out.println("Removing building for all player in Area " + AreaAffected + " - " + GameBoard.GetListArea().get(AreaAffected-1).GetName());
             for(int i=0; i<TotalPlayer; i++)
             {
                 RemoveBuldingInBoard(AreaAffected-1, ListPlayer.get(i));
@@ -2931,7 +2931,7 @@ public class GameEngine implements Serializable
                 if(CurrentPlayerTurn < 0) CurrentPlayerTurn=TotalPlayer-1;
                 
                 AreaAffected = GameBoard.RollDie();
-                System.out.println("Area affected : " + AreaAffected + " - " + GameBoard.ListArea.get(AreaAffected-1).GetName());
+                System.out.println("Area affected : " + AreaAffected + " - " + GameBoard.GetListArea().get(AreaAffected-1).GetName());
                 
                 // TODO:remove a minion in that area of their choice
                 System.out.println("Enter player index on which to remove the minion");
@@ -2946,13 +2946,13 @@ public class GameEngine implements Serializable
             {
                 int AreaAffected = GameBoard.RollDie();
                 System.out.println("Area affected " + AreaAffected);
-                if(!GameBoard.ListArea.get(AreaAffected-1).GetIsTrouble())
+                if(!GameBoard.GetListArea().get(AreaAffected-1).GetIsTrouble())
                 {
                 	System.out.println("Area does not have a troublemaker yet. Adding one");
-                	GameBoard.ListArea.get(AreaAffected-1).AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
+                	GameBoard.GetListArea().get(AreaAffected-1).AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
                 }
                 System.out.println("Adding demons in Area " + AreaAffected);
-                GameBoard.ListArea.get(AreaAffected-1).AddDemons(new Pieces(PieceType.Demon, Colors.None));
+                GameBoard.GetListArea().get(AreaAffected-1).AddDemons(new Pieces(PieceType.Demon, Colors.None));
             }
         }
         else if(cardName.compareToIgnoreCase("Subsidence") == 0)
@@ -2963,9 +2963,9 @@ public class GameEngine implements Serializable
             for(int i=0; i<TotalPlayer; i++)
             {
                 //TODO For each building in the board, pay 2$ or remove it
-            	for(int a=0; a<GameBoard.ListArea.size(); a++)
+            	for(int a=0; a<GameBoard.GetListArea().size(); a++)
             	{
-            		if(GameBoard.ListArea.get(a).GetBuilding().GetPieceColor() == ListPlayer.get(i).GetColor())
+            		if(GameBoard.GetListArea().get(a).GetBuilding().GetPieceColor() == ListPlayer.get(i).GetColor())
             		{
             			System.out.println("Building owned by player " + (i+1) + " is found. Would you like to pay 2$ to keep it? (yes/no)");
             			String choice = scan.next();
@@ -2976,7 +2976,7 @@ public class GameEngine implements Serializable
             			}
             			else
             			{
-            				System.out.println("Removing building in Area " + (a+1)+ " - " + GameBoard.ListArea.get(a).GetName());
+            				System.out.println("Removing building in Area " + (a+1)+ " - " + GameBoard.GetListArea().get(a).GetName());
             				RemoveBuldingInBoard(a, ListPlayer.get(i));
             			}
             		}
@@ -2988,16 +2988,16 @@ public class GameEngine implements Serializable
             System.out.println("Bloody Stupid Johson \n===========================================");
             int AreaAffected = GameBoard.RollDie();
             CurrentDie = AreaAffected;
-            System.out.println("Current area affected is " + AreaAffected + " - " + GameBoard.ListArea.get(AreaAffected-1).GetName());
+            System.out.println("Current area affected is " + AreaAffected + " - " + GameBoard.GetListArea().get(AreaAffected-1).GetName());
             //disable effect of City Area of that card by discarding the card
             for(int i=0; i<TotalPlayer; i++)
             {
                 for(int c=0; c<ListPlayer.get(i).ListCityAreaCards.size(); c++)
                 {
                 	//boolean 
-                    if(ListPlayer.get(i).ListCityAreaCards.get(c).GetName().compareToIgnoreCase(GameBoard.ListArea.get(AreaAffected-1).GetName()) == 0)
+                    if(ListPlayer.get(i).ListCityAreaCards.get(c).GetName().compareToIgnoreCase(GameBoard.GetListArea().get(AreaAffected-1).GetName()) == 0)
                     {
-                    	System.out.println("City area card " + GameBoard.ListArea.get(AreaAffected-1).GetName() + " is no longer in play. Discarding it.");
+                    	System.out.println("City area card " + GameBoard.GetListArea().get(AreaAffected-1).GetName() + " is no longer in play. Discarding it.");
                     	DiscardCards.add(ListPlayer.get(i).ListCityAreaCards.get(c));
                     	ListPlayer.get(i).ListCityAreaCards.remove(c);
                         GameBoard.RemoveMinion(c, ListPlayer.get(i).GetColor());
@@ -3018,14 +3018,14 @@ public class GameEngine implements Serializable
                 AreaAffected = GameBoard.RollDie();
                 
                 //test if current area has a minion, if they do, we add a troublemaker as per rule
-                if(GameBoard.ListArea.get(AreaAffected-1).GetMinionCount(Colors.None) > 0)
+                if(GameBoard.GetListArea().get(AreaAffected-1).GetMinionCount(Colors.None) > 0)
                 {
                 	System.out.println("Area " + AreaAffected + " has at least one minion. Adding a TroubleMarker on area.");
-                	GameBoard.ListArea.get(AreaAffected-1).AddTroubleMaker(new Pieces(PieceType.TroubleMarker,Colors.None));
+                	GameBoard.GetListArea().get(AreaAffected-1).AddTroubleMaker(new Pieces(PieceType.TroubleMarker,Colors.None));
                 }
                 
-                System.out.println("Adding Troll in Area " + AreaAffected + " - " + GameBoard.ListArea.get(AreaAffected-1).GetName());
-                GameBoard.ListArea.get(AreaAffected-1).AddTrolls(new Pieces(PieceType.Troll,Colors.None));
+                System.out.println("Adding Troll in Area " + AreaAffected + " - " + GameBoard.GetListArea().get(AreaAffected-1).GetName());
+                GameBoard.GetListArea().get(AreaAffected-1).AddTrolls(new Pieces(PieceType.Troll,Colors.None));
             }
         }
         else
@@ -3231,9 +3231,9 @@ public class GameEngine implements Serializable
 			 }
 			 else
 			 {
-				for (int i : this.GameBoard.ListArea.get(AreaNumber-1).GetAdjAreas())
+				for (int i : this.GameBoard.GetListArea().get(AreaNumber-1).GetAdjAreas())
 	    		{
-	    			if (this.GameBoard.ListArea.get(i).GetMinionCount(thisPlayer.GetColor()) > 0)
+	    			if (this.GameBoard.GetListArea().get(i).GetMinionCount(thisPlayer.GetColor()) > 0)
 	            	{
 	    				CanNotPut = false;
 	            	}
@@ -3271,7 +3271,7 @@ public class GameEngine implements Serializable
 			//search for the right city area cards
 			for(int i=0; i<CardManager.CityArea_Cards.length; i++)
 			{
-				if(CardManager.CityArea_Cards[i].GetName().compareTo(GameBoard.ListArea.get(AreaNumber-1).GetName()) == 0)
+				if(CardManager.CityArea_Cards[i].GetName().compareTo(GameBoard.GetListArea().get(AreaNumber-1).GetName()) == 0)
 				{
 					CardManager.CityArea_Cards[i].Status = false;
 					ListPlayer.get(player).AddCityAreayCard(CardManager.CityArea_Cards[i]);	
@@ -3599,7 +3599,7 @@ public class GameEngine implements Serializable
 		{
 			int control = 0;
 			
-			for (Area area : this.GameBoard.ListArea)
+			for (Area area : this.GameBoard.GetListArea())
 			{
 				if (area.AreaControllled(ListPlayer.get(this.CurrentPlayer).GetColor())) 
 				{
@@ -3641,7 +3641,7 @@ public class GameEngine implements Serializable
 		else if (CardName.contains("Vetinari"))
 		{
 			int TotalAreaCovered = 0;
-			for (Area area : this.GameBoard.ListArea)
+			for (Area area : this.GameBoard.GetListArea())
 			{
 				if (area.GetMinionPoint(ListPlayer.get(CurrentPlayer).GetColor()) > 0) 
 				{
@@ -3726,7 +3726,7 @@ public class GameEngine implements Serializable
     	Player player = this.ListPlayer.get(playerIndex);
     	
     	//First calculate point from minions
-    	for (Area area : this.GameBoard.ListArea)
+    	for (Area area : this.GameBoard.GetListArea())
     	{
     		if(area.GetDemonCount() == 0)
     		{
@@ -3737,7 +3737,7 @@ public class GameEngine implements Serializable
     	}
     	
     	////Calculate Points from buildings
-    	for (Area area : this.GameBoard.ListArea)
+    	for (Area area : this.GameBoard.GetListArea())
     	{
     		if(area != null && (area.GetDemonCount() == 0))
     		{
@@ -3785,7 +3785,7 @@ StringBuilder AllPlayers = new StringBuilder();
     {
     	 System.out.println("AREA INFO");
          System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n","area","minions","trouble?","building?","demons","trolls");
-         this.GameBoard.ListArea.get(AreaNumber - 1).PrintState();
+         this.GameBoard.GetListArea().get(AreaNumber - 1).PrintState();
     }
     
     /**
@@ -3835,7 +3835,7 @@ StringBuilder AllPlayers = new StringBuilder();
     	
     	moneyCount = thisPlayer.GetMoneyCount() - thisPlayer.TotalLoan();
     	
-    	for (Area area : this.GameBoard.ListArea)
+    	for (Area area : this.GameBoard.GetListArea())
     	{
     		if (area.GetIsBuilt() && area.BuildingColor() == thisColor && area.GetDemonCount() == 0)
     		{
@@ -3865,7 +3865,7 @@ StringBuilder AllPlayers = new StringBuilder();
 	 */
     public void PlaceMinionInEachArea(int player)
     {
-        for(int i=1; i<=GameBoard.ListArea.size(); i++)
+        for(int i=1; i<=GameBoard.GetListArea().size(); i++)
             GameBoard.PlaceMinion(i,ListPlayer.get(player));
     }
     
@@ -3884,7 +3884,7 @@ StringBuilder AllPlayers = new StringBuilder();
     			x = 7;
     		}
     		
-	        for(int i = x ;i<=GameBoard.ListArea.size(); i++)
+	        for(int i = x ;i<=GameBoard.GetListArea().size(); i++)
 	        {
 	            //GameBoard.PlaceBuilding(i,ListPlayer.get(player+j));
 	        	GameBoard.PlaceBuildingInitial(i,ListPlayer.get(player+j));
@@ -3898,7 +3898,7 @@ StringBuilder AllPlayers = new StringBuilder();
      */
     public void PlaceTrollInEachArea(int player)
     {
-        for(int i=1; i<=GameBoard.ListArea.size(); i++)
+        for(int i=1; i<=GameBoard.GetListArea().size(); i++)
             GameBoard.PlaceTroll(i);
     }
     
@@ -3908,7 +3908,7 @@ StringBuilder AllPlayers = new StringBuilder();
      */
     public void PlaceDemonsInEachArea(int player)
     {
-        for(int i=1; i<=GameBoard.ListArea.size(); i++)
+        for(int i=1; i<=GameBoard.GetListArea().size(); i++)
             GameBoard.PlaceDemon(i);
     }
     
@@ -3919,9 +3919,9 @@ StringBuilder AllPlayers = new StringBuilder();
     public int GetBuildingCount()
     {
     	int TotalBuilding = 0;
-        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        for(int i=0; i<GameBoard.GetListArea().size(); i++)
         {
-        	Pieces b =GameBoard.ListArea.get(i).GetBuilding();
+        	Pieces b =GameBoard.GetListArea().get(i).GetBuilding();
         	if(b!=null) TotalBuilding++;
         }
         return TotalBuilding;
@@ -3934,9 +3934,9 @@ StringBuilder AllPlayers = new StringBuilder();
 	public int CountDemonsInArea()
     {
         int TotalDemons = 0;
-        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        for(int i=0; i<GameBoard.GetListArea().size(); i++)
         {
-            TotalDemons +=GameBoard.ListArea.get(i).GetDemonCount();
+            TotalDemons +=GameBoard.GetListArea().get(i).GetDemonCount();
         }
         return TotalDemons;
     }
@@ -3948,9 +3948,9 @@ StringBuilder AllPlayers = new StringBuilder();
 	public int CountTrollsInArea()
     {
         int TotalTrolls= 0;
-        for(int i=0; i<GameBoard.ListArea.size(); i++)
+        for(int i=0; i<GameBoard.GetListArea().size(); i++)
         {
-        	TotalTrolls +=GameBoard.ListArea.get(i).GetTrollCount();
+        	TotalTrolls +=GameBoard.GetListArea().get(i).GetTrollCount();
         }
         return TotalTrolls;
     }
@@ -4010,10 +4010,10 @@ StringBuilder AllPlayers = new StringBuilder();
     public int GetTotalMinion()
     {
     	int TotalMinion = 0;
-    	for(int i=0; i<GameBoard.ListArea.size(); i++)
+    	for(int i=0; i<GameBoard.GetListArea().size(); i++)
     	{
     		for(int p=0; p<TotalPlayer; p++)
-    			TotalMinion = GameBoard.ListArea.get(i).GetMinionCount(ListPlayer.get(p).GetColor());
+    			TotalMinion = GameBoard.GetListArea().get(i).GetMinionCount(ListPlayer.get(p).GetColor());
     	}
     	return TotalMinion;
     }
@@ -4114,9 +4114,9 @@ StringBuilder AllPlayers = new StringBuilder();
 	    	Graphics2D  myGraphObj = biScaledImage.createGraphics();
 	    	
 	    	//traverse each area to draw elements
-	    	for(int eachArea = 0; eachArea < GameBoard.ListArea.size(); eachArea++)
+	    	for(int eachArea = 0; eachArea < GameBoard.GetListArea().size(); eachArea++)
 	    	{
-	    		String CurrentArea = GameBoard.ListArea.get(eachArea).GetName();
+	    		String CurrentArea = GameBoard.GetListArea().get(eachArea).GetName();
 	    		int StartX = 0;
 	    		int StartY = 0;
 	    		
@@ -4182,9 +4182,9 @@ StringBuilder AllPlayers = new StringBuilder();
 	    		} 
 	    		
 	    		//draw trolls and demons
-	    		Boolean HasTroubleMaker = GameBoard.ListArea.get(eachArea).HasTroubleMaker();
-	    		Boolean HasTrolls       = (GameBoard.ListArea.get(eachArea).GetTrollCount() > 0);
-	    		Boolean HasDemons       = (GameBoard.ListArea.get(eachArea).GetDemonCount() > 0);
+	    		Boolean HasTroubleMaker = GameBoard.GetListArea().get(eachArea).HasTroubleMaker();
+	    		Boolean HasTrolls       = (GameBoard.GetListArea().get(eachArea).GetTrollCount() > 0);
+	    		Boolean HasDemons       = (GameBoard.GetListArea().get(eachArea).GetDemonCount() > 0);
 	    		
 	    		if(HasTroubleMaker)
 	    		{
@@ -4227,8 +4227,8 @@ StringBuilder AllPlayers = new StringBuilder();
 	    				System.out.println("Invalid player colors!!!");
 	    			
 	    			//draw building of each player
-	    			Boolean HasBuilding = GameBoard.ListArea.get(eachArea).HasBuilding();
-	    			if(HasBuilding && (GameBoard.ListArea.get(eachArea).GetBuilding().GetPieceColor() == PlayerColor))
+	    			Boolean HasBuilding = GameBoard.GetListArea().get(eachArea).HasBuilding();
+	    			if(HasBuilding && (GameBoard.GetListArea().get(eachArea).GetBuilding().GetPieceColor() == PlayerColor))
 	    			{
 	    				myGraphObj.fillRect(CoordBuildingX, CoordBuildingY, 10, 10);
 	    				CoordBuildingX += 15;
@@ -4236,7 +4236,7 @@ StringBuilder AllPlayers = new StringBuilder();
 	    			}
 	    				
 	    			int PointX  = StartX;
-	    			for(int eachMinion=0; eachMinion < GameBoard.ListArea.get(eachArea).GetMinionCount(PlayerColor); eachMinion++)
+	    			for(int eachMinion=0; eachMinion < GameBoard.GetListArea().get(eachArea).GetMinionCount(PlayerColor); eachMinion++)
 	    			{
 	    				//myGraphObj.(PointX, StartY, 5, 5);
 	    				myGraphObj.fillOval(PointX, StartY, 5,5);
@@ -4326,7 +4326,7 @@ StringBuilder AllPlayers = new StringBuilder();
   	    PersonalityCards Worde = new PersonalityCards("Lord Worde", 1, true, CardType.PersonalityCards);
   	    
   	    //Dolly Sister
-  	    Area DollySisterArea = GameBoard.ListArea.get(0);
+  	    Area DollySisterArea = GameBoard.GetListArea().get(0);
   	    DollySisterArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    DollySisterArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Yellow)); 
   	    DollySisterArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Green));
@@ -4334,11 +4334,11 @@ StringBuilder AllPlayers = new StringBuilder();
   	    DollySisterArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    //Unreal Estate
-  	    Area UnrealEstateArea = GameBoard.ListArea.get(1);
+  	    Area UnrealEstateArea = GameBoard.GetListArea().get(1);
   	    UnrealEstateArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    
   	    //Dragon Landing
-  	    Area DragonLandingArea = GameBoard.ListArea.get(2);
+  	    Area DragonLandingArea = GameBoard.GetListArea().get(2);
   	    DragonLandingArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    DragonLandingArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    DragonLandingArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
@@ -4347,7 +4347,7 @@ StringBuilder AllPlayers = new StringBuilder();
   	    //SmallGods - empty
   	    
   	    //The Scours
-  	    Area TheScoursArea = GameBoard.ListArea.get(4);
+  	    Area TheScoursArea = GameBoard.GetListArea().get(4);
   	    TheScoursArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Yellow));
   	    TheScoursArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   	    TheScoursArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue));
@@ -4357,37 +4357,37 @@ StringBuilder AllPlayers = new StringBuilder();
   	    TheScoursArea.AddDemons(new Pieces(PieceType.Demon, Colors.None));
   	    
   	    //The Hippo
-  	    Area TheHippoArea = GameBoard.ListArea.get(5);
+  	    Area TheHippoArea = GameBoard.GetListArea().get(5);
   	    TheHippoArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   	    TheHippoArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Blue));
   	    TheHippoArea.AddTrolls(new Pieces(PieceType.Troll, Colors.None));
   	    
   	    //The Shades
-  	    Area TheShadesArea = GameBoard.ListArea.get(6);
+  	    Area TheShadesArea = GameBoard.GetListArea().get(6);
   	    TheShadesArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Yellow)); 
   	    TheShadesArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   		TheShadesArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Yellow));
       	TheShadesArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    //DimWell
-  	    Area DimWellArea = GameBoard.ListArea.get(7);
+  	    Area DimWellArea = GameBoard.GetListArea().get(7);
   	    DimWellArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red)); 
   	    DimWellArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Green)); 
   	    DimWellArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Red));
   	    
   	    //LongWall
-  	    Area LongWallArea = GameBoard.ListArea.get(8);
+  	    Area LongWallArea = GameBoard.GetListArea().get(8);
   	    LongWallArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   	    LongWallArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Green)); 
   	    LongWallArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   	    LongWallArea.AddTroubleMaker(new Pieces(PieceType.TroubleMarker, Colors.None));
   	    
   	    //Isles of Gods
-  	    Area IsleOfGods = GameBoard.ListArea.get(9);
+  	    Area IsleOfGods = GameBoard.GetListArea().get(9);
   	    IsleOfGods.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    
   	    //Seven Sleepers
-  	    Area SevenSleepersArea = GameBoard.ListArea.get(10);
+  	    Area SevenSleepersArea = GameBoard.GetListArea().get(10);
   	    SevenSleepersArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    SevenSleepersArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Yellow)); 
   	    SevenSleepersArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Green));
@@ -4395,7 +4395,7 @@ StringBuilder AllPlayers = new StringBuilder();
   	    SevenSleepersArea.AddBuildingInitial(new Pieces(PieceType.Building, Colors.Yellow));
   	    
   	    //Nap Hill
-  	    Area NappHillArea = GameBoard.ListArea.get(11);
+  	    Area NappHillArea = GameBoard.GetListArea().get(11);
   	    NappHillArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Red));
   	    NappHillArea.AddMinionsInit(new Pieces(PieceType.Minion, Colors.Blue)); 
   	    NappHillArea.AddTrolls(new Pieces(PieceType.Troll, Colors.None));
