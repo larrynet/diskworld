@@ -7,7 +7,6 @@ import java.io.IOException;
 
 /**
  * @author parinaz Barakhshan
- * @param <ListAdjacentAreas>
  *
  */
 public class Board implements Serializable {

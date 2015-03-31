@@ -49,7 +49,7 @@ public class GameEngine implements Serializable
 	}
 	
 	/**
-	 * @param set current player turn to t
+	 * @param t - set current player turn to param
 	 */
 	public void SetPlayerTurn(int t) 
 	{
@@ -143,7 +143,7 @@ public class GameEngine implements Serializable
 	        	//play city area only if it is desactivated
 	        	if(!ListPlayer.get(player).ListCityAreaCards.get(i).IsEffectActivate() && NoDemon)
 	        	{
-	        		System.out.println("City Area card" + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " is available. Would you like to play it?");
+	        		System.out.println("City Area card " + ListPlayer.get(player).ListCityAreaCards.get(i).GetName() + " is available. Would you like to play it?");
 	        		String WantPlayCard = scan.next();
 	        		if(WantPlayCard.compareToIgnoreCase("yes") == 0)
 	        		{
@@ -3039,8 +3039,7 @@ public class GameEngine implements Serializable
     
     /**
      * RemoveTrouble Marker function
-     * @param player to 
-     * @return 
+     * @return if remove success
      */
 	public boolean RemoveTrouble()
 	{
@@ -3730,7 +3729,7 @@ public class GameEngine implements Serializable
     	{
     		if(area.GetDemonCount() == 0)
     		{
-    			System.out.println("Total Minion Count (5$ for each): " + area.GetMinionCount(player.GetColor()));
+    			System.out.println("Area " + area.GetName() + " - Total Minion Count (5$ for each): " + area.GetMinionCount(player.GetColor()));
         		
         		totalPoints += 5 * area.GetMinionCount(player.GetColor());	
     		}
@@ -3756,6 +3755,7 @@ public class GameEngine implements Serializable
     	//Calculate Total Dollars
     	totalPoints += player.GetMoneyCount();
     	
+    	System.out.println("Total Points by player: " + totalPoints + "\n");
     	return totalPoints;
     	
     }
@@ -4037,7 +4037,7 @@ StringBuilder AllPlayers = new StringBuilder();
     	int max=0;
     	for(int i=0; i<TotalPlayer; i++)
     	{
-    		System.out.println("Player " + i + " report\n==================================================\n");
+    		System.out.println("Player " + (i+1) + " report\n==================================================\n");
     		PointsPerPlayer[i] = GetPlayerPoints(i);
     		if(PointsPerPlayer[i] > max)
     		{
@@ -4047,10 +4047,9 @@ StringBuilder AllPlayers = new StringBuilder();
     	
     	for(int j=0; j<TotalPlayer; j++)
     	{
-    		if(max == GetPlayerPoints(j))
+    		if(max == PointsPerPlayer[j])
     		{
-    			System.out.println("\n\nCongratulation Player " + j + "!!! You have won the game. ");
-    			break;
+    			System.out.println("\n\nCongratulation Player " + (j+1) + "( "+ max+ " points) !!! You have won the game. ");
     		}
     	}
     }

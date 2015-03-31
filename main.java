@@ -72,12 +72,13 @@ public class main {
 				System.out.println("6 - Load Game state of build 3");
 				System.out.println("7 - Quit the game");
 				System.out.println("8 - Keep current state but change player turn for testing");
-				System.out.println("9 - Try to play City Area Card");
+				System.out.println("9 - Simulate end game by drawing all the green cards");
 				int choice = scan.nextInt();
 			
 				if(choice == 9)
 				{
-					ge.ActivateCityAreaEffect(CurrentPlayerIndex);
+					
+					ge.EmptyCard();
 				}
 				else if(choice == 8)
 				{
@@ -101,7 +102,7 @@ public class main {
 					System.out.println("\nPlayer 4 cards:\n");
 					ge.ShowCard(3);
 				}
-				else if(choice == 6)
+				else if(choice == 7)
 				{
 					Continue = false;
 					break;
@@ -160,14 +161,18 @@ public class main {
                     		String Title = "Player " + (CurrentPlayerIndex+1) + " - Card Index " + i;
                     		CurrentGreenCard.ShowImage(Title);
                     	}
-                    	else if(ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i).GetCardType() == CardType.GreenCards)
-                    	{
-                    		BrownCards CurrentBrownCard = (BrownCards)ge.ListPlayer.get(CurrentPlayerIndex).PlayerCards.get(i);
-                    		String Title = "Player " + CurrentPlayerIndex + " - Card Index " + i;
-                    		CurrentBrownCard.ShowImage(Title);
-                    	}
-                    	
                     }
+                    //show list of city area cards
+                    for(int j=0;j<ge.ListPlayer.get(CurrentPlayerIndex).GetCityAreayCards().size(); j++)
+                    {
+                    	CityAreaCards CurrentAreaCard = ge.ListPlayer.get(CurrentPlayerIndex).GetCityAreayCards().get(j);
+                    	String Title = "Player " + (CurrentPlayerIndex+1) + " - City Area Card Index " + j;
+                    	CurrentAreaCard.ShowImage(Title);
+                    }
+                    
+                    //show personality also
+                    String Title = "Player " + (CurrentPlayerIndex+1) + " - Personality";
+                    ge.ListPlayer.get(CurrentPlayerIndex).GetPlayerPersonality().ShowImage(Title);
 				}
 				else // play card
 				{
