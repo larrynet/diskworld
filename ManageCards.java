@@ -66,7 +66,7 @@ public class ManageCards implements Serializable
 	 * Search for the green cards with the given name
 	 * 
 	 * @param Name
-	 * @return
+	 * @return greencard
 	 */
 	public GreenCards SearchCards(String Name)
 	{
@@ -445,7 +445,7 @@ public class ManageCards implements Serializable
 	}
 
 	/**
-	 * Function will crate all the city area cards
+	 * Function will create all the city area cards
 	 */
 	private void CreateCityCards()
 	{

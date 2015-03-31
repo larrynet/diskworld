@@ -22,6 +22,12 @@ public class PersonalityCards implements Cards, Serializable {
 	private CardType Type;
 	
 	
+	/**
+	 * @param _Name name of card
+	 * @param _Id card id
+	 * @param _Status card status
+	 * @param _Type type of card
+	 */
 	public PersonalityCards (String _Name, int _Id, boolean _Status, CardType _Type) {
 		Name = _Name;
 		Id = _Id;
@@ -29,18 +35,31 @@ public class PersonalityCards implements Cards, Serializable {
 		Type = _Type;
 
 	}
+	/**
+	 * empty constructor
+	 */
 	public PersonalityCards(){}
 	
+	/* (non-Javadoc)
+	 * @see Cards#GetName()
+	 */
 	public String GetName ()
 	{
 		return this.Name;
 	}
 	
+	/* (non-Javadoc)
+	 * @see Cards#GetID()
+	 */
 	public int GetID()
 	{
 		return this.Id;
 	}
 	
+	/**
+	 * @param _Title
+	 * shows the image of the card
+	 */
 	public void ShowImage(String _Title)
 	{
 		
@@ -95,6 +114,9 @@ public class PersonalityCards implements Cards, Serializable {
 	}
 
 	
+	/* (non-Javadoc)
+	 * @see Cards#GetCardType()
+	 */
 	public CardType GetCardType()
 	 {
 		 return this.Type;

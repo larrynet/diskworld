@@ -22,6 +22,12 @@ public class EventCards implements Cards, Serializable
 	private CardType Type;
 	
 	
+	/**
+	 * @param _Name name of card
+	 * @param _Id id of the card
+	 * @param _Status status of the card
+	 * @param _Type type of card
+	 */
 	public EventCards (String _Name, int _Id, boolean _Status, CardType _Type)
 	{
 		Name = _Name;
@@ -31,18 +37,31 @@ public class EventCards implements Cards, Serializable
 
 	}
 
+	/* (non-Javadoc)
+	 * @see Cards#GetName()
+	 */
 	public String GetName ()
 	{
 		return this.Name;
 	}
 	
+	/**
+	 * @return action
+	 */
 	public Action GetAction()
 	{return null;}
 	
+	/* (non-Javadoc)
+	 * @see Cards#GetID()
+	 */
 	public int GetID()
 	{
 		return this.Id;
 	}
+	/**
+	 * @param _Title
+	 * shows the image of the card
+	 */
 	public void ShowImage(String _Title)
 	{
 		//replace all space in Name
@@ -94,11 +113,17 @@ public class EventCards implements Cards, Serializable
         editorFrame.setVisible(true);
 
 	}
+	/* (non-Javadoc)
+	 * @see Cards#GetCardType()
+	 */
 	public CardType GetCardType()
 	 {
 		 return this.Type;
 	 }
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() 
 	   {
 		 return  (this.toString());

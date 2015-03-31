@@ -26,6 +26,12 @@ public class GreenCards extends CardAction implements Cards, Serializable
 	private CardType Type;
 	
 	//Constructor
+	/**
+	 * @param _Name nmae of the card
+	 * @param _Id id of the card
+	 * @param _Status card status
+	 * @param _Type type of card
+	 */
 	public GreenCards (String _Name, int _Id, boolean _Status, CardType _Type)
  {
 		Name = _Name;
@@ -36,6 +42,9 @@ public class GreenCards extends CardAction implements Cards, Serializable
 	}
 	
 	
+	/**
+	 * empty constructor
+	 */
 	public GreenCards ()
 	{
 		
@@ -44,21 +53,34 @@ public class GreenCards extends CardAction implements Cards, Serializable
 	
 
 //Getter
+/* (non-Javadoc)
+ * @see Cards#GetName()
+ */
 public String GetName ()
 	{
 		return this.Name;
 	}
 	
+/* (non-Javadoc)
+ * @see Cards#GetID()
+ */
 public int GetID()
 {
 	return this.Id;
 }
 
+/* (non-Javadoc)
+ * @see Cards#GetCardType()
+ */
 public CardType GetCardType()
  {
 	 return this.Type;
  }
 
+/**
+ * @param _Title
+ * shows the image of the related card
+ */
 public void ShowImage(String _Title)
 {
 	
@@ -112,6 +134,9 @@ public void ShowImage(String _Title)
 
 }
 
+/* (non-Javadoc)
+ * @see CardAction#toString()
+ */
 public String toString() 
    {
 	 return  (this.toString());
