@@ -4322,7 +4322,7 @@ StringBuilder AllPlayers = new StringBuilder();
 		PersonalityCards Vetinari = new PersonalityCards("Lord Vetinari", 1, true, CardType.PersonalityCards);
   	    PersonalityCards Chrysoprase= new PersonalityCards("Chrysoprase", 1, true, CardType.PersonalityCards);
   	    PersonalityCards Arms= new PersonalityCards("Dragon King of Arms", 1, true, CardType.PersonalityCards);
-  	    PersonalityCards Worde = new PersonalityCards("Lord Worde", 1, true, CardType.PersonalityCards);
+  	    PersonalityCards Worde = new PersonalityCards("Lord de Worde", 1, true, CardType.PersonalityCards);
   	    
   	    //Dolly Sister
   	    Area DollySisterArea = GameBoard.GetListArea().get(0);
