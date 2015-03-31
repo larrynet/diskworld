@@ -7,6 +7,7 @@ import java.io.IOException;
 
 /**
  * @author parinaz Barakhshan
+ * @param <ListAdjacentAreas>
  *
  */
 public class Board implements Serializable {
@@ -92,7 +93,7 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * @param b
+	 * @param amount of balance to be set
 	 */
 	public void SetBalance(int b)
 	{
@@ -100,7 +101,7 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * @return the current balance of the bank ofthe board
+	 * @return the current balance of the bank of the board
 	 */
 	public int GetBalance()
 	{
@@ -108,7 +109,7 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * @param amount
+	 * @param amount of money to get deducted from bank
 	 */
 	public void DeductFromBank(int amount)
 	{
@@ -116,7 +117,7 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * @param amount
+	 * @param amount of money to be added to the bank
 	 */
 	public void AddToBank(int amount)
 	{
@@ -126,7 +127,7 @@ public class Board implements Serializable {
 	/**
 	 * @param AreaNumber
 	 * @param player
-	 * @return boolaen to show if it is done or not
+	 * @return boolean to show if a minion related to a player is placed in an area or not
 	 */
 	public boolean PlaceMinion(int AreaNumber,Player player)
 	{
@@ -142,7 +143,7 @@ public class Board implements Serializable {
 	/**
 	 * @param AreaNumber
 	 * @param player
-	 * @return
+	 * @return boolean to show if a building related to a player is placed in an area or not
 	 */
 	public boolean PlaceBuilding(int AreaNumber,Player player)
 	{
@@ -157,7 +158,7 @@ public class Board implements Serializable {
 	/**
 	 * @param AreaNumber
 	 * @param player
-	 * @return
+	 * @return boolean to show if a building related to a player is placed in an area or not
 	 */
 	public boolean PlaceBuildingInitial(int AreaNumber,Player player)
 	{
@@ -176,7 +177,7 @@ public class Board implements Serializable {
 	 * @param AreaNumber
 	 * @param player
 	 * @param _areaCard
-	 * @return
+	 * @return boolean to show if a building related to a player is removed from an area or not
 	 */
 	public boolean RemoveBuilding(int AreaNumber, Player player)
 	{
@@ -188,7 +189,7 @@ public class Board implements Serializable {
 
 	/**
 	 * @param AreaNumber
-	 * @return
+	 * @return boolean to show if a troll is placed in an area or not
 	 */
 	public boolean PlaceTroll(int AreaNumber)
 	{
@@ -198,7 +199,7 @@ public class Board implements Serializable {
 
 	/**
 	 * @param AreaNumber
-	 * @return
+	 * @return boolean to show if a Demon is placed in an area or not
 	 */
 	public boolean PlaceDemon(int AreaNumber)
 	{
@@ -208,7 +209,7 @@ public class Board implements Serializable {
 
 	/**
 	 * @param AreaNumber
-	 * @return
+	 * @return boolean to show if a TroubleMarker is placed in an area or not
 	 */
 	public boolean PlaceTroubleMarker(int AreaNumber)
 	{
@@ -291,7 +292,7 @@ public class Board implements Serializable {
 	 * check the adjacency of one area to another one-is a adjacent to b and return a boolean
 	 * @param Area1
 	 * @param Area2
-	 * @return
+	 * @return if two areas are adjacent or not
 	 */
 	public boolean AreaAdjacency(int Area1, int Area2)
 	{
@@ -313,7 +314,7 @@ public class Board implements Serializable {
 	/**
 	 * Return Empty status of current area
 	 * @param AreaIndex
-	 * @return
+	 * @return boolean to show if the area is empty
 	 */
 	public boolean EmptyArea(int AreaIndex)
 	{
@@ -335,21 +336,18 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * Does area have demons
 	 * @param AreaIndex
-	 * @return
+	 * @return the number of Demons in an Area
 	 */
 	public int AreaDemonCount(int AreaIndex)
 	{
-
 		return this.ListArea.get(AreaIndex - 1).GetDemonCount();
-
 	}
 
 	/**
-	 * Does Area have trolls
+	 * 
 	 * @param AreaIndex
-	 * @return
+	 * @return the number of trolls in an Area
 	 */
 	public int AreatrollCount(int AreaIndex)
 	{
@@ -384,8 +382,8 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * If there is at least one troublemaker in board
-	 * @return
+	 * If there is at least one TroubleMarker in board
+	 * @return if the Board has TroubleMarker
 	 */
 	public boolean BoardHasTrouble()
 	{
@@ -403,9 +401,9 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * Return if given area has trouble
+	 * 
 	 * @param AreaNumber
-	 * @return
+	 * @return if given area has trouble
 	 */
 	public boolean AreaHasTrouble(int AreaNumber)
 	{
@@ -463,9 +461,9 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * Return area with given index
-	 * @param i - indx
-	 * @return
+	 * 
+	 * @param i - index
+	 * @return area with given index
 	 */
 	public Area GetArea(int i)
 	{
@@ -473,8 +471,8 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * Return all the list of deadmininos in boards
-	 * @return
+	 * 
+	 * @return all the list of deadmininos in boards
 	 */
 	public List<Pieces> GetDeadMinions()
 	{
@@ -482,7 +480,11 @@ public class Board implements Serializable {
 	}
 
 
-	//returns an array containing the areas adjacent.we do not have area 0
+	
+	/**
+	 * @param AreaIndex
+	 * @return an array containing the areas adjacent.we do not have area 0
+	 */
 	public int[] GetAdjacent(int AreaIndex)
 	{
 		return this.ListArea.get(AreaIndex--).GetAdjAreas();

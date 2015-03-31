@@ -23,6 +23,9 @@ public class Area implements Serializable
 		private Pieces Building;
 		private String AdjArea; 
 				
+		/**
+		 * @return building
+		 */
 		public Pieces GetBuilding() 
 		{
 			return Building; 
@@ -59,13 +62,14 @@ public class Area implements Serializable
 		}
 		
 		/**
-		 * @return
+		 * @return IsBuilt variable.to show if this area has been built or not
 		 */
 		public boolean GetIsBuilt() {
 			return IsBuilt;
 		}
 
 		/**
+		 * It sets the amount of Isbuilt depending on the status of the Area 
 		 * @param isBuilt
 		 */
 		public void SetIsBuilt(boolean isBuilt) {
@@ -73,13 +77,14 @@ public class Area implements Serializable
 		}
 
 		/**
-		 * @return
+		 * @return IsTrouble variable.In case there is a TroubleMarker in the Area it returns true.
 		 */
 		public boolean GetIsTrouble() {
 			return IsTrouble;
 		}
 
 		/**
+		 * sets the variable IsTrouble.In case there is a TRoubleMarker in that Area it would be set to true.
 		 * @param isTrouble
 		 */
 		public void SetIsTrouble(boolean isTrouble) {
@@ -177,6 +182,7 @@ public class Area implements Serializable
 			
 		}
 		/**
+		 * Adds Demon to the Area.
 		 * @param p Piece of type Demon
 		 */
 		public void AddDemons(Pieces p) 
@@ -185,6 +191,7 @@ public class Area implements Serializable
 		}
 		
 		/**
+		 * Adds troll to the area
 		 * @param p Piece of type Troll
 		 */
 		public void AddTrolls(Pieces p) 
@@ -193,6 +200,7 @@ public class Area implements Serializable
 		}
 		
 		/**
+		 * adds troubleMraker to the area
 		 * @param p Piece of Type Trouble Marker
 		 */
 		public void AddTroubleMaker(Pieces p) 
@@ -204,6 +212,7 @@ public class Area implements Serializable
 		}
 		
 		/**
+		 * adds minions to the area-Used for JUnit tests
 		 * @param p Minion Piece to add in area 
 		 */
 		public void AddMinionsInit(Pieces p) 
@@ -213,6 +222,7 @@ public class Area implements Serializable
 		
 		
 		/**
+		 * checks the conditions of that area to see if a troubleMarker should be added or not.
 		 * @param p Piece of type minion
 		 */
 		public void AddMinions(Pieces p) 
@@ -225,7 +235,8 @@ public class Area implements Serializable
 			ListMinions.add(p);
 		}
 		
-		/**
+		/**Checks if the area contains troubleMarker it cannot add a building to that Area.
+		 * if the Area is already built then no more building on that area
 		 * @param b piece of type building
 		 */
 		public boolean AddBuilding(Pieces b) 
@@ -266,12 +277,12 @@ public class Area implements Serializable
 			this.IsBuilt = true;
 		}
 		
-		/**
+		/**removing Demon
 		 * @param p Piece of type Demon
 		 */
 		public boolean RemoveDemons() 
 		{  
-			//should I remove TroubleMarker?check if troublemarker is set then I unset it?
+			
 			if(ListDemons.size()>0)
 		    {
 				ListDemons.remove(ListDemons.size()-1);
@@ -282,7 +293,7 @@ public class Area implements Serializable
 			return false;
 		}
 		
-		/**
+		/**removing troll
 		 * @param p Troll from Pieces class
 		 */
 		public boolean RemoveTrolls() 
@@ -298,6 +309,9 @@ public class Area implements Serializable
 			return false;
 		}
 		
+        /**
+         * @return if it has TroubleMarker in the Area
+         */
         public boolean HasTroubleMaker()
         {
            return (TroubleMakers != null); 
@@ -347,7 +361,7 @@ public class Area implements Serializable
 		
 		/**
 		 * 
-		 * @return boolean to show if it has been removed or not
+		 * @return boolean to show if the building has been removed or not
 		 */
 		public boolean RemoveBuilding() 
 		{

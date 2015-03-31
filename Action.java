@@ -3,6 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * @author Gay
+ * this class is a parser for action.txt file that includes all the cards,their actions and symbols.
+ *
+ */
 public class Action implements Serializable {
 	private int NumberOfAction=0;
 	private List<String> Verb;
@@ -15,12 +20,12 @@ public class Action implements Serializable {
 	/**
 	 * Constructor that will initialize an action class
 	 * 
-	 * @param n
-	 * @param v
-	 * @param o
-	 * @param c
-	 * @param relation
-	 * @param keep
+	 * @param n number of actions.Each card can have multiple actions.
+	 * @param v verb.each action is made up of a verb,an object,and a condition maybe.
+	 * @param o object.Each action is a verb that is implemented on an object
+	 * @param c condition.each action may contain a condition.
+	 * @param relation indicates the relation between different actions.it can be OR,AND.
+	 * @param keep when a card is supposed to be left on player's hand till end we set this parameter.
 	 */
 	public Action(int n, List<String> v, List<String> o, List<String> c,String relation, boolean keep)  
 	{
@@ -121,7 +126,7 @@ public class Action implements Serializable {
 	 * Return the verb in the given index
 	 * 
 	 * @param index
-	 * @return
+	 * @return verb of the action
 	 */
 	public String GetVerbs(int index)
 	{
@@ -137,7 +142,7 @@ public class Action implements Serializable {
 	 * Return the object in the given index
 	 * 
 	 * @param index
-	 * @return
+	 * @return object of the action
 	 */
 	public String GetObject(int index)
 	{
@@ -153,7 +158,7 @@ public class Action implements Serializable {
 	 * Return the condition in the given index
 	 * 
 	 * @param index
-	 * @return
+	 * @return condition of the action
 	 */
 	public String GetCondition(int index){
 
@@ -166,6 +171,9 @@ public class Action implements Serializable {
 	}
 
 	//print all the action stored
+	/**
+	 * 
+	 */
 	public void PrintAll() {
 
 		int max = this.Verb.size();
@@ -179,7 +187,7 @@ public class Action implements Serializable {
 	/**
 	 * Return the current description
 	 * @param desc
-	 * @return
+	 * @return description
 	 */
 	private static String ReturnDesc(String desc)
 	{

@@ -13,7 +13,7 @@ import javax.swing.WindowConstants;
 
 /**
  * @author Niloufar
- *
+ *Brown Crads
  *
  */
 public class BrownCards extends CardAction implements Cards, Serializable
@@ -26,6 +26,12 @@ public class BrownCards extends CardAction implements Cards, Serializable
 	
 	
 	
+	/**
+	 * @param _Name card name
+	 * @param _Id card id
+	 * @param _Status card status
+	 * @param _Type card type
+	 */
 	public BrownCards(String _Name, int _Id, boolean _Status, CardType _Type)
 	{
 		Name = _Name;
@@ -37,20 +43,33 @@ public class BrownCards extends CardAction implements Cards, Serializable
 	}
 
 		
+	/* (non-Javadoc)
+	 * @see Cards#GetName()
+	 */
 	public String GetName() 
 	{
 		return this.Name;
 	}
 
+	/* (non-Javadoc)
+	 * @see Cards#GetID()
+	 */
 	public int GetID()
 	{
 		return this.Id;
 	}
 
+	/* (non-Javadoc)
+	 * @see Cards#GetCardType()
+	 */
 	public CardType GetCardType()
 	{
 		return this.Type;
 	}
+	/**
+	 * @param _Title
+	 * shows the image of the card 
+	 */
 	public void ShowImage(String _Title)
 	{
 		//replace all space in Name
@@ -101,6 +120,9 @@ public class BrownCards extends CardAction implements Cards, Serializable
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see CardAction#toString()
+	 */
 	public String toString() 
 	{
 		return (this.toString());
