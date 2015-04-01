@@ -10,8 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 /**
+ * Event Card Cards stores information for Random Event card
+ * 
  * @author Niloufar
- *
+ * @version 3.0
  *
  */
 public class EventCards implements Cards, Serializable 

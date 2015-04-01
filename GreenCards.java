@@ -12,10 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 /**
-/**
+ * GreenCards is used to define card cards. It implements the Cards class with the basic attribute. 
+ * It also extends the CardAction to get function to control the action of a class
+ * 
  * @author Niloufar
- *
- *
+ * @version 3.0
  */
 public class GreenCards extends CardAction implements Cards, Serializable
 

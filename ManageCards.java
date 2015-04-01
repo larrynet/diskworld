@@ -8,14 +8,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Vector;
 
+
 /**
- * 
- * 
  *  ManageCards class use to hold the attributes of every single card in the game.
  *  These Cards will be initiated at the beginning of the game.
  *  this class only interact with Game Engine.
  *  
  *  @author Niloufar
+ *  @version 3.0
  */
 
 public class ManageCards implements Serializable

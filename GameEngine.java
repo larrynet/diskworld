@@ -22,7 +22,7 @@ import javax.swing.JLabel;
  * This class acts as a Facade to hide the internal structure to player. 
  * 
  * @author Lawrence
- * @version 2.0
+ * @version 3.0
  */
  
 public class GameEngine implements Serializable

@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
  * Class to control state of the game
  * 
  * @author Lawrence
- * @version 1.0
+ * @version 3.0
  *
  */
 public class StateManager 

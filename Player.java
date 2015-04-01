@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Player Class to create and initiate a player.
  * 
  * @author Gay Hazan
- * @version 1.0
+ * @version 3.0
  */
 public class Player implements Serializable {
 	

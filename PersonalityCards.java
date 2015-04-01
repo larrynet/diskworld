@@ -11,9 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 /**
+ * This class is used to define personality cards. It implements the Cards class with the basic attribute. 
+ * 
  * @author Niloufar
- *
- *
+ * @version 3.0
  */
 public class PersonalityCards implements Cards, Serializable {
 	private String Name;
