@@ -3,8 +3,10 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * Card interface that will be inherited by all card type
+ * 
  * @author Niloufar
- *
+ * @version 3.0
  */
 public interface Cards
 {

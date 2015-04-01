@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 /**
+ * Area class will store the information of each Area.  
+ * 
  * @author Parinaz Barakhshan
- * @version 2.0
+ * @version 3.0
  */
 
 public class Area implements Serializable

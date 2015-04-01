@@ -4,6 +4,13 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
+<<<<<<< HEAD
+ * Action class define the action that a card can do. A card action can be defined by a list of verb, object, condition and action number for the order of execution of the verb.\
+ * There is also a relation variable that will define the relationship among the action (eg. OR or AND).  
+ * 
+ * @version 3.0
+ */
+/**
  * @author Gay
  * this class is a parser for action.txt file that includes all the cards,their actions and symbols.
  *

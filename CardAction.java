@@ -2,9 +2,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
+
 /**
- * @author pari
- *
+<<<<<<< HEAD
+ * Abstract class that contains function to control Card Action.
+ * 
+ * @author Gay
+ * @version 3.0
  */
 public abstract class CardAction implements Serializable{
 

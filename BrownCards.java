@@ -12,9 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 /**
+ * BrownCard is used to define brown cards. It implements the Cards class with the basic attribute. 
+ * It also extends the CardAction to get function to control the action of a class
+ * 
  * @author Niloufar
+<<<<<<< HEAD
+ * @version 3.0
+=======
  *Brown Crads
  *
+>>>>>>> fab1b86ef99eb20d529d9853be4021dff7714445
  */
 public class BrownCards extends CardAction implements Cards, Serializable
 {

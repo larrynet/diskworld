@@ -6,9 +6,15 @@ import java.util.Iterator;
 import java.io.IOException;
 
 /**
+ * Board class will control the list of areas. It interacts with the GameEngine.
+ * 
  * @author parinaz Barakhshan
+<<<<<<< HEAD
+ * @version 3.0
+=======
  * @param <ListAdjacentAreas>
  *
+>>>>>>> fab1b86ef99eb20d529d9853be4021dff7714445
  */
 public class Board implements Serializable {
 

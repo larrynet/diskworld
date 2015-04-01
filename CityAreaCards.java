@@ -11,9 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 /**
+ * CityArea Cards stores information for city area card
+ * 
  * @author Niloufar
- *
- *
+ * @version 3.0
  */
 
 public class CityAreaCards implements Cards, Serializable 
