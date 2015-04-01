@@ -28,17 +28,20 @@ public class Player implements Serializable {
 	public List<CityAreaCards> ListCityAreaCards;
 	
 	
+	/**
+	 * @return player number
+	 */
 	public int GetPlayerNumber()
 	{return PlayerNumber;}
 	/**
 	 * Player constructor 
 	 * 
-	 * @param _PlayerNumber
-	 * @param _Personality
-	 * @param _Color
-	 * @param _PlayerCards
-	 * @param _ListMinion
-	 * @param _ListBuilding
+	 * @param _PlayerNumber player number
+	 * @param _Personality personality of the player
+	 * @param _Color player color
+	 * @param _PlayerCards player cards
+	 * @param _ListMinion list of minions related to the player
+	 * @param _ListBuilding list of buildings related to the player
 	 */
 	public Player(int _PlayerNumber, Cards _Personality, Colors _Color, List<Cards> _PlayerCards, List<Pieces> _ListMinion, List<Pieces> _ListBuilding){
 		PlayerNumber = _PlayerNumber;
@@ -53,10 +56,16 @@ public class Player implements Serializable {
 		Color = _Color;
 	}
 	
+	/**
+	 * @param index 
+	 */
 	public void DisableStatusCityArea(int index)
 	{
 		ListCityAreaCards.get(index).DesactivateCityArea();;
 	}
+	/**
+	 * Desactivate Small God
+	 */
 	public void DesactivateSmallGod()
 	{
 		for(int i=0; i<ListCityAreaCards.size(); i++)
@@ -71,6 +80,9 @@ public class Player implements Serializable {
 		}
 		
 	}
+	/**
+	 * @return boolean to show if player can play small God
+	 */
 	public boolean CanPlaySmallGod()
 	{
 		for(int i=0; i<ListCityAreaCards.size(); i++)
@@ -88,6 +100,9 @@ public class Player implements Serializable {
 		}
 		return false;
 	}
+	/**
+	 * Activate the city area card for the player
+	 */
 	public void EnableAllCityArea()
 	{
 		for(CityAreaCards _cityAreaCard: ListCityAreaCards)
@@ -96,12 +111,21 @@ public class Player implements Serializable {
 		}
 	}
 	
+	/**
+	 * @return payBack
+	 */
 	public int GetPayBack() {return PayBack; }
 	//used for testing
+	/**
+	 * @param p personality card
+	 */
 	public void SetPersonalityCard(PersonalityCards p)
 	{
 		Personality = p;
 	}
+	/**
+	 * @return boolean to show if the player has interrupt card
+	 */
 	public boolean HasInterruptCard()
 	{
 		GreenCards g = null;
@@ -143,6 +167,9 @@ public class Player implements Serializable {
 	{
 		return(ListCityAreaCards.size() > 0);
 	}
+	/**
+	 * remove interrupt card
+	 */
 	public void RemoveInterruptCard()
 	{
 		int Index = 0;
@@ -233,6 +260,9 @@ public class Player implements Serializable {
 		this.ListCityAreaCards.add(CityAreaCard);
 	}
 	
+	/**
+	 * @return city area card
+	 */
 	public Cards RemoveCityAreaCard()
 	{
 		Cards UsedCityAreaCard = this.ListCityAreaCards.get(this.ListCityAreaCards.size()-1);
@@ -274,6 +304,10 @@ public class Player implements Serializable {
 	
 	}
 	
+	/**
+	 * @param index
+	 * @return boolean to show if it has been removed or not
+	 */
 	public boolean RemovePlayerCard(int index )
 	{
 		return (PlayerCards.remove(index)) != null;
@@ -554,7 +588,7 @@ public class Player implements Serializable {
 	}
 	
 	/**
-	 * If condtion met remove lost points bank
+	 * If condition met remove lost points bank
 	 * @param points
 	 */
 	public void DecreaseLostPoints(int points)
@@ -562,6 +596,9 @@ public class Player implements Serializable {
 		this.LostPoints -= points;
 	}
 
+	/**
+	 * prints player hand
+	 */
 	public void PrintCardsIndex()
 	{
 		StringBuilder strCards = new StringBuilder();
@@ -574,6 +611,10 @@ public class Player implements Serializable {
 		System.out.println(strCards.toString());
 	}
 	
+	/**
+	 * @param PersoCard
+	 * sets personality card in case of need for exchanging personality
+	 */
 	public void SetPlayerPersonality(Cards PersoCard)
 	{
 		    this.Personality=PersoCard;

@@ -29,14 +29,14 @@ public class Pieces implements Serializable{
 	
 	
 	/**
-	 * @return
+	 * @return color of piece
 	 */
 	public Colors GetPieceColor() {
 		return this.Color;
 	}
 	
 	/**
-	 * @return
+	 * @return type of piece
 	 */
 	public PieceType GetPieceType() {
 		return this.Type;
