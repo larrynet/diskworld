@@ -102,7 +102,7 @@ public class CityAreaCards implements Cards, Serializable
 	{
 		//replace all space in Name
 		Name = Name.replace(" ", "");
-		String path = "src\\Cards\\CityAreas\\" + Name+".jpg";
+		String path = "Cards\\CityAreas\\" + Name+".jpg";
 		System.out.println("Looking for file in " + path);
         JFrame editorFrame = new JFrame(_Title);
 

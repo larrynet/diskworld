@@ -188,8 +188,13 @@ public class Board implements Serializable {
 	public boolean RemoveBuilding(int AreaNumber, Player player)
 	{
 		Area currentArea = this.ListArea.get(AreaNumber);
-
-		boolean RemoveSuccess = currentArea.RemoveBuilding();
+		Pieces CurBuilding = currentArea.GetBuilding();
+		boolean RemoveSuccess = false;
+		if(currentArea !=null && CurBuilding != null && CurBuilding.GetPieceColor() == player.GetColor())
+		{
+			RemoveSuccess = currentArea.RemoveBuilding();
+		}
+		
 		return RemoveSuccess;
 	}
 
@@ -236,9 +241,11 @@ public class Board implements Serializable {
 		System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n","area","minions","trouble?","building?","demons","trolls");
 		System.out.println();
 
+		int count = 1;
 		for (Area area : ListArea)
 		{
-			area.PrintState();
+			area.PrintState(count);
+			count++;
 		}
 	}
 

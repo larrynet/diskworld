@@ -87,7 +87,7 @@ public void ShowImage(String _Title)
 	
 	//replace all space in Name
 	Name = Name.replace(" ", "");
-	String path = "/Users/gayhazan/Documents/workspace/LocDiskworld/src/Cards/GreenCards/" + Name+".jpg";
+	String path = "Cards\\GreenCards\\" + Name + ".jpg";
 	System.out.println("Looking for file in " + path);
     JFrame editorFrame = new JFrame(_Title);
     

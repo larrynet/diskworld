@@ -417,9 +417,9 @@ public class Area implements Serializable
 		/**
 		 * Prints State of Current Area: Name, Minions in Area, Trouble Marker present, Building present, Demon count, troll count
 		 */
-		public void PrintState() //to print for demo
+		public void PrintState(int currentIndex) //to print for demo
 		{
-			 System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, this.BuildingColor(),this.GetDemonCount(),this.GetTrollCount());
+			 System.out.printf(currentIndex + "- %-16S %-25S  %-10s %-10s %-8s %-10s %n",this.Name, this.ReportMinion(),IsTrouble, this.BuildingColor(),this.GetDemonCount(),this.GetTrollCount());
             
 		}
 		

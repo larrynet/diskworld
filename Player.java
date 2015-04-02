@@ -359,7 +359,7 @@ public class Player implements Serializable {
 	 */
 	public void PrintPlayerProfile()
 	{
-		System.out.println("Player " + this.PlayerNumber + " (" + this.Color + ") " + "is playing as " + this.Personality.GetName() + ".");
+		System.out.println("Player " + (this.PlayerNumber+1) + " (" + this.Color + ") " + "is playing as " + this.Personality.GetName() + ".");
 
 	}
 	

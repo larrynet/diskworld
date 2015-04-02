@@ -123,7 +123,15 @@ public class main {
 					ge = sm.ImportGameState(PathState);
 					if(ge != null)
 					{
-						ge.PrintState();	
+						ge.PrintState();
+						System.out.println("Player 1 cards:\n");
+						ge.ShowCard(0);
+						System.out.println("\nPlayer 2 cards:\n");
+						ge.ShowCard(1);
+						System.out.println("\nPlayer 3 cards:\n");
+						ge.ShowCard(2);
+						System.out.println("\nPlayer 4 cards:\n");
+						ge.ShowCard(3);
 					}
 					else
 					{
@@ -235,7 +243,7 @@ public class main {
 	                    if(ge.IsGameEnded())
 	                    {
 	                    	//RIOTS
-	                        System.out.println("The Game Engine signaled a game end event preemptively because certains cards force to end. ");
+	                        System.out.println("(RIOTS) The Game Engine signaled a game end event preemptively because certains cards force to end. ");
 	                        ge.DetermineWinner();
 	                        Continue = false;
 	                    }

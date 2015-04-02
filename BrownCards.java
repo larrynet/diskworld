@@ -81,7 +81,7 @@ public class BrownCards extends CardAction implements Cards, Serializable
 	{
 		//replace all space in Name
 		Name = Name.replace(" ", "");
-		String path = "src\\Cards\\Brown\\" + Name+".jpg";
+		String path = "Cards\\BrownCards\\" + Name + ".jpg";
 		System.out.println("Looking for file in " + path);
         JFrame editorFrame = new JFrame(_Title);
 

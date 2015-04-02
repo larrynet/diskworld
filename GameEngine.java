@@ -2724,13 +2724,17 @@ public class GameEngine implements Serializable
     	Area currentArea = GameBoard.GetListArea().get(AreaNumber);
 		
 		boolean RemoveSuccess = GameBoard.RemoveBuilding(AreaNumber, player);
+		
 		if(RemoveSuccess)
 		{
+			
 			//remove city area cards from player hand and put it back to deck
 			for(CityAreaCards _PlayerArea : player.ListCityAreaCards)
 			{
+			
 				if(_PlayerArea.GetName().compareToIgnoreCase(currentArea.GetName())== 0)
 				{
+					System.out.println("Area card " + currentArea.GetName() + " is being removed from player " + player.GetColor());
 					player.ListCityAreaCards.remove(_PlayerArea);
 					break;
 				}
@@ -2761,6 +2765,7 @@ public class GameEngine implements Serializable
     	if(UseCardName)
     		cardName = CardPlayed.GetName();
     	
+    	cardName = "Flood";
 		boolean ActionSuccess = true;
 		System.out.println("Activating the event effect now");
         
@@ -2768,11 +2773,13 @@ public class GameEngine implements Serializable
         {
             System.out.println("Dragon Event \n===========================================");
             int AreaAffected = GameBoard.RollDie();
+            AreaAffected = 6;
             BoardDie = AreaAffected;
             
-            System.out.println("Area " + AreaAffected + " will be affected by the fire. Removing all minions/trouble marker/building in it");
+            System.out.println("Area " + GameBoard.GetListArea().get(AreaAffected-1).GetName() + " will be affected by the fire. Removing all minions/trouble marker/building in it");
             for(int i=0; i<TotalPlayer; i++)
             {
+            	System.out.println("Testing player " + (i+1));
                 RemoveBuldingInBoard(AreaAffected-1, ListPlayer.get(i));
                 GameBoard.RemoveTroll(AreaAffected);
                 GameBoard.Removetrouble(AreaAffected);
@@ -2782,52 +2789,50 @@ public class GameEngine implements Serializable
         }
         else if(cardName.compareToIgnoreCase("Flood") == 0)
         {
+        	
+        	Scanner scan = new Scanner(System.in);
             System.out.println("Floood Event \n===========================================");
             for(int FloodCount=0; FloodCount<2; FloodCount++)
             {
+            	Print("Here it comes. Flood " + FloodCount);
                 int AreaAffected = GameBoard.RollDie();
                 CurrentDie = AreaAffected;
                 
                 //If area doesn't belong to the ones not connected to a river
                 if(AreaAffected!=3 && AreaAffected!= 6)
                 {
-                	for(int EachPlayer= CurrentPlayer; EachPlayer<(CurrentPlayer+4); EachPlayer++)
+                	this.Print("Area affected " + GameBoard.GetListArea().get(AreaAffected-1).GetName() + " is adjacent adjacent to the river. Moving player now. ");
+                	System.out.println("Here is a list of adjacent area: ");
+                	int[] ListAdjacentArea = GameBoard.GetListArea().get(AreaAffected-1).GetAdjAreas();
+        			for(int i=0; i<(ListAdjacentArea.length-1); i++)
+        				System.out.print((1+ListAdjacentArea[i])+", ");
+        			
+        			System.out.println((1+ListAdjacentArea[ListAdjacentArea.length-1]));
+        			int EachPlayer= CurrentPlayer;
+                	for(int k= 0; k<4; k++)
                 	{
-                		if(EachPlayer > 4) EachPlayer=EachPlayer%4;
-                		//NOCOMMIT
-
-                		if (this.GameBoard.CountPlayerMinions(this.ListPlayer.get(EachPlayer).GetColor()) > 0)
+                		EachPlayer = CurrentPlayer + k;
+                		
+                		if(EachPlayer >= 4) 
+                			EachPlayer= EachPlayer%4;
+                		
+                		Player p = this.ListPlayer.get(EachPlayer);
+                		if(GameBoard.GetListArea().get(AreaAffected-1).GetMinionCount(this.ListPlayer.get(EachPlayer).GetColor())>0)
                 		{
-
-                			int[] ListAdjacentArea = GameBoard.GetListArea().get(AreaAffected-1).GetAdjAreas();
-
-                			boolean userChoice= false;
-
-                			Scanner scan = new Scanner(System.in);
-
-                			while(!userChoice)
-                			{   
-                				for(int i=0; i<ListAdjacentArea.length; i++)
-                				{
-
-                					System.out.println("Area " + ListAdjacentArea[i] + "is adjacent to " + AreaAffected + ". Would you like to move your minion there?");
-                					String chooseMove = scan.next();
-                					if(chooseMove.compareToIgnoreCase("yes") == 0)
-                					{
-
-                						GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(EachPlayer).GetColor());
-                						GameBoard.PlaceMinion(AreaAffected, ListPlayer.get(EachPlayer));
-                						userChoice = true;
-                						break;
-                					}
-
-                				}
-                			}
+                			Print("There are currently minion for player " + (EachPlayer+1) + " in area affected. Please enter one of those areas listed above to move your minion to: ");
+                			int NewArea = scan.nextInt();
+                			GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(EachPlayer).GetColor());
+    						GameBoard.PlaceMinion(NewArea, ListPlayer.get(EachPlayer));
+    						
                 		} //END IFF
+                		else
+                			System.out.println("Player " + (EachPlayer+1)+ " does not have any minion in area affected.");
 
 
                 	}
                 }
+                else
+                	this.Print("Area affected " + GameBoard.GetListArea().get(AreaAffected-1).GetName() + " is NOT affected by flood");
                 
             }
         }
@@ -2857,6 +2862,7 @@ public class GameEngine implements Serializable
                 if(RollIsAdjacent && HasBuilding)
                 {
                     ContinueRolling = true;
+                    System.out.println("Fire roll " + AffectedArea + " has building and is adjacent to " + PrevArea+". Continue rolling.");
                     for(int i=0; i<TotalPlayer; i++)
                     {
                         RemoveBuldingInBoard(AffectedArea-1, ListPlayer.get(i));
@@ -2865,7 +2871,10 @@ public class GameEngine implements Serializable
                     PrevArea = AffectedArea;
                 } 
                 else
+                {
+                	System.out.println("Fire roll " + AffectedArea + " is NOT adjacent to " + PrevArea+". Stop rolling.");
                     ContinueRolling = false;
+                }
             }while(ContinueRolling);
             
         }
@@ -2878,6 +2887,8 @@ public class GameEngine implements Serializable
             for(int i=0; i<5; i++)
             {
                 DiscardCard = CardManager.GetCard(CardType.GreenCards);
+                GreenCards gDiscard = (GreenCards)DiscardCard;
+                gDiscard.ShowImage("Discard card " + (i+1));
                 System.out.println("Card " + DiscardCard.GetName() + " has been discarded");
 
                 DiscardCards.add(DiscardCard);
@@ -2890,6 +2901,7 @@ public class GameEngine implements Serializable
             if(GameBoard.CountTroubleMaker() >= 8)
             {
                 System.out.println("Game is ending preemptively because EventCard RIOT is played");
+                
                 //calculating points and determine winner
                 ActivateGameEnd();
             }
@@ -2927,16 +2939,23 @@ public class GameEngine implements Serializable
             //rotate through player left-side
             for(int i=0; i<TotalPlayer; i++)
             {
+            	System.out.println("Player " + (i+1) + " (Color " + ListPlayer.get(i).GetColor() +") turn to roll the dice to kill someone");
                 int CurrentPlayerTurn = CurrentPlayer-i;
                 if(CurrentPlayerTurn < 0) CurrentPlayerTurn=TotalPlayer-1;
                 
                 AreaAffected = GameBoard.RollDie();
-                System.out.println("Area affected : " + AreaAffected + " - " + GameBoard.GetListArea().get(AreaAffected-1).GetName());
-                
-                // TODO:remove a minion in that area of their choice
-                System.out.println("Enter player index on which to remove the minion");
-                int PlayerIndex = scan.nextInt() - 1;
-                GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(PlayerIndex).GetColor());
+                if(GameBoard.GetListArea().get(AreaAffected-1).GetMinionCount(Colors.None) > 0)
+                {
+                	System.out.println("Area affected : " + AreaAffected + " - " + GameBoard.GetListArea().get(AreaAffected-1).GetName());
+                    
+                    // remove a minion in that area of their choice
+                    System.out.println("Enter player index on which to remove the minion");
+                    int PlayerIndex = scan.nextInt() - 1;
+                    if(GameBoard.GetListArea().get(AreaAffected-1).GetMinionCount(Colors.None) > 0)
+                    	GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(PlayerIndex).GetColor());	
+                }
+                else
+                	this.Print("Area " + AreaAffected + " does not have a minion");
             }
         }
         else if(cardName.compareToIgnoreCase("Demons From The Dungeon Dimension") == 0)
@@ -2965,9 +2984,11 @@ public class GameEngine implements Serializable
                 //TODO For each building in the board, pay 2$ or remove it
             	for(int a=0; a<GameBoard.GetListArea().size(); a++)
             	{
-            		if(GameBoard.GetListArea().get(a).GetBuilding().GetPieceColor() == ListPlayer.get(i).GetColor())
+            		Pieces AreaBuilding = GameBoard.GetListArea().get(a).GetBuilding();
+            		
+            		if(AreaBuilding!=null && GameBoard.GetListArea().get(a).GetBuilding().GetPieceColor() == ListPlayer.get(i).GetColor())
             		{
-            			System.out.println("Building owned by player " + (i+1) + " is found. Would you like to pay 2$ to keep it? (yes/no)");
+            			System.out.println("Building on area " + (a+1)+" owned by player " + (i+1) + " is found. Would you like to pay 2$ to keep it? (yes/no)");
             			String choice = scan.next();
             			if(choice.compareToIgnoreCase("yes") == 0)
             			{
@@ -2990,6 +3011,7 @@ public class GameEngine implements Serializable
             CurrentDie = AreaAffected;
             System.out.println("Current area affected is " + AreaAffected + " - " + GameBoard.GetListArea().get(AreaAffected-1).GetName());
             //disable effect of City Area of that card by discarding the card
+            boolean InPlay = false;
             for(int i=0; i<TotalPlayer; i++)
             {
                 for(int c=0; c<ListPlayer.get(i).ListCityAreaCards.size(); c++)
@@ -2997,6 +3019,7 @@ public class GameEngine implements Serializable
                 	//boolean 
                     if(ListPlayer.get(i).ListCityAreaCards.get(c).GetName().compareToIgnoreCase(GameBoard.GetListArea().get(AreaAffected-1).GetName()) == 0)
                     {
+                    	InPlay = true;
                     	System.out.println("City area card " + GameBoard.GetListArea().get(AreaAffected-1).GetName() + " is no longer in play. Discarding it.");
                     	DiscardCards.add(ListPlayer.get(i).ListCityAreaCards.get(c));
                     	ListPlayer.get(i).ListCityAreaCards.remove(c);
@@ -3004,7 +3027,10 @@ public class GameEngine implements Serializable
                     }
                 }
             }
+            if(!InPlay)
+            	System.out.println("Area "+AreaAffected + " - " + GameBoard.GetListArea().get(AreaAffected-1).GetName() + " not in play.");
             
+            System.out.println("Removing a minion from player " + (player+1) + " in area " + GameBoard.GetListArea().get(AreaAffected-1).GetName());
             //remove 1 minion of that area
             GameBoard.RemoveMinion(AreaAffected, ListPlayer.get(player).GetColor());
         }
@@ -3785,7 +3811,7 @@ StringBuilder AllPlayers = new StringBuilder();
     {
     	 System.out.println("AREA INFO");
          System.out.printf("%-16S %-25S  %-10s %-10s %-8s %-10s %n","area","minions","trouble?","building?","demons","trolls");
-         this.GameBoard.GetListArea().get(AreaNumber - 1).PrintState();
+         this.GameBoard.GetListArea().get(AreaNumber - 1).PrintState(AreaNumber);
     }
     
     /**
