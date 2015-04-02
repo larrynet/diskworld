@@ -3280,7 +3280,7 @@ public class GameEngine implements Serializable
 			
 		}
 			
-		return ActionSuccess;
+		return true;
 	}
 	
 	/**
